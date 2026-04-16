@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Services — HMG Academy | Virtual Classes, CBT, Tutoring & Data Science</title>
+  <meta name="description" content="HMG Academy offers virtual classes, CBT exam access, lesson notes, one-on-one tutoring, and data science training for secondary school students in Lagos and Ogun State, Nigeria." />
+  <link rel="canonical" href="https://hmgacademy.pages.dev/services.html" />
+  <link rel="stylesheet" href="_shared.css" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J5C7CTP1N5"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-J5C7CTP1N5');</script>
+  <style>
+    .services-full-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:40px; }
+    .svc-card { background:white; border:1px solid var(--grey-200); border-radius:var(--radius-lg); padding:32px; transition:var(--transition); position:relative; overflow:hidden; }
+    .svc-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; opacity:0; transition:opacity 0.24s; }
+    .svc-card:hover { box-shadow:var(--shadow-md); transform:translateY(-4px); }
+    .svc-card:hover::before { opacity:1; }
+    .svc-card.gold::before { background:linear-gradient(90deg,var(--gold),var(--gold-bright)); }
+    .svc-card.navy::before { background:linear-gradient(90deg,var(--navy),var(--navy-light)); }
+    .svc-card.green::before { background:linear-gradient(90deg,var(--emerald),#34d399); }
+    .svc-icon-lg { width:58px; height:58px; border-radius:15px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; margin-bottom:20px; }
+    .svc-card h3 { font-size:1.15rem; color:var(--navy); margin-bottom:10px; }
+    .svc-card p { font-size:0.90rem; color:var(--grey-600); line-height:1.74; margin-bottom:18px; }
+    .svc-features { display:flex; flex-direction:column; gap:8px; margin-bottom:22px; }
+    .svc-feature { display:flex; align-items:flex-start; gap:9px; font-size:0.85rem; color:var(--grey-600); }
+    .svc-feature::before { content:'✓'; color:var(--emerald); font-weight:700; flex-shrink:0; font-size:0.80rem; margin-top:2px; }
+    .pricing-pill { display:inline-flex; align-items:center; gap:6px; padding:5px 14px; border-radius:99px; font-size:0.76rem; font-weight:700; }
+    .price-free { background:rgba(13,158,106,0.10); color:var(--emerald); }
+    .price-contact { background:var(--gold-wash); color:var(--gold-muted); }
+    .highlight-band { background:var(--navy); border-radius:var(--radius-xl); padding:56px 48px; margin:64px 0; position:relative; overflow:hidden; }
+    .highlight-band::before { content:''; position:absolute; top:-80px; right:-80px; width:320px; height:320px; background:radial-gradient(circle,rgba(232,160,32,0.12) 0%,transparent 70%); }
+    .highlight-inner { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+    .highlight-inner h2 { color:white; font-size:clamp(1.6rem,3vw,2.4rem); margin-bottom:14px; }
+    .highlight-inner p { color:rgba(255,255,255,0.65); font-size:0.96rem; line-height:1.78; margin-bottom:20px; }
+    .cbt-features { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .cbt-feat { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.10); border-radius:var(--radius-sm); padding:12px 14px; font-size:0.84rem; color:rgba(255,255,255,0.75); }
+    .cbt-feat strong { color:white; display:block; margin-bottom:2px; }
+    .ds-section { background:var(--navy-pale); border-radius:var(--radius-xl); padding:56px 48px; }
+    .ds-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
+    .ds-module { background:white; border:1px solid var(--grey-200); border-radius:var(--radius); padding:20px; }
+    .ds-module h4 { font-size:0.90rem; font-weight:700; color:var(--navy); margin-bottom:8px; }
+    .ds-module p { font-size:0.82rem; color:var(--grey-600); line-height:1.60; }
+    .ds-modules { display:flex; flex-direction:column; gap:12px; }
+    @media (max-width:900px) { .services-full-grid { grid-template-columns:1fr 1fr; } .highlight-inner { grid-template-columns:1fr; gap:32px; } .ds-grid { grid-template-columns:1fr; } }
+    @media (max-width:600px) { .services-full-grid { grid-template-columns:1fr; } .cbt-features { grid-template-columns:1fr; } .highlight-band { padding:40px 24px; } .ds-section { padding:40px 24px; } }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="nav-logo-mark">HMG</div><div class="nav-logo-text"><span class="name">HMG Academy</span><span class="sub">His Marvellous Grace</span></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html" class="active">Services</a></li>
+      <li><a href="tools.html">Tools</a></li><li><a href="notes.html">Notes</a></li><li><a href="register.html">Register</a></li><li><a href="contact.html">Contact</a></li>
+      <li><a href="https://wa.me/2348094481488" target="_blank" rel="noopener" class="nav-cta btn">💬 WhatsApp</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div></div>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="tools.html">Tools</a><a href="notes.html">Notes</a><a href="register.html">Register</a><a href="contact.html">Contact</a>
+    <a href="https://wa.me/2348094481488" target="_blank" rel="noopener" class="mobile-wa">💬 Chat on WhatsApp</a>
+  </nav>
+</nav>
+
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span class="current">Services</span></nav>
+    <h1>What HMG Academy Offers</h1>
+    <p>Every service here was built from a real classroom need — not a marketing brief. From virtual classes to AI-powered exam tools, we cover the full learning journey.</p>
+  </div>
+</section>
+
+<section class="section" id="all-services">
+  <div class="container">
+    <div class="section-header-centered reveal">
+      <div class="section-eyebrow">Our Services</div>
+      <h2 class="section-title">Education Meets Technology</h2>
+      <p class="section-subtitle">Six services. One mission: make quality STEM education accessible and effective for Nigerian secondary school students.</p>
+    </div>
+    <div class="services-full-grid">
+      <div class="svc-card gold reveal" id="virtual-classes">
+        <div class="svc-icon-lg" style="background:rgba(232,160,32,0.12);">🎓</div>
+        <h3>Virtual Classes</h3>
+        <p>Live, structured online sessions for JSS 1 – SSS 3 students. Each class follows a clear plan: theory, worked examples, class exercises, and Q&A. No shortcuts.</p>
+        <div class="svc-features">
+          <div class="svc-feature">Covers Maths, Further Maths, Physics, Chemistry, Computer Science</div>
+          <div class="svc-feature">JSS 1 through SSS 3 — all arms and levels</div>
+          <div class="svc-feature">WAEC and NECO exam alignment built in</div>
+          <div class="svc-feature">Recorded sessions available on request</div>
+          <div class="svc-feature">WhatsApp group for questions between classes</div>
+        </div>
+        <span class="pricing-pill price-contact">Contact for pricing</span>
+        <div style="margin-top:18px;"><a href="register.html" class="btn btn-navy btn-sm">Enrol Now</a></div>
+      </div>
+
+      <div class="svc-card navy reveal">
+        <div class="svc-icon-lg" style="background:rgba(15,37,71,0.08);">💻</div>
+        <h3>CBT Pro Platform</h3>
+        <p>A free, fully-featured Computer-Based Testing system — built entirely by HMG Academy. Students take timed exams, get auto-marked results, and receive AI-generated explanations per question.</p>
+        <div class="svc-features">
+          <div class="svc-feature">Timed exams with per-student question randomisation</div>
+          <div class="svc-feature">Auto-marking and score certificate</div>
+          <div class="svc-feature">AI explanations via Gemini (optional)</div>
+          <div class="svc-feature">Flag-for-review, question navigator</div>
+          <div class="svc-feature">Teacher dashboard with 4-tab reporting</div>
+        </div>
+        <span class="pricing-pill price-free">100% Free</span>
+        <div style="margin-top:18px; display:flex; gap:8px; flex-wrap:wrap;">
+          <a href="https://cssadewale.github.io/cbt-system" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Open CBT Pro</a>
+          <a href="https://github.com/cssadewale/cbt-system" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub</a>
+        </div>
+      </div>
+
+      <div class="svc-card green reveal">
+        <div class="svc-icon-lg" style="background:rgba(13,158,106,0.10);">📊</div>
+        <h3>Data Science Training</h3>
+        <p>A structured, portfolio-first programme for beginners who want to break into data science — built by someone actively doing it. Python, ML, and real projects from day one.</p>
+        <div class="svc-features">
+          <div class="svc-feature">Python, Pandas, Scikit-learn, Matplotlib, Seaborn</div>
+          <div class="svc-feature">Machine learning fundamentals with real datasets</div>
+          <div class="svc-feature">SHAP explainability and model interpretation</div>
+          <div class="svc-feature">GitHub portfolio setup and deployment</div>
+          <div class="svc-feature">Honest career guidance — no hype</div>
+        </div>
+        <span class="pricing-pill price-contact">Contact for pricing</span>
+        <div style="margin-top:18px;"><a href="register.html" class="btn btn-navy btn-sm">Enquire</a></div>
+      </div>
+
+      <div class="svc-card gold reveal" id="tutoring">
+        <div class="svc-icon-lg" style="background:rgba(46,84,144,0.09);">👤</div>
+        <h3>One-on-One Tutoring</h3>
+        <p>Personalised sessions for students who need focused, individual attention. We diagnose gaps, work through them systematically, and track progress at each session.</p>
+        <div class="svc-features">
+          <div class="svc-feature">Diagnostic test at first session — no guesswork</div>
+          <div class="svc-feature">Customised session plan per student</div>
+          <div class="svc-feature">Flexible scheduling — weekday and weekend slots</div>
+          <div class="svc-feature">Progress tracking shared with parents</div>
+          <div class="svc-feature">Available online and in-person (Lagos/Ogun)</div>
+        </div>
+        <span class="pricing-pill price-contact">Contact for pricing</span>
+        <div style="margin-top:18px;"><a href="https://wa.me/2348094481488?text=Hello%20HMG%20Academy%2C%20I%20am%20interested%20in%20one-on-one%20tutoring." target="_blank" rel="noopener" class="btn btn-wa btn-sm">Book via WhatsApp</a></div>
+      </div>
+
+      <div class="svc-card navy reveal">
+        <div class="svc-icon-lg" style="background:rgba(224,90,58,0.10);">📝</div>
+        <h3>Lesson Notes</h3>
+        <p>Downloadable, WAEC/NECO-aligned notes across all core subjects. Written by the same teacher who delivers the classes — so the explanations match the way you'll be taught.</p>
+        <div class="svc-features">
+          <div class="svc-feature">Topic-by-topic coverage across all WAEC syllabi</div>
+          <div class="svc-feature">Worked examples included in every note</div>
+          <div class="svc-feature">PDF format — works on any device</div>
+          <div class="svc-feature">Updated regularly with new topics</div>
+        </div>
+        <span class="pricing-pill price-free">Free Download</span>
+        <div style="margin-top:18px;"><a href="notes.html" class="btn btn-navy btn-sm">Browse Notes</a></div>
+      </div>
+
+      <div class="svc-card green reveal">
+        <div class="svc-icon-lg" style="background:rgba(232,160,32,0.10);">📋</div>
+        <h3>Exam Registration</h3>
+        <p>Through HMG Concepts, we assist students and families with WAEC, NECO, and JAMB registration — handling forms, deadlines, and documentation so nothing falls through the cracks.</p>
+        <div class="svc-features">
+          <div class="svc-feature">WAEC, NECO, and JAMB registration support</div>
+          <div class="svc-feature">Document preparation and submission guidance</div>
+          <div class="svc-feature">Deadline reminders and follow-up</div>
+          <div class="svc-feature">Serving Lagos and Ogun State families since 2015</div>
+        </div>
+        <span class="pricing-pill price-contact">Contact for details</span>
+        <div style="margin-top:18px;"><a href="contact.html" class="btn btn-navy btn-sm">Get in Touch</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CBT HIGHLIGHT -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="highlight-band reveal">
+      <div class="highlight-inner">
+        <div>
+          <div class="section-eyebrow" style="color:var(--gold-bright); background:rgba(232,160,32,0.15); border-color:rgba(232,160,32,0.25);">Built by an Educator Who Codes</div>
+          <h2>CBT Pro — The Free Exam Platform</h2>
+          <p>I built CBT Pro because I was tired of watching students prepare well but freeze on exam day because they had never sat a proper computer-based test. Now they can practise — for free — on the exact format WAEC and NECO use.</p>
+          <p>It was built on an Android tablet using Acode editor. That's not a limitation — that's a proof of concept. If you can think clearly, the tools don't matter.</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:24px;">
+            <a href="https://cssadewale.github.io/cbt-system" target="_blank" rel="noopener" class="btn btn-gold">Open CBT Pro</a>
+            <a href="tools.html" class="btn btn-white-ghost">All Tools</a>
+          </div>
+        </div>
+        <div class="cbt-features">
+          <div class="cbt-feat"><strong>⏱️ Timed Exams</strong>Countdown timer with auto-submit on expiry</div>
+          <div class="cbt-feat"><strong>🔀 Randomisation</strong>Per-student question order — no copying</div>
+          <div class="cbt-feat"><strong>🤖 AI Explanations</strong>Gemini-powered answer explanations per question</div>
+          <div class="cbt-feat"><strong>🏆 Certificates</strong>Auto-generated result certificates after exam</div>
+          <div class="cbt-feat"><strong>📊 Teacher Dashboard</strong>4-tab reporting: scores, topics, questions, insights</div>
+          <div class="cbt-feat"><strong>🔒 Secure</strong>Supabase + RLS — every student's data protected</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATA SCIENCE -->
+<section class="section" id="data-science">
+  <div class="container">
+    <div class="ds-section reveal">
+      <div class="ds-grid">
+        <div>
+          <div class="section-eyebrow">Data Science Training Programme</div>
+          <h2 class="section-title">Learn Data Science the Right Way</h2>
+          <p style="color:var(--grey-600); font-size:0.96rem; line-height:1.80; margin-bottom:20px;">
+            Most data science courses teach you tools. This programme teaches you <em>thinking</em>. Because a data scientist who can't reason about a problem clearly is just someone who knows how to run code.
+          </p>
+          <p style="color:var(--grey-600); font-size:0.96rem; line-height:1.80; margin-bottom:24px;">
+            I'm not a trainer who has never worked in the field. I am actively building ML models, shipping portfolio projects, and documenting the real journey — including the failures. That's what you'll learn from.
+          </p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a href="register.html" class="btn btn-navy">Enquire Now</a>
+            <a href="https://github.com/cssadewale" target="_blank" rel="noopener" class="btn btn-ghost">See My Portfolio</a>
+          </div>
+        </div>
+        <div class="ds-modules">
+          <div class="ds-module"><h4>Module 1 — Python Foundations</h4><p>Variables, data types, loops, functions, and the Pandas/NumPy stack. We start from the very beginning — no assumptions.</p></div>
+          <div class="ds-module"><h4>Module 2 — Data Analysis & EDA</h4><p>Loading, cleaning, transforming, and visualising data. Non-graphical analysis always before graphical — the right workflow from day one.</p></div>
+          <div class="ds-module"><h4>Module 3 — Machine Learning</h4><p>Classification, regression, and ensemble methods using Scikit-learn. Feature engineering, model selection, anti-leakage practices, and proper evaluation.</p></div>
+          <div class="ds-module"><h4>Module 4 — Explainability & Deployment</h4><p>SHAP values, model interpretation, Streamlit dashboards, and publishing your portfolio on GitHub. Your work becomes public proof.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container reveal">
+    <div style="background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 100%); border-radius:var(--radius-xl); padding:60px 48px; text-align:center; position:relative; overflow:hidden;">
+      <div style="position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(232,160,32,0.10) 0%,transparent 70%);"></div>
+      <h2 style="color:white; font-size:clamp(1.6rem,3vw,2.3rem); margin-bottom:14px;">Not Sure Which Service Is Right?</h2>
+      <p style="color:rgba(255,255,255,0.65); margin-bottom:28px; font-size:1rem;">Send a WhatsApp message and we'll figure it out together. No pitch, no pressure — just a conversation.</p>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; position:relative; z-index:1;">
+        <a href="https://wa.me/2348094481488?text=Hello%20HMG%20Academy%2C%20I%20need%20help%20choosing%20the%20right%20service." target="_blank" rel="noopener" class="btn btn-wa btn-lg">💬 Chat on WhatsApp</a>
+        <a href="register.html" class="btn btn-gold btn-lg">✍️ Register</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><div class="nav-logo-mark">HMG</div><div class="nav-logo-text"><span class="name" style="color:white;">HMG Academy</span><span class="sub">His Marvellous Grace</span></div></a>
+        <p>A subsidiary of HMG Concepts, founded in 2015. Serving secondary school students and families across Lagos and Ogun State, Nigeria.</p>
+        <div class="footer-socials">
+          <a href="https://linkedin.com/in/adewalesamsonadeagbo" target="_blank" class="social-btn">in</a>
+          <a href="https://github.com/cssadewale" target="_blank" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
+          <a href="https://wa.me/2348094481488" target="_blank" class="social-btn" style="background:rgba(37,211,102,0.18);color:#25D366;">💬</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Navigation</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="tools.html">Tools</a></li><li><a href="notes.html">Notes</a></li><li><a href="register.html">Register</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="#virtual-classes">Virtual Classes</a></li><li><a href="https://cssadewale.github.io/cbt-system" target="_blank">CBT Pro</a></li><li><a href="notes.html">Lesson Notes</a></li><li><a href="#tutoring">One-on-One Tutoring</a></li><li><a href="#data-science">Data Science Training</a></li><li><a href="contact.html">Exam Registration</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4>
+        <div class="footer-contact-item">📧 <a href="mailto:buildingmyictcareer@gmail.com">buildingmyictcareer@gmail.com</a></div>
+        <div class="footer-contact-item">💬 <a href="https://wa.me/2348094481488" target="_blank">+234 809 448 1488</a></div>
+        <div class="footer-contact-item">📍 Lagos / Ogun State, Nigeria</div>
+        <div class="footer-contact-item">🕐 Response within 24 hours</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> HMG Academy · A subsidiary of HMG Concepts. All rights reserved.</p>
+      <p>Built with ❤️ by <a href="about.html">Adewale Samson Adeagbo</a></p>
+    </div>
+  </div>
+</footer>
+<a href="https://wa.me/2348094481488?text=Hello%20HMG%20Academy%2C%20I%20am%20interested%20in%20your%20services." target="_blank" rel="noopener" class="wa-float"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span class="wa-label">Chat on WhatsApp</span></a>
+<script src="_shared.js"></script>
+</body>
+</html>
