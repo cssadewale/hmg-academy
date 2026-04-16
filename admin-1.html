@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HMG Academy — Admin Panel</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="_shared.css" />
+  <style>
+    body { background: var(--off-white); }
+
+    /* ── AUTH SCREEN ── */
+    .auth-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, var(--navy-deep) 0%, var(--navy) 100%);
+    }
+    .auth-box {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: var(--shadow-lg);
+    }
+    .auth-logo { text-align: center; margin-bottom: 32px; }
+    .auth-logo .mark {
+      width: 60px; height: 60px;
+      background: var(--navy);
+      border-radius: 15px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 900; font-size: 1.2rem;
+      color: var(--gold);
+      margin: 0 auto 14px;
+    }
+    .auth-logo h2 { font-size: 1.4rem; color: var(--navy); margin-bottom: 4px; }
+    .auth-logo p { font-size: 0.84rem; color: var(--grey-400); }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--navy); margin-bottom: 7px; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--grey-200);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: var(--grey-800);
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(15,37,71,0.08);
+    }
+    .auth-error { color: var(--coral); font-size: 0.82rem; text-align: center; margin-top: 12px; display: none; }
+
+    /* ── ADMIN LAYOUT ── */
+    .admin-layout { display: none; min-height: 100vh; }
+    .admin-sidebar {
+      width: 256px;
+      background: var(--navy-deep);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      overflow-y: auto;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-logo {
+      padding: 24px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+    .sidebar-logo .mark {
+      width: 40px; height: 40px;
+      background: var(--gold);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 900; font-size: 0.9rem;
+      color: var(--navy-deep);
+      flex-shrink: 0;
+    }
+    .sidebar-logo .text .name { font-family: var(--font-display); font-weight: 700; font-size: 0.96rem; color: white; display: block; }
+    .sidebar-logo .text .sub { font-size: 0.66rem; color: rgba(255,255,255,0.38); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    .sidebar-nav { padding: 16px 12px; flex: 1; }
+    .sidebar-section {
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      padding: 14px 8px 6px;
+    }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.60);
+      cursor: pointer;
+      transition: var(--transition);
+      margin-bottom: 2px;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+    }
+    .sidebar-link:hover { background: rgba(255,255,255,0.06); color: white; }
+    .sidebar-link.active { background: rgba(232,160,32,0.12); color: var(--gold-bright); }
+    .sidebar-link .icon { font-size: 1rem; width: 20px; flex-shrink: 0; }
+
+    .sidebar-footer {
+      padding: 16px 12px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    /* ── MAIN CONTENT ── */
+    .admin-main {
+      margin-left: 256px;
+      min-height: 100vh;
+    }
+    .admin-topbar {
+      background: white;
+      border-bottom: 1px solid var(--grey-200);
+      padding: 0 32px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: var(--shadow-xs);
+    }
+    .topbar-title { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--navy); }
+    .topbar-subtitle { font-size: 0.78rem; color: var(--grey-400); }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .topbar-user {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .topbar-user .avatar {
+      width: 34px; height: 34px;
+      background: var(--navy);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .admin-content { padding: 32px; }
+
+    /* ── PANELS ── */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* Dashboard */
+    .dash-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 32px;
+    }
+    .dash-card {
+      background: white;
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+    }
+    .dash-card .label { font-size: 0.76rem; font-weight: 600; color: var(--grey-400); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+    .dash-card .value { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .dash-card .sub { font-size: 0.78rem; color: var(--grey-400); }
+    .dash-card .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; }
+
+    .quick-actions {
+      background: white;
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .quick-actions h3 { font-size: 1rem; color: var(--navy); margin-bottom: 16px; }
+    .actions-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* Content editor */
+    .editor-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--grey-200); margin-bottom: 24px; }
+    .editor-tab {
+      padding: 10px 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--grey-400);
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: all 0.2s;
+    }
+    .editor-tab:hover { color: var(--navy); }
+    .editor-tab.active { color: var(--navy); border-bottom-color: var(--gold); }
+
+    .editor-section { display: none; }
+    .editor-section.active { display: block; }
+
+    .field-card {
+      background: white;
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+    .field-card h4 { font-size: 0.92rem; font-weight: 700; color: var(--navy); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--grey-100); }
+
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+    /* Notes Manager */
+    .notes-table {
+      background: white;
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .notes-table-header {
+      background: var(--navy-pale);
+      padding: 14px 20px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 100px;
+      gap: 12px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .note-row {
+      padding: 14px 20px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 100px;
+      gap: 12px;
+      align-items: center;
+      border-bottom: 1px solid var(--grey-100);
+      font-size: 0.86rem;
+      transition: background 0.15s;
+    }
+    .note-row:hover { background: var(--off-white); }
+    .note-row:last-child { border-bottom: none; }
+    .note-title { font-weight: 600; color: var(--navy); }
+    .note-actions { display: flex; gap: 6px; }
+    .action-btn {
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.74rem;
+      font-weight: 600;
+      border: 1px solid var(--grey-200);
+      background: white;
+      cursor: pointer;
+      transition: all 0.15s;
+      color: var(--grey-600);
+    }
+    .action-btn:hover { border-color: var(--navy); color: var(--navy); }
+    .action-btn.danger:hover { border-color: var(--coral); color: var(--coral); background: rgba(224,90,58,0.05); }
+
+    /* Upload zone */
+    .upload-zone {
+      border: 2px dashed var(--grey-200);
+      border-radius: var(--radius);
+      padding: 48px 32px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: white;
+    }
+    .upload-zone:hover, .upload-zone.drag-over {
+      border-color: var(--navy);
+      background: var(--navy-pale);
+    }
+    .upload-icon { font-size: 2.5rem; margin-bottom: 14px; }
+    .upload-zone h4 { color: var(--navy); margin-bottom: 8px; }
+    .upload-zone p { font-size: 0.84rem; color: var(--grey-400); }
+    #fileInput { display: none; }
+
+    /* Pages manager */
+    .pages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .page-card {
+      background: white;
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: var(--transition);
+    }
+    .page-card:hover { box-shadow: var(--shadow-sm); border-color: rgba(15,37,71,0.15); }
+    .page-card h4 { font-size: 0.96rem; color: var(--navy); margin-bottom: 6px; }
+    .page-card .url { font-size: 0.76rem; color: var(--grey-400); margin-bottom: 12px; font-family: monospace; }
+    .page-card-actions { display: flex; gap: 8px; }
+
+    /* Testimonials */
+    .testimonial-manage {
+      background: white;
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 14px;
+    }
+    .testimonial-manage textarea { resize: vertical; min-height: 80px; }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--navy-deep);
+      color: white;
+      padding: 13px 22px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      z-index: 9999;
+      opacity: 0;
+      transition: all 0.3s var(--ease-out);
+      white-space: nowrap;
+      box-shadow: var(--shadow-lg);
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .toast.success { background: var(--emerald); }
+    .toast.error { background: var(--coral); }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(8,23,48,0.55);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      width: 100%;
+      max-width: 580px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+    }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .modal-header h3 { font-size: 1.15rem; color: var(--navy); }
+    .modal-close { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--grey-400); padding: 4px; border-radius: 6px; }
+    .modal-close:hover { background: var(--grey-100); color: var(--navy); }
+
+    /* Changelog */
+    .changelog-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--grey-100);
+      font-size: 0.86rem;
+    }
+    .changelog-icon { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0; }
+    .changelog-text strong { color: var(--navy); }
+    .changelog-time { font-size: 0.74rem; color: var(--grey-400); margin-top: 2px; }
+
+    @media (max-width: 900px) {
+      .admin-sidebar { transform: translateX(-100%); }
+      .admin-main { margin-left: 0; }
+      .dash-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     AUTH SCREEN
+═══════════════════════════════════════ -->
+<div class="auth-screen" id="authScreen">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div class="mark">HMG</div>
+      <h2>Admin Panel</h2>
+      <p>HMG Academy Content Management</p>
+    </div>
+    <div class="form-group">
+      <label for="authUser">Username</label>
+      <input type="text" id="authUser" placeholder="admin" autocomplete="username" />
+    </div>
+    <div class="form-group">
+      <label for="authPass">Password</label>
+      <input type="password" id="authPass" placeholder="Enter password" autocomplete="current-password" />
+    </div>
+    <button class="btn btn-navy" style="width:100%; justify-content:center;" onclick="doLogin()">Sign In →</button>
+    <p class="auth-error" id="authError">❌ Invalid credentials. Please try again.</p>
+    <p style="margin-top:20px; font-size:0.76rem; color:var(--grey-400); text-align:center;">
+      Default: admin / hmgacademy2025<br/>
+      <span style="color:var(--coral);">Change this password after first login.</span>
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     ADMIN LAYOUT
+═══════════════════════════════════════ -->
+<div class="admin-layout" id="adminLayout">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-logo">
+      <div class="mark">HMG</div>
+      <div class="text">
+        <span class="name">HMG Academy</span>
+        <span class="sub">Admin Panel</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">Main</div>
+      <button class="sidebar-link active" onclick="showPanel('dashboard', this)">
+        <span class="icon">📊</span> Dashboard
+      </button>
+      <button class="sidebar-link" onclick="showPanel('content', this)">
+        <span class="icon">✏️</span> Site Content
+      </button>
+      <button class="sidebar-link" onclick="showPanel('notes', this)">
+        <span class="icon">📝</span> Lesson Notes
+      </button>
+      <button class="sidebar-link" onclick="showPanel('tools', this)">
+        <span class="icon">🔧</span> Tools & Projects
+      </button>
+      <button class="sidebar-link" onclick="showPanel('testimonials', this)">
+        <span class="icon">💬</span> Testimonials
+      </button>
+      <button class="sidebar-link" onclick="showPanel('upload', this)">
+        <span class="icon">📁</span> File Uploads
+      </button>
+
+      <div class="sidebar-section">Site</div>
+      <button class="sidebar-link" onclick="showPanel('pages', this)">
+        <span class="icon">📄</span> Pages
+      </button>
+      <button class="sidebar-link" onclick="showPanel('settings', this)">
+        <span class="icon">⚙️</span> Settings
+      </button>
+
+      <div class="sidebar-section">Account</div>
+      <button class="sidebar-link" onclick="showPanel('changelog', this)">
+        <span class="icon">📋</span> Change Log
+      </button>
+      <a href="index.html" class="sidebar-link" target="_blank">
+        <span class="icon">🌐</span> View Site
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-link" onclick="doLogout()" style="color:rgba(255,100,100,0.7);">
+        <span class="icon">🚪</span> Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <div>
+        <div class="topbar-title" id="topbarTitle">Dashboard</div>
+        <div class="topbar-subtitle" id="topbarSub">Overview of your HMG Academy website</div>
+      </div>
+      <div class="topbar-right">
+        <a href="index.html" target="_blank" class="btn btn-ghost btn-sm">🌐 View Site</a>
+        <div class="topbar-user">
+          <div class="avatar">AS</div>
+          <span>Adewale</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-content">
+
+      <!-- ── DASHBOARD ── -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="dash-grid">
+          <div class="dash-card">
+            <div class="label">Total Pages</div>
+            <div class="value" id="stat-pages">7</div>
+            <div class="sub">index, about, services, tools, notes, register, contact</div>
+          </div>
+          <div class="dash-card">
+            <div class="label">Lesson Notes</div>
+            <div class="value" id="stat-notes">0</div>
+            <div class="sub">Click Lesson Notes to add entries</div>
+          </div>
+          <div class="dash-card">
+            <div class="label">Testimonials</div>
+            <div class="value" id="stat-testimonials">0</div>
+            <div class="sub"><span class="dot" style="background:var(--gold);"></span>Pending content</div>
+          </div>
+          <div class="dash-card">
+            <div class="label">Tools Listed</div>
+            <div class="value" id="stat-tools">4</div>
+            <div class="sub">CBT Pro, Performance Tracker, At-Risk, Advisor</div>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <h3>⚡ Quick Actions</h3>
+          <div class="actions-row">
+            <button class="btn btn-navy btn-sm" onclick="showPanel('notes', document.querySelector('[onclick*=notes]'))">+ Add Lesson Note</button>
+            <button class="btn btn-navy btn-sm" onclick="showPanel('testimonials', document.querySelectorAll('.sidebar-link')[4])">+ Add Testimonial</button>
+            <button class="btn btn-navy btn-sm" onclick="showPanel('tools', document.querySelectorAll('.sidebar-link')[3])">+ Add Tool</button>
+            <button class="btn btn-ghost btn-sm" onclick="showPanel('upload', document.querySelectorAll('.sidebar-link')[5])">📁 Upload File</button>
+            <button class="btn btn-ghost btn-sm" onclick="showPanel('content', document.querySelectorAll('.sidebar-link')[1])">✏️ Edit Content</button>
+          </div>
+        </div>
+
+        <div style="background:white; border:1px solid var(--grey-200); border-radius:var(--radius); padding:24px;">
+          <h3 style="font-size:1rem; color:var(--navy); margin-bottom:16px;">📋 Recent Changes</h3>
+          <div id="dashChangelog">
+            <div class="changelog-item">
+              <div class="changelog-icon" style="background:rgba(13,158,106,0.1);">✅</div>
+              <div class="changelog-text"><strong>Admin panel created</strong><div class="changelog-time">Just now</div></div>
+            </div>
+            <div class="changelog-item">
+              <div class="changelog-icon" style="background:rgba(232,160,32,0.1);">🎨</div>
+              <div class="changelog-text"><strong>Website redesigned with new Fraunces/DM Sans typography</strong><div class="changelog-time">Today</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SITE CONTENT ── -->
+      <div class="panel" id="panel-content">
+        <div class="editor-tabs">
+          <button class="editor-tab active" onclick="showEditorTab('hero', this)">🏠 Homepage Hero</button>
+          <button class="editor-tab" onclick="showEditorTab('about-bio', this)">👤 About Bio</button>
+          <button class="editor-tab" onclick="showEditorTab('services-text', this)">📚 Services</button>
+          <button class="editor-tab" onclick="showEditorTab('contact-info', this)">📞 Contact Info</button>
+          <button class="editor-tab" onclick="showEditorTab('seo', this)">🔍 SEO</button>
+        </div>
+
+        <!-- Hero -->
+        <div class="editor-section active" id="tab-hero">
+          <div class="field-card">
+            <h4>Homepage Hero Text</h4>
+            <div class="form-group">
+              <label>Hero Headline (Line 1)</label>
+              <input type="text" id="hero-line1" value="Learning" />
+            </div>
+            <div class="form-group">
+              <label>Hero Headline (Italic accent word)</label>
+              <input type="text" id="hero-line2" value="Deliberately." />
+            </div>
+            <div class="form-group">
+              <label>Hero Headline (Line 3)</label>
+              <input type="text" id="hero-line3" value="Teaching Authentically." />
+            </div>
+            <div class="form-group">
+              <label>Hero Description Paragraph</label>
+              <textarea id="hero-desc" rows="3">HMG Academy brings together 10+ years of classroom experience and real-world data science skills — building tools, teaching students, and closing the gap between education and technology.</textarea>
+            </div>
+            <div class="row-2">
+              <div class="form-group">
+                <label>Primary CTA Button Text</label>
+                <input type="text" id="hero-cta1" value="✍️ Register Now" />
+              </div>
+              <div class="form-group">
+                <label>Secondary CTA Button Text</label>
+                <input type="text" id="hero-cta2" value="Explore Services" />
+              </div>
+            </div>
+            <button class="btn btn-gold" onclick="saveContent('hero')">💾 Save Hero Changes</button>
+          </div>
+        </div>
+
+        <!-- About Bio -->
+        <div class="editor-section" id="tab-about-bio">
+          <div class="field-card">
+            <h4>About Page — Founder Bio</h4>
+            <div class="form-group">
+              <label>Bio Paragraph 1</label>
+              <textarea rows="4" id="bio-1">I started HMG Academy in 2015 from a simple conviction: that Nigerian students deserve teaching that is honest, rigorous, and student-centred. Over a decade later, that conviction hasn't changed — but the tools I use have grown enormously.</textarea>
+            </div>
+            <div class="form-group">
+              <label>Bio Paragraph 2</label>
+              <textarea rows="4" id="bio-2">Today I am simultaneously an educator and a practising Data Scientist, building machine learning models, creating AI-powered EdTech tools, and documenting the whole journey publicly. CBT Pro — the exam platform powering this academy — was built entirely on an Android tablet. That is the kind of builder I am.</textarea>
+            </div>
+            <div class="form-group">
+              <label>Featured Quote (shown in blockquote)</label>
+              <textarea rows="2" id="bio-quote">"If you can think through a problem clearly, you can find a solution — even in unfamiliar territory. That is the same lesson I bring to every student I teach."</textarea>
+            </div>
+            <div class="form-group">
+              <label>Education / Schools tagline</label>
+              <input type="text" id="bio-schools" value="BSc/Ed Computer Science Education, Lagos State University (2023) · Taught at HMG, Fredaks, Anchor Heights, Dave Model School, Roas Model School, Lifeline, De Glorious, Ennycharles, and more." />
+            </div>
+            <button class="btn btn-gold" onclick="saveContent('bio')">💾 Save Bio Changes</button>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="editor-section" id="tab-services-text">
+          <div class="field-card">
+            <h4>Services Section Header</h4>
+            <div class="form-group">
+              <label>Section Eyebrow Label</label>
+              <input type="text" value="What We Offer" />
+            </div>
+            <div class="form-group">
+              <label>Section Title</label>
+              <input type="text" value="Education Meets Technology" />
+            </div>
+            <div class="form-group">
+              <label>Section Subtitle</label>
+              <textarea rows="2">From structured classroom sessions to AI-powered exam tools — HMG Academy serves students at every level of their learning journey.</textarea>
+            </div>
+            <button class="btn btn-gold" onclick="saveContent('services')">💾 Save Services Header</button>
+          </div>
+          <div class="field-card">
+            <h4>Add / Edit a Service Card</h4>
+            <p style="font-size:0.84rem; color:var(--grey-400); margin-bottom:16px;">Use this to add a new service card that will appear on the Services page. To edit existing cards, modify the services.html file directly or ask for help.</p>
+            <div class="row-2">
+              <div class="form-group"><label>Icon Emoji</label><input type="text" id="svc-icon" placeholder="🎓" /></div>
+              <div class="form-group"><label>Service Title</label><input type="text" id="svc-title" placeholder="Virtual Classes" /></div>
+            </div>
+            <div class="form-group"><label>Description</label><textarea id="svc-desc" rows="3" placeholder="What does this service offer?"></textarea></div>
+            <div class="form-group"><label>Link URL</label><input type="text" id="svc-link" placeholder="services.html#virtual-classes" /></div>
+            <button class="btn btn-gold" onclick="addService()">+ Add Service Card</button>
+          </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="editor-section" id="tab-contact-info">
+          <div class="field-card">
+            <h4>Contact Information</h4>
+            <div class="row-2">
+              <div class="form-group"><label>Email Address</label><input type="email" value="buildingmyictcareer@gmail.com" /></div>
+              <div class="form-group"><label>WhatsApp Number</label><input type="tel" value="+234 809 448 1488" /></div>
+            </div>
+            <div class="row-2">
+              <div class="form-group"><label>Location</label><input type="text" value="Lagos / Ogun State, Nigeria" /></div>
+              <div class="form-group"><label>Response Time Message</label><input type="text" value="We respond within 24 hours via WhatsApp or email" /></div>
+            </div>
+            <div class="row-2">
+              <div class="form-group"><label>LinkedIn URL</label><input type="url" value="https://linkedin.com/in/adewalesamsonadeagbo" /></div>
+              <div class="form-group"><label>GitHub URL</label><input type="url" value="https://github.com/cssadewale" /></div>
+            </div>
+            <button class="btn btn-gold" onclick="saveContent('contact')">💾 Save Contact Info</button>
+          </div>
+        </div>
+
+        <!-- SEO -->
+        <div class="editor-section" id="tab-seo">
+          <div class="field-card">
+            <h4>🔍 SEO Settings — Homepage</h4>
+            <div class="form-group"><label>Page Title Tag</label><input type="text" value="HMG Academy — Learning Deliberately. Teaching Authentically." /></div>
+            <div class="form-group"><label>Meta Description</label><textarea rows="2">HMG Academy offers virtual classes, CBT exam access, lesson notes, one-on-one tutoring, and data science training for secondary school students in Lagos and Ogun State, Nigeria.</textarea></div>
+            <div class="form-group"><label>Keywords (comma separated)</label><textarea rows="2">HMG Academy, virtual classes Lagos, secondary school tutor Nigeria, CBT exam platform, lesson notes Nigeria, data science training Nigeria</textarea></div>
+            <div class="form-group"><label>Canonical URL</label><input type="url" value="https://hmgacademy.pages.dev/" /></div>
+            <div class="form-group"><label>Google Analytics ID</label><input type="text" placeholder="G-XXXXXXXXXX" /></div>
+            <button class="btn btn-gold" onclick="saveContent('seo')">💾 Save SEO Settings</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── LESSON NOTES ── -->
+      <div class="panel" id="panel-notes">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;">
+          <h3 style="font-size:1.1rem; color:var(--navy);">Lesson Notes Library</h3>
+          <button class="btn btn-gold btn-sm" onclick="openModal('addNoteModal')">+ Add Note</button>
+        </div>
+
+        <div class="notes-table">
+          <div class="notes-table-header">
+            <span>Title</span><span>Subject</span><span>Class</span><span>Status</span><span>Actions</span>
+          </div>
+          <div id="notesList">
+            <!-- Notes rendered here by JS -->
+          </div>
+        </div>
+        <p id="notesEmpty" style="text-align:center; color:var(--grey-400); padding:40px; font-size:0.88rem;">No lesson notes yet. Click "+ Add Note" to get started.</p>
+      </div>
+
+      <!-- ── TOOLS ── -->
+      <div class="panel" id="panel-tools">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;">
+          <h3 style="font-size:1.1rem; color:var(--navy);">Tools & Projects</h3>
+          <button class="btn btn-gold btn-sm" onclick="openModal('addToolModal')">+ Add Tool</button>
+        </div>
+        <div id="toolsList" style="display:flex; flex-direction:column; gap:14px;">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- ── TESTIMONIALS ── -->
+      <div class="panel" id="panel-testimonials">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;">
+          <h3 style="font-size:1.1rem; color:var(--navy);">Testimonials</h3>
+          <button class="btn btn-gold btn-sm" onclick="openModal('addTestimonialModal')">+ Add Testimonial</button>
+        </div>
+        <div id="testimonialsList">
+          <p style="text-align:center; color:var(--grey-400); padding:40px; font-size:0.88rem;">No testimonials yet. Add real feedback from students, parents, or colleagues.</p>
+        </div>
+      </div>
+
+      <!-- ── UPLOAD ── -->
+      <div class="panel" id="panel-upload">
+        <div class="field-card">
+          <h4>📁 Upload Files</h4>
+          <p style="font-size:0.86rem; color:var(--grey-400); margin-bottom:20px;">Upload lesson note PDFs, images, resources, or any files. Uploaded files are listed below and can be linked anywhere on the site.</p>
+          <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+            <div class="upload-icon">📂</div>
+            <h4>Drag & Drop or Click to Upload</h4>
+            <p>PDF, PNG, JPG, DOCX, XLSX — up to 25MB per file</p>
+          </div>
+          <input type="file" id="fileInput" multiple accept=".pdf,.png,.jpg,.jpeg,.docx,.xlsx,.pptx" onchange="handleUpload(event)" />
+        </div>
+        <div style="background:white; border:1px solid var(--grey-200); border-radius:var(--radius); overflow:hidden; margin-top:18px;">
+          <div style="padding:16px 20px; border-bottom:1px solid var(--grey-100); font-weight:700; font-size:0.88rem; color:var(--navy);">Uploaded Files</div>
+          <div id="uploadedFilesList" style="padding:20px;">
+            <p style="color:var(--grey-400); font-size:0.84rem;">No files uploaded yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PAGES ── -->
+      <div class="panel" id="panel-pages">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;">
+          <h3 style="font-size:1.1rem; color:var(--navy);">Site Pages</h3>
+          <button class="btn btn-gold btn-sm" onclick="openModal('addPageModal')">+ Add Page</button>
+        </div>
+        <div class="pages-grid">
+          <div class="page-card">
+            <h4>🏠 Home</h4>
+            <div class="url">index.html</div>
+            <div class="page-card-actions">
+              <a href="index.html" target="_blank" class="action-btn">Preview</a>
+              <button class="action-btn" onclick="showPanel('content', null)">Edit Content</button>
+            </div>
+          </div>
+          <div class="page-card">
+            <h4>👤 About</h4>
+            <div class="url">about.html</div>
+            <div class="page-card-actions">
+              <a href="about.html" target="_blank" class="action-btn">Preview</a>
+              <button class="action-btn" onclick="showPanel('content', null); showEditorTab('about-bio', null)">Edit Bio</button>
+            </div>
+          </div>
+          <div class="page-card">
+            <h4>📚 Services</h4>
+            <div class="url">services.html</div>
+            <div class="page-card-actions">
+              <a href="services.html" target="_blank" class="action-btn">Preview</a>
+            </div>
+          </div>
+          <div class="page-card">
+            <h4>🔧 Tools</h4>
+            <div class="url">tools.html</div>
+            <div class="page-card-actions">
+              <a href="tools.html" target="_blank" class="action-btn">Preview</a>
+              <button class="action-btn" onclick="showPanel('tools', null)">Manage Tools</button>
+            </div>
+          </div>
+          <div class="page-card">
+            <h4>📝 Lesson Notes</h4>
+            <div class="url">notes.html</div>
+            <div class="page-card-actions">
+              <a href="notes.html" target="_blank" class="action-btn">Preview</a>
+              <button class="action-btn" onclick="showPanel('notes', null)">Manage Notes</button>
+            </div>
+          </div>
+          <div class="page-card">
+            <h4>✍️ Register</h4>
+            <div class="url">register.html</div>
+            <div class="page-card-actions">
+              <a href="register.html" target="_blank" class="action-btn">Preview</a>
+            </div>
+          </div>
+          <div class="page-card">
+            <h4>📞 Contact</h4>
+            <div class="url">contact.html</div>
+            <div class="page-card-actions">
+              <a href="contact.html" target="_blank" class="action-btn">Preview</a>
+              <button class="action-btn" onclick="showPanel('content', null); showEditorTab('contact-info', null)">Edit Info</button>
+            </div>
+          </div>
+          <div class="page-card" id="addPageCard" style="border-style:dashed; display:flex; align-items:center; justify-content:center; cursor:pointer; min-height:110px;" onclick="openModal('addPageModal')">
+            <div style="text-align:center; color:var(--grey-400);">
+              <div style="font-size:1.8rem; margin-bottom:8px;">+</div>
+              <div style="font-size:0.84rem;">New Page</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SETTINGS ── -->
+      <div class="panel" id="panel-settings">
+        <div class="field-card">
+          <h4>⚙️ General Settings</h4>
+          <div class="row-2">
+            <div class="form-group"><label>Site Name</label><input type="text" value="HMG Academy" /></div>
+            <div class="form-group"><label>Tagline</label><input type="text" value="Learning Deliberately. Teaching Authentically." /></div>
+          </div>
+          <div class="form-group"><label>WhatsApp Message Prefix (auto-prepended)</label><input type="text" value="Hello HMG Academy, I am interested in your services." /></div>
+          <button class="btn btn-gold" onclick="saveContent('settings')">💾 Save Settings</button>
+        </div>
+        <div class="field-card">
+          <h4>🔐 Change Admin Password</h4>
+          <div class="row-2">
+            <div class="form-group"><label>New Password</label><input type="password" id="newPass" placeholder="Min. 8 characters" /></div>
+            <div class="form-group"><label>Confirm Password</label><input type="password" id="confirmPass" placeholder="Repeat password" /></div>
+          </div>
+          <button class="btn btn-navy" onclick="changePassword()">Update Password</button>
+        </div>
+        <div class="field-card">
+          <h4>💾 Data Management</h4>
+          <p style="font-size:0.86rem; color:var(--grey-400); margin-bottom:16px;">Export all your CMS data (notes, testimonials, tools) as a JSON backup, or import from a previous backup.</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <button class="btn btn-ghost btn-sm" onclick="exportData()">📥 Export Backup</button>
+            <button class="btn btn-ghost btn-sm" onclick="document.getElementById('importInput').click()">📤 Import Backup</button>
+            <input type="file" id="importInput" accept=".json" style="display:none" onchange="importData(event)" />
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CHANGELOG ── -->
+      <div class="panel" id="panel-changelog">
+        <div style="background:white; border:1px solid var(--grey-200); border-radius:var(--radius); padding:24px;">
+          <h3 style="font-size:1rem; color:var(--navy); margin-bottom:20px;">📋 Change Log</h3>
+          <div id="changelogList">
+            <div class="changelog-item">
+              <div class="changelog-icon" style="background:rgba(13,158,106,0.1);">✅</div>
+              <div class="changelog-text"><strong>Admin panel initialised</strong><div class="changelog-time">Now</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+  </main>
+</div><!-- /admin-layout -->
+
+<!-- ═══════════════════════════════════════
+     MODALS
+═══════════════════════════════════════ -->
+
+<!-- Add Note Modal -->
+<div class="modal-overlay" id="addNoteModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>📝 Add Lesson Note</h3>
+      <button class="modal-close" onclick="closeModal('addNoteModal')">×</button>
+    </div>
+    <div class="form-group"><label>Note Title</label><input type="text" id="note-title" placeholder="e.g. Arithmetic Progression — SSS 1 Further Maths" /></div>
+    <div class="row-2">
+      <div class="form-group">
+        <label>Subject</label>
+        <select id="note-subject">
+          <option>Further Mathematics</option>
+          <option>Mathematics</option>
+          <option>Physics</option>
+          <option>Chemistry</option>
+          <option>Computer Science</option>
+          <option>Data Science</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Class Level</label>
+        <select id="note-class">
+          <option>JSS 1</option><option>JSS 2</option><option>JSS 3</option>
+          <option>SSS 1</option><option>SSS 2</option><option>SSS 3</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Description (optional)</label>
+      <textarea id="note-desc" rows="3" placeholder="Brief description of what this note covers..."></textarea>
+    </div>
+    <div class="row-2">
+      <div class="form-group">
+        <label>File URL or Upload Path</label>
+        <input type="text" id="note-url" placeholder="/notes/arithmetic-progression.pdf" />
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select id="note-status">
+          <option value="published">Published (visible on site)</option>
+          <option value="draft">Draft (hidden)</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:flex; gap:10px; margin-top:8px;">
+      <button class="btn btn-gold" onclick="addNote()">+ Add Note</button>
+      <button class="btn btn-ghost" onclick="closeModal('addNoteModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Tool Modal -->
+<div class="modal-overlay" id="addToolModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>🔧 Add Tool / Project</h3>
+      <button class="modal-close" onclick="closeModal('addToolModal')">×</button>
+    </div>
+    <div class="row-2">
+      <div class="form-group"><label>Icon Emoji</label><input type="text" id="tool-icon" placeholder="💻" /></div>
+      <div class="form-group"><label>Tool Name</label><input type="text" id="tool-name" placeholder="CBT Pro" /></div>
+    </div>
+    <div class="form-group"><label>Description</label><textarea id="tool-desc" rows="3" placeholder="What does this tool do?"></textarea></div>
+    <div class="row-2">
+      <div class="form-group"><label>Live URL (optional)</label><input type="url" id="tool-url" placeholder="https://..." /></div>
+      <div class="form-group"><label>GitHub URL (optional)</label><input type="url" id="tool-github" placeholder="https://github.com/..." /></div>
+    </div>
+    <div class="row-2">
+      <div class="form-group">
+        <label>Status Badge</label>
+        <select id="tool-status">
+          <option value="live">🟢 Live</option>
+          <option value="progress">🟡 In Progress</option>
+          <option value="planned">⚪ Planned</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Key Metric (e.g. R²=0.855)</label><input type="text" id="tool-metric" placeholder="Optional" /></div>
+    </div>
+    <div style="display:flex; gap:10px; margin-top:8px;">
+      <button class="btn btn-gold" onclick="addTool()">+ Add Tool</button>
+      <button class="btn btn-ghost" onclick="closeModal('addToolModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Testimonial Modal -->
+<div class="modal-overlay" id="addTestimonialModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>💬 Add Testimonial</h3>
+      <button class="modal-close" onclick="closeModal('addTestimonialModal')">×</button>
+    </div>
+    <div class="form-group"><label>Testimonial Text</label><textarea id="test-text" rows="4" placeholder="What did they say? Paste the review here..."></textarea></div>
+    <div class="row-2">
+      <div class="form-group"><label>Name</label><input type="text" id="test-name" placeholder="Student or Parent Name" /></div>
+      <div class="form-group"><label>Role / Label</label><input type="text" id="test-role" placeholder="e.g. SSS 3 Student, Lagos" /></div>
+    </div>
+    <div class="row-2">
+      <div class="form-group">
+        <label>Star Rating</label>
+        <select id="test-stars">
+          <option value="5">★★★★★ (5 stars)</option>
+          <option value="4">★★★★ (4 stars)</option>
+          <option value="3">★★★ (3 stars)</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Avatar Emoji</label><input type="text" id="test-avatar" placeholder="👨‍🎓" /></div>
+    </div>
+    <div style="display:flex; gap:10px; margin-top:8px;">
+      <button class="btn btn-gold" onclick="addTestimonial()">+ Add Testimonial</button>
+      <button class="btn btn-ghost" onclick="closeModal('addTestimonialModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Page Modal -->
+<div class="modal-overlay" id="addPageModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>📄 Create New Page</h3>
+      <button class="modal-close" onclick="closeModal('addPageModal')">×</button>
+    </div>
+    <div class="form-group"><label>Page Name</label><input type="text" id="page-name" placeholder="e.g. Gallery, Blog, FAQ" /></div>
+    <div class="form-group"><label>Page Filename</label><input type="text" id="page-filename" placeholder="gallery.html" /></div>
+    <div class="form-group">
+      <label>Page Template</label>
+      <select id="page-template">
+        <option value="blank">Blank Page (nav + hero + footer)</option>
+        <option value="content">Content Page (with text sections)</option>
+        <option value="gallery">Gallery Page (image grid)</option>
+        <option value="list">List/Cards Page</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Hero Headline</label><input type="text" id="page-headline" placeholder="Page headline" /></div>
+    <div class="form-group"><label>Hero Subtext</label><textarea id="page-subtext" rows="2" placeholder="Brief description shown in the hero..."></textarea></div>
+    <p style="font-size:0.80rem; color:var(--grey-400); margin-bottom:16px;">⚠️ After creation, download the generated HTML file and add it to your site folder.</p>
+    <div style="display:flex; gap:10px;">
+      <button class="btn btn-gold" onclick="generatePage()">⚡ Generate Page</button>
+      <button class="btn btn-ghost" onclick="closeModal('addPageModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════ -->
+<script>
+'use strict';
+
+// ── AUTH ──
+const CREDENTIALS = { user: 'admin', pass: 'hmgacademy2025' };
+let adminPass = localStorage.getItem('hmg_admin_pass') || CREDENTIALS.pass;
+
+function doLogin() {
+  const u = document.getElementById('authUser').value.trim();
+  const p = document.getElementById('authPass').value;
+  if (u === CREDENTIALS.user && p === adminPass) {
+    document.getElementById('authScreen').style.display = 'none';
+    document.getElementById('adminLayout').style.display = 'flex';
+    logChange('🔐', 'Admin signed in');
+    renderAll();
+  } else {
+    document.getElementById('authError').style.display = 'block';
+    document.getElementById('authPass').value = '';
+    setTimeout(() => document.getElementById('authError').style.display = 'none', 3000);
+  }
+}
+document.getElementById('authPass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+function doLogout() {
+  document.getElementById('adminLayout').style.display = 'none';
+  document.getElementById('authScreen').style.display = 'flex';
+  document.getElementById('authUser').value = '';
+  document.getElementById('authPass').value = '';
+}
+
+function changePassword() {
+  const np = document.getElementById('newPass').value;
+  const cp = document.getElementById('confirmPass').value;
+  if (!np || np.length < 8) return showToast('Password must be at least 8 characters.', 'error');
+  if (np !== cp) return showToast('Passwords do not match.', 'error');
+  adminPass = np;
+  localStorage.setItem('hmg_admin_pass', np);
+  document.getElementById('newPass').value = '';
+  document.getElementById('confirmPass').value = '';
+  showToast('✅ Password updated!', 'success');
+  logChange('🔐', 'Admin password changed');
+}
+
+// ── NAVIGATION ──
+const panelTitles = {
+  dashboard: ['Dashboard', 'Overview of your HMG Academy website'],
+  content: ['Site Content', 'Edit text, bio, contact info and SEO'],
+  notes: ['Lesson Notes', 'Manage downloadable lesson notes'],
+  tools: ['Tools & Projects', 'Manage your EdTech tools and portfolio'],
+  testimonials: ['Testimonials', 'Add and manage student/parent reviews'],
+  upload: ['File Uploads', 'Upload PDFs, images and other resources'],
+  pages: ['Site Pages', 'Manage and create site pages'],
+  settings: ['Settings', 'General settings and admin account'],
+  changelog: ['Change Log', 'History of all content changes'],
+};
+
+function showPanel(name, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+  const panel = document.getElementById('panel-' + name);
+  if (panel) panel.classList.add('active');
+  if (btn) btn.classList.add('active');
+  const t = panelTitles[name] || [name, ''];
+  document.getElementById('topbarTitle').textContent = t[0];
+  document.getElementById('topbarSub').textContent = t[1];
+}
+
+function showEditorTab(name, btn) {
+  document.querySelectorAll('.editor-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.editor-tab').forEach(t => t.classList.remove('active'));
+  const sec = document.getElementById('tab-' + name);
+  if (sec) sec.classList.add('active');
+  if (btn) btn.classList.add('active');
+  // Show content panel
+  showPanel('content', document.querySelectorAll('.sidebar-link')[1]);
+}
+
+// ── DATA STORE (localStorage) ──
+function getData(key, def) {
+  try { return JSON.parse(localStorage.getItem('hmg_' + key)) || def; }
+  catch { return def; }
+}
+function setData(key, val) {
+  localStorage.setItem('hmg_' + key, JSON.stringify(val));
+}
+
+// ── RENDER FUNCTIONS ──
+function renderAll() {
+  renderNotes();
+  renderTools();
+  renderTestimonials();
+  updateDashStats();
+  renderChangelog();
+}
+
+function renderNotes() {
+  const notes = getData('notes', []);
+  const list = document.getElementById('notesList');
+  const empty = document.getElementById('notesEmpty');
+  list.innerHTML = '';
+  if (!notes.length) { empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  notes.forEach((n, i) => {
+    const row = document.createElement('div');
+    row.className = 'note-row';
+    const stars = {'★★★★★': 5}; // unused
+    row.innerHTML = `
+      <span class="note-title">${n.title}</span>
+      <span>${n.subject}</span>
+      <span>${n.class}</span>
+      <span><span class="badge ${n.status === 'published' ? 'badge-live' : 'badge-soon'}">${n.status}</span></span>
+      <div class="note-actions">
+        ${n.url ? `<a href="${n.url}" target="_blank" class="action-btn">View</a>` : ''}
+        <button class="action-btn danger" onclick="deleteNote(${i})">Del</button>
+      </div>`;
+    list.appendChild(row);
+  });
+}
+
+function addNote() {
+  const title = document.getElementById('note-title').value.trim();
+  if (!title) return showToast('Please enter a note title.', 'error');
+  const notes = getData('notes', []);
+  notes.push({
+    title,
+    subject: document.getElementById('note-subject').value,
+    class: document.getElementById('note-class').value,
+    desc: document.getElementById('note-desc').value,
+    url: document.getElementById('note-url').value,
+    status: document.getElementById('note-status').value,
+    added: new Date().toLocaleDateString('en-GB'),
+  });
+  setData('notes', notes);
+  closeModal('addNoteModal');
+  document.getElementById('note-title').value = '';
+  document.getElementById('note-desc').value = '';
+  document.getElementById('note-url').value = '';
+  renderNotes();
+  updateDashStats();
+  showToast('✅ Note added!', 'success');
+  logChange('📝', `Lesson note added: "${title}"`);
+}
+
+function deleteNote(i) {
+  if (!confirm('Delete this note?')) return;
+  const notes = getData('notes', []);
+  const title = notes[i].title;
+  notes.splice(i, 1);
+  setData('notes', notes);
+  renderNotes();
+  updateDashStats();
+  showToast('Note deleted.', '');
+  logChange('🗑️', `Note deleted: "${title}"`);
+}
+
+function renderTools() {
+  const defaultTools = [
+    { icon: '💻', name: 'CBT Pro — Exam Platform', desc: 'Free CBT system with timed exams, AI explanations, auto-marking, and certificates. Built in Vanilla JS + Supabase.', url: 'https://cssadewale.github.io/cbt-system', github: 'https://github.com/cssadewale/cbt-system', status: 'live', metric: '' },
+    { icon: '📈', name: 'Student Performance Tracker', desc: 'Streamlit dashboard with 4 tabs — score summaries, at-risk alerts, topic analysis, question-level breakdowns.', url: '', github: 'https://github.com/cssadewale/student-performance-tracker', status: 'live', metric: 'v3' },
+    { icon: '🤖', name: 'Student At-Risk Predictor', desc: 'RF + SHAP trained on Nigerian school data. Single-student and batch CSV modes.', url: '', github: 'https://github.com/cssadewale/student-at-risk-predictor', status: 'live', metric: 'SHAP' },
+    { icon: '🔮', name: 'Student Performance Advisor (AI)', desc: 'LLM + ML classification + SHAP + Claude AI for personalised performance recommendations.', url: '', github: '', status: 'progress', metric: 'In Dev' },
+  ];
+  const tools = getData('tools', defaultTools);
+  const list = document.getElementById('toolsList');
+  list.innerHTML = '';
+  tools.forEach((t, i) => {
+    const statusLabel = t.status === 'live' ? '<span class="badge badge-live">Live</span>' : t.status === 'progress' ? '<span class="badge badge-soon">In Progress</span>' : '<span class="badge badge-navy">Planned</span>';
+    const card = document.createElement('div');
+    card.className = 'field-card';
+    card.style.padding = '18px 22px';
+    card.innerHTML = `
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <span style="font-size:1.5rem;">${t.icon}</span>
+          <div>
+            <div style="font-weight:700; color:var(--navy); font-size:0.96rem;">${t.name}</div>
+            <div style="font-size:0.82rem; color:var(--grey-400); margin-top:3px;">${t.desc.substring(0,90)}...</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          ${statusLabel}
+          ${t.url ? `<a href="${t.url}" target="_blank" class="action-btn">Live</a>` : ''}
+          ${t.github ? `<a href="${t.github}" target="_blank" class="action-btn">GitHub</a>` : ''}
+          <button class="action-btn danger" onclick="deleteTool(${i})">Del</button>
+        </div>
+      </div>`;
+    list.appendChild(card);
+  });
+}
+
+function addTool() {
+  const name = document.getElementById('tool-name').value.trim();
+  if (!name) return showToast('Please enter a tool name.', 'error');
+  const defaultTools = [
+    { icon: '💻', name: 'CBT Pro — Exam Platform', desc: 'Free CBT system with timed exams, AI explanations, auto-marking, and certificates. Built in Vanilla JS + Supabase.', url: 'https://cssadewale.github.io/cbt-system', github: 'https://github.com/cssadewale/cbt-system', status: 'live', metric: '' },
+    { icon: '📈', name: 'Student Performance Tracker', desc: 'Streamlit dashboard with 4 tabs — score summaries, at-risk alerts, topic analysis, question-level breakdowns.', url: '', github: 'https://github.com/cssadewale/student-performance-tracker', status: 'live', metric: 'v3' },
+    { icon: '🤖', name: 'Student At-Risk Predictor', desc: 'RF + SHAP trained on Nigerian school data. Single-student and batch CSV modes.', url: '', github: 'https://github.com/cssadewale/student-at-risk-predictor', status: 'live', metric: 'SHAP' },
+    { icon: '🔮', name: 'Student Performance Advisor (AI)', desc: 'LLM + ML classification + SHAP + Claude AI for personalised performance recommendations.', url: '', github: '', status: 'progress', metric: 'In Dev' },
+  ];
+  const tools = getData('tools', defaultTools);
+  tools.push({
+    icon: document.getElementById('tool-icon').value || '🔧',
+    name,
+    desc: document.getElementById('tool-desc').value,
+    url: document.getElementById('tool-url').value,
+    github: document.getElementById('tool-github').value,
+    status: document.getElementById('tool-status').value,
+    metric: document.getElementById('tool-metric').value,
+  });
+  setData('tools', tools);
+  closeModal('addToolModal');
+  renderTools();
+  updateDashStats();
+  showToast('✅ Tool added!', 'success');
+  logChange('🔧', `Tool added: "${name}"`);
+}
+
+function deleteTool(i) {
+  if (!confirm('Remove this tool?')) return;
+  const defaultTools = [
+    { icon: '💻', name: 'CBT Pro — Exam Platform', desc: 'Free CBT system with timed exams, AI explanations, auto-marking, and certificates.', url: 'https://cssadewale.github.io/cbt-system', github: 'https://github.com/cssadewale/cbt-system', status: 'live', metric: '' },
+    { icon: '📈', name: 'Student Performance Tracker', desc: 'Streamlit dashboard.', url: '', github: 'https://github.com/cssadewale/student-performance-tracker', status: 'live', metric: 'v3' },
+    { icon: '🤖', name: 'Student At-Risk Predictor', desc: 'RF + SHAP.', url: '', github: 'https://github.com/cssadewale/student-at-risk-predictor', status: 'live', metric: 'SHAP' },
+    { icon: '🔮', name: 'Student Performance Advisor (AI)', desc: 'In development.', url: '', github: '', status: 'progress', metric: 'In Dev' },
+  ];
+  const tools = getData('tools', defaultTools);
+  const name = tools[i].name;
+  tools.splice(i, 1);
+  setData('tools', tools);
+  renderTools();
+  updateDashStats();
+  showToast('Tool removed.', '');
+  logChange('🗑️', `Tool deleted: "${name}"`);
+}
+
+function renderTestimonials() {
+  const tests = getData('testimonials', []);
+  const list = document.getElementById('testimonialsList');
+  if (!tests.length) {
+    list.innerHTML = '<p style="text-align:center; color:var(--grey-400); padding:40px; font-size:0.88rem;">No testimonials yet. Add real feedback from students, parents, or colleagues.</p>';
+    return;
+  }
+  list.innerHTML = '';
+  tests.forEach((t, i) => {
+    const card = document.createElement('div');
+    card.className = 'testimonial-manage';
+    card.innerHTML = `
+      <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:1.3rem;">${t.avatar || '👤'}</span>
+          <div><strong style="font-size:0.92rem; color:var(--navy);">${t.name}</strong> <span style="color:var(--grey-400); font-size:0.80rem;">${t.role}</span></div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="color:var(--gold); font-size:0.88rem;">${'★'.repeat(t.stars)}</span>
+          <button class="action-btn danger" onclick="deleteTestimonial(${i})">Del</button>
+        </div>
+      </div>
+      <p style="font-size:0.86rem; color:var(--grey-600); font-style:italic; line-height:1.64;">"${t.text}"</p>`;
+    list.appendChild(card);
+  });
+}
+
+function addTestimonial() {
+  const text = document.getElementById('test-text').value.trim();
+  const name = document.getElementById('test-name').value.trim();
+  if (!text || !name) return showToast('Please fill in name and testimonial text.', 'error');
+  const tests = getData('testimonials', []);
+  tests.push({
+    text, name,
+    role: document.getElementById('test-role').value,
+    stars: parseInt(document.getElementById('test-stars').value),
+    avatar: document.getElementById('test-avatar').value || '👤',
+    added: new Date().toLocaleDateString('en-GB'),
+  });
+  setData('testimonials', tests);
+  closeModal('addTestimonialModal');
+  document.getElementById('test-text').value = '';
+  document.getElementById('test-name').value = '';
+  document.getElementById('test-role').value = '';
+  renderTestimonials();
+  updateDashStats();
+  showToast('✅ Testimonial added!', 'success');
+  logChange('💬', `Testimonial added from "${name}"`);
+}
+
+function deleteTestimonial(i) {
+  if (!confirm('Delete this testimonial?')) return;
+  const tests = getData('testimonials', []);
+  const name = tests[i].name;
+  tests.splice(i, 1);
+  setData('testimonials', tests);
+  renderTestimonials();
+  updateDashStats();
+  showToast('Testimonial deleted.', '');
+  logChange('🗑️', `Testimonial deleted from "${name}"`);
+}
+
+// ── SAVE CONTENT ──
+function saveContent(section) {
+  logChange('✏️', `Site content updated: ${section}`);
+  showToast(`✅ ${section} settings saved! (Note: to apply to HTML files, copy values and update the files or use your deployment workflow.)`, 'success');
+}
+
+function addService() {
+  const title = document.getElementById('svc-title').value.trim();
+  if (!title) return showToast('Please enter a service title.', 'error');
+  showToast(`✅ Service "${title}" noted. Add it to services.html manually or ask for a code snippet.`, 'success');
+  logChange('📚', `Service added: "${title}"`);
+}
+
+// ── UPLOAD ──
+function handleUpload(event) {
+  const files = Array.from(event.target.files);
+  const uploads = getData('uploads', []);
+  const listEl = document.getElementById('uploadedFilesList');
+  files.forEach(f => {
+    uploads.push({ name: f.name, size: (f.size/1024).toFixed(1) + ' KB', date: new Date().toLocaleDateString('en-GB'), type: f.type });
+    showToast(`✅ "${f.name}" recorded.`, 'success');
+    logChange('📁', `File noted: "${f.name}"`);
+  });
+  setData('uploads', uploads);
+  renderUploads();
+}
+
+function renderUploads() {
+  const uploads = getData('uploads', []);
+  const listEl = document.getElementById('uploadedFilesList');
+  if (!uploads.length) { listEl.innerHTML = '<p style="color:var(--grey-400); font-size:0.84rem;">No files uploaded yet.</p>'; return; }
+  listEl.innerHTML = uploads.map((u, i) => `
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--grey-100); font-size:0.84rem;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:1.1rem;">${u.name.endsWith('.pdf') ? '📄' : u.name.match(/\.(png|jpg|jpeg)$/) ? '🖼️' : '📁'}</span>
+        <div><strong style="color:var(--navy);">${u.name}</strong><div style="color:var(--grey-400); font-size:0.76rem;">${u.size} · ${u.date}</div></div>
+      </div>
+      <button class="action-btn danger" onclick="deleteUpload(${i})">Del</button>
+    </div>`).join('');
+}
+
+function deleteUpload(i) {
+  const uploads = getData('uploads', []);
+  uploads.splice(i, 1);
+  setData('uploads', uploads);
+  renderUploads();
+}
+
+// Drag-and-drop
+const zone = document.getElementById('uploadZone');
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+zone.addEventListener('drop', e => { e.preventDefault(); zone.classList.remove('drag-over'); handleUpload({ target: { files: e.dataTransfer.files } }); });
+
+// ── PAGE GENERATOR ──
+function generatePage() {
+  const name = document.getElementById('page-name').value.trim();
+  const filename = document.getElementById('page-filename').value.trim();
+  const headline = document.getElementById('page-headline').value.trim();
+  const subtext = document.getElementById('page-subtext').value.trim();
+  const template = document.getElementById('page-template').value;
+  if (!name || !filename) return showToast('Please enter page name and filename.', 'error');
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${name} — HMG Academy</title>
+  <meta name="description" content="${subtext}" />
+  <link rel="stylesheet" href="_shared.css" />
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><div class="nav-logo-mark">HMG</div><div class="nav-logo-text"><span class="name">HMG Academy</span><span class="sub">His Marvellous Grace</span></div></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li><li><a href="tools.html">Tools</a></li>
+        <li><a href="notes.html">Notes</a></li><li><a href="register.html">Register</a></li><li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="tools.html">Tools</a><a href="notes.html">Notes</a><a href="register.html">Register</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</nav>
+
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span class="current">${name}</span></nav>
+    <h1>${headline || name}</h1>
+    <p>${subtext || 'Content coming soon.'}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <!-- Add your content here -->
+      <p style="color:var(--grey-400); text-align:center; padding:60px;">Content for ${name} page. Edit this section to add your content.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><div class="nav-logo-mark">HMG</div><div class="nav-logo-text"><span class="name" style="color:white;">HMG Academy</span><span class="sub">His Marvellous Grace</span></div></a>
+        <p>A subsidiary of HMG Concepts, founded in 2015.</p>
+      </div>
+      <div class="footer-col"><h4>Navigation</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item">📧 <a href="mailto:buildingmyictcareer@gmail.com">buildingmyictcareer@gmail.com</a></div><div class="footer-contact-item">💬 <a href="https://wa.me/2348094481488">+234 809 448 1488</a></div></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; <span id="year"></span> HMG Academy</p></div>
+  </div>
+</footer>
+<script src="_shared.js"><\/script>
+</body>
+</html>`;
+
+  // Download the file
+  const blob = new Blob([html], { type: 'text/html' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename.endsWith('.html') ? filename : filename + '.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+
+  // Add to pages panel
+  const pagesGrid = document.querySelector('.pages-grid');
+  const addCard = document.getElementById('addPageCard');
+  const newCard = document.createElement('div');
+  newCard.className = 'page-card';
+  newCard.innerHTML = `<h4>📄 ${name}</h4><div class="url">${filename}</div><div class="page-card-actions"><a href="${filename}" target="_blank" class="action-btn">Preview</a></div>`;
+  pagesGrid.insertBefore(newCard, addCard);
+
+  closeModal('addPageModal');
+  showToast(`✅ "${name}" page generated and downloaded!`, 'success');
+  logChange('📄', `New page created: "${name}" (${filename})`);
+
+  // Update pages stat
+  const stat = document.getElementById('stat-pages');
+  if (stat) stat.textContent = parseInt(stat.textContent) + 1;
+}
+
+// ── DASHBOARD STATS ──
+function updateDashStats() {
+  const notes = getData('notes', []);
+  const tests = getData('testimonials', []);
+  const defaultTools = [{},{},{},{}];
+  const tools = getData('tools', defaultTools);
+  document.getElementById('stat-notes').textContent = notes.length;
+  document.getElementById('stat-testimonials').textContent = tests.length;
+  document.getElementById('stat-tools').textContent = tools.length;
+}
+
+// ── CHANGE LOG ──
+const changeLog = [];
+function logChange(icon, msg) {
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  changeLog.unshift({ icon, msg, time: timeStr });
+  if (changeLog.length > 50) changeLog.pop();
+  renderChangelog();
+}
+
+function renderChangelog() {
+  const list = document.getElementById('changelogList');
+  const dash = document.getElementById('dashChangelog');
+  if (!list) return;
+  const items = changeLog.slice(0, 20).map(c => `
+    <div class="changelog-item">
+      <div class="changelog-icon" style="background:rgba(15,37,71,0.07); font-size:0.85rem;">${c.icon}</div>
+      <div class="changelog-text"><strong>${c.msg}</strong><div class="changelog-time">${c.time}</div></div>
+    </div>`).join('');
+  list.innerHTML = items || '<p style="color:var(--grey-400); font-size:0.84rem;">No changes yet.</p>';
+  if (dash) dash.innerHTML = changeLog.slice(0, 5).map(c => `
+    <div class="changelog-item">
+      <div class="changelog-icon" style="background:rgba(15,37,71,0.07); font-size:0.85rem;">${c.icon}</div>
+      <div class="changelog-text"><strong>${c.msg}</strong><div class="changelog-time">${c.time}</div></div>
+    </div>`).join('') || dash.innerHTML;
+}
+
+// ── EXPORT / IMPORT ──
+function exportData() {
+  const data = {
+    notes: getData('notes', []),
+    tools: getData('tools', []),
+    testimonials: getData('testimonials', []),
+    uploads: getData('uploads', []),
+    exportedAt: new Date().toISOString(),
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'hmg-academy-backup-' + new Date().toISOString().split('T')[0] + '.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast('✅ Backup exported!', 'success');
+  logChange('💾', 'Data backup exported');
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.notes) setData('notes', data.notes);
+      if (data.tools) setData('tools', data.tools);
+      if (data.testimonials) setData('testimonials', data.testimonials);
+      if (data.uploads) setData('uploads', data.uploads);
+      renderAll();
+      showToast('✅ Backup imported successfully!', 'success');
+      logChange('📤', 'Data backup imported');
+    } catch {
+      showToast('❌ Invalid backup file.', 'error');
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ── MODALS ──
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
+});
+
+// ── TOAST ──
+let toastTimer;
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.className = 'toast'; }, 3500);
+}
+
+// ── INIT ──
+renderUploads();
+</script>
+</body>
+</html>

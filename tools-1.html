@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tools & Projects — HMG Academy | EdTech & Data Science Portfolio</title>
+  <meta name="description" content="Free EdTech tools and data science projects built by Adewale Samson Adeagbo — educator and ML engineer. CBT Pro is live. More coming soon." />
+  <link rel="canonical" href="https://hmgacademy.pages.dev/tools.html" />
+  <link rel="stylesheet" href="_shared.css" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+  <style>
+    .tools-full-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:40px; }
+    .tool-full-card { background:white; border:1px solid var(--grey-200); border-radius:var(--radius-lg); padding:32px; transition:var(--transition); position:relative; overflow:hidden; }
+    .tool-full-card:hover { box-shadow:var(--shadow-md); transform:translateY(-4px); border-color:rgba(15,37,71,0.20); }
+    .tool-full-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--gold),var(--gold-bright)); opacity:0; transition:opacity 0.24s; }
+    .tool-full-card:hover::before { opacity:1; }
+    .tool-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:16px; gap:12px; }
+    .tool-icon-lg { width:54px; height:54px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; flex-shrink:0; }
+    .tool-title { font-size:1.08rem; font-weight:700; color:var(--navy); margin-bottom:4px; }
+    .tool-stack { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 16px; }
+    .stack-tag { font-size:0.72rem; font-weight:600; padding:3px 9px; border-radius:99px; background:var(--navy-pale); color:var(--navy-light); border:1px solid rgba(15,37,71,0.12); }
+    .tool-desc { font-size:0.88rem; color:var(--grey-600); line-height:1.72; margin-bottom:16px; }
+    .tool-metric-box { background:var(--off-white); border:1px solid var(--grey-200); border-radius:var(--radius-sm); padding:12px 16px; margin-bottom:16px; font-size:0.82rem; color:var(--grey-600); }
+    .tool-metric-box strong { color:var(--navy); display:block; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px; }
+    .tool-links { display:flex; gap:8px; flex-wrap:wrap; }
+    .portfolio-section { background:var(--navy-pale); border-radius:var(--radius-xl); padding:56px 48px; margin-top:64px; }
+    .portfolio-3col { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:28px; }
+    .mini-project { background:white; border:1px solid var(--grey-200); border-radius:var(--radius); padding:20px; transition:var(--transition); }
+    .mini-project:hover { box-shadow:var(--shadow-sm); transform:translateY(-2px); }
+    .mini-metric { font-family:var(--font-display); font-size:1.3rem; font-weight:700; color:var(--gold-muted); margin-bottom:4px; }
+    .mini-title { font-size:0.88rem; font-weight:700; color:var(--navy); margin-bottom:5px; }
+    .mini-desc { font-size:0.78rem; color:var(--grey-400); line-height:1.55; margin-bottom:10px; }
+    @media (max-width:900px) { .tools-full-grid { grid-template-columns:1fr; } .portfolio-3col { grid-template-columns:1fr 1fr; } .portfolio-section { padding:40px 24px; } }
+    @media (max-width:480px) { .portfolio-3col { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="nav-logo-mark">HMG</div><div class="nav-logo-text"><span class="name">HMG Academy</span><span class="sub">His Marvellous Grace</span></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li>
+      <li><a href="tools.html" class="active">Tools</a></li><li><a href="notes.html">Notes</a></li><li><a href="register.html">Register</a></li><li><a href="contact.html">Contact</a></li>
+      <li><a href="https://wa.me/2348094481488" target="_blank" rel="noopener" class="nav-cta btn">💬 WhatsApp</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div></div>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="tools.html">Tools</a><a href="notes.html">Notes</a><a href="register.html">Register</a><a href="contact.html">Contact</a>
+    <a href="https://wa.me/2348094481488" target="_blank" rel="noopener" class="mobile-wa">💬 Chat on WhatsApp</a>
+  </nav>
+</nav>
+
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span class="current">Tools & Projects</span></nav>
+    <h1>Tools Built by an Educator Who Codes</h1>
+    <p>Every tool here was born from a real classroom problem. No investor brief. No feature roadmap handed down from above. Just a teacher who learned to code — and started building.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header-centered reveal">
+      <div class="section-eyebrow">EdTech Tools</div>
+      <h2 class="section-title">Free Tools for Nigerian Students & Teachers</h2>
+      <p class="section-subtitle">Open, documented, and honestly built. Some are live. Some are in progress. All are real.</p>
+    </div>
+
+    <div class="tools-full-grid" id="toolsGrid">
+
+      <div class="tool-full-card reveal">
+        <div class="tool-header">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div class="tool-icon-lg" style="background:rgba(15,37,71,0.08);">💻</div>
+            <div>
+              <div class="tool-title">CBT Pro — Exam Platform</div>
+              <span class="badge badge-live">Live</span>
+            </div>
+          </div>
+        </div>
+        <p class="tool-desc">A full computer-based testing system built entirely on an Android tablet using Acode editor. No frameworks — pure HTML5, CSS3, and Vanilla JavaScript. Backend powered by Supabase (PostgreSQL + Auth + RLS). Features: timed exams, per-student randomisation, flag-for-review, question navigator, auto-marking, AI explanations via Gemini API, result certificates, and a 4-tab teacher dashboard with CSV export.</p>
+        <div class="tool-metric-box"><strong>Tech Stack</strong>HTML5 · CSS3 · Vanilla JS · Supabase (PostgreSQL) · Gemini API · GitHub Pages</div>
+        <div class="tool-stack">
+          <span class="stack-tag">HTML5</span><span class="stack-tag">CSS3</span><span class="stack-tag">Vanilla JS</span>
+          <span class="stack-tag">Supabase</span><span class="stack-tag">Gemini API</span><span class="stack-tag">GitHub Pages</span>
+        </div>
+        <div class="tool-links">
+          <a href="https://cssadewale.github.io/cbt-system" target="_blank" rel="noopener" class="btn btn-navy btn-sm">🌐 Open Platform</a>
+          <a href="https://github.com/cssadewale/cbt-system" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="tool-full-card reveal">
+        <div class="tool-header">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div class="tool-icon-lg" style="background:rgba(13,158,106,0.10);">📈</div>
+            <div>
+              <div class="tool-title">Student Performance Tracker v3</div>
+              <span class="badge badge-live">Live</span>
+            </div>
+          </div>
+        </div>
+        <p class="tool-desc">A Streamlit dashboard with 4 interactive tabs designed for Nigerian secondary school teachers. Tab 1: Score summaries. Tab 2: At-risk thresholds and alerts. Tab 3: Topic-level analysis. Tab 4: Question-level breakdown. Uses Plotly for interactive charts. Designed from real classroom data needs.</p>
+        <div class="tool-metric-box"><strong>Tech Stack</strong>Python · Streamlit · Plotly · Pandas · GitHub</div>
+        <div class="tool-stack">
+          <span class="stack-tag">Python</span><span class="stack-tag">Streamlit</span><span class="stack-tag">Plotly</span><span class="stack-tag">Pandas</span>
+        </div>
+        <div class="tool-links">
+          <a href="https://github.com/cssadewale/student-performance-tracker" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="tool-full-card reveal">
+        <div class="tool-header">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div class="tool-icon-lg" style="background:rgba(46,84,144,0.10);">🤖</div>
+            <div>
+              <div class="tool-title">Student At-Risk Predictor</div>
+              <span class="badge badge-live">Live</span>
+            </div>
+          </div>
+        </div>
+        <p class="tool-desc">Random Forest classifier trained on synthetic Nigerian secondary school data with SHAP explainability. Identifies students at risk of poor performance before exams. Supports two modes: single-student input (form-based) and batch CSV mode for teachers processing an entire class. SHAP waterfall charts explain each prediction.</p>
+        <div class="tool-metric-box"><strong>Model & Stack</strong>Random Forest · SHAP · Python · Scikit-Learn · Streamlit · joblib serialisation</div>
+        <div class="tool-stack">
+          <span class="stack-tag">Random Forest</span><span class="stack-tag">SHAP</span><span class="stack-tag">Scikit-Learn</span><span class="stack-tag">Streamlit</span>
+        </div>
+        <div class="tool-links">
+          <a href="https://github.com/cssadewale/student-at-risk-predictor" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="tool-full-card reveal">
+        <div class="tool-header">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div class="tool-icon-lg" style="background:rgba(232,160,32,0.12);">🔮</div>
+            <div>
+              <div class="tool-title">Student Performance Advisor (AI)</div>
+              <span class="badge badge-soon">In Progress</span>
+            </div>
+          </div>
+        </div>
+        <p class="tool-desc">An LLM-powered advisory system that combines ML classification, SHAP explainability, and the Claude AI API to deliver personalised, conversational performance recommendations per student. Architecture: Scikit-learn ML backend → SHAP feature importance → Claude API advisory layer → Streamlit frontend → SQLite persistence. Dataset: UCI Student Performance (649 rows, Maths + Portuguese merged), four-class performance_tier target engineered from G3 scores.</p>
+        <div class="tool-metric-box"><strong>Architecture</strong>ML Classification · SHAP · Claude AI API · Streamlit · SQLite · UCI Dataset (id=320)</div>
+        <div class="tool-stack">
+          <span class="stack-tag">Claude API</span><span class="stack-tag">Scikit-Learn</span><span class="stack-tag">SHAP</span><span class="stack-tag">Streamlit</span><span class="stack-tag">SQLite</span>
+        </div>
+        <div class="tool-links">
+          <span style="font-size:0.82rem; color:var(--grey-400); font-style:italic;">🔨 Actively in development — Milestone 2 EDA complete</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DS PORTFOLIO -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="portfolio-section reveal">
+      <div class="section-eyebrow">Data Science Portfolio</div>
+      <h2 class="section-title" style="margin-bottom:10px;">Published ML Projects</h2>
+      <p class="section-subtitle">Each project follows a structured 5-step notebook format, documented transparently — including the ones where results were honest about limitations.</p>
+      <div class="portfolio-3col">
+        <div class="mini-project">
+          <div class="mini-metric">R²=0.855</div>
+          <div class="mini-title">NeuroWell Burnout Predictor</div>
+          <div class="mini-desc">Gradient Boosting regression · RMSE=0.072 · HR analytics</div>
+          <a href="https://github.com/cssadewale/burnout-prediction" target="_blank" rel="noopener" style="font-size:0.78rem; color:var(--navy); font-weight:600;">GitHub →</a>
+        </div>
+        <div class="mini-project">
+          <div class="mini-metric">AUC=0.939</div>
+          <div class="mini-title">TruthLens Fake News Detector</div>
+          <div class="mini-desc">NLP · XGBoost · TF-IDF · Acc=86.75% · 3MTT Capstone</div>
+          <a href="https://github.com/cssadewale/fake-news-detector" target="_blank" rel="noopener" style="font-size:0.78rem; color:var(--navy); font-weight:600;">GitHub →</a>
+        </div>
+        <div class="mini-project">
+          <div class="mini-metric">5 Models</div>
+          <div class="mini-title">Income Level Prediction</div>
+          <div class="mini-desc">UCI Census · Random Forest · SMOTE · Classification</div>
+          <a href="https://github.com/cssadewale/income-level-prediction" target="_blank" rel="noopener" style="font-size:0.78rem; color:var(--navy); font-weight:600;">GitHub →</a>
+        </div>
+        <div class="mini-project">
+          <div class="mini-metric">AUC=0.868</div>
+          <div class="mini-title">Bank Customer Churn</div>
+          <div class="mini-desc">Gradient Boosting · F1=0.609 · Churn prediction</div>
+          <a href="https://github.com/cssadewale/bank-customer-churn-prediction" target="_blank" rel="noopener" style="font-size:0.78rem; color:var(--navy); font-weight:600;">GitHub →</a>
+        </div>
+        <div class="mini-project">
+          <div class="mini-metric">AUC=0.891</div>
+          <div class="mini-title">Yakub Staff Promotion</div>
+          <div class="mini-desc">Random Forest · F1=0.411 · HR prediction</div>
+          <a href="https://github.com/cssadewale/yakub-promotion-prediction" target="_blank" rel="noopener" style="font-size:0.78rem; color:var(--navy); font-weight:600;">GitHub →</a>
+        </div>
+        <div class="mini-project">
+          <div class="mini-metric">Honest</div>
+          <div class="mini-title">SecureLife Insurance Premium</div>
+          <div class="mini-desc">Regression · R²≈0 · Documented as data diagnosis — no cover-up</div>
+          <a href="https://github.com/cssadewale/insurance-claim-prediction" target="_blank" rel="noopener" style="font-size:0.78rem; color:var(--navy); font-weight:600;">GitHub →</a>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:28px;">
+        <a href="https://github.com/cssadewale" target="_blank" rel="noopener" class="btn btn-navy">View All on GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><div class="nav-logo-mark">HMG</div><div class="nav-logo-text"><span class="name" style="color:white;">HMG Academy</span><span class="sub">His Marvellous Grace</span></div></a>
+        <p>A subsidiary of HMG Concepts, founded in 2015.</p>
+        <div class="footer-socials">
+          <a href="https://linkedin.com/in/adewalesamsonadeagbo" target="_blank" class="social-btn">in</a>
+          <a href="https://github.com/cssadewale" target="_blank" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
+          <a href="https://wa.me/2348094481488" target="_blank" class="social-btn" style="background:rgba(37,211,102,0.18);color:#25D366;">💬</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Navigation</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="tools.html">Tools</a></li><li><a href="notes.html">Notes</a></li><li><a href="register.html">Register</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Tools</h4><ul><li><a href="https://cssadewale.github.io/cbt-system" target="_blank">CBT Pro</a></li><li><a href="https://github.com/cssadewale/student-performance-tracker" target="_blank">Performance Tracker</a></li><li><a href="https://github.com/cssadewale/student-at-risk-predictor" target="_blank">At-Risk Predictor</a></li><li><a href="https://github.com/cssadewale" target="_blank">All Projects on GitHub</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4>
+        <div class="footer-contact-item">📧 <a href="mailto:buildingmyictcareer@gmail.com">buildingmyictcareer@gmail.com</a></div>
+        <div class="footer-contact-item">💬 <a href="https://wa.me/2348094481488" target="_blank">+234 809 448 1488</a></div>
+        <div class="footer-contact-item">📍 Lagos / Ogun State, Nigeria</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> HMG Academy · A subsidiary of HMG Concepts. All rights reserved.</p>
+      <p>Built with ❤️ by <a href="about.html">Adewale Samson Adeagbo</a> · <a href="https://github.com/cssadewale" target="_blank">GitHub</a></p>
+    </div>
+  </div>
+</footer>
+<a href="https://wa.me/2348094481488?text=Hello%20HMG%20Academy%2C%20I%20am%20interested%20in%20your%20tools." target="_blank" rel="noopener" class="wa-float"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span class="wa-label">Chat on WhatsApp</span></a>
+<script src="_shared.js"></script>
+</body>
+</html>
