@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tools & Projects — HMG Academy | 12 Live EdTech & Data Science Solutions</title>
+  <meta name="description" content="12 live deployed tools by Adewale Samson Adeagbo — CBT Pro, Student Performance Tracker, Fake News Detector, Burnout Predictor, and more. All built to solve real classroom and business problems." />
+  <link rel="canonical" href="https://hmgacademy.pages.dev/tools.html" />
+  <meta property="og:title" content="Tools & Projects — HMG Academy" />
+  <meta property="og:description" content="12 live deployed data science and EdTech tools — real problems, real solutions, real code." />
+  <meta property="og:image" content="https://hmgacademy.pages.dev/assets/og-image.png" />
+  <link rel="stylesheet" href="_shared.css" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J5C7CTP1N5"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-J5C7CTP1N5');</script>
+
+  <style>
+    /* ── STATS BAR ── */
+    .tools-stats { display:flex; gap:0; background:var(--navy); overflow:hidden; }
+    .tstat { flex:1; padding:1.2rem 1rem; text-align:center; border-right:1px solid rgba(255,255,255,0.08); }
+    .tstat:last-child { border-right:none; }
+    .tstat:hover { background:rgba(255,255,255,0.04); }
+    .tstat-n { font-family:var(--font-display); font-size:1.7rem; font-weight:700; color:var(--gold-bright); line-height:1; }
+    .tstat-l { font-size:0.70rem; font-weight:600; color:rgba(255,255,255,0.42); margin-top:4px; letter-spacing:0.04em; }
+
+    /* ── FILTER BAR ── */
+    .filter-bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px; }
+    .filter-btn { font-family:var(--font-body); font-size:0.78rem; font-weight:600; padding:7px 16px; border-radius:99px; border:1px solid var(--grey-200); background:var(--white); color:var(--grey-600); cursor:pointer; transition:var(--transition); }
+    .filter-btn:hover { border-color:var(--navy); color:var(--navy); }
+    .filter-btn.active { background:var(--navy); border-color:var(--navy); color:var(--white); }
+
+    /* ── SECTION DIVIDER ── */
+    .section-divider { display:flex; align-items:center; gap:1rem; margin:40px 0 24px; }
+    .section-divider h3 { font-size:0.80rem; font-weight:700; color:var(--navy); white-space:nowrap; letter-spacing:0.08em; text-transform:uppercase; }
+    .section-divider .line { flex:1; height:1px; background:var(--grey-200); }
+    .section-divider .count { font-family:var(--font-display); font-size:0.72rem; color:var(--grey-400); white-space:nowrap; }
+
+    /* ── FEATURED CARD (CBT Pro) ── */
+    .featured-card {
+      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 100%);
+      border-radius: var(--radius-xl); padding:36px; margin-bottom:32px;
+      position:relative; overflow:hidden; border:1px solid rgba(232,160,32,0.20);
+      transition: var(--transition);
+    }
+    .featured-card:hover { border-color:rgba(232,160,32,0.40); box-shadow:0 20px 60px rgba(15,37,71,0.3); }
+    .featured-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--gold),var(--gold-bright),var(--emerald)); }
+    .featured-card::after { content:''; position:absolute; top:-60px; right:-60px; width:280px; height:280px; background:radial-gradient(circle,rgba(232,160,32,0.10) 0%,transparent 70%); }
+    .featured-inner { display:grid; grid-template-columns:1fr 1.1fr; gap:48px; align-items:center; position:relative; z-index:1; }
+    .featured-live-pill { display:inline-flex; align-items:center; gap:6px; background:rgba(13,158,106,0.18); border:1px solid rgba(13,158,106,0.30); border-radius:99px; padding:4px 14px; font-size:0.70rem; font-weight:700; color:#4ade80; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:14px; }
+    .featured-live-dot { width:6px; height:6px; background:#4ade80; border-radius:50%; animation:pulse-dot 1.5s infinite; }
+    .featured-card h2 { font-size:clamp(1.5rem,2.5vw,2rem); color:white; margin-bottom:10px; letter-spacing:-0.02em; }
+    .featured-hook { font-style:italic; font-size:0.92rem; color:var(--gold-bright); margin-bottom:18px; }
+    .psi-list { list-style:none; margin-bottom:18px; }
+    .psi-list li { display:flex; gap:10px; font-size:0.86rem; color:rgba(255,255,255,0.78); margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.06); line-height:1.5; }
+    .psi-list li:last-child { border-bottom:none; }
+    .psi-label { font-family:var(--font-body); font-size:0.62rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; align-self:flex-start; margin-top:2px; flex-shrink:0; }
+    .psi-problem { background:rgba(239,68,68,0.18); color:#f87171; }
+    .psi-solution { background:rgba(13,158,106,0.18); color:#4ade80; }
+    .psi-impact { background:rgba(232,160,32,0.18); color:var(--gold-bright); }
+    .stack-row { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px; }
+    .stack-tag { font-size:0.70rem; font-weight:600; padding:3px 10px; border-radius:99px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.65); }
+    .project-btns { display:flex; gap:8px; flex-wrap:wrap; }
+    .cbt-screen { background:var(--navy-deep); border:1px solid rgba(255,255,255,0.10); border-radius:var(--radius); overflow:hidden; }
+    .cbt-bar { background:rgba(255,255,255,0.05); padding:8px 14px; display:flex; align-items:center; gap:6px; border-bottom:1px solid rgba(255,255,255,0.06); }
+    .cbt-dot { width:8px; height:8px; border-radius:50%; }
+    .cbt-url { flex:1; background:rgba(255,255,255,0.04); border-radius:4px; padding:3px 10px; font-family:var(--font-body); font-size:0.60rem; color:rgba(255,255,255,0.38); }
+    .cbt-body { padding:16px; display:flex; flex-direction:column; gap:10px; }
+    .cbt-header { display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.06); }
+    .cbt-logo { font-family:var(--font-display); font-weight:800; font-size:0.92rem; color:var(--gold); }
+    .cbt-live { font-size:0.60rem; padding:2px 8px; background:rgba(13,158,106,0.15); border:1px solid rgba(13,158,106,0.25); border-radius:99px; color:#4ade80; }
+    .cbt-metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+    .cbt-m { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); border-radius:6px; padding:8px; text-align:center; }
+    .cbt-mn { font-family:var(--font-display); font-size:1rem; font-weight:700; color:var(--gold); }
+    .cbt-ml { font-size:0.58rem; color:rgba(255,255,255,0.38); }
+    .cbt-features-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:5px; }
+    .cbt-feat { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); border-radius:5px; padding:6px 10px; font-size:0.68rem; color:rgba(255,255,255,0.60); }
+    .cbt-feat strong { color:rgba(255,255,255,0.85); display:block; font-size:0.65rem; margin-bottom:1px; }
+
+    /* ── PROJECT CARDS GRID ── */
+    .projects-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .project-card {
+      background:var(--white); border:1px solid var(--grey-200);
+      border-radius:var(--radius-lg); padding:22px;
+      transition:var(--transition); position:relative; overflow:hidden;
+      display:flex; flex-direction:column;
+    }
+    .project-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--navy-light),var(--gold)); opacity:0; transition:opacity 0.24s; }
+    .project-card:hover { border-color:rgba(15,37,71,0.22); box-shadow:var(--shadow-md); transform:translateY(-4px); }
+    .project-card:hover::before { opacity:1; }
+    .project-card.hidden { display:none; }
+
+    .card-live-badge { position:absolute; top:14px; right:14px; font-size:0.62rem; font-weight:700; padding:3px 9px; border-radius:99px; }
+    .badge-live { background:rgba(13,158,106,0.10); color:var(--emerald); border:1px solid rgba(13,158,106,0.22); }
+    .badge-progress { background:rgba(232,160,32,0.10); color:var(--gold-muted); border:1px solid rgba(232,160,32,0.22); }
+
+    .project-cat { font-size:0.68rem; font-weight:700; color:var(--gold-muted); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px; margin-right:60px; }
+    .project-name { font-size:1rem; font-weight:700; color:var(--navy); margin-bottom:8px; line-height:1.3; }
+    .project-problem { font-size:0.83rem; color:var(--grey-600); line-height:1.62; margin-bottom:12px; flex:1; }
+    .project-metric { font-family:var(--font-display); font-size:0.82rem; font-weight:700; color:var(--navy-light); margin-bottom:10px; padding:5px 10px; background:var(--navy-pale); border-radius:var(--radius-sm); display:inline-block; }
+    .project-metric.gold-metric { color:var(--gold-muted); background:rgba(232,160,32,0.08); }
+    .project-stack { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:14px; }
+    .stack-pill { font-size:0.65rem; font-weight:600; padding:2px 8px; border-radius:99px; background:var(--grey-100); color:var(--grey-600); border:1px solid var(--grey-200); }
+    .project-btns-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:auto; }
+
+    /* ── EDTECH CARDS ── */
+    .edtech-card { border-color:rgba(13,158,106,0.15); }
+    .edtech-card::before { background:linear-gradient(90deg,var(--emerald),#34d399) !important; }
+    .edtech-card:hover { border-color:rgba(13,158,106,0.35); }
+
+    /* ── SPECIAL BADGE ── */
+    .special-badge { display:inline-flex; align-items:center; gap:4px; font-size:0.62rem; font-weight:700; padding:2px 8px; border-radius:99px; margin-bottom:6px; }
+    .badge-capstone { background:rgba(232,160,32,0.12); color:var(--gold-muted); border:1px solid rgba(232,160,32,0.25); }
+    .badge-highest { background:rgba(124,58,237,0.10); color:#7c3aed; border:1px solid rgba(124,58,237,0.22); }
+    .badge-regression { background:rgba(8,145,178,0.10); color:#0891b2; border:1px solid rgba(8,145,178,0.22); }
+    .badge-edtech { background:rgba(13,158,106,0.10); color:var(--emerald); border:1px solid rgba(13,158,106,0.22); }
+
+    /* ── PHILOSOPHY BOX ── */
+    .philosophy-box { background:var(--navy); border-radius:var(--radius-xl); padding:48px; text-align:center; margin-top:48px; position:relative; overflow:hidden; }
+    .philosophy-box::before { content:''; position:absolute; top:-40px; right:-40px; width:200px; height:200px; background:radial-gradient(circle,rgba(232,160,32,0.10) 0%,transparent 70%); }
+    .philosophy-box p { font-family:var(--font-display); font-size:clamp(1rem,2vw,1.3rem); font-style:italic; color:rgba(255,255,255,0.80); line-height:1.65; max-width:700px; margin:0 auto 14px; position:relative; z-index:1; }
+    .philosophy-box cite { font-size:0.80rem; color:var(--gold-bright); font-style:normal; font-weight:600; position:relative; z-index:1; }
+
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.75)} }
+
+    @media(max-width:900px) { .projects-grid { grid-template-columns:1fr 1fr; } .featured-inner { grid-template-columns:1fr; gap:32px; } }
+    @media(max-width:600px) { .projects-grid { grid-template-columns:1fr; } .filter-bar { gap:6px; } .tools-stats { flex-wrap:wrap; } .tstat { min-width:50%; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar" aria-label="Main navigation">
+  <div class="container"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="nav-logo-mark">HMG</div><div class="nav-logo-text"><span class="name">HMG Academy</span><span class="sub">His Marvellous Grace</span></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="tools.html" class="active">Tools</a></li>
+      <li><a href="notes.html">Notes</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://wa.me/2348100866322?text=Hello%20HMG%20Academy%2C%20I%20am%20interested%20in%20your%20tools." target="_blank" rel="noopener" class="nav-cta btn">💬 WhatsApp</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div></div>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="tools.html">Tools</a><a href="notes.html">Notes</a>
+    <a href="register.html">Register</a><a href="contact.html">Contact</a>
+    <a href="https://wa.me/2348100866322" target="_blank" rel="noopener" class="mobile-wa">💬 Chat on WhatsApp</a>
+  </nav>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero" aria-label="Tools page header">
+  <div class="container page-hero-inner">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span class="current">Tools &amp; Projects</span></nav>
+    <h1>Tools Built for Real Classrooms</h1>
+    <p>Every project on this page started not with a dataset — but with a problem that real students, teachers, or schools were struggling with. 12 live, deployed solutions. All free to use.</p>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="tools-stats" aria-label="Project statistics">
+  <div class="tstat reveal"><div class="tstat-n">12</div><div class="tstat-l">Live Projects</div></div>
+  <div class="tstat reveal"><div class="tstat-n">7</div><div class="tstat-l">Industries Served</div></div>
+  <div class="tstat reveal"><div class="tstat-n">0.9393</div><div class="tstat-l">Highest AUC Score</div></div>
+  <div class="tstat reveal"><div class="tstat-n">48K+</div><div class="tstat-l">Largest Dataset</div></div>
+  <div class="tstat reveal"><div class="tstat-n">Free</div><div class="tstat-l">All Tools — Zero Cost</div></div>
+</div>
+
+<section class="section" aria-label="All tools and projects">
+  <div class="container">
+
+    <!-- FILTER -->
+    <div class="filter-bar" role="group" aria-label="Filter projects by category">
+      <button class="filter-btn active" data-filter="all">All (12)</button>
+      <button class="filter-btn" data-filter="edtech">EdTech (5)</button>
+      <button class="filter-btn" data-filter="ml classification">ML Classification (5)</button>
+      <button class="filter-btn" data-filter="regression">Regression (1)</button>
+      <button class="filter-btn" data-filter="nlp">NLP (1)</button>
+    </div>
+
+    <!-- ═══════════════════════ EDTECH SECTION ═══════════════════════ -->
+    <div class="section-divider" data-category="edtech">
+      <h3>🏫 EdTech Tools</h3>
+      <div class="line"></div>
+      <div class="count">5 deployed tools</div>
+    </div>
+
+    <!-- CBT PRO — FEATURED -->
+    <div class="featured-card" data-category="edtech" aria-label="CBT Pro featured project">
+      <div class="featured-inner">
+        <div>
+          <div class="featured-live-pill"><span class="featured-live-dot"></span> Live · Used by Real Students</div>
+          <h2>CBT Pro — Free Exam Platform</h2>
+          <p class="featured-hook">"Built for my students. Built on an Android tablet. Built for free."</p>
+          <ul class="psi-list">
+            <li><span class="psi-label psi-problem">Problem</span>Every CBT platform either charged money for basic features or required a laptop and technical setup most Nigerian teachers don't have.</li>
+            <li><span class="psi-label psi-solution">Solution</span>A full web-based CBT system built entirely with AI assistance — no development background, no laptop, zero budget. Works on any phone or computer.</li>
+            <li><span class="psi-label psi-impact">Impact</span>Live and actively used by real students. Free for every school in Nigeria that needs it. Zero licensing cost, ever.</li>
+          </ul>
+          <div class="stack-row">
+            <span class="stack-tag">HTML/CSS/JS</span><span class="stack-tag">Supabase</span><span class="stack-tag">GitHub Pages</span><span class="stack-tag">AI-Augmented Build</span>
+          </div>
+          <div class="project-btns">
+            <a href="https://cssadewale.github.io/cbt-system/teacher.html" target="_blank" rel="noopener" class="btn btn-gold btn-sm">🎓 Teacher Portal</a>
+            <a href="https://cssadewale.github.io/cbt-system/student.html" target="_blank" rel="noopener" class="btn btn-white-ghost btn-sm">📝 Student Portal</a>
+            <a href="https://github.com/cssadewale/cbt-system" target="_blank" rel="noopener" class="btn btn-white-ghost btn-sm">⌥ GitHub</a>
+          </div>
+        </div>
+        <div class="cbt-screen" aria-hidden="true">
+          <div class="cbt-bar">
+            <div class="cbt-dot" style="background:#ef4444;"></div>
+            <div class="cbt-dot" style="background:#f59e0b;"></div>
+            <div class="cbt-dot" style="background:#10b981;"></div>
+            <div class="cbt-url">cssadewale.github.io/cbt-system/teacher.html</div>
+          </div>
+          <div class="cbt-body">
+            <div class="cbt-header">
+              <div class="cbt-logo">CBT Pro</div>
+              <div class="cbt-live">● All Systems Live</div>
+            </div>
+            <div class="cbt-metrics">
+              <div class="cbt-m"><div class="cbt-mn">CSV</div><div class="cbt-ml">Upload</div></div>
+              <div class="cbt-m"><div class="cbt-mn">Auto</div><div class="cbt-ml">Marking</div></div>
+              <div class="cbt-m"><div class="cbt-mn">Free</div><div class="cbt-ml">Forever</div></div>
+            </div>
+            <div class="cbt-features-grid">
+              <div class="cbt-feat"><strong>Scientific Calculator</strong>Built-in</div>
+              <div class="cbt-feat"><strong>Anti-Cheat</strong>Tab detection</div>
+              <div class="cbt-feat"><strong>Certificates</strong>Auto-generated</div>
+              <div class="cbt-feat"><strong>Analytics</strong>Teacher dashboard</div>
+              <div class="cbt-feat"><strong>WhatsApp</strong>Result sharing</div>
+              <div class="cbt-feat"><strong>Supabase</strong>Live database</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDTECH GRID (4 cards) -->
+    <div class="projects-grid" id="projects-grid">
+
+      <div class="project-card edtech-card reveal" data-category="edtech">
+        <span class="card-live-badge badge-live">Live</span>
+        <span class="special-badge badge-edtech">📊 Analytics Dashboard</span>
+        <div class="project-cat">EdTech · Data Analytics</div>
+        <div class="project-name">Student Performance Tracker</div>
+        <div class="project-problem">Upload a class result CSV and instantly see analytics — class average, score distribution, top performers, bottom performers, and students at risk. Gives teachers the data picture they have always needed.</div>
+        <div class="project-metric gold-metric">Analytics · Pandas · Plotly</div>
+        <div class="project-stack"><span class="stack-pill">Python</span><span class="stack-pill">Pandas</span><span class="stack-pill">Plotly</span><span class="stack-pill">Streamlit</span></div>
+        <div class="project-btns-row">
+          <a href="https://adewale-student-performance-tracker.streamlit.app/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">▶ Live App</a>
+          <a href="https://github.com/cssadewale/student-performance-tracker" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card edtech-card reveal" data-category="edtech">
+        <span class="card-live-badge badge-live">Live</span>
+        <span class="special-badge badge-edtech">📚 Question Management</span>
+        <div class="project-cat">EdTech · Full-Stack · SQLite</div>
+        <div class="project-name">CBT Question Bank Manager</div>
+        <div class="project-problem">Build, organise, tag, search, and reuse CBT question sets across subjects and exam years. One-click export to CBT Pro CSV format. No more lost or disorganised question banks before exam season.</div>
+        <div class="project-metric gold-metric">SQLite · CRUD · Export</div>
+        <div class="project-stack"><span class="stack-pill">Python</span><span class="stack-pill">SQLite</span><span class="stack-pill">Streamlit</span></div>
+        <div class="project-btns-row">
+          <a href="https://adewale-cbt-question-bank.streamlit.app/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">▶ Live App</a>
+          <a href="https://github.com/cssadewale/cbt-question-bank" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card edtech-card reveal" data-category="edtech ml classification">
+        <span class="card-live-badge badge-live">Live</span>
+        <span class="special-badge badge-edtech">⚠️ Early Warning</span>
+        <div class="project-cat">EdTech · ML · Classification · SHAP</div>
+        <div class="project-name">Student At-Risk Predictor</div>
+        <div class="project-problem">Identifies students likely to fail before exam season — so teachers can intervene early, not after the results come back. Every prediction explained with SHAP — teachers see the reason, not just the risk score.</div>
+        <div class="project-metric gold-metric">Random Forest · SHAP · Early Warning</div>
+        <div class="project-stack"><span class="stack-pill">Python</span><span class="stack-pill">Random Forest</span><span class="stack-pill">SHAP</span><span class="stack-pill">Streamlit</span></div>
+        <div class="project-btns-row">
+          <a href="https://student-at-risk-predictor.streamlit.app/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">▶ Live App</a>
+          <a href="https://github.com/cssadewale/student-at-risk-predictor" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card edtech-card reveal" data-category="edtech">
+        <span class="card-live-badge badge-live">Live</span>
+        <span class="special-badge badge-edtech">📅 Study Planning</span>
+        <div class="project-cat">EdTech · Rule-Based · Personalisation</div>
+        <div class="project-name">Student Study Plan Generator</div>
+        <div class="project-problem">Generates personalised study plans for students based on their exam targets, available time, weak subjects, and learning pace. Every student gets a plan built for them — not a generic timetable.</div>
+        <div class="project-metric gold-metric">Rule-Based AI · Personalised</div>
+        <div class="project-stack"><span class="stack-pill">Python</span><span class="stack-pill">Streamlit</span><span class="stack-pill">Rule-Based</span></div>
+        <div class="project-btns-row">
+          <a href="https://student-study-plan-generator.streamlit.app/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">▶ Live App</a>
+          <a href="https://github.com/cssadewale/student-study-plan-generator" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════ ML SECTION ═══════════════════════ -->
+      <div class="section-divider" style="grid-column:1/-1;" data-category="ml">
+        <h3>📊 Machine Learning Models</h3>
+        <div class="line"></div>
+        <div class="count">7 deployed models · 7 industries</div>
+      </div>
+
+      <div class="project-card reveal" data-category="nlp ml classification">
+        <span class="card-live-badge badge-live">Live</span>
+        <span class="special-badge badge-highest">🏆 Highest AUC: 0.9393</span>
+        <span class="special-badge badge-capstone">🎓 3MTT Capstone</span>
+        <div class="project-cat">NLP · Binary Classification · Media</div>
+        <div class="project-name">Fake News Detector — TruthLens Institute</div>
+        <div class="project-problem">Classifies news articles as real or fake using NLP — TF-IDF vectorisation, VADER sentiment analysis, and XGBoost. Trained on 12,999 real-world articles. The highest-performing model across all 12 projects. Formally assessed as 3MTT Capstone Project 2.</div>
+        <div class="project-metric">AUC 0.9393 · Accuracy 86.75%</div>
+        <div class="project-stack"><span class="stack-pill">Python</span><span class="stack-pill">XGBoost</span><span class="stack-pill">NLTK</span><span class="stack-pill">TF-IDF</span><span class="stack-pill">VADER</span><span class="stack-pill">Streamlit</span></div>
+        <div class="project-btns-row">
+          <a href="https://adewale-fake-news-detector.streamlit.app/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">▶ Live App</a>
+          <a href="https://github.com/cssadewale/fake-news-detector" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-category="regression ml">
+        <span class="card-live-badge badge-live">Live</span>
+        <span class="special-badge badge-regression">📈 Only Regression Model</span>
+        <div class="project-cat">Regression · HR / Workplace Health</div>
+        <div class="project-name">Employee Burnout Rate Predictor — NeuroWell Analytics</div>
+        <div class="project-problem">Predicts employee burnout rate as a continuous score (not just yes/no). 22,750 records, 108 GridSearchCV combinations, Gradient Boosting. R² of 0.855. Mental fatigue alone accounts for 85.9% of feature importance — a finding directly actionable for HR teams.</div>
+        <div class="project-metric">R² 0.855 · RMSE 0.072 · MAE 0.053</div>
+        <div class="project-stack"><span class="stack-pill">Python</span><span class="stack-pill">Gradient Boosting</span><span class="stack-pill">GridSearchCV</span><span class="stack-pill">Streamlit</span></div>
+        <div class="project-btns-row">
+          <a href="https://adewale-burnout-prediction.streamlit.app/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">▶ Live App</a>
+          <a href="https://github.com/cssadewale/burnout-prediction" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-category="ml classification">
+        <span class="card-live-badge badge-live">Live</span>
+        <div class="project-cat">Binary Classification · Insurance</div>
+        <div class="project-name">Insurance Claim Prediction</div>
+        <div class="project-problem">Predicts the likelihood of insurance claims from building structural features. 7,160 records. Random Forest + SMOTE to handle class imbalance + SHAP for explainability. Includes 6 business recommendations for risk-based pricing.</div>
+        <div class="project-metric">CV F1: 0.7921 · ROC-AUC: 0.6144</div>
+        <div class="project-stack"><span class="stack-pill">Python</span><span class="stack-pill">Random Forest</span><span class="stack-pill">SMOTE</span><span class="stack-pill">SHAP</span><span class="stack-pill">Streamlit</span></div>
+        <div class="project-btns-row">
+          <a href="https://adewale-insurance-claim-prediction.streamlit.app/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">▶ Live App</a>
+          <a href="https://github.com/cssadewale/insurance-claim-prediction" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-category="ml classification">
+        <span class="card-live-badge badge-live">Live</span>
+        <div class="project-cat">Binary Classification · HR / People Analytics</div>
+        <div class="project-name">Staff Promotion Prediction — Yakub Trading Group</div>
+        <div class="project-problem">Replaces subjective promotion decisions with data-driven predictions. 38,312 Nigerian employee records — the largest dataset in the portfolio. Random Forest with class balancing. Removes favouritism and replaces it with evidence.</div>
+        <div class="project-metric">ROC-AUC 0.891 · Accuracy 93.6%</div>
+        <div class="project-stack"><span class="stack-pill">Python</span><span class="stack-pill">Random Forest</span><span class="stack-pill">Class Weight</span><span class="stack-pill">Streamlit</span></div>
+        <div class="project-btns-row">
+          <a href="https://yakub-promotion-prediction.streamlit.app/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">▶ Live App</a>
+          <a href="https://github.com/cssadewale/yakub-promotion-prediction" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-category="ml classification">
+        <span class="card-live-badge badge-live">Live</span>
+        <div class="project-cat">Binary Classification · Banking / Finance</div>
+        <div class="project-name">Bank Customer Churn Prediction</div>
+        <div class="project-problem">Predicts which bank customers are likely to leave — so the bank can intervene before they do. 10,000 records, Gradient Boosting. Key finding: age is the #1 churn driver, with a 7.43-year mean gap between churned and retained customers.</div>
+        <div class="project-metric">F1 0.6091 · ROC-AUC 0.8675</div>
+        <div class="project-stack"><span class="stack-pill">Python</span><span class="stack-pill">Gradient Boosting</span><span class="stack-pill">Scikit-learn</span><span class="stack-pill">Streamlit</span></div>
+        <div class="project-btns-row">
+          <a href="https://adewale-bank-customer-churn-prediction.streamlit.app/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">▶ Live App</a>
+          <a href="https://github.com/cssadewale/bank-customer-churn-prediction" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-category="ml classification">
+        <span class="card-live-badge badge-live">Live</span>
+        <div class="project-cat">Binary Classification · Social Policy / Finance</div>
+        <div class="project-name">Income Level Prediction</div>
+        <div class="project-problem">Predicts whether an individual earns above or below $50K/year from demographic data. 48,842 US Census records — the largest dataset by record count in the portfolio. Random Forest + SMOTE + GridSearchCV. Best performer across 5 models compared.</div>
+        <div class="project-metric">Best ROC-AUC &amp; F1 Across 5 Models</div>
+        <div class="project-stack"><span class="stack-pill">Python</span><span class="stack-pill">Random Forest</span><span class="stack-pill">SMOTE</span><span class="stack-pill">GridSearchCV</span><span class="stack-pill">Streamlit</span></div>
+        <div class="project-btns-row">
+          <a href="https://adewale-income-level-prediction.streamlit.app/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">▶ Live App</a>
+          <a href="https://github.com/cssadewale/income-level-prediction" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-category="ml classification">
+        <span class="card-live-badge badge-live">Live</span>
+        <div class="project-cat">Multi-Class Classification · Logistics / Supply Chain</div>
+        <div class="project-name">SwiftChain Delivery Delay Prediction</div>
+        <div class="project-problem">Predicts delivery delay categories (on-time, slightly late, severely late) for a logistics company. 15,549 orders, Gradient Boosting. Key insight: Standard Class shipping has a 38.1% late rate and accounts for 67.2% of model importance — actionable for operations teams.</div>
+        <div class="project-metric">Weighted F1 0.5791 · CV F1 0.5768</div>
+        <div class="project-stack"><span class="stack-pill">Python</span><span class="stack-pill">Gradient Boosting</span><span class="stack-pill">Multi-class</span><span class="stack-pill">Streamlit</span></div>
+        <div class="project-btns-row">
+          <a href="https://adewale-swiftchain-delivery-prediction.streamlit.app/" target="_blank" rel="noopener" class="btn btn-navy btn-sm">▶ Live App</a>
+          <a href="https://github.com/cssadewale/swiftchain-delivery-prediction" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
+
+    </div><!-- /projects-grid -->
+
+    <!-- PHILOSOPHY BOX -->
+    <div class="philosophy-box reveal">
+      <p>"Every project on this page started not with a dataset — but with a problem real students, teachers, or organisations were struggling with. Data science and AI are the tools. The classroom is the brief. An AI-Augmented Solutions Developer does not wait for the perfect environment — they think clearly about the problem and build the solution anyway."</p>
+      <cite>— Adewale Samson Adeagbo · Data Scientist · Educator · AI-Augmented Solutions Developer · Founder, HMG Concepts</cite>
+    </div>
+
+    <!-- MORE COMING -->
+    <div style="text-align:center;margin-top:40px;padding:32px;background:var(--grey-100);border-radius:var(--radius-lg);">
+      <div style="font-size:1.4rem;margin-bottom:10px;">🔬</div>
+      <h3 style="font-size:1rem;color:var(--navy);margin-bottom:8px;">More Projects In Active Development</h3>
+      <p style="font-size:0.86rem;color:var(--grey-600);max-width:480px;margin:0 auto 16px;">WAEC/NECO Topic Frequency Predictor and Student Performance AI Advisor are currently in development. Follow on GitHub for updates.</p>
+      <a href="https://github.com/cssadewale" target="_blank" rel="noopener" class="btn btn-navy">Follow on GitHub →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- PORTFOLIO CTA -->
+<section class="section section-alt" aria-label="Portfolio call to action">
+  <div class="container reveal">
+    <div style="background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 100%);border-radius:var(--radius-xl);padding:56px 48px;text-align:center;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-50px;right:-50px;width:260px;height:260px;background:radial-gradient(circle,rgba(232,160,32,0.10) 0%,transparent 70%);"></div>
+      <h2 style="color:white;font-size:clamp(1.5rem,2.8vw,2.1rem);margin-bottom:12px;">Want to Collaborate or Build Together?</h2>
+      <p style="color:rgba(255,255,255,0.65);max-width:520px;margin:0 auto 28px;font-size:0.96rem;line-height:1.75;">Whether you are a school needing CBT Pro, a company wanting a data solution, or a student wanting to learn data science — let's talk.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;">
+        <a href="contact.html" class="btn btn-gold">📬 Get in Touch</a>
+        <a href="https://wa.me/2348100866322?text=Hello%2C%20I%20saw%20your%20projects%20and%20I%20want%20to%20discuss%20a%20collaboration." target="_blank" rel="noopener" class="btn btn-wa">💬 WhatsApp</a>
+        <a href="https://linkedin.com/in/adewalesamsonadeagbo" target="_blank" rel="noopener" class="btn btn-white-ghost">LinkedIn ↗</a>
+        <a href="https://cssadewale.pages.dev" target="_blank" rel="noopener" class="btn btn-white-ghost">Portfolio ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer aria-label="Site footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><div class="nav-logo-mark">HMG</div><div class="nav-logo-text"><span class="name" style="color:white;">HMG Academy</span><span class="sub">His Marvellous Grace</span></div></a>
+        <p>A subsidiary of HMG Concepts, founded in 2015. Full-service virtual institution — all subjects, all levels, all major examinations.</p>
+        <div class="footer-socials">
+          <a href="https://linkedin.com/in/adewalesamsonadeagbo" target="_blank" rel="noopener" class="social-btn" title="LinkedIn">in</a>
+          <a href="https://github.com/cssadewale" target="_blank" rel="noopener" class="social-btn" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
+          <a href="https://youtube.com/@hmgconcepts" target="_blank" rel="noopener" class="social-btn" style="color:#FF0000;">▶</a>
+          <a href="https://wa.me/2348100866322" target="_blank" rel="noopener" class="social-btn" style="background:rgba(37,211,102,0.18);color:#25D366;">💬</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Navigate</h4><ul>
+        <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li><li><a href="tools.html">Tools</a></li>
+        <li><a href="notes.html">Notes</a></li><li><a href="register.html">Register</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Projects</h4><ul>
+        <li><a href="https://cssadewale.github.io/cbt-system/teacher.html" target="_blank" rel="noopener">CBT Pro — Teacher ↗</a></li>
+        <li><a href="https://adewale-student-performance-tracker.streamlit.app/" target="_blank" rel="noopener">Student Tracker ↗</a></li>
+        <li><a href="https://adewale-cbt-question-bank.streamlit.app/" target="_blank" rel="noopener">Question Bank ↗</a></li>
+        <li><a href="https://adewale-fake-news-detector.streamlit.app/" target="_blank" rel="noopener">Fake News Detector ↗</a></li>
+        <li><a href="https://adewale-burnout-prediction.streamlit.app/" target="_blank" rel="noopener">Burnout Predictor ↗</a></li>
+        <li><a href="https://github.com/cssadewale" target="_blank" rel="noopener">All Projects on GitHub ↗</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4>
+        <div class="footer-contact-item">📞 <a href="tel:+2348100866322">+234 810 086 6322</a></div>
+        <div class="footer-contact-item">💬 <a href="https://wa.me/2348094481488" target="_blank" rel="noopener">+234 809 448 1488 (WA only)</a></div>
+        <div class="footer-contact-item">📧 <a href="mailto:hismarvellousgrace@gmail.com">hismarvellousgrace@gmail.com</a></div>
+        <div class="footer-contact-item">📍 Lagos / Ogun State, Nigeria</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> HMG Academy · A subsidiary of HMG Concepts. All rights reserved.</p>
+      <p>Built with AI augmentation by <a href="https://cssadewale.pages.dev" target="_blank" rel="noopener">Adewale Samson Adeagbo</a></p>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/2348100866322?text=Hello%20HMG%20Academy%2C%20I%20am%20interested%20in%20your%20services." target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="wa-label">Chat on WhatsApp</span>
+</a>
+
+<script src="_shared.js"></script>
+<script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const f = this.dataset.filter;
+      document.querySelectorAll('.project-card, .featured-card').forEach(card => {
+        const cats = (card.dataset.category || '') + ' all';
+        card.classList.toggle('hidden', f !== 'all' && !cats.includes(f));
+      });
+      document.querySelectorAll('.section-divider').forEach(d => {
+        if (f === 'all') { d.style.display = ''; return; }
+        const cat = d.dataset.category || '';
+        d.style.display = f.includes(cat) || cat === 'ml' ? '' : 'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>
