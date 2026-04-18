@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson Notes — HMG Academy | Free WAEC/NECO Study Materials</title>
+  <meta name="description" content="Free downloadable lesson notes for JSS–SSS students in Nigeria. Mathematics, Further Maths, Physics, Chemistry, Computer Science — written by HMG Academy." />
+  <link rel="canonical" href="https://hmgacademy.pages.dev/notes.html" />
+  <link rel="stylesheet" href="_shared.css" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J5C7CTP1N5"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-J5C7CTP1N5');</script>
+  <style>
+    .filter-bar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:32px; }
+    .filter-btn { padding:8px 18px; border-radius:99px; border:1.5px solid var(--grey-200); background:white; font-family:var(--font-body); font-size:0.84rem; font-weight:600; color:var(--grey-600); cursor:pointer; transition:var(--transition); }
+    .filter-btn:hover, .filter-btn.active { background:var(--navy); color:white; border-color:var(--navy); }
+    .notes-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .note-card { background:white; border:1px solid var(--grey-200); border-radius:var(--radius); padding:24px; transition:var(--transition); position:relative; }
+    .note-card:hover { box-shadow:var(--shadow-md); transform:translateY(-3px); border-color:rgba(15,37,71,0.18); }
+    .note-subject { font-size:0.72rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase; margin-bottom:10px; }
+    .note-title { font-size:0.96rem; font-weight:700; color:var(--navy); margin-bottom:8px; }
+    .note-desc { font-size:0.84rem; color:var(--grey-600); line-height:1.62; margin-bottom:16px; }
+    .note-meta { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+    .note-tag { font-size:0.72rem; font-weight:600; padding:3px 9px; border-radius:99px; background:var(--grey-100); color:var(--grey-600); border:1px solid var(--grey-200); }
+    .empty-state { text-align:center; padding:80px 40px; background:white; border:2px dashed var(--grey-200); border-radius:var(--radius-lg); }
+    .empty-state .icon { font-size:3rem; margin-bottom:16px; }
+    .empty-state h3 { color:var(--navy); margin-bottom:10px; }
+    .empty-state p { font-size:0.88rem; color:var(--grey-400); max-width:400px; margin:0 auto; }
+    @media (max-width:768px) { .notes-grid { grid-template-columns:1fr 1fr; } }
+    @media (max-width:480px) { .notes-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="nav-logo-mark">HMG</div><div class="nav-logo-text"><span class="name">HMG Academy</span><span class="sub">His Marvellous Grace</span></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li>
+      <li><a href="tools.html">Tools</a></li><li><a href="notes.html" class="active">Notes</a></li><li><a href="register.html">Register</a></li><li><a href="contact.html">Contact</a></li>
+      <li><a href="https://wa.me/2348100866322" target="_blank" rel="noopener" class="nav-cta btn">💬 WhatsApp</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div></div>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="tools.html">Tools</a><a href="notes.html">Notes</a><a href="register.html">Register</a><a href="contact.html">Contact</a>
+    <a href="https://wa.me/2348100866322" target="_blank" rel="noopener" class="mobile-wa">💬 Chat on WhatsApp</a>
+  </nav>
+</nav>
+
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span class="current">Lesson Notes</span></nav>
+    <h1>Lesson Notes Library</h1>
+    <p>Free, WAEC/NECO-aligned notes written by the same hand that teaches. Clear, structured, and honestly made for Nigerian secondary school students.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-filter="all" onclick="filterNotes('all', this)">All Notes</button>
+      <button class="filter-btn" data-filter="Further Mathematics" onclick="filterNotes('Further Mathematics', this)">Further Maths</button>
+      <button class="filter-btn" data-filter="Mathematics" onclick="filterNotes('Mathematics', this)">Mathematics</button>
+      <button class="filter-btn" data-filter="Physics" onclick="filterNotes('Physics', this)">Physics</button>
+      <button class="filter-btn" data-filter="Chemistry" onclick="filterNotes('Chemistry', this)">Chemistry</button>
+      <button class="filter-btn" data-filter="Computer Science" onclick="filterNotes('Computer Science', this)">Computer Science</button>
+    </div>
+
+    <div class="notes-grid" id="notesGrid"></div>
+    <div id="notesEmptyState" class="empty-state" style="display:none;">
+      <div class="icon">📝</div>
+      <h3>Notes Coming Soon</h3>
+      <p>Lesson notes are being prepared and will be uploaded here shortly. Check back soon — or contact us on WhatsApp to request a specific topic.</p>
+      <a href="https://wa.me/2348100866322?text=Hello%2C%20I%20am%20looking%20for%20lesson%20notes%20on%20a%20specific%20topic." target="_blank" rel="noopener" class="btn btn-wa" style="margin-top:20px;">💬 Request a Note</a>
+    </div>
+    <div id="allNotesEmpty" class="empty-state">
+      <div class="icon">📚</div>
+      <h3>Building the Notes Library</h3>
+      <p>This section is powered by the Admin Panel. Once notes are added there, they'll appear here automatically for students to browse and download.</p>
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:20px; flex-wrap:wrap;">
+        <a href="https://wa.me/2348100866322?text=Hello%2C%20I%20am%20looking%20for%20lesson%20notes." target="_blank" rel="noopener" class="btn btn-wa">💬 Request via WhatsApp</a>
+        <a href="register.html" class="btn btn-navy">✍️ Register for Classes</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div style="max-width:700px; margin:0 auto; text-align:center;" class="reveal">
+      <div class="section-eyebrow">Why Free Notes?</div>
+      <h2 class="section-title">Knowledge Shouldn't Have a Paywall</h2>
+      <p style="font-size:1rem; color:var(--grey-600); line-height:1.80; margin-bottom:24px;">
+        I've been in enough classrooms to know that access to good study material is often the difference between a student passing and failing. Every note on this page was written from scratch — not copied from a textbook, not generated blindly. They reflect a decade of teaching the same topics, understanding where students get stuck, and writing explanations that actually work.
+      </p>
+      <p style="font-size:1rem; color:var(--grey-600); line-height:1.80;">
+        If you find them useful, share them. That's the whole point.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><div class="nav-logo-mark">HMG</div><div class="nav-logo-text"><span class="name" style="color:white;">HMG Academy</span><span class="sub">His Marvellous Grace</span></div></a>
+        <p>A subsidiary of HMG Concepts, founded in 2015.</p>
+        <div class="footer-socials">
+          <a href="https://linkedin.com/in/adewalesamsonadeagbo" target="_blank" rel="noopener" class="social-btn">in</a>
+          <a href="https://github.com/cssadewale" target="_blank" rel="noopener" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
+          <a href="https://wa.me/2348100866322" target="_blank" rel="noopener" class="social-btn" style="background:rgba(37,211,102,0.18);color:#25D366;">💬</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Navigation</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="tools.html">Tools</a></li><li><a href="notes.html">Notes</a></li><li><a href="register.html">Register</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Subjects</h4><ul><li><a href="notes.html">Further Mathematics</a></li><li><a href="notes.html">Mathematics</a></li><li><a href="notes.html">Physics</a></li><li><a href="notes.html">Chemistry</a></li><li><a href="notes.html">Computer Science</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4>
+        <div class="footer-contact-item">📧 <a href="mailto:buildingmyictcareer@gmail.com">buildingmyictcareer@gmail.com</a></div>
+        <div class="footer-contact-item">💬 <a href="https://wa.me/2348100866322" target="_blank" rel="noopener">+234 809 448 1488</a></div>
+        <div class="footer-contact-item">📍 Lagos / Ogun State, Nigeria</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> HMG Academy · A subsidiary of HMG Concepts. All rights reserved.</p>
+      <p>Built with ❤️ by <a href="about.html">Adewale Samson Adeagbo</a></p>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/2348100866322?text=Hello%20HMG%20Academy%2C%20I%20am%20looking%20for%20lesson%20notes." target="_blank" rel="noopener" class="wa-float">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="wa-label">Request a Note</span>
+</a>
+
+<script src="_shared.js"></script>
+<script>
+// Load notes from admin panel localStorage
+function getData(key, def) { try { return JSON.parse(localStorage.getItem('hmg_' + key)) || def; } catch { return def; } }
+let currentFilter = 'all';
+const subjectColors = {
+  'Further Mathematics': '#2E5490',
+  'Mathematics': '#0F2547',
+  'Physics': '#0D9E6A',
+  'Chemistry': '#E8A020',
+  'Computer Science': '#E05A3A',
+  'Data Science': '#7C3AED',
+};
+function renderNotesPage(filter) {
+  const notes = getData('notes', []).filter(n => n.status === 'published');
+  const filtered = filter === 'all' ? notes : notes.filter(n => n.subject === filter);
+  const grid = document.getElementById('notesGrid');
+  const empty = document.getElementById('notesEmptyState');
+  const allEmpty = document.getElementById('allNotesEmpty');
+  if (!notes.length) { grid.style.display='none'; empty.style.display='none'; allEmpty.style.display='block'; return; }
+  allEmpty.style.display = 'none';
+  grid.style.display = 'grid';
+  if (!filtered.length) { grid.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display = 'none';
+  grid.innerHTML = filtered.map(n => `
+    <div class="note-card reveal">
+      <div class="note-subject" style="color:${subjectColors[n.subject]||'#1B3A6B'}">${n.subject}</div>
+      <div class="note-title">${n.title}</div>
+      <div class="note-desc">${n.desc || 'Tap to download this lesson note.'}</div>
+      <div class="note-meta">
+        <span class="note-tag">${n.class}</span>
+        <span class="note-tag">${n.added || ''}</span>
+      </div>
+      ${n.url ? `<a href="${n.url}" target="_blank" class="btn btn-navy btn-sm" style="width:100%; justify-content:center;">📥 Download Note</a>` : `<button class="btn btn-ghost btn-sm" style="width:100%; justify-content:center;" onclick="requestNote('${n.title}')">💬 Request This Note</button>`}
+    </div>`).join('');
+  document.querySelectorAll('.note-card.reveal').forEach(el => {
+    el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+    setTimeout(() => { el.style.transition = 'all 0.4s'; el.style.opacity = '1'; el.style.transform = 'none'; }, 50);
+  });
+}
+function filterNotes(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderNotesPage(f);
+}
+function requestNote(title) {
+  window.open('https://wa.me/2348100866322?text=Hello%20HMG%20Academy%2C%20I%20would%20like%20to%20request%20the%20lesson%20note%20on%3A%20' + encodeURIComponent(title), '_blank');
+}
+renderNotesPage('all');
+</script>
+</body>
+</html>

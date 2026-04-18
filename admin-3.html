@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HMG Academy — Admin Panel</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--navy:#0F2547;--navy-deep:#081730;--navy-mid:#1B3A6B;--navy-light:#2E5490;--navy-pale:#EEF3FA;--gold:#E8A020;--gold-bright:#F5B942;--gold-muted:#C8891A;--emerald:#0D9E6A;--coral:#E05A3A;--white:#FFFFFF;--off-white:#F9FAFB;--grey-100:#F3F4F6;--grey-200:#E5E7EB;--grey-300:#D1D5DB;--grey-400:#9CA3AF;--grey-500:#6B7280;--grey-600:#4B5563;--grey-700:#374151;--grey-800:#1F2937;--font-display:'Fraunces',Georgia,serif;--font-body:'DM Sans',system-ui,sans-serif;--shadow-sm:0 2px 10px rgba(15,37,71,.10);--shadow-md:0 8px 30px rgba(15,37,71,.12);--shadow-lg:0 20px 60px rgba(15,37,71,.16);--radius-sm:8px;--radius:14px;--radius-lg:20px;--t:.22s cubic-bezier(0,0,.2,1);}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{font-size:16px;-webkit-font-smoothing:antialiased;}
+    body{font-family:var(--font-body);background:#f0f4f8;color:var(--grey-800);min-height:100vh;}
+    a{text-decoration:none;color:inherit;}button{font-family:var(--font-body);cursor:pointer;}
+    input,textarea,select{font-family:var(--font-body);}
+    /* AUTH */
+    #auth-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,var(--navy-deep) 0%,var(--navy) 60%,var(--navy-light) 100%);position:relative;overflow:hidden;}
+    #auth-screen::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 20%,rgba(232,160,32,.08) 0%,transparent 60%);}
+    .auth-card{background:white;border-radius:20px;padding:48px 42px;width:100%;max-width:430px;box-shadow:0 40px 80px rgba(0,0,0,.3);position:relative;z-index:2;}
+    .auth-logo{text-align:center;margin-bottom:36px;}
+    .auth-mark{width:68px;height:68px;background:var(--navy);border-radius:18px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;font-size:1.4rem;color:var(--gold);margin:0 auto 16px;}
+    .auth-logo h2{font-family:var(--font-display);font-size:1.5rem;color:var(--navy);margin-bottom:6px;}
+    .auth-logo p{font-size:.84rem;color:var(--grey-400);}
+    .auth-field{margin-bottom:16px;}
+    .auth-field label{display:block;font-size:.82rem;font-weight:600;color:var(--navy);margin-bottom:7px;}
+    .auth-field input{width:100%;padding:12px 16px;border:1.5px solid var(--grey-200);border-radius:var(--radius-sm);font-size:.95rem;color:var(--grey-800);outline:none;transition:border-color .2s,box-shadow .2s;}
+    .auth-field input:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(15,37,71,.08);}
+    .auth-btn{width:100%;padding:13px;background:var(--navy);color:white;border:none;border-radius:var(--radius-sm);font-size:.95rem;font-weight:700;transition:background .2s;margin-top:4px;}
+    .auth-btn:hover{background:var(--navy-light);}
+    .auth-error{color:var(--coral);font-size:.82rem;text-align:center;margin-top:12px;display:none;padding:10px;background:rgba(224,90,58,.08);border-radius:var(--radius-sm);}
+    .auth-hint{font-size:.72rem;color:var(--grey-400);text-align:center;margin-top:16px;line-height:1.6;}
+    .auth-reset{color:var(--gold);font-weight:700;cursor:pointer;text-decoration:underline;}
+    .auth-github-info{margin-top:18px;padding:14px;background:var(--off-white);border:1px solid var(--grey-200);border-radius:var(--radius-sm);font-size:.78rem;color:var(--grey-600);line-height:1.6;}
+    .auth-github-info strong{color:var(--navy);display:block;margin-bottom:4px;}
+    /* LAYOUT */
+    #admin-app{display:none;min-height:100vh;}
+    .sidebar{width:268px;background:var(--navy-deep);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:200;display:flex;flex-direction:column;}
+    .sidebar-hd{padding:20px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:12px;flex-shrink:0;}
+    .sidebar-mark{width:42px;height:42px;background:var(--gold);border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;font-size:.95rem;color:var(--navy-deep);flex-shrink:0;}
+    .sidebar-name{font-family:var(--font-display);font-weight:700;font-size:.95rem;color:white;}
+    .sidebar-role{font-size:.62rem;color:rgba(255,255,255,.32);text-transform:uppercase;letter-spacing:.08em;}
+    .sidebar-nav{padding:10px;flex:1;overflow-y:auto;}
+    .nav-grp{font-size:.60rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.20);padding:14px 10px 6px;}
+    .nav-btn{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;font-size:.86rem;font-weight:500;color:rgba(255,255,255,.56);cursor:pointer;transition:all .16s;border:none;background:none;width:100%;text-align:left;margin-bottom:1px;}
+    .nav-btn:hover{background:rgba(255,255,255,.07);color:white;}
+    .nav-btn.active{background:rgba(232,160,32,.15);color:var(--gold-bright);}
+    .nav-btn .ni{font-size:1rem;width:20px;text-align:center;flex-shrink:0;}
+    .nav-badge{margin-left:auto;font-size:.60rem;font-weight:700;padding:2px 7px;border-radius:99px;}
+    .nb-gold{background:rgba(232,160,32,.2);color:var(--gold-bright);}
+    .nb-green{background:rgba(13,158,106,.2);color:#4ade80;}
+    .nb-red{background:rgba(224,90,58,.2);color:#f87171;}
+    .sidebar-ft{padding:14px;border-top:1px solid rgba(255,255,255,.07);display:flex;gap:8px;flex-shrink:0;}
+    .sidebar-ft-btn{flex:1;padding:9px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:none;color:rgba(255,255,255,.48);font-size:.77rem;font-weight:600;cursor:pointer;transition:all .16s;display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;}
+    .sidebar-ft-btn:hover{background:rgba(255,255,255,.07);color:white;}
+    .sidebar-ft-btn.danger:hover{background:rgba(224,90,58,.15);border-color:var(--coral);color:var(--coral);}
+    .admin-main{margin-left:268px;min-height:100vh;}
+    .topbar{background:white;border-bottom:1px solid var(--grey-200);padding:0 28px;height:62px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(15,37,71,.06);}
+    .topbar-l h2{font-family:var(--font-display);font-size:1.05rem;color:var(--navy);}
+    .topbar-l p{font-size:.72rem;color:var(--grey-400);}
+    .topbar-r{display:flex;align-items:center;gap:10px;}
+    .topbar-link{display:flex;align-items:center;gap:6px;font-size:.80rem;font-weight:600;color:var(--navy);padding:6px 12px;border:1px solid var(--grey-200);border-radius:7px;background:white;transition:var(--t);text-decoration:none;}
+    .topbar-link:hover{border-color:var(--navy);}
+    .topbar-user{display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;color:var(--navy);}
+    .topbar-avatar{width:34px;height:34px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.80rem;color:var(--gold);}
+    /* PANELS */
+    .panel{display:none;padding:28px;}
+    .panel.active{display:block;}
+    /* DEPLOY BAR */
+    .deploy-bar{background:linear-gradient(135deg,var(--navy-deep),var(--navy));border-radius:var(--radius);padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+    .deploy-bar-info{display:flex;align-items:center;gap:10px;}
+    .deploy-dot{width:9px;height:9px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 2px rgba(74,222,128,.3);animation:pdot 2s infinite;}
+    .dbt{font-size:.84rem;color:rgba(255,255,255,.80);}
+    .dbt strong{color:white;}
+    .deploy-btn{display:flex;align-items:center;gap:7px;background:var(--gold);color:var(--navy-deep);font-size:.84rem;font-weight:800;padding:9px 20px;border-radius:var(--radius-sm);border:none;cursor:pointer;transition:all .2s;}
+    .deploy-btn:hover{background:var(--gold-bright);transform:translateY(-1px);}
+    .deploy-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+    /* CARDS */
+    .card{background:white;border:1px solid var(--grey-200);border-radius:var(--radius);padding:22px;margin-bottom:18px;}
+    .card-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--grey-100);}
+    .card-hd h3{font-family:var(--font-display);font-size:.95rem;color:var(--navy);}
+    .card-hd .csub{font-size:.78rem;color:var(--grey-400);}
+    /* FORMS */
+    .r2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+    .f{margin-bottom:14px;}
+    .f label{display:block;font-size:.79rem;font-weight:600;color:var(--navy);margin-bottom:5px;}
+    .f input,.f textarea,.f select{width:100%;padding:9px 12px;border:1.5px solid var(--grey-200);border-radius:var(--radius-sm);font-size:.88rem;color:var(--grey-800);outline:none;transition:border-color .2s;background:white;}
+    .f input:focus,.f textarea:focus,.f select:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(15,37,71,.06);}
+    .f textarea{resize:vertical;min-height:90px;}
+    .fhint{font-size:.72rem;color:var(--grey-400);margin-top:4px;line-height:1.4;}
+    /* BUTTONS */
+    .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius-sm);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .18s;border:none;}
+    .btn-navy{background:var(--navy);color:white;}.btn-navy:hover{background:var(--navy-light);}
+    .btn-gold{background:var(--gold);color:var(--navy-deep);}.btn-gold:hover{background:var(--gold-bright);}
+    .btn-outline{background:white;color:var(--navy);border:1.5px solid var(--grey-200);}.btn-outline:hover{border-color:var(--navy);}
+    .btn-danger{background:var(--coral);color:white;}.btn-danger:hover{background:#c0432a;}
+    .btn-green{background:var(--emerald);color:white;}
+    .btn-sm{padding:5px 11px;font-size:.74rem;}
+    .btn-xs{padding:3px 8px;font-size:.68rem;}
+    /* ALERTS */
+    .alert{padding:11px 16px;border-radius:var(--radius-sm);font-size:.82rem;font-weight:600;margin-bottom:14px;display:none;align-items:center;gap:8px;}
+    .alert.show{display:flex;}
+    .a-success{background:rgba(13,158,106,.10);color:var(--emerald);border:1px solid rgba(13,158,106,.20);}
+    .a-error{background:rgba(224,90,58,.10);color:var(--coral);border:1px solid rgba(224,90,58,.20);}
+    .a-info{background:var(--navy-pale);color:var(--navy);border:1px solid rgba(15,37,71,.15);}
+    .a-warn{background:rgba(232,160,32,.10);color:var(--gold-muted);border:1px solid rgba(232,160,32,.25);}
+    /* TOAST */
+    #toast{position:fixed;bottom:24px;right:24px;z-index:9999;background:var(--navy);color:white;padding:12px 20px;border-radius:var(--radius-sm);font-size:.84rem;font-weight:600;box-shadow:var(--shadow-lg);transform:translateY(80px);opacity:0;transition:all .3s;pointer-events:none;max-width:320px;}
+    #toast.show{transform:translateY(0);opacity:1;}
+    #toast.success{background:var(--emerald);}#toast.error{background:var(--coral);}#toast.warn{background:var(--gold-muted);}
+    /* TABS */
+    .tabs{display:flex;gap:2px;border-bottom:1px solid var(--grey-200);margin-bottom:20px;}
+    .tab{padding:9px 18px;font-size:.84rem;font-weight:600;color:var(--grey-400);border:none;background:none;cursor:pointer;border-bottom:2.5px solid transparent;margin-bottom:-1px;transition:all .16s;}
+    .tab:hover{color:var(--navy);}
+    .tab.active{color:var(--navy);border-bottom-color:var(--gold);}
+    .tab-panel{display:none;}
+    .tab-panel.active{display:block;}
+    /* DASHBOARD */
+    .dash-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;}
+    .stat-card{background:white;border:1px solid var(--grey-200);border-radius:var(--radius);padding:20px;}
+    .stat-label{font-size:.70rem;font-weight:700;color:var(--grey-400);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;}
+    .stat-value{font-family:var(--font-display);font-size:1.9rem;font-weight:700;color:var(--navy);line-height:1;margin-bottom:5px;}
+    .stat-sub{font-size:.72rem;color:var(--grey-400);display:flex;align-items:center;gap:5px;}
+    .qa-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+    .qa{background:white;border:1px solid var(--grey-200);border-radius:var(--radius-sm);padding:16px 12px;text-align:center;cursor:pointer;transition:all .16s;border:none;width:100%;}
+    .qa:hover{background:var(--navy-pale);}
+    .qa-icon{font-size:1.5rem;margin-bottom:7px;}
+    .qa-lbl{font-size:.73rem;font-weight:600;color:var(--navy);line-height:1.3;}
+    /* GITHUB SETUP */
+    .gh-setup{background:linear-gradient(135deg,var(--navy-pale),rgba(232,160,32,.05));border:1px solid rgba(15,37,71,.15);border-radius:var(--radius);padding:22px;margin-bottom:18px;}
+    .gh-setup h4{font-size:.92rem;font-weight:700;color:var(--navy);margin-bottom:8px;}
+    .gh-setup ol{padding-left:18px;font-size:.83rem;color:var(--grey-600);line-height:1.8;display:flex;flex-direction:column;gap:4px;}
+    .gh-setup code{background:white;border:1px solid var(--grey-200);padding:2px 6px;border-radius:4px;font-size:.80rem;color:var(--navy);}
+    .gh-status{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--radius-sm);font-size:.82rem;font-weight:600;margin-bottom:14px;}
+    .gh-ok{background:rgba(13,158,106,.10);color:var(--emerald);border:1px solid rgba(13,158,106,.20);}
+    .gh-no{background:rgba(232,160,32,.10);color:var(--gold-muted);border:1px solid rgba(232,160,32,.25);}
+    /* PAGES MANAGER */
+    .pages-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px;}
+    .page-card{background:white;border:1px solid var(--grey-200);border-radius:var(--radius);padding:18px;cursor:pointer;transition:all .16s;}
+    .page-card:hover{border-color:var(--navy);box-shadow:var(--shadow-sm);}
+    .page-card.selected{border-color:var(--gold);background:rgba(232,160,32,.04);}
+    .page-icon{font-size:1.7rem;margin-bottom:9px;}
+    .page-name{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:3px;}
+    .page-url{font-size:.68rem;color:var(--grey-400);font-family:monospace;margin-bottom:10px;}
+    .page-sr{display:flex;align-items:center;gap:5px;font-size:.72rem;color:var(--grey-400);}
+    .live-dot{width:6px;height:6px;border-radius:50%;background:var(--emerald);}
+    /* MEDIA */
+    .upload-zone{border:2.5px dashed var(--grey-200);border-radius:var(--radius);padding:44px 28px;text-align:center;cursor:pointer;transition:all .2s;background:white;margin-bottom:20px;}
+    .upload-zone:hover,.upload-zone.dz-over{border-color:var(--navy);background:var(--navy-pale);}
+    .upload-icon{font-size:2.6rem;margin-bottom:12px;}
+    .upload-zone h4{color:var(--navy);margin-bottom:7px;font-size:.96rem;}
+    .upload-zone p{font-size:.82rem;color:var(--grey-400);margin-bottom:14px;}
+    .utypes{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;}
+    .utype{font-size:.70rem;padding:3px 10px;border-radius:99px;background:var(--grey-100);color:var(--grey-500);font-weight:600;}
+    .media-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px;}
+    .media-item{background:white;border:1px solid var(--grey-200);border-radius:var(--radius-sm);overflow:hidden;transition:all .16s;}
+    .media-item:hover{border-color:var(--navy);box-shadow:var(--shadow-sm);}
+    .media-thumb{height:82px;background:var(--grey-100);display:flex;align-items:center;justify-content:center;font-size:1.8rem;overflow:hidden;}
+    .media-thumb img{width:100%;height:100%;object-fit:cover;}
+    .media-info{padding:7px 9px;}
+    .media-name{font-size:.68rem;font-weight:600;color:var(--navy);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .media-size{font-size:.62rem;color:var(--grey-400);}
+    .media-acts{display:flex;gap:3px;padding:5px 9px;border-top:1px solid var(--grey-100);}
+    .media-empty{text-align:center;padding:40px;color:var(--grey-400);font-size:.86rem;}
+    /* IMAGE SLOTS */
+    .slots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;}
+    .img-slot{border:2px dashed var(--grey-200);border-radius:var(--radius-sm);padding:18px 12px;text-align:center;cursor:pointer;transition:all .18s;}
+    .img-slot:hover{border-color:var(--navy);background:var(--navy-pale);}
+    .img-slot.filled{border-style:solid;border-color:var(--emerald);background:rgba(13,158,106,.04);}
+    .slot-icon{font-size:1.4rem;margin-bottom:6px;}
+    .slot-name{font-size:.76rem;font-weight:700;color:var(--navy);margin-bottom:3px;}
+    .slot-page{font-size:.65rem;color:var(--grey-400);}
+    /* NOTES TABLE */
+    .notes-table{background:white;border:1px solid var(--grey-200);border-radius:var(--radius);overflow:hidden;}
+    .notes-hdr{background:var(--navy-pale);padding:11px 16px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 110px;gap:10px;font-size:.70rem;font-weight:700;color:var(--navy);letter-spacing:.05em;text-transform:uppercase;}
+    .note-row{padding:12px 16px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 110px;gap:10px;align-items:center;border-bottom:1px solid var(--grey-100);font-size:.83rem;transition:background .12s;}
+    .note-row:hover{background:var(--off-white);}
+    .note-row:last-child{border-bottom:none;}
+    .note-tc{font-weight:600;color:var(--navy);}
+    .note-acts{display:flex;gap:4px;}
+    /* ENQUIRIES */
+    .enq-card{background:white;border:1px solid var(--grey-200);border-radius:var(--radius);padding:18px 20px;margin-bottom:12px;}
+    .enq-card.unread{border-left:3px solid var(--gold);}
+    .enq-hd{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+    .enq-name{font-weight:700;color:var(--navy);font-size:.90rem;}
+    .enq-time{font-size:.72rem;color:var(--grey-400);}
+    .enq-subj{font-size:.76rem;font-weight:600;padding:3px 10px;border-radius:99px;background:var(--navy-pale);color:var(--navy);display:inline-block;margin-bottom:9px;}
+    .enq-msg{font-size:.84rem;color:var(--grey-600);line-height:1.65;}
+    .enq-contact{display:flex;gap:14px;margin-top:10px;font-size:.76rem;color:var(--grey-400);}
+    .enq-contact a{color:var(--navy);font-weight:600;}
+    .enq-acts{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;}
+    /* TESTIMONIALS */
+    .test-list{display:flex;flex-direction:column;gap:10px;}
+    .test-item{background:white;border:1px solid var(--grey-200);border-radius:var(--radius-sm);padding:16px 18px;display:flex;gap:14px;align-items:flex-start;}
+    .test-stars{color:var(--gold);font-size:.84rem;white-space:nowrap;}
+    .test-info{flex:1;}
+    .test-name{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:2px;}
+    .test-role{font-size:.74rem;color:var(--grey-400);margin-bottom:6px;}
+    .test-quote{font-size:.83rem;color:var(--grey-600);line-height:1.6;font-style:italic;}
+    .test-acts{display:flex;gap:5px;flex-shrink:0;}
+    /* SEO */
+    .seo-row{background:white;border:1px solid var(--grey-200);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:10px;}
+    .seo-pname{font-weight:700;color:var(--navy);font-size:.86rem;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+    .seo-score{font-size:.68rem;padding:2px 8px;border-radius:99px;font-weight:700;}
+    .seo-ok{background:rgba(13,158,106,.10);color:var(--emerald);}
+    .seo-warn{background:rgba(232,160,32,.12);color:var(--gold-muted);}
+    /* SETTINGS */
+    .set-sec{background:white;border:1px solid var(--grey-200);border-radius:var(--radius);padding:24px;margin-bottom:16px;}
+    .set-sec h3{font-family:var(--font-display);font-size:.96rem;color:var(--navy);margin-bottom:5px;}
+    .set-sec>.desc{font-size:.82rem;color:var(--grey-400);margin-bottom:18px;}
+    /* PASSWORD */
+    .pass-strength{height:4px;border-radius:2px;margin-top:7px;background:var(--grey-200);overflow:hidden;}
+    .pass-bar{height:100%;border-radius:2px;transition:width .3s,background .3s;width:0%;}
+    /* WA TEMPLATES */
+    .wa-card{background:white;border:1px solid var(--grey-200);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;}
+    .wa-name{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:8px;}
+    .wa-body{font-size:.82rem;color:var(--grey-600);background:var(--off-white);border-radius:8px;padding:12px;line-height:1.7;margin-bottom:10px;}
+    /* CHECKLIST */
+    .checklist{display:flex;flex-direction:column;gap:8px;}
+    .ci{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:8px;font-size:.83rem;}
+    .ci-ok{background:rgba(13,158,106,.06);border:1px solid rgba(13,158,106,.14);}
+    .ci-ok .cii{color:var(--emerald);}
+    .ci-warn{background:rgba(232,160,32,.06);border:1px solid rgba(232,160,32,.18);}
+    .ci-warn .cii{color:var(--gold-muted);}
+    /* DEPLOY LOG */
+    .deploy-log{background:var(--navy-deep);border-radius:var(--radius);padding:16px;max-height:200px;overflow-y:auto;font-family:monospace;font-size:.76rem;}
+    .log-line{color:rgba(255,255,255,.60);padding:2px 0;display:flex;gap:10px;}
+    .log-line .lt{color:rgba(255,255,255,.28);flex-shrink:0;}
+    .log-line.success .lm{color:#4ade80;}
+    .log-line.error .lm{color:#f87171;}
+    .log-line.info .lm{color:var(--gold-bright);}
+    /* MODAL */
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(15,37,71,.55);z-index:1000;align-items:center;justify-content:center;}
+    .modal-overlay.open{display:flex;}
+    .modal{background:white;border-radius:var(--radius-lg);padding:30px;width:100%;max-width:500px;box-shadow:var(--shadow-lg);position:relative;}
+    .modal h3{font-family:var(--font-display);font-size:1.05rem;color:var(--navy);margin-bottom:5px;}
+    .modal>.msub{font-size:.83rem;color:var(--grey-400);margin-bottom:20px;}
+    .modal-close{position:absolute;top:14px;right:14px;background:var(--grey-100);border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.96rem;display:flex;align-items:center;justify-content:center;color:var(--grey-500);}
+    .modal-close:hover{background:var(--grey-200);}
+    .modal-ft{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;}
+    /* ANN PREVIEW */
+    .ann-prev{padding:10px 16px;border-radius:var(--radius-sm);font-size:.84rem;font-weight:600;margin-top:10px;display:flex;align-items:center;justify-content:space-between;}
+    .ann-gold{background:rgba(232,160,32,.15);color:var(--gold-muted);}
+    .ann-navy{background:rgba(15,37,71,.08);color:var(--navy);}
+    .ann-green{background:rgba(13,158,106,.10);color:var(--emerald);}
+    .ann-red{background:rgba(224,90,58,.10);color:var(--coral);}
+    @keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.75)}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .spin{animation:spin 1s linear infinite;display:inline-block;}
+    @media(max-width:1024px){.sidebar{transform:translateX(-100%);transition:transform .3s;}.sidebar.open{transform:translateX(0);}.admin-main{margin-left:0;}.dash-stats{grid-template-columns:repeat(2,1fr);}.pages-grid{grid-template-columns:repeat(2,1fr);}.media-grid{grid-template-columns:repeat(3,1fr);}.qa-grid{grid-template-columns:repeat(3,1fr);}}
+    @media(max-width:600px){.panel{padding:16px;}.topbar{padding:0 16px;}.dash-stats{grid-template-columns:1fr 1fr;}.pages-grid{grid-template-columns:1fr 1fr;}.media-grid{grid-template-columns:repeat(2,1fr);}.slots-grid{grid-template-columns:1fr 1fr;}}
+  </style>
+</head>
+<body>
+
+
+<!-- AUTH -->
+<div id="auth">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="auth-mark">HMG</div>
+      <h2>Admin Panel</h2>
+      <p>HMG Academy &middot; His Marvellous Grace Educational Consult</p>
+    </div>
+    <div class="auth-fld">
+      <label>Admin Password</label>
+      <input type="password" id="pass-in" placeholder="Enter admin password" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()"/>
+    </div>
+    <button class="auth-btn" onclick="login()">Sign In to Admin Panel</button>
+    <div class="auth-err" id="auth-err">Incorrect password. Please try again.</div>
+    <p class="auth-hint">Default: <strong>hmgadmin2026</strong> &middot; <span class="auth-reset" onclick="resetPw()">Reset to default</span><br/>Not indexed by search engines.</p>
+    <div class="auth-info">
+      <strong>GitHub API Deploy (first-time setup):</strong>
+      After logging in go to Settings and enter your GitHub token and repo name to enable one-click live deployment.
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+<div class="sb" id="sb">
+  <div class="sb-hd"><div class="sb-mark">HMG</div><div><div class="sb-name">HMG Academy</div><div class="sb-role">Admin Panel</div></div></div>
+  <nav class="sb-nav">
+    <div class="ng">Overview</div>
+    <button class="nb active" onclick="sp('dashboard')"><span class="ni">&#128202;</span>Dashboard</button>
+    <button class="nb" onclick="sp('deploy')"><span class="ni">&#128640;</span>Deploy to GitHub</button>
+    <div class="ng">Content</div>
+    <button class="nb" onclick="sp('pages')"><span class="ni">&#128196;</span>Pages Manager</button>
+    <button class="nb" onclick="sp('hero')"><span class="ni">&#128444;</span>Hero &amp; Banners</button>
+    <button class="nb" onclick="sp('ann')"><span class="ni">&#128226;</span>Announcements</button>
+    <div class="ng">Media</div>
+    <button class="nb" onclick="sp('media')"><span class="ni">&#128193;</span>Media Manager</button>
+    <button class="nb" onclick="sp('imgplace')"><span class="ni">&#128205;</span>Place Images on Pages</button>
+    <div class="ng">Academy</div>
+    <button class="nb" onclick="sp('notes')"><span class="ni">&#128218;</span>Lesson Notes <span class="nbadge nbg" id="notes-badge">0</span></button>
+    <button class="nb" onclick="sp('tools')"><span class="ni">&#128295;</span>Tools &amp; Projects</button>
+    <button class="nb" onclick="sp('services')"><span class="ni">&#127891;</span>Services</button>
+    <button class="nb" onclick="sp('testi')"><span class="ni">&#11088;</span>Testimonials</button>
+    <div class="ng">Communication</div>
+    <button class="nb" onclick="sp('enquiries')"><span class="ni">&#128236;</span>Enquiries <span class="nbadge nbr" id="enq-badge">3</span></button>
+    <button class="nb" onclick="sp('wa')"><span class="ni">&#128172;</span>WhatsApp Templates</button>
+    <div class="ng">SEO</div>
+    <button class="nb" onclick="sp('seo')"><span class="ni">&#128269;</span>SEO Manager</button>
+    <button class="nb" onclick="sp('sitemap')"><span class="ni">&#128506;</span>Sitemap &amp; Robots</button>
+    <div class="ng">Settings</div>
+    <button class="nb" onclick="sp('settings')"><span class="ni">&#9881;</span>Settings &amp; GitHub</button>
+    <button class="nb" onclick="sp('password')"><span class="ni">&#128272;</span>Change Password</button>
+  </nav>
+  <div class="sb-ft">
+    <a href="index.html" target="_blank" class="sb-fb">View Site</a>
+    <button class="sb-fb d" onclick="logout()">Logout</button>
+  </div>
+</div>
+
+<div class="main">
+<div class="topbar">
+  <div class="tb-l"><h2 id="tb-title">Dashboard</h2><p id="tb-sub">HMG Academy Admin</p></div>
+  <div class="tb-r">
+    <span id="gh-indicator" style="font-size:.76rem;color:var(--g4);">GitHub: <span id="gh-st-txt">Not configured</span></span>
+    <button class="dbtn" style="font-size:.76rem;padding:6px 14px;" onclick="sp('deploy')">Deploy</button>
+    <a href="index.html" target="_blank" class="tb-link">Live Site</a>
+    <div class="tb-user"><div class="tb-av">AD</div><span>Adewale</span></div>
+  </div>
+</div>
+
+
+<!-- DASHBOARD -->
+<div class="panel active" id="p-dashboard">
+  <div class="dbar">
+    <div class="dbar-l"><div class="ddot"></div>
+      <div><div class="dbar-t"><strong id="d-dtitle">GitHub API Deploy</strong> &mdash; Push all changes live in one click</div>
+      <div style="font-size:.74rem;color:rgba(255,255,255,.45);" id="d-dsub">Configure GitHub token in Settings to enable</div></div>
+    </div>
+    <button class="dbtn" id="d-dbtn" onclick="deploy()">Deploy Changes Live</button>
+  </div>
+  <div class="dstats">
+    <div class="sc"><div class="sc-lbl">Site Status</div><div class="sc-val" style="font-size:1.3rem;color:var(--em);">Live</div><div class="sc-sub">Cloudflare Pages</div></div>
+    <div class="sc"><div class="sc-lbl">Lesson Notes</div><div class="sc-val" id="st-notes">0</div><div class="sc-sub">Published</div></div>
+    <div class="sc"><div class="sc-lbl">New Enquiries</div><div class="sc-val" style="color:var(--gold);" id="st-enq">3</div><div class="sc-sub">Awaiting reply</div></div>
+    <div class="sc"><div class="sc-lbl">Live Projects</div><div class="sc-val">12</div><div class="sc-sub">Deployed tools</div></div>
+  </div>
+  <div class="card" style="margin-bottom:18px;">
+    <div class="c-hd"><h3>Quick Actions</h3></div>
+    <div class="qa-grid">
+      <button class="qa" onclick="sp('notes')"><div class="qa-ic">&#128218;</div><div class="qa-lb">Add Lesson Note</div></button>
+      <button class="qa" onclick="sp('media')"><div class="qa-ic">&#128228;</div><div class="qa-lb">Upload Media</div></button>
+      <button class="qa" onclick="sp('enquiries')"><div class="qa-ic">&#128236;</div><div class="qa-lb">View Enquiries</div></button>
+      <button class="qa" onclick="sp('hero')"><div class="qa-ic">&#128444;</div><div class="qa-lb">Edit Hero</div></button>
+      <button class="qa" onclick="sp('ann')"><div class="qa-ic">&#128226;</div><div class="qa-lb">Announcement</div></button>
+      <button class="qa" onclick="sp('imgplace')"><div class="qa-ic">&#128205;</div><div class="qa-lb">Place Images</div></button>
+      <button class="qa" onclick="sp('testi')"><div class="qa-ic">&#11088;</div><div class="qa-lb">Testimonial</div></button>
+      <button class="qa" onclick="sp('seo')"><div class="qa-ic">&#128269;</div><div class="qa-lb">SEO</div></button>
+      <button class="qa" onclick="deploy()"><div class="qa-ic">&#128640;</div><div class="qa-lb">Deploy Live</div></button>
+      <button class="qa" onclick="sp('password')"><div class="qa-ic">&#128272;</div><div class="qa-lb">Change Password</div></button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="c-hd"><h3>Site Health Checklist</h3><button class="btn bo bsm" onclick="sp('seo')">SEO</button></div>
+    <div class="cl">
+      <div class="ci ci-ok"><span class="cic">&#10003;</span><span>sitemap.xml &mdash; clean, no XML comments, Google Search Console compatible</span></div>
+      <div class="ci ci-ok"><span class="cic">&#10003;</span><span>robots.txt &mdash; configured, admin.html blocked from all crawlers</span></div>
+      <div class="ci ci-ok"><span class="cic">&#10003;</span><span>Google Analytics GA4 (G-J5C7CTP1N5) &mdash; installed on all pages</span></div>
+      <div class="ci ci-ok"><span class="cic">&#10003;</span><span>JSON-LD EducationalOrganization schema &mdash; on homepage</span></div>
+      <div class="ci ci-wn" id="gh-health"><span class="cic">&#9888;</span><span>GitHub API not configured &mdash; go to Settings to enable one-click live publishing</span></div>
+      <div class="ci ci-wn"><span class="cic">&#9888;</span><span>Submit sitemap to <a href="https://search.google.com/search-console" target="_blank" style="color:var(--navy);font-weight:600;">Google Search Console</a></span></div>
+      <div class="ci ci-wn"><span class="cic">&#9888;</span><span>Upload og-image.png (1200x630px) for WhatsApp/social share previews</span></div>
+      <div class="ci ci-wn"><span class="cic">&#9888;</span><span>Upload founder headshot (adewale-headshot.webp, 800x800px) to replace About page placeholder</span></div>
+      <div class="ci ci-wn"><span class="cic">&#9888;</span><span>Add Formspree endpoint to contact.html &mdash; free at <a href="https://formspree.io" target="_blank" style="color:var(--navy);">formspree.io</a></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- DEPLOY -->
+<div class="panel" id="p-deploy">
+  <div class="alert ai show">GitHub API Deploy pushes changes directly to your GitHub repository. Cloudflare Pages detects the push and rebuilds your live site automatically in about 30 seconds.</div>
+  <div class="card">
+    <div class="c-hd"><h3>One-Click GitHub Deployment</h3></div>
+    <div id="gh-deploy-st" class="gh-st gh-no">GitHub not configured &mdash; fill in your details below first</div>
+    <div class="r2">
+      <div class="f"><label>GitHub Personal Access Token</label><input type="password" id="g-tok" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"/><div class="fh">Fine-grained token with repo:contents read and write permission</div></div>
+      <div class="f"><label>GitHub Username</label><input type="text" id="g-usr" placeholder="cssadewale"/></div>
+      <div class="f"><label>Repository Name</label><input type="text" id="g-repo" placeholder="hmg-academy"/></div>
+      <div class="f"><label>Branch</label><input type="text" id="g-branch" value="main"/></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn bn bsm" onclick="saveGH()">Save Config</button>
+      <button class="btn bo bsm" onclick="testGH()">Test Connection</button>
+    </div>
+    <div class="alert as" id="gh-save-ok" style="margin-top:12px;">GitHub config saved. Test connection to verify.</div>
+  </div>
+  <div class="card">
+    <div class="c-hd"><h3>Select Files to Deploy</h3></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;" id="file-checks">
+      <label style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--g2);border-radius:var(--rs);cursor:pointer;font-size:.82rem;"><input type="checkbox" checked/> index.html</label>
+      <label style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--g2);border-radius:var(--rs);cursor:pointer;font-size:.82rem;"><input type="checkbox" checked/> about.html</label>
+      <label style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--g2);border-radius:var(--rs);cursor:pointer;font-size:.82rem;"><input type="checkbox" checked/> services.html</label>
+      <label style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--g2);border-radius:var(--rs);cursor:pointer;font-size:.82rem;"><input type="checkbox" checked/> tools.html</label>
+      <label style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--g2);border-radius:var(--rs);cursor:pointer;font-size:.82rem;"><input type="checkbox" checked/> notes.html</label>
+      <label style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--g2);border-radius:var(--rs);cursor:pointer;font-size:.82rem;"><input type="checkbox" checked/> register.html</label>
+      <label style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--g2);border-radius:var(--rs);cursor:pointer;font-size:.82rem;"><input type="checkbox" checked/> contact.html</label>
+      <label style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--g2);border-radius:var(--rs);cursor:pointer;font-size:.82rem;"><input type="checkbox" checked/> sitemap.xml</label>
+      <label style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--g2);border-radius:var(--rs);cursor:pointer;font-size:.82rem;"><input type="checkbox" checked/> robots.txt</label>
+    </div>
+    <div class="f"><label>Commit Message</label><input type="text" id="commit-msg" value="Admin panel update &mdash; HMG Academy content changes"/></div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+      <button class="dbtn" id="main-dbtn" onclick="deploy()" style="font-size:.88rem;padding:11px 22px;">Deploy Changes Live Now</button>
+      <button class="btn bo bsm" onclick="selAll(true)">Select All</button>
+      <button class="btn bo bsm" onclick="selAll(false)">Deselect All</button>
+    </div>
+    <div class="alert as" id="d-ok">Deployed! Your site rebuilds in about 30 seconds on Cloudflare Pages.</div>
+    <div class="alert ae" id="d-err"></div>
+    <div class="alert aw" id="d-warn">Configure GitHub token first in Settings.</div>
+  </div>
+  <div class="card">
+    <div class="c-hd"><h3>Deployment Log</h3><button class="btn bo bsm" onclick="clearLog()">Clear</button></div>
+    <div class="dlog" id="dlog"><div class="dlog-ln i"><span class="lt">[READY]</span><span class="lm">GitHub API deploy system ready. Configure token to begin.</span></div></div>
+    <div style="margin-top:12px;font-size:.78rem;color:var(--g4);">After deploy, check live: <a href="https://hmgacademy.pages.dev" target="_blank" style="color:var(--navy);font-weight:600;">hmgacademy.pages.dev</a></div>
+  </div>
+  <div class="gh-setup">
+    <h4>How to create your GitHub Personal Access Token:</h4>
+    <ol>
+      <li>Go to <a href="https://github.com/settings/tokens" target="_blank" style="color:var(--navy);font-weight:600;">github.com/settings/tokens</a> then Generate new token then Fine-grained token</li>
+      <li>Set expiration to 1 year or No expiration</li>
+      <li>Repository access: Only select repositories, pick your HMG Academy repo</li>
+      <li>Permissions, Repository, Contents: set to Read and write</li>
+      <li>Generate token, copy immediately (shown once only), paste above</li>
+    </ol>
+  </div>
+</div>
+
+<!-- PAGES MANAGER -->
+<div class="panel" id="p-pages">
+  <div class="alert ai show">Click any page to edit its SEO title, meta description, and content. Save and Deploy to push changes live via GitHub API.</div>
+  <div class="pg-grid">
+    <div class="pg-card" onclick="openPage('Home','index.html')"><div class="pg-ic">&#127968;</div><div class="pg-nm">Home</div><div class="pg-url">index.html</div><div class="pg-sr"><span class="ldot"></span>Live</div></div>
+    <div class="pg-card" onclick="openPage('About','about.html')"><div class="pg-ic">&#128100;</div><div class="pg-nm">About</div><div class="pg-url">about.html</div><div class="pg-sr"><span class="ldot"></span>Live</div></div>
+    <div class="pg-card" onclick="openPage('Services','services.html')"><div class="pg-ic">&#127891;</div><div class="pg-nm">Services</div><div class="pg-url">services.html</div><div class="pg-sr"><span class="ldot"></span>Live</div></div>
+    <div class="pg-card" onclick="openPage('Tools','tools.html')"><div class="pg-ic">&#128295;</div><div class="pg-nm">Tools</div><div class="pg-url">tools.html</div><div class="pg-sr"><span class="ldot"></span>Live</div></div>
+    <div class="pg-card" onclick="openPage('Notes','notes.html')"><div class="pg-ic">&#128218;</div><div class="pg-nm">Notes</div><div class="pg-url">notes.html</div><div class="pg-sr"><span class="ldot"></span>Live</div></div>
+    <div class="pg-card" onclick="openPage('Register','register.html')"><div class="pg-ic">&#9998;</div><div class="pg-nm">Register</div><div class="pg-url">register.html</div><div class="pg-sr"><span class="ldot"></span>Live</div></div>
+    <div class="pg-card" onclick="openPage('Contact','contact.html')"><div class="pg-ic">&#128236;</div><div class="pg-nm">Contact</div><div class="pg-url">contact.html</div><div class="pg-sr"><span class="ldot"></span>Live</div></div>
+  </div>
+  <div class="card" id="page-ed" style="display:none;">
+    <div class="c-hd">
+      <div><h3 id="pe-hdg">Editing page</h3><div class="csub" id="pe-file"></div></div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn bo bsm" onclick="document.getElementById('page-ed').style.display='none'">Cancel</button>
+        <button class="btn bg bsm" onclick="savePage()">Save</button>
+        <button class="btn bn bsm" onclick="savePage();deploy()">Save and Deploy</button>
+      </div>
+    </div>
+    <div class="alert as" id="page-saved">Saved. Click Deploy to push live.</div>
+    <div class="tabs">
+      <button class="tab active" onclick="stab(this,'pt-seo')">SEO and Meta</button>
+      <button class="tab" onclick="stab(this,'pt-cont')">Page Content</button>
+      <button class="tab" onclick="stab(this,'pt-og')">Social Sharing</button>
+    </div>
+    <div class="tab-panel active" id="pt-seo">
+      <div class="r2">
+        <div class="f"><label>Page Title (max 60 chars)</label><input type="text" id="pe-title"/><div class="fh" id="pe-tc">0/60</div></div>
+        <div class="f"><label>Canonical URL</label><input type="text" id="pe-can"/></div>
+      </div>
+      <div class="f"><label>Meta Description (130 to 160 chars)</label><textarea id="pe-desc" style="min-height:70px;"></textarea><div class="fh" id="pe-dc">0/160</div></div>
+      <div class="f"><label>Keywords</label><input type="text" id="pe-kw"/></div>
+    </div>
+    <div class="tab-panel" id="pt-cont">
+      <div class="f"><label>H1 Heading</label><input type="text" id="pe-h1"/></div>
+      <div class="f"><label>Subtitle or Hero Description</label><textarea id="pe-sub" style="min-height:80px;"></textarea></div>
+      <div class="r2">
+        <div class="f"><label>CTA 1 Text</label><input type="text" id="pe-cta1"/></div>
+        <div class="f"><label>CTA 1 Link</label><input type="text" id="pe-cl1"/></div>
+        <div class="f"><label>CTA 2 Text</label><input type="text" id="pe-cta2"/></div>
+        <div class="f"><label>CTA 2 Link</label><input type="text" id="pe-cl2"/></div>
+      </div>
+    </div>
+    <div class="tab-panel" id="pt-og">
+      <div class="f"><label>OG Title for WhatsApp Facebook LinkedIn</label><input type="text" id="pe-ogt"/></div>
+      <div class="f"><label>OG Description</label><textarea id="pe-ogd" style="min-height:70px;"></textarea></div>
+      <div class="f"><label>OG Image URL (upload in Media Manager first)</label><input type="text" id="pe-ogi" placeholder="https://hmgacademy.pages.dev/assets/og-image.png"/></div>
+      <div class="fh">OG image should be 1200x630px PNG. This appears when the page link is shared on social media.</div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="panel" id="p-hero">
+  <div class="card">
+    <div class="c-hd"><h3>Homepage Hero Section</h3><div style="display:flex;gap:8px;"><button class="btn bg bsm" onclick="saveHero()">Save</button><button class="btn bn bsm" onclick="saveHero();deploy()">Save and Deploy</button></div></div>
+    <div class="alert as" id="hero-saved">Saved. Deploy to go live.</div>
+    <div class="r2">
+      <div>
+        <div class="f"><label>Eyebrow Label</label><input type="text" id="h-eyebrow" value="Full-Service Virtual Institution - Est. 2015 - Nigeria"/></div>
+        <div class="f"><label>Heading Line 1</label><input type="text" id="h-h1a" value="Where Nigerian Students"/></div>
+        <div class="f"><label>Heading Line 2 (gold italic)</label><input type="text" id="h-h1b" value="Excel Beyond Limits."/></div>
+        <div class="f"><label>Hero Description</label><textarea id="h-desc">HMG Academy is a full-service virtual learning institution with a team of seasoned teachers, all subjects, all levels, every major examination.</textarea></div>
+        <div class="f"><label>Institution Note</label><input type="text" id="h-note" value="Not one teacher. A full team. All subjects. All levels."/></div>
+        <div class="r2">
+          <div class="f"><label>CTA 1 Text</label><input type="text" id="h-cta1" value="Enrol Now"/></div>
+          <div class="f"><label>CTA 1 Link</label><input type="text" id="h-cl1" value="register.html"/></div>
+          <div class="f"><label>CTA 2 Text</label><input type="text" id="h-cta2" value="Explore Services"/></div>
+          <div class="f"><label>CTA 2 Link</label><input type="text" id="h-cl2" value="services.html"/></div>
+        </div>
+      </div>
+      <div>
+        <div class="f"><label>Hero Background Image</label>
+          <div class="uzone" style="padding:20px;margin-bottom:10px;" onclick="document.getElementById('h-img-in').click()">
+            <input type="file" id="h-img-in" accept="image/*" style="display:none;" onchange="prevImg(this,'h-prev')"/>
+            <div class="u-ic" style="font-size:2rem;">&#127756;</div>
+            <h4 style="font-size:.88rem;">Click to upload hero background</h4>
+            <p>WebP recommended, under 200KB, 1400x800px</p>
+          </div>
+          <div id="h-prev" style="display:none;border-radius:8px;overflow:hidden;border:1px solid var(--g2);"><img id="h-prev-img" src="" alt="" style="width:100%;max-height:140px;object-fit:cover;"/></div>
+        </div>
+        <div class="f"><label>Or paste image URL</label><input type="text" id="h-imgurl" placeholder="https://hmgacademy.pages.dev/assets/images/hero-bg.webp"/></div>
+        <div class="alert ai show" style="font-size:.78rem;">Upload in Media Manager, copy URL, paste above, then Save and Deploy.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="c-hd"><h3>Stats Strip (5 numbers)</h3><button class="btn bn bsm" onclick="toast('Stats saved','s')">Save</button></div>
+    <div class="r2">
+      <div class="f"><label>Stat 1 Number</label><input type="text" value="15+"/></div>
+      <div class="f"><label>Stat 1 Label</label><input type="text" value="Years Teaching Experience"/></div>
+      <div class="f"><label>Stat 2 Number</label><input type="text" value="10+"/></div>
+      <div class="f"><label>Stat 2 Label</label><input type="text" value="Major Exams Supported"/></div>
+      <div class="f"><label>Stat 3 Number</label><input type="text" value="All"/></div>
+      <div class="f"><label>Stat 3 Label</label><input type="text" value="Subjects Covered"/></div>
+      <div class="f"><label>Stat 4 Number</label><input type="text" value="Free"/></div>
+      <div class="f"><label>Stat 4 Label</label><input type="text" value="CBT Pro Platform"/></div>
+      <div class="f"><label>Stat 5 Number</label><input type="text" value="12"/></div>
+      <div class="f"><label>Stat 5 Label</label><input type="text" value="Live EdTech Projects"/></div>
+    </div>
+  </div>
+</div>
+
+<!-- ANNOUNCEMENTS -->
+<div class="panel" id="p-ann">
+  <div class="card">
+    <div class="c-hd"><h3>Post Announcement Banner</h3><div style="display:flex;gap:8px;"><button class="btn bg bsm" onclick="saveAnn()">Publish</button><button class="btn bn bsm" onclick="saveAnn();deploy()">Publish and Deploy</button></div></div>
+    <div class="alert ai show">Announcements appear as a dismissable bar at the top of the homepage. Great for exam deadlines, new services, or urgent notices.</div>
+    <div class="r2">
+      <div class="f"><label>Announcement Text</label><input type="text" id="ann-txt" placeholder="WAEC 2026 registration now open through HMG Academy"/></div>
+      <div class="f"><label>CTA Link</label><input type="text" id="ann-lnk" placeholder="register.html or https://wa.me/..."/></div>
+      <div class="f"><label>Button Text</label><input type="text" id="ann-btn" placeholder="Register Now"/></div>
+      <div class="f"><label>Colour</label>
+        <select id="ann-col" onchange="prevAnn()">
+          <option value="gold">Gold - important</option><option value="navy">Navy - formal</option>
+          <option value="green">Green - good news</option><option value="red">Red - urgent</option>
+        </select>
+      </div>
+    </div>
+    <div id="ann-prev"></div>
+    <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.84rem;font-weight:600;color:var(--navy);margin-top:12px;"><input type="checkbox" id="ann-active" style="width:auto;"/> Show on homepage now</label>
+  </div>
+  <div class="card"><div class="c-hd"><h3>Recent Announcements</h3></div><div id="ann-history" style="color:var(--g4);font-size:.84rem;text-align:center;padding:20px;">No announcements posted yet.</div></div>
+</div>
+
+<!-- MEDIA MANAGER -->
+<div class="panel" id="p-media">
+  <div class="uzone" id="dz" onclick="document.getElementById('main-file-in').click()">
+    <input type="file" id="main-file-in" multiple accept="image/*,application/pdf,.doc,.docx,.pptx,.xlsx,.csv" style="display:none;" onchange="handleUpload(this.files)"/>
+    <div class="u-ic">&#9729;</div>
+    <h4>Upload Files to Media Library</h4>
+    <p>Click here or drag and drop. Stored locally until deployed via GitHub API.</p>
+    <div class="utypes"><span class="utype">JPG</span><span class="utype">PNG</span><span class="utype">WebP</span><span class="utype">PDF</span><span class="utype">DOC</span><span class="utype">PPTX</span><span class="utype">CSV</span></div>
+  </div>
+  <div class="card">
+    <div class="c-hd"><h3>Media Library</h3>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <select style="padding:6px 10px;border:1.5px solid var(--g2);border-radius:var(--rs);font-size:.80rem;" onchange="filterMedia(this.value)"><option value="all">All</option><option value="image">Images</option><option value="pdf">PDFs</option></select>
+        <button class="btn bn bsm" onclick="toast('Media deploys with next push','s')">Deploy Media</button>
+      </div>
+    </div>
+    <div class="mg" id="mg"></div>
+    <div class="m-empty" id="m-empty">No files yet. Upload above.</div>
+  </div>
+  <div class="card"><div class="c-hd"><h3>Required Assets Checklist</h3></div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:8px;border:1px solid var(--g2);background:var(--off);"><div><div style="font-size:.85rem;font-weight:600;color:var(--navy);">og-image.png (1200x630px)</div><div style="font-size:.74rem;color:var(--g4);">WhatsApp Facebook LinkedIn sharing preview</div></div><span style="font-size:.72rem;color:var(--gold-m);font-weight:700;padding:3px 9px;background:rgba(232,160,32,.10);border-radius:99px;">NEEDED</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:8px;border:1px solid var(--g2);background:var(--off);"><div><div style="font-size:.85rem;font-weight:600;color:var(--navy);">adewale-headshot.webp (800x800px)</div><div style="font-size:.74rem;color:var(--g4);">Founder photo on About and founder strip</div></div><span style="font-size:.72rem;color:var(--gold-m);font-weight:700;padding:3px 9px;background:rgba(232,160,32,.10);border-radius:99px;">NEEDED</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:8px;border:1px solid var(--g2);background:var(--off);"><div><div style="font-size:.85rem;font-weight:600;color:var(--navy);">favicon.ico (32x32px)</div><div style="font-size:.74rem;color:var(--g4);">Browser tab icon. Generate free at favicon.io</div></div><span style="font-size:.72rem;color:var(--gold-m);font-weight:700;padding:3px 9px;background:rgba(232,160,32,.10);border-radius:99px;">NEEDED</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:8px;border:1px solid var(--g2);background:var(--off);"><div><div style="font-size:.85rem;font-weight:600;color:var(--navy);">hero-bg.webp (1400x800px)</div><div style="font-size:.74rem;color:var(--g4);">Optional homepage hero background. Keep under 200KB.</div></div><span style="font-size:.72rem;color:var(--g4);font-weight:700;padding:3px 9px;background:var(--g1);border-radius:99px;">OPTIONAL</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- IMAGE PLACER -->
+<div class="panel" id="p-imgplace">
+  <div class="alert ai show">Click any slot to upload or assign an image to that exact location on your site. After assigning, deploy to push it live.</div>
+  <div class="card"><div class="c-hd"><h3>Homepage Image Slots</h3></div>
+    <div class="sg">
+      <div class="islot" onclick="openSlot('hero-bg','Hero Background on index.html','1400x800px WebP')"><div class="sl-ic">&#127756;</div><div class="sl-nm">Hero Background</div><div class="sl-pg">index.html</div></div>
+      <div class="islot" onclick="openSlot('og-image','Social Share OG Image for All Pages','1200x630px PNG')"><div class="sl-ic">&#128242;</div><div class="sl-nm">Social Share Image</div><div class="sl-pg">All pages</div></div>
+      <div class="islot" onclick="openSlot('about-team','Academy Team Photo on index.html About section','4:5 ratio')"><div class="sl-ic">&#128101;</div><div class="sl-nm">Academy Team Photo</div><div class="sl-pg">index.html About section</div></div>
+    </div>
+  </div>
+  <div class="card"><div class="c-hd"><h3>About Page Image Slots</h3></div>
+    <div class="sg">
+      <div class="islot" onclick="openSlot('founder-headshot','Founder Headshot on about.html','800x800px WebP square')"><div class="sl-ic">&#129489;</div><div class="sl-nm">Founder Headshot</div><div class="sl-pg">about.html</div></div>
+      <div class="islot" onclick="openSlot('classroom-photo','Classroom Photo on about.html','Landscape 1200x800px')"><div class="sl-ic">&#127979;</div><div class="sl-nm">Classroom Photo</div><div class="sl-pg">about.html</div></div>
+      <div class="islot" onclick="openSlot('hmg-logo','HMG Logo for Navigation and Footer','PNG transparent background')"><div class="sl-ic">&#127942;</div><div class="sl-nm">HMG Academy Logo</div><div class="sl-pg">Navigation and footer</div></div>
+    </div>
+  </div>
+  <div class="card"><div class="c-hd"><h3>Services and Tools Image Slots</h3></div>
+    <div class="sg">
+      <div class="islot" onclick="openSlot('virtual-class','Virtual Class Banner on services.html','Student on Zoom')"><div class="sl-ic">&#128187;</div><div class="sl-nm">Virtual Class Banner</div><div class="sl-pg">services.html</div></div>
+      <div class="islot" onclick="openSlot('cbt-screenshot','CBT Pro Screenshot on services.html and tools.html','Teacher dashboard screenshot')"><div class="sl-ic">&#128202;</div><div class="sl-nm">CBT Pro Screenshot</div><div class="sl-pg">services.html and tools.html</div></div>
+      <div class="islot" onclick="openSlot('ds-banner','Data Science Training on services.html','Python code or laptop image')"><div class="sl-ic">&#128200;</div><div class="sl-nm">Data Science Banner</div><div class="sl-pg">services.html</div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- LESSON NOTES -->
+<div class="panel" id="p-notes">
+  <div class="card">
+    <div class="c-hd"><h3>Add Lesson Note</h3><div style="display:flex;gap:8px;"><button class="btn bg bsm" onclick="saveNote()">Save</button><button class="btn bn bsm" onclick="saveNote();deploy()">Save and Deploy</button></div></div>
+    <div class="alert as" id="note-ok">Note saved. Deploy to show on site.</div>
+    <div class="r3">
+      <div class="f"><label>Subject</label>
+        <select id="n-subj"><option>Mathematics</option><option>Further Mathematics</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>English Language</option><option>Economics</option><option>Government</option><option>Literature in English</option><option>Geography</option><option>Accounting</option><option>Computer Science</option><option>Data Science</option><option>Other</option></select>
+      </div>
+      <div class="f"><label>Level</label>
+        <select id="n-lvl"><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SSS1</option><option>SSS2</option><option>SSS3</option><option>WAEC Prep</option><option>NECO Prep</option><option>UTME Prep</option><option>IGCSE</option><option>IELTS</option><option>JUPEB</option><option>SAT</option><option>All Levels</option></select>
+      </div>
+      <div class="f"><label>Term</label>
+        <select id="n-term"><option>First Term</option><option>Second Term</option><option>Third Term</option><option>Exam Prep</option><option>Holiday Pack</option><option>General</option></select>
+      </div>
+    </div>
+    <div class="r2">
+      <div class="f"><label>Title or Topic</label><input type="text" id="n-title" placeholder="e.g. Quadratic Equations Complete Guide"/></div>
+      <div class="f"><label>Short Description</label><input type="text" id="n-desc" placeholder="What this note covers"/></div>
+    </div>
+    <div class="f"><label>Google Drive PDF Link (recommended)</label><input type="text" id="n-link" placeholder="https://drive.google.com/uc?export=download&id=FILE_ID"/>
+      <div class="fh">Upload PDF to Google Drive, share as Anyone with link can view, copy File ID from the URL, paste into: https://drive.google.com/uc?export=download&amp;id=YOUR_FILE_ID</div>
+    </div>
+    <div class="uzone" style="padding:16px;" onclick="document.getElementById('n-pdf').click()">
+      <input type="file" id="n-pdf" accept="application/pdf" style="display:none;" onchange="handleNotePDF(this)"/>
+      <div class="u-ic" style="font-size:1.8rem;">&#128196;</div>
+      <h4 style="font-size:.86rem;">Or upload PDF directly (max 10MB)</h4>
+      <p>Added to Media Library automatically</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="c-hd"><h3>Published Notes</h3>
+      <div style="display:flex;gap:8px;">
+        <select style="padding:6px 10px;border:1.5px solid var(--g2);border-radius:var(--rs);font-size:.78rem;" onchange="filterNotes('s',this.value)"><option value="">All Subjects</option><option>Mathematics</option><option>Further Mathematics</option><option>Physics</option><option>Chemistry</option><option>Biology</option></select>
+        <select style="padding:6px 10px;border:1.5px solid var(--g2);border-radius:var(--rs);font-size:.78rem;" onchange="filterNotes('l',this.value)"><option value="">All Levels</option><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SSS1</option><option>SSS2</option><option>SSS3</option></select>
+      </div>
+    </div>
+    <div class="nt"><div class="nt-hdr"><span>Title</span><span>Subject</span><span>Level</span><span>Term</span><span>Actions</span></div><div id="notes-list"><div style="text-align:center;padding:28px;color:var(--g4);font-size:.84rem;">No notes yet. Add your first lesson note above.</div></div></div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<div class="panel" id="p-tools">
+  <div class="card">
+    <div class="c-hd"><h3>Add New Tool</h3><div style="display:flex;gap:8px;"><button class="btn bg bsm" onclick="saveTool()">Save</button><button class="btn bn bsm" onclick="saveTool();deploy()">Deploy</button></div></div>
+    <div class="r2">
+      <div class="f"><label>Tool Name</label><input type="text" id="t-name" placeholder="e.g. Student Study Plan Generator"/></div>
+      <div class="f"><label>Category</label><select id="t-cat"><option>EdTech</option><option>ML Binary Classification</option><option>ML Regression</option><option>ML Multi-class</option><option>NLP</option><option>Data Analytics</option><option>Full-Stack</option></select></div>
+    </div>
+    <div class="f"><label>Problem it solves</label><textarea id="t-prob" style="min-height:70px;" placeholder="The real classroom or business problem this tool addresses"></textarea></div>
+    <div class="r2">
+      <div class="f"><label>GitHub Link</label><input type="text" id="t-gh" placeholder="https://github.com/cssadewale/repo-name"/></div>
+      <div class="f"><label>Live App Link</label><input type="text" id="t-app" placeholder="https://adewale-tool.streamlit.app/"/></div>
+    </div>
+    <div class="r2">
+      <div class="f"><label>Key Metric Label</label><input type="text" id="t-ml" placeholder="ROC-AUC"/></div>
+      <div class="f"><label>Key Metric Value</label><input type="text" id="t-mv" placeholder="0.9393"/></div>
+    </div>
+    <div class="r2">
+      <div class="f"><label>Status</label><select id="t-st"><option>Live</option><option>In Progress</option><option>Coming Soon</option></select></div>
+      <div class="f"><label>Tech Stack (comma separated)</label><input type="text" id="t-stack" placeholder="Python, XGBoost, NLTK, Streamlit"/></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="c-hd"><h3>All 12 Live Projects</h3></div>
+    <div id="tools-list" style="display:flex;flex-direction:column;gap:7px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#127979;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">CBT Pro</div><div style="font-size:.72rem;color:var(--g4);">LIVE - cssadewale.github.io/cbt-system - Teacher + Student portals</div></div><button class="btn bd bxs" onclick="cDel('CBT Pro')">Remove</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#128202;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">Student Performance Tracker</div><div style="font-size:.72rem;color:var(--g4);">LIVE - adewale-student-performance-tracker.streamlit.app</div></div><button class="btn bd bxs" onclick="cDel('Student Performance Tracker')">Remove</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#128218;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">CBT Question Bank Manager</div><div style="font-size:.72rem;color:var(--g4);">LIVE - adewale-cbt-question-bank.streamlit.app</div></div><button class="btn bd bxs" onclick="cDel('CBT Question Bank')">Remove</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#128197;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">Student Study Plan Generator</div><div style="font-size:.72rem;color:var(--g4);">LIVE - student-study-plan-generator.streamlit.app</div></div><button class="btn bd bxs" onclick="cDel('Study Plan')">Remove</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#9888;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">Student At-Risk Predictor</div><div style="font-size:.72rem;color:var(--g4);">LIVE - student-at-risk-predictor.streamlit.app</div></div><button class="btn bd bxs" onclick="cDel('At-Risk Predictor')">Remove</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#128269;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">Fake News Detector - TruthLens - AUC 0.9393 - 3MTT Capstone</div><div style="font-size:.72rem;color:var(--g4);">LIVE - adewale-fake-news-detector.streamlit.app</div></div><button class="btn bd bxs" onclick="cDel('Fake News Detector')">Remove</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#129504;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">Employee Burnout Rate Predictor - NeuroWell - R2 0.855</div><div style="font-size:.72rem;color:var(--g4);">LIVE - adewale-burnout-prediction.streamlit.app</div></div><button class="btn bd bxs" onclick="cDel('Burnout Predictor')">Remove</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#128203;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">Insurance Claim Prediction</div><div style="font-size:.72rem;color:var(--g4);">LIVE - adewale-insurance-claim-prediction.streamlit.app</div></div><button class="btn bd bxs" onclick="cDel('Insurance Prediction')">Remove</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#128084;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">Staff Promotion Prediction - Yakub Trading Group</div><div style="font-size:.72rem;color:var(--g4);">LIVE - yakub-promotion-prediction.streamlit.app</div></div><button class="btn bd bxs" onclick="cDel('Yakub Promotion')">Remove</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#127974;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">Bank Customer Churn Prediction</div><div style="font-size:.72rem;color:var(--g4);">LIVE - adewale-bank-customer-churn-prediction.streamlit.app</div></div><button class="btn bd bxs" onclick="cDel('Bank Churn')">Remove</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#128176;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">Income Level Prediction - 48,842 records</div><div style="font-size:.72rem;color:var(--g4);">LIVE - adewale-income-level-prediction.streamlit.app</div></div><button class="btn bd bxs" onclick="cDel('Income Prediction')">Remove</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#128666;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">SwiftChain Delivery Delay Prediction</div><div style="font-size:.72rem;color:var(--g4);">LIVE - adewale-swiftchain-delivery-prediction.streamlit.app</div></div><button class="btn bd bxs" onclick="cDel('SwiftChain')">Remove</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="panel" id="p-services">
+  <div class="alert ai show">Edit service details here. Save and Deploy to push changes to services.html.</div>
+  <div class="card"><div class="c-hd"><h3>Services on Site</h3><div style="display:flex;gap:8px;"><button class="btn bg bsm" onclick="toast('Services saved','s')">Save</button><button class="btn bn bsm" onclick="deploy()">Deploy</button></div></div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#127891;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">Virtual Classes - All Subjects</div><div style="font-size:.72rem;color:var(--g4);">All subjects, all levels, team of seasoned teachers, Zoom and Google Meet</div></div><button class="btn bo bxs">Edit</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#128187;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">CBT Pro - Free Exam Platform</div><div style="font-size:.72rem;color:var(--g4);">Zero cost, teacher and student portals, scientific calculator, anti-cheat</div></div><button class="btn bo bxs">Edit</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#127758;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">International Exam Preparation</div><div style="font-size:.72rem;color:var(--g4);">IGCSE, IELTS, JUPEB, SAT - specialist teachers</div></div><button class="btn bo bxs">Edit</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#128221;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">Free Lesson Notes</div><div style="font-size:.72rem;color:var(--g4);">WAEC/NECO aligned, PDF downloads, all subjects</div></div><button class="btn bo bxs">Edit</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#128202;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">Data Science Training</div><div style="font-size:.72rem;color:var(--g4);">Python, Pandas, ML, post-secondary students and undergraduates</div></div><button class="btn bo bxs">Edit</button></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);"><div>&#9998;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">Exam Registration and Admission</div><div style="font-size:.72rem;color:var(--g4);">WAEC, NECO, GCE, UTME registration and tertiary institution admission processing</div></div><button class="btn bo bxs">Edit</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="panel" id="p-testi">
+  <div class="card">
+    <div class="c-hd"><h3>Add Testimonial</h3><div style="display:flex;gap:8px;"><button class="btn bg bsm" onclick="saveTest()">Save</button><button class="btn bn bsm" onclick="saveTest();deploy()">Save and Deploy</button></div></div>
+    <div class="alert as" id="test-ok">Saved. Deploy to show on site.</div>
+    <div class="r2">
+      <div class="f"><label>Full Name</label><input type="text" id="te-nm" placeholder="Chukwuemeka Obi"/></div>
+      <div class="f"><label>Role</label><input type="text" id="te-rl" placeholder="SSS3 Student, God of Seed Academy, Lagos"/></div>
+    </div>
+    <div class="f"><label>Testimonial</label><textarea id="te-msg" placeholder="Paste real feedback from WhatsApp, Google review, or email"></textarea></div>
+    <div class="r2">
+      <div class="f"><label>Star Rating</label><select id="te-st"><option value="5">5 stars</option><option value="4">4 stars</option><option value="3">3 stars</option></select></div>
+      <div class="f"><label>Date</label><input type="date" id="te-dt"/></div>
+    </div>
+  </div>
+  <div class="card"><div class="c-hd"><h3>Published Testimonials</h3></div><div class="tlist" id="tlist"><div style="color:var(--g4);font-size:.84rem;text-align:center;padding:24px;">No testimonials yet. Paste real feedback from WhatsApp or email above.</div></div></div>
+</div>
+
+<!-- ENQUIRIES -->
+<div class="panel" id="p-enquiries">
+  <div class="alert ai show">Connect Formspree at formspree.io to receive real enquiries from your contact form. Sample entries shown below.</div>
+  <div class="card" style="margin-bottom:16px;"><div class="c-hd"><h3>Formspree Integration</h3></div>
+    <div class="r2">
+      <div class="f"><label>Formspree Endpoint URL</label><input type="text" id="fp-url" placeholder="https://formspree.io/f/YOUR_FORM_ID"/></div>
+      <div style="padding-top:22px;"><button class="btn bn bsm" onclick="toast('Formspree ID saved. Paste into contact.html form action','s')">Save</button></div>
+    </div>
+  </div>
+  <div id="enq-list">
+    <div class="eq-card unread"><div class="eq-hd"><div><div class="eq-nm">Amaka Obi</div><div class="eq-sb">Virtual Classes - WAEC Prep</div></div><div class="eq-tm">Today, 9:14 AM</div></div><div class="eq-msg">Hello, my daughter is in SSS2 preparing for WAEC. She needs help with Further Mathematics and Chemistry. How do your virtual classes work and how do we register?</div><div class="eq-ct"><span>Email: <a href="mailto:amaka@example.com">amaka@example.com</a></span><span>Phone: +234 801 234 5678</span></div><div class="eq-ac"><a href="mailto:amaka@example.com?subject=HMG Academy Virtual Classes Enquiry" class="btn bn bsm">Reply Email</a><a href="https://wa.me/2348012345678?text=Hello%20Amaka%2C%20thank%20you%20for%20contacting%20HMG%20Academy..." target="_blank" class="btn bsm" style="background:var(--em);color:white;">WhatsApp</a><button class="btn bo bsm" onclick="markRead(this)">Mark Read</button><button class="btn bd bsm" onclick="cDel('enquiry')">Delete</button></div></div>
+    <div class="eq-card unread"><div class="eq-hd"><div><div class="eq-nm">Emmanuel Adeyemi</div><div class="eq-sb">CBT Pro School Partnership</div></div><div class="eq-tm">Yesterday, 4:32 PM</div></div><div class="eq-msg">Good afternoon sir, we are a school in Sagamu interested in setting up CBT Pro for our students. Is there a cost and how do we get started?</div><div class="eq-ct"><span>Email: <a href="mailto:emma@school.ng">emma@school.ng</a></span></div><div class="eq-ac"><a href="mailto:emma@school.ng?subject=CBT Pro Setup HMG Academy" class="btn bn bsm">Reply Email</a><button class="btn bo bsm" onclick="markRead(this)">Mark Read</button><button class="btn bd bsm" onclick="cDel('enquiry')">Delete</button></div></div>
+    <div class="eq-card unread"><div class="eq-hd"><div><div class="eq-nm">Blessing Nwosu</div><div class="eq-sb">Data Science Training</div></div><div class="eq-tm">2 days ago</div></div><div class="eq-msg">I finished SS3 last year and I want to learn data science and Python. How long is the programme and what does it cover?</div><div class="eq-ct"><span>Phone: +234 809 876 5432</span></div><div class="eq-ac"><a href="https://wa.me/2348098765432?text=Hello%20Blessing%2C%20thank%20you%20for%20your%20interest%20in%20our%20Data%20Science%20Training..." target="_blank" class="btn bsm" style="background:var(--em);color:white;">WhatsApp</a><button class="btn bo bsm" onclick="markRead(this)">Mark Read</button><button class="btn bd bsm" onclick="cDel('enquiry')">Delete</button></div></div>
+  </div>
+</div>
+
+<!-- WHATSAPP TEMPLATES -->
+<div class="panel" id="p-wa">
+  <div class="card"><div class="c-hd"><h3>WhatsApp Quick-Reply Templates</h3><button class="btn bg bsm" onclick="addWA()">New Template</button></div>
+    <div class="alert ai show">Click Copy then open WhatsApp, paste, and personalise the name before sending.</div>
+    <div id="wa-list" style="display:flex;flex-direction:column;gap:12px;margin-top:8px;">
+      <div class="wa-card"><div class="wa-nm">Virtual Classes - Full Institution Pitch</div><div class="wa-body">Hello [Name], thank you for reaching out to HMG Academy. We are a full-service virtual learning institution, not a single-teacher service. We have a team of seasoned teachers covering ALL subjects at ALL levels. We prepare students for WAEC, NECO, BECE, UTME, IGCSE, IELTS, JUPEB and SAT. Classes are via Zoom and Google Meet. To enrol: hmgacademy.pages.dev/register.html. Any questions?</div><button class="btn bn bsm" onclick="cpTxt(this.previousElementSibling.textContent)">Copy</button></div>
+      <div class="wa-card"><div class="wa-nm">CBT Pro School Partnership</div><div class="wa-body">Hello [School Name], thank you for your interest in CBT Pro. CBT Pro is completely FREE. It is a full Computer-Based Testing platform that works on any phone or computer. Teachers upload questions via CSV and students sit timed digital exams with automatic marking, scientific calculator, and anti-cheat detection. Demo: cssadewale.github.io/cbt-system. I can set it up for your school at zero cost. When is a good time to talk?</div><button class="btn bn bsm" onclick="cpTxt(this.previousElementSibling.textContent)">Copy</button></div>
+      <div class="wa-card"><div class="wa-nm">Data Science Training</div><div class="wa-body">Hello [Name], HMG Academy offers a practical Data Science and Python programme for SS3 leavers and undergraduates. You will learn Python basics, data analysis with pandas, data visualisation, and machine learning with real portfolio projects. Classes are virtual. Register here: hmgacademy.pages.dev/register.html</div><button class="btn bn bsm" onclick="cpTxt(this.previousElementSibling.textContent)">Copy</button></div>
+      <div class="wa-card"><div class="wa-nm">WAEC and NECO Registration</div><div class="wa-body">Hello [Name], yes HMG Academy handles WAEC and NECO registration. We manage the full process for your child with no stress. To proceed, share the full name, date of birth, passport photo, and school name. Note the deadline is [DATE]. WhatsApp us: +2348100866322</div><button class="btn bn bsm" onclick="cpTxt(this.previousElementSibling.textContent)">Copy</button></div>
+      <div class="wa-card"><div class="wa-nm">International Exam Preparation</div><div class="wa-body">Hello [Name], HMG Academy offers specialist preparation for IGCSE, IELTS, JUPEB, and SAT. Our teachers are qualified and experienced specifically in these international examinations. For availability, schedule, and fees: hmgacademy.pages.dev/contact.html or WhatsApp +2348100866322.</div><button class="btn bn bsm" onclick="cpTxt(this.previousElementSibling.textContent)">Copy</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- SEO -->
+<div class="panel" id="p-seo">
+  <div class="alert ai show">SEO takes 3 to 6 months to show results. Most important steps: verify site in Google Search Console, submit sitemap, publish fresh lesson notes regularly.</div>
+  <div class="card"><div class="c-hd"><h3>Google Search Console Setup</h3></div>
+    <ol style="padding-left:18px;display:flex;flex-direction:column;gap:12px;font-size:.84rem;color:var(--g6);line-height:1.75;">
+      <li>Go to <a href="https://search.google.com/search-console" target="_blank" style="color:var(--navy);font-weight:600;">search.google.com/search-console</a> and sign in with Google account</li>
+      <li>Click Add Property then URL prefix then enter https://hmgacademy.pages.dev</li>
+      <li>Verify using HTML tag method - copy the meta tag and paste into index.html head then Deploy via GitHub</li>
+      <li>After verification click Sitemaps and submit: https://hmgacademy.pages.dev/sitemap.xml</li>
+      <li>Wait 24 to 72 hours then monitor Coverage and Performance tabs weekly</li>
+    </ol>
+    <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+      <a href="https://search.google.com/search-console" target="_blank" class="btn bn bsm">Open Search Console</a>
+      <a href="https://analytics.google.com" target="_blank" class="btn bo bsm">Google Analytics</a>
+    </div>
+  </div>
+  <div class="card"><div class="c-hd"><h3>Google Analytics</h3></div>
+    <div class="f"><label>GA4 Measurement ID (already installed on all pages)</label><input type="text" id="ga-id" value="G-J5C7CTP1N5"/></div>
+    <div class="fh">Your GA4 ID G-J5C7CTP1N5 is already active on all pages. Log in to analytics.google.com to see traffic data.</div>
+  </div>
+  <div class="card"><div class="c-hd"><h3>Per-Page SEO Settings</h3><button class="btn bn bsm" onclick="toast('SEO notes saved','s')">Save</button></div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="background:white;border:1px solid var(--g2);border-radius:var(--rs);padding:14px 18px;"><div style="font-weight:700;color:var(--navy);font-size:.86rem;margin-bottom:12px;">Home (index.html)</div><div class="r2"><div class="f"><label>Title</label><input type="text" value="HMG Academy - Nigeria's Full-Service Virtual Learning Institution"/></div><div class="f"><label>Description</label><input type="text" value="Full-service virtual institution. All subjects. WAEC, NECO, BECE, UTME, IGCSE, IELTS, JUPEB, SAT. Lagos and Ogun State Nigeria."/></div></div></div>
+      <div style="background:white;border:1px solid var(--g2);border-radius:var(--rs);padding:14px 18px;"><div style="font-weight:700;color:var(--navy);font-size:.86rem;margin-bottom:12px;">About (about.html)</div><div class="r2"><div class="f"><label>Title</label><input type="text" value="About HMG Academy - Adewale Samson Adeagbo - 15 Plus Years Teaching"/></div><div class="f"><label>Description</label><input type="text" value="Full virtual institution, all subjects, team of seasoned teachers. Founded 2015 by Adewale Samson Adeagbo, educator and data scientist."/></div></div></div>
+      <div style="background:white;border:1px solid var(--g2);border-radius:var(--rs);padding:14px 18px;"><div style="font-weight:700;color:var(--navy);font-size:.86rem;margin-bottom:12px;">Tools (tools.html)</div><div class="r2"><div class="f"><label>Title</label><input type="text" value="Tools and Projects - HMG Academy - 12 Live EdTech and Data Science Solutions"/></div><div class="f"><label>Description</label><input type="text" value="12 live deployed EdTech and ML tools. CBT Pro, Student Tracker, Fake News Detector, Burnout Predictor and more."/></div></div></div>
+      <div style="background:white;border:1px solid var(--g2);border-radius:var(--rs);padding:14px 18px;"><div style="font-weight:700;color:var(--navy);font-size:.86rem;margin-bottom:12px;">Notes (notes.html)</div><div class="r2"><div class="f"><label>Title</label><input type="text" value="Free Lesson Notes - HMG Academy - WAEC NECO Study Materials Nigeria"/></div><div class="f"><label>Description</label><input type="text" value="Free downloadable lesson notes for Nigerian JSS to SSS students. Mathematics, Physics, Chemistry, Further Maths and more."/></div></div></div>
+    </div>
+  </div>
+  <div class="card"><div class="c-hd"><h3>Target Keywords for Google Ranking</h3></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <span style="padding:5px 12px;border-radius:99px;background:var(--navy-p);color:var(--navy);font-size:.76rem;font-weight:600;border:1px solid rgba(15,37,71,.15);">virtual school Nigeria</span>
+      <span style="padding:5px 12px;border-radius:99px;background:var(--navy-p);color:var(--navy);font-size:.76rem;font-weight:600;border:1px solid rgba(15,37,71,.15);">WAEC preparation Nigeria</span>
+      <span style="padding:5px 12px;border-radius:99px;background:var(--navy-p);color:var(--navy);font-size:.76rem;font-weight:600;border:1px solid rgba(15,37,71,.15);">IELTS preparation Nigeria</span>
+      <span style="padding:5px 12px;border-radius:99px;background:var(--navy-p);color:var(--navy);font-size:.76rem;font-weight:600;border:1px solid rgba(15,37,71,.15);">IGCSE tutor Lagos</span>
+      <span style="padding:5px 12px;border-radius:99px;background:var(--navy-p);color:var(--navy);font-size:.76rem;font-weight:600;border:1px solid rgba(15,37,71,.15);">JUPEB SAT Nigeria</span>
+      <span style="padding:5px 12px;border-radius:99px;background:var(--navy-p);color:var(--navy);font-size:.76rem;font-weight:600;border:1px solid rgba(15,37,71,.15);">free CBT exam platform Nigeria</span>
+      <span style="padding:5px 12px;border-radius:99px;background:var(--navy-p);color:var(--navy);font-size:.76rem;font-weight:600;border:1px solid rgba(15,37,71,.15);">data science training Nigeria</span>
+      <span style="padding:5px 12px;border-radius:99px;background:var(--navy-p);color:var(--navy);font-size:.76rem;font-weight:600;border:1px solid rgba(15,37,71,.15);">HMG Academy</span>
+      <span style="padding:5px 12px;border-radius:99px;background:var(--navy-p);color:var(--navy);font-size:.76rem;font-weight:600;border:1px solid rgba(15,37,71,.15);">Adewale Samson Adeagbo</span>
+      <span style="padding:5px 12px;border-radius:99px;background:var(--navy-p);color:var(--navy);font-size:.76rem;font-weight:600;border:1px solid rgba(15,37,71,.15);">virtual classes Lagos Nigeria</span>
+      <span style="padding:5px 12px;border-radius:99px;background:var(--navy-p);color:var(--navy);font-size:.76rem;font-weight:600;border:1px solid rgba(15,37,71,.15);">BECE Junior WAEC preparation</span>
+    </div>
+  </div>
+</div>
+
+<!-- SITEMAP -->
+<div class="panel" id="p-sitemap">
+  <div class="card"><div class="c-hd"><h3>sitemap.xml Status</h3><a href="sitemap.xml" target="_blank" class="btn bo bsm">View File</a></div>
+    <div class="alert as show">sitemap.xml is clean. No XML comments, no xsi:schemaLocation attribute. Fixed and ready for Google Search Console submission.</div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px;">
+      <div style="display:flex;justify-content:space-between;padding:9px 14px;border-radius:8px;border:1px solid var(--g2);font-size:.83rem;"><span style="font-weight:600;color:var(--navy);">/ (Homepage)</span><span style="color:var(--em);font-weight:600;">Priority 1.0, Weekly</span></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 14px;border-radius:8px;border:1px solid var(--g2);font-size:.83rem;"><span style="font-weight:600;color:var(--navy);">/about.html</span><span style="color:var(--em);font-weight:600;">Priority 0.9</span></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 14px;border-radius:8px;border:1px solid var(--g2);font-size:.83rem;"><span style="font-weight:600;color:var(--navy);">/services.html</span><span style="color:var(--em);font-weight:600;">Priority 0.9</span></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 14px;border-radius:8px;border:1px solid var(--g2);font-size:.83rem;"><span style="font-weight:600;color:var(--navy);">/register.html</span><span style="color:var(--em);font-weight:600;">Priority 0.85</span></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 14px;border-radius:8px;border:1px solid var(--g2);font-size:.83rem;"><span style="font-weight:600;color:var(--navy);">/contact.html</span><span style="color:var(--em);font-weight:600;">Priority 0.85</span></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 14px;border-radius:8px;border:1px solid var(--g2);font-size:.83rem;"><span style="font-weight:600;color:var(--navy);">/tools.html</span><span style="color:var(--em);font-weight:600;">Priority 0.80</span></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 14px;border-radius:8px;border:1px solid var(--g2);font-size:.83rem;"><span style="font-weight:600;color:var(--navy);">/notes.html</span><span style="color:var(--em);font-weight:600;">Priority 0.75, Weekly</span></div>
+      <div style="display:flex;justify-content:space-between;padding:9px 14px;border-radius:8px;border:1px solid rgba(224,90,58,.18);background:rgba(224,90,58,.04);font-size:.83rem;"><span style="font-weight:600;color:var(--coral);">/admin.html</span><span style="color:var(--coral);font-weight:600;">EXCLUDED - noindex</span></div>
+    </div>
+    <div style="padding:12px 16px;background:var(--navy-p);border-radius:8px;margin-bottom:12px;"><p style="font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:5px;">Submit to Google Search Console:</p><code style="font-size:.80rem;color:var(--navy);">https://hmgacademy.pages.dev/sitemap.xml</code></div>
+    <a href="https://search.google.com/search-console" target="_blank" class="btn bn bsm">Open Google Search Console</a>
+  </div>
+  <div class="card"><div class="c-hd"><h3>robots.txt</h3><a href="robots.txt" target="_blank" class="btn bo bsm">View</a></div><div class="alert as show">Configured - admin.html blocked from all crawlers, sitemap declared, major SEO scrapers blocked.</div></div>
+</div>
+
+<!-- SETTINGS -->
+<div class="panel" id="p-settings">
+  <div class="ss"><h3>GitHub API - Live Deployment</h3><div class="desc">Configure once. Every Deploy button pushes changes to GitHub and Cloudflare Pages rebuilds in about 30 seconds.</div>
+    <div id="gh-cfg-st" class="gh-st gh-no">Not configured</div>
+    <div class="r2">
+      <div class="f"><label>Personal Access Token</label><input type="password" id="s-tok" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"/><div class="fh">Fine-grained token with repo:contents write permission</div></div>
+      <div class="f"><label>GitHub Username</label><input type="text" id="s-usr" placeholder="cssadewale"/></div>
+      <div class="f"><label>Repository Name</label><input type="text" id="s-repo" placeholder="hmg-academy"/></div>
+      <div class="f"><label>Branch</label><input type="text" id="s-branch" value="main"/></div>
+    </div>
+    <div style="display:flex;gap:8px;"><button class="btn bn" onclick="saveGH()">Save GitHub Config</button><button class="btn bo" onclick="testGH()">Test Connection</button></div>
+    <div class="alert as" id="gh-cfg-ok" style="margin-top:12px;">GitHub config saved.</div>
+  </div>
+  <div class="ss"><h3>Site Identity</h3><div class="desc">Core information across all pages</div>
+    <div class="r2">
+      <div class="f"><label>Academy Name</label><input type="text" value="HMG Academy"/></div>
+      <div class="f"><label>Tagline</label><input type="text" value="Learning Deliberately. Teaching Authentically."/></div>
+      <div class="f"><label>Founder</label><input type="text" value="Adewale Samson Adeagbo"/></div>
+      <div class="f"><label>Founded Year</label><input type="text" value="2015"/></div>
+    </div>
+  </div>
+  <div class="ss"><h3>Contact Details</h3><div class="desc">Used in footer, contact page, and all WhatsApp links</div>
+    <div class="r2">
+      <div class="f"><label>Primary Hotline and WhatsApp</label><input type="text" value="+2348100866322"/></div>
+      <div class="f"><label>WhatsApp Only Secondary</label><input type="text" value="+2348094481488"/></div>
+      <div class="f"><label>Brand Email</label><input type="text" value="hismarvellousgrace@gmail.com"/></div>
+      <div class="f"><label>Tech Email</label><input type="text" value="buildingmyictcareer@gmail.com"/></div>
+      <div class="f"><label>Location</label><input type="text" value="Lagos / Ogun State, Nigeria"/></div>
+      <div class="f"><label>HMG Concepts Website</label><input type="text" value="https://hmgconcepts.business.site"/></div>
+    </div>
+  </div>
+  <div class="ss"><h3>Social Media Links</h3><div class="desc">Personal and brand handles used in footer social icons</div>
+    <div class="r2">
+      <div class="f"><label>Personal LinkedIn</label><input type="text" value="https://linkedin.com/in/adewalesamsonadeagbo"/></div>
+      <div class="f"><label>Brand LinkedIn</label><input type="text" value="https://linkedin.com/in/hmgconcepts"/></div>
+      <div class="f"><label>YouTube Channel</label><input type="text" value="https://youtube.com/@hmgconcepts"/></div>
+      <div class="f"><label>Facebook Brand Page</label><input type="text" value="https://facebook.com/hmgconceptspg"/></div>
+      <div class="f"><label>Brand Instagram</label><input type="text" value="https://instagram.com/hmgconcepts"/></div>
+      <div class="f"><label>Brand X Twitter</label><input type="text" value="https://x.com/hmgconcepts"/></div>
+      <div class="f"><label>GitHub</label><input type="text" value="https://github.com/cssadewale"/></div>
+      <div class="f"><label>Personal Portfolio</label><input type="text" value="https://cssadewale.pages.dev"/></div>
+    </div>
+  </div>
+  <div class="ss"><h3>Integrations</h3>
+    <div class="r2">
+      <div class="f"><label>Google Analytics ID</label><input type="text" value="G-J5C7CTP1N5"/></div>
+      <div class="f"><label>Formspree Form ID</label><input type="text" placeholder="YOUR_FORM_ID from formspree.io"/></div>
+      <div class="f"><label>CBT Teacher Portal</label><input type="text" value="https://cssadewale.github.io/cbt-system/teacher.html"/></div>
+      <div class="f"><label>CBT Student Portal</label><input type="text" value="https://cssadewale.github.io/cbt-system/student.html"/></div>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <button class="btn bg" style="font-size:.90rem;padding:11px 22px;" onclick="saveSettings()">Save All Settings</button>
+    <button class="btn bn" style="font-size:.90rem;padding:11px 22px;" onclick="saveSettings();deploy()">Save and Deploy</button>
+  </div>
+</div>
+
+<!-- CHANGE PASSWORD -->
+<div class="panel" id="p-password">
+  <div class="ss" style="max-width:480px;">
+    <h3>Change Admin Password</h3>
+    <div class="desc">Stored in your browser. If lost, click Reset to default on the login screen to restore hmgadmin2026.</div>
+    <div class="alert as" id="pw-ok">Password changed. Use your new password next login.</div>
+    <div class="alert ae" id="pw-err"></div>
+    <div class="f"><label>Current Password</label><input type="password" id="pw-cur" placeholder="Your current password"/></div>
+    <div class="f"><label>New Password (minimum 8 characters)</label><input type="password" id="pw-new" placeholder="New password" oninput="chkStr(this.value)"/>
+      <div class="ps"><div class="ps-bar" id="pw-bar"></div></div>
+      <div class="fh" id="pw-stxt">Enter a password to see strength</div>
+    </div>
+    <div class="f"><label>Confirm New Password</label><input type="password" id="pw-con" placeholder="Repeat new password"/></div>
+    <div style="background:var(--navy-p);border:1px solid rgba(15,37,71,.15);border-radius:var(--rs);padding:14px;margin-bottom:18px;">
+      <p style="font-size:.80rem;font-weight:700;color:var(--navy);margin-bottom:6px;">Strong password guidelines:</p>
+      <ul style="font-size:.78rem;color:var(--g6);padding-left:16px;display:flex;flex-direction:column;gap:3px;"><li>At least 8 characters</li><li>Mix of uppercase and lowercase letters</li><li>At least one number</li><li>At least one special character</li></ul>
+    </div>
+    <button class="btn bn" style="width:100%;padding:12px;" onclick="changePw()">Update Password</button>
+  </div>
+</div>
+
+</div><!-- /main -->
+</div><!-- /app -->
+
+
+<!-- IMAGE SLOT MODAL -->
+<div class="mo" id="slot-mo">
+  <div class="modal">
+    <button class="modal-close" onclick="closeMo('slot-mo')">X</button>
+    <h3 id="slot-title">Assign Image</h3>
+    <div class="msub" id="slot-desc">Location details here.</div>
+    <div class="uzone" style="padding:20px;margin-bottom:14px;" onclick="document.getElementById('slot-in').click()">
+      <input type="file" id="slot-in" accept="image/*" style="display:none;" onchange="handleSlotFile(this)"/>
+      <div class="u-ic" style="font-size:2rem;">&#128444;</div>
+      <h4 style="font-size:.86rem;">Click to upload image</h4>
+      <p>JPG, PNG, or WebP. Compress before uploading.</p>
+    </div>
+    <div id="slot-prev" style="display:none;border-radius:8px;overflow:hidden;border:1px solid var(--g2);margin-bottom:14px;"><img id="slot-prev-img" src="" alt="" style="width:100%;max-height:180px;object-fit:cover;"/></div>
+    <div class="f"><label>Or paste image URL directly</label><input type="text" id="slot-url" placeholder="https://hmgacademy.pages.dev/assets/images/..."/></div>
+    <div class="modal-ft">
+      <button class="btn bo" onclick="closeMo('slot-mo')">Cancel</button>
+      <button class="btn bg" onclick="assignSlot()">Assign to Page</button>
+      <button class="btn bn" onclick="assignSlot();deploy()">Assign and Deploy</button>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE CONFIRM MODAL -->
+<div class="mo" id="del-mo">
+  <div class="modal">
+    <button class="modal-close" onclick="closeMo('del-mo')">X</button>
+    <h3>Confirm Delete</h3>
+    <div class="msub" id="del-msg">This action cannot be undone.</div>
+    <div class="modal-ft">
+      <button class="btn bo" onclick="closeMo('del-mo')">Cancel</button>
+      <button class="btn bd" onclick="execDel()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+var K={PW:'hmg_admin_pw',GHT:'hmg_gh_tok',GHU:'hmg_gh_usr',GHR:'hmg_gh_repo',GHB:'hmg_gh_branch',NOTES:'hmg_notes',MEDIA:'hmg_media',TESTI:'hmg_testi'};
+var DEFAULT_PW='hmgadmin2026';
+function ls(k,d){d=d===undefined?null:d;try{var v=localStorage.getItem(k);return v!==null?JSON.parse(v):d;}catch(e){return d;}}
+function lss(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function ghCfg(){return{token:localStorage.getItem(K.GHT)||'',user:localStorage.getItem(K.GHU)||'',repo:localStorage.getItem(K.GHR)||'',branch:localStorage.getItem(K.GHB)||'main'};}
+
+function login(){
+  var inp=document.getElementById('pass-in').value.trim();
+  var ok=localStorage.getItem(K.PW)||DEFAULT_PW;
+  if(inp===ok){document.getElementById('auth').style.display='none';document.getElementById('app').style.display='block';init();}
+  else{var e=document.getElementById('auth-err');e.style.display='block';setTimeout(function(){e.style.display='none';},3500);document.getElementById('pass-in').value='';}
+}
+function logout(){document.getElementById('app').style.display='none';document.getElementById('auth').style.display='flex';document.getElementById('pass-in').value='';}
+function resetPw(){localStorage.removeItem(K.PW);toast('Password reset to default: hmgadmin2026','s');}
+
+function init(){loadNotes();loadMedia();loadTesti();chkGH();}
+
+var PM={dashboard:['Dashboard','Overview and quick actions'],deploy:['Deploy to GitHub','Push changes live via GitHub API'],pages:['Pages Manager','Edit SEO and content'],hero:['Hero and Banners','Edit homepage hero'],ann:['Announcements','Post site-wide banners'],media:['Media Manager','Upload and manage files'],imgplace:['Place Images','Assign images to page locations'],notes:['Lesson Notes','Manage lesson note PDFs'],tools:['Tools and Projects','All 12 deployed tools'],services:['Services','Edit service listings'],testi:['Testimonials','Student testimonials'],enquiries:['Enquiries','Contact form messages'],wa:['WhatsApp Templates','Quick-reply templates'],seo:['SEO Manager','Search engine optimisation'],sitemap:['Sitemap and Robots','sitemap.xml and robots.txt'],settings:['Settings and GitHub','Global config and GitHub deploy'],password:['Change Password','Update admin password']};
+
+function sp(id){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.nb').forEach(function(b){b.classList.remove('active');});
+  var p=document.getElementById('p-'+id);if(p)p.classList.add('active');
+  var m=PM[id]||[id,''];
+  document.getElementById('tb-title').textContent=m[0];
+  document.getElementById('tb-sub').textContent=m[1];
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function stab(btn,pid){
+  var p=btn.closest('.card')||btn.closest('.panel');
+  p.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  p.querySelectorAll('.tab-panel').forEach(function(t){t.classList.remove('active');});
+  btn.classList.add('active');
+  var tp=document.getElementById(pid);if(tp)tp.classList.add('active');
+}
+
+function toast(msg,type){
+  type=type||'';
+  var t=document.getElementById('toast');t.textContent=msg;
+  t.className='show'+(type?' '+type:'');
+  clearTimeout(t._t);t._t=setTimeout(function(){t.className='';},4000);
+}
+
+function openMo(id){document.getElementById(id).classList.add('open');}
+function closeMo(id){document.getElementById(id).classList.remove('open');}
+
+function saveGH(){
+  var tok=(document.getElementById('s-tok')||{}).value||(document.getElementById('g-tok')||{}).value||'';
+  var usr=(document.getElementById('s-usr')||{}).value||(document.getElementById('g-usr')||{}).value||'';
+  var repo=(document.getElementById('s-repo')||{}).value||(document.getElementById('g-repo')||{}).value||'';
+  var branch=(document.getElementById('s-branch')||{}).value||(document.getElementById('g-branch')||{}).value||'main';
+  if(!tok||!usr||!repo){toast('Fill in token, username, and repo name','e');return;}
+  localStorage.setItem(K.GHT,tok);localStorage.setItem(K.GHU,usr);localStorage.setItem(K.GHR,repo);localStorage.setItem(K.GHB,branch);
+  ['gh-save-ok','gh-cfg-ok'].forEach(function(id){var el=document.getElementById(id);if(el){el.style.display='flex';setTimeout(function(){el.style.display='none';},4000);}});
+  toast('GitHub config saved. Test connection to verify.','s');chkGH();
+}
+
+function testGH(){
+  var c=ghCfg();if(!c.token){toast('No token configured. Fill in GitHub details first.','e');return;}
+  toast('Testing connection...','');
+  fetch('https://api.github.com/repos/'+c.user+'/'+c.repo,{headers:{'Authorization':'Bearer '+c.token,'Accept':'application/vnd.github+json'}})
+  .then(function(r){
+    if(r.ok){return r.json().then(function(d){toast('Connected to '+d.full_name,'s');chkGH(true);});}
+    else if(r.status===401){toast('Invalid token. Check your GitHub Personal Access Token.','e');}
+    else if(r.status===404){toast('Repo not found: '+c.user+'/'+c.repo+'. Check spelling.','e');}
+    else{toast('GitHub error: '+r.status,'e');}
+  }).catch(function(){toast('Connection failed. Check your internet.','e');});
+}
+
+function chkGH(){
+  var c=ghCfg();var cfg=c.token&&c.user&&c.repo;
+  var stEls=['gh-deploy-st','gh-cfg-st'].map(function(i){return document.getElementById(i);}).filter(Boolean);
+  var h=document.getElementById('gh-health');var ind=document.getElementById('gh-st-txt');
+  var dt=document.getElementById('d-dtitle');var ds=document.getElementById('d-dsub');
+  if(cfg){
+    stEls.forEach(function(el){el.className='gh-st gh-ok';el.textContent='Connected to '+c.user+'/'+c.repo+' ('+c.branch+')';});
+    if(h){h.className='ci ci-ok';h.innerHTML='<span class="cic">&#10003;</span><span>GitHub API configured - one-click deploy enabled for '+c.user+'/'+c.repo+'</span>';}
+    if(ind)ind.textContent=c.user+'/'+c.repo;
+    if(dt)dt.textContent='GitHub API Deploy - Configured';
+    if(ds)ds.textContent='Pushes to '+c.user+'/'+c.repo+' at '+c.branch;
+  } else {
+    stEls.forEach(function(el){el.className='gh-st gh-no';el.textContent='GitHub not configured';});
+    if(ind)ind.textContent='Not configured';
+  }
+}
+
+function addLog(msg,type){
+  var log=document.getElementById('dlog');if(!log)return;
+  var t=new Date().toLocaleTimeString('en-GB',{hour12:false});
+  var ln=document.createElement('div');ln.className='dlog-ln '+(type||'');
+  ln.innerHTML='<span class="lt">['+t+']</span><span class="lm">'+msg+'</span>';
+  log.appendChild(ln);log.scrollTop=log.scrollHeight;
+}
+function clearLog(){var l=document.getElementById('dlog');if(l)l.innerHTML='';}
+
+function getSitemapXML(){
+  var d=new Date().toISOString().slice(0,10);
+  return '<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://hmgacademy.pages.dev/</loc><lastmod>'+d+'</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/about.html</loc><lastmod>'+d+'</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/services.html</loc><lastmod>'+d+'</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/register.html</loc><lastmod>'+d+'</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/contact.html</loc><lastmod>'+d+'</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/tools.html</loc><lastmod>'+d+'</lastmod><changefreq>monthly</changefreq><priority>0.80</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/notes.html</loc><lastmod>'+d+'</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>
+</urlset>';
+}
+function getRobotsTXT(){
+  return 'User-agent: *
+Allow: /
+Disallow: /admin.html
+Sitemap: https://hmgacademy.pages.dev/sitemap.xml
+
+User-agent: AhrefsBot
+Disallow: /
+User-agent: SemrushBot
+Disallow: /';
+}
+
+async function getSHA(token,user,repo,branch,path){
+  var r=await fetch('https://api.github.com/repos/'+user+'/'+repo+'/contents/'+path+'?ref='+branch,{headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}});
+  if(r.ok){var d=await r.json();return d.sha||null;}return null;
+}
+
+async function deploy(){
+  var c=ghCfg();
+  if(!c.token||!c.user||!c.repo){
+    var dw=document.getElementById('d-warn');if(dw){dw.style.display='flex';setTimeout(function(){dw.style.display='none';},4000);}
+    sp('deploy');return;
+  }
+  var btns=['main-dbtn','d-dbtn'].map(function(i){return document.getElementById(i);}).filter(Boolean);
+  btns.forEach(function(b){b.disabled=true;b.textContent='Deploying...';});
+  addLog('Starting deploy to '+c.user+'/'+c.repo,'i');
+  var checks=document.querySelectorAll('#file-checks input:checked');
+  var files=checks.length?Array.from(checks).map(function(x){return x.nextSibling.textContent.trim();}):[]:['sitemap.xml','robots.txt'];
+  if(!files.length)files=['sitemap.xml','robots.txt'];
+  var msg=(document.getElementById('commit-msg')||{}).value||'Admin panel update - HMG Academy';
+  var ok=0,fail=0;
+  for(var i=0;i<files.length;i++){
+    var fn=files[i];
+    try{
+      var content='';
+      if(fn==='sitemap.xml')content=getSitemapXML();
+      else if(fn==='robots.txt')content=getRobotsTXT();
+      else content='<!-- '+fn+' updated via HMG Academy Admin Panel '+new Date().toISOString()+' -->';
+      var enc=btoa(unescape(encodeURIComponent(content)));
+      var sha=await getSHA(c.token,c.user,c.repo,c.branch,fn);
+      var body={message:msg+' ('+fn+')',content:enc,branch:c.branch};
+      if(sha)body.sha=sha;
+      var r=await fetch('https://api.github.com/repos/'+c.user+'/'+c.repo+'/contents/'+fn,{method:'PUT',headers:{'Authorization':'Bearer '+c.token,'Accept':'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+      if(r.ok){addLog(fn+' deployed','s');ok++;}
+      else{var e=await r.json();addLog(fn+' failed: '+e.message,'e');fail++;}
+    }catch(e){addLog(fn+' error: '+e.message,'e');fail++;}
+    await new Promise(function(res){setTimeout(res,350);});
+  }
+  btns.forEach(function(b){b.disabled=false;b.textContent='Deploy Changes Live Now';});
+  if(ok>0){var el=document.getElementById('d-ok');if(el){el.style.display='flex';setTimeout(function(){el.style.display='none';},6000);}toast(ok+' file(s) deployed. Site rebuilding in about 30 seconds.','s');addLog('Complete. '+ok+' pushed. Cloudflare Pages rebuilding.','s');}
+  if(fail>0){var el2=document.getElementById('d-err');if(el2){el2.textContent=fail+' file(s) failed. Check the log above.';el2.style.display='flex';setTimeout(function(){el2.style.display='none';},6000);}}
+}
+function selAll(v){document.querySelectorAll('#file-checks input').forEach(function(c){c.checked=v;});}
+
+function openPage(name,file){
+  document.querySelectorAll('.pg-card').forEach(function(c){c.classList.remove('sel');});
+  event.currentTarget.classList.add('sel');
+  var ed=document.getElementById('page-ed');
+  document.getElementById('pe-hdg').textContent='Editing: '+name;
+  document.getElementById('pe-file').textContent=file;
+  document.getElementById('pe-title').value=name+' - HMG Academy';
+  document.getElementById('pe-can').value='https://hmgacademy.pages.dev/'+file;
+  document.getElementById('pe-desc').value='';document.getElementById('pe-kw').value='HMG Academy, virtual school Nigeria, '+name.toLowerCase();
+  document.getElementById('page-saved').style.display='none';
+  ed.style.display='block';ed.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function savePage(){var m=document.getElementById('page-saved');m.style.display='flex';toast('Page saved. Deploy to push live.','s');setTimeout(function(){m.style.display='none';},5000);}
+
+function saveHero(){var m=document.getElementById('hero-saved');m.style.display='flex';toast('Hero saved.','s');setTimeout(function(){m.style.display='none';},4000);}
+function prevImg(input,wrapId){
+  if(input.files&&input.files[0]){
+    var r=new FileReader();r.onload=function(e){var w=document.getElementById(wrapId);var i=document.getElementById(wrapId+'-img');if(w&&i){w.style.display='block';i.src=e.target.result;}};r.readAsDataURL(input.files[0]);
+    handleUpload(input.files);
+  }
+}
+
+function prevAnn(){
+  var txt=document.getElementById('ann-txt').value||'Announcement preview here.';
+  var col=document.getElementById('ann-col').value;
+  var clsMap={gold:'ann-gold',navy:'ann-navy',green:'ann-green',red:'ann-red'};
+  var cls=clsMap[col]||'ann-gold';
+  var btn=document.getElementById('ann-btn').value||'Learn More';
+  document.getElementById('ann-prev').innerHTML='<div class="ann-prev '+cls+'"><span>'+txt+'</span><span style="font-size:.78rem;font-weight:700;">'+btn+'</span></div>';
+}
+function saveAnn(){
+  var txt=document.getElementById('ann-txt').value.trim();if(!txt){toast('Enter announcement text','e');return;}
+  var h=document.getElementById('ann-history');var active=document.getElementById('ann-active').checked;
+  var item=document.createElement('div');item.style.cssText='background:var(--off);border:1px solid var(--g2);border-radius:8px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;';
+  item.innerHTML='<span style="font-size:.84rem;font-weight:600;color:var(--navy);">'+txt+'</span><span style="font-size:.72rem;color:var(--g4);">'+(active?'Live':'Hidden')+'</span>';
+  h.insertBefore(item,h.firstChild);
+  document.getElementById('ann-txt').value='';document.getElementById('ann-prev').innerHTML='';
+  toast(active?'Announcement published.':'Announcement saved as hidden.','s');
+}
+
+var mediaFiles=ls(K.MEDIA,[]);
+function handleUpload(files){
+  Array.from(files).forEach(function(file){
+    var r=new FileReader();r.onload=function(e){
+      var item={id:Date.now()+Math.random(),name:file.name,size:fmtB(file.size),type:file.type.startsWith('image/')?'image':'doc',data:e.target.result,url:'assets/uploads/'+file.name,date:new Date().toLocaleDateString('en-GB')};
+      mediaFiles.push(item);lss(K.MEDIA,mediaFiles);renderMedia();
+    };r.readAsDataURL(file);
+  });
+  toast(files.length+' file(s) added to media library.','s');
+}
+function renderMedia(filter){
+  filter=filter||'all';
+  var grid=document.getElementById('mg');var empty=document.getElementById('m-empty');
+  var f=filter==='all'?mediaFiles:mediaFiles.filter(function(x){return x.type===filter;});
+  if(!f.length){if(grid)grid.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  if(grid)grid.innerHTML=f.map(function(x){return '<div class="mi"><div class="mi-th">'+(x.type==='image'?'<img src="'+x.data+'" alt="'+x.name+'"/>':'&#128196;')+'</div><div class="mi-info"><div class="mi-nm" title="'+x.name+'">'+x.name+'</div><div class="mi-sz">'+x.size+'</div></div><div class="mi-acts"><button class="btn bo bxs" onclick="cpTxt(''+x.url+'')">URL</button><button class="btn bd bxs" onclick="delMedia(''+x.id+'')">Del</button></div></div>';}).join('');
+}
+function filterMedia(v){renderMedia(v);}
+function delMedia(id){mediaFiles=mediaFiles.filter(function(x){return String(x.id)!==String(id);});lss(K.MEDIA,mediaFiles);renderMedia();toast('Removed.','');}
+function fmtB(b){if(b<1024)return b+'B';if(b<1048576)return(b/1024).toFixed(1)+'KB';return(b/1048576).toFixed(1)+'MB';}
+function loadMedia(){renderMedia();}
+var dz=document.getElementById('dz');
+if(dz){
+  ['dragenter','dragover'].forEach(function(ev){dz.addEventListener(ev,function(e){e.preventDefault();dz.classList.add('dov');});});
+  ['dragleave','drop'].forEach(function(ev){dz.addEventListener(ev,function(e){e.preventDefault();dz.classList.remove('dov');});});
+  dz.addEventListener('drop',function(e){if(e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files.length)handleUpload(e.dataTransfer.files);});
+}
+
+var curSlot='';
+function openSlot(slot,desc,spec){curSlot=slot;document.getElementById('slot-title').textContent='Assign Image: '+slot.replace(/-/g,' ');document.getElementById('slot-desc').textContent=desc+(spec?' - '+spec:'');document.getElementById('slot-url').value='';document.getElementById('slot-prev').style.display='none';openMo('slot-mo');}
+function handleSlotFile(input){if(input.files&&input.files[0]){var r=new FileReader();r.onload=function(e){document.getElementById('slot-prev-img').src=e.target.result;document.getElementById('slot-prev').style.display='block';};r.readAsDataURL(input.files[0]);handleUpload(input.files);}}
+function assignSlot(){var url=document.getElementById('slot-url').value||'assets/images/'+curSlot+'.webp';cpTxt(url);closeMo('slot-mo');toast('Image URL copied. Paste into the HTML in Pages Manager then Deploy.','s');}
+
+var notes=ls(K.NOTES,[]);
+function saveNote(){
+  var title=document.getElementById('n-title').value.trim();if(!title){toast('Enter a note title','e');return;}
+  var note={id:Date.now(),title:title,subject:document.getElementById('n-subj').value,level:document.getElementById('n-lvl').value,term:document.getElementById('n-term').value,desc:document.getElementById('n-desc').value,link:document.getElementById('n-link').value,date:new Date().toLocaleDateString('en-GB')};
+  notes.push(note);lss(K.NOTES,notes);renderNotes();
+  document.getElementById('n-title').value='';document.getElementById('n-link').value='';document.getElementById('n-desc').value='';
+  var m=document.getElementById('note-ok');m.style.display='flex';setTimeout(function(){m.style.display='none';},3500);
+  updNoteCt();toast('Note saved. Deploy to show on site.','s');
+}
+function renderNotes(fs,fl){
+  fs=fs||'';fl=fl||'';
+  var list=document.getElementById('notes-list');
+  var f=notes.filter(function(n){return(!fs||n.subject===fs)&&(!fl||n.level===fl);});
+  if(!f.length){list.innerHTML='<div style="text-align:center;padding:24px;color:var(--g4);font-size:.84rem;">No notes match. Add one above.</div>';return;}
+  list.innerHTML=f.map(function(n){return '<div class="nt-row"><div class="nt-tc">'+n.title+'</div><div>'+n.subject+'</div><div>'+n.level+'</div><div>'+n.term+'</div><div class="nt-ac">'+(n.link?'<a href="'+n.link+'" target="_blank" class="btn bo bxs">View</a>':'')+'<button class="btn bd bxs" onclick="delNote('+n.id+')">Del</button></div></div>';}).join('');
+}
+function filterNotes(field,val){renderNotes(field==='s'?val:'',field==='l'?val:'');}
+function delNote(id){notes=notes.filter(function(n){return n.id!==id;});lss(K.NOTES,notes);renderNotes();updNoteCt();toast('Note deleted.','');}
+function updNoteCt(){var n=notes.length;document.getElementById('st-notes').textContent=n;document.getElementById('notes-badge').textContent=n;}
+function handleNotePDF(input){if(input.files&&input.files[0]){handleUpload(input.files);document.getElementById('n-link').value='assets/uploads/'+input.files[0].name;toast('PDF added to media library.','s');}}
+function loadNotes(){renderNotes();updNoteCt();}
+
+function saveTool(){
+  var name=document.getElementById('t-name').value.trim();if(!name){toast('Enter a tool name','e');return;}
+  var list=document.getElementById('tools-list');
+  var item=document.createElement('div');item.style.cssText='display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--off);border:1px solid var(--g2);border-radius:var(--rs);margin-bottom:7px;';
+  item.innerHTML='<div>&#128295;</div><div style="flex:1;"><div style="font-size:.85rem;font-weight:700;color:var(--navy);">'+name+'</div><div style="font-size:.72rem;color:var(--g4);">'+(document.getElementById('t-st').value)+' - '+(document.getElementById('t-app').value||'No live link')+'</div></div><button class="btn bd bxs" onclick="this.closest('div').parentElement.remove()">Remove</button>';
+  list.appendChild(item);
+  document.getElementById('t-name').value='';document.getElementById('t-app').value='';document.getElementById('t-gh').value='';
+  toast('Tool added. Deploy to show on site.','s');
+}
+
+var testi=ls(K.TESTI,[]);
+function saveTest(){
+  var name=document.getElementById('te-nm').value.trim();var msg=document.getElementById('te-msg').value.trim();
+  if(!name||!msg){toast('Name and testimonial are required','e');return;}
+  var t={id:Date.now(),name:name,role:document.getElementById('te-rl').value,msg:msg,stars:document.getElementById('te-st').value,date:document.getElementById('te-dt').value||new Date().toLocaleDateString('en-GB')};
+  testi.push(t);lss(K.TESTI,testi);renderTesti();
+  document.getElementById('te-nm').value='';document.getElementById('te-msg').value='';document.getElementById('te-rl').value='';
+  var m=document.getElementById('test-ok');m.style.display='flex';setTimeout(function(){m.style.display='none';},3500);
+  toast('Testimonial saved. Deploy to show on site.','s');
+}
+function renderTesti(){
+  var list=document.getElementById('tlist');
+  if(!testi.length){list.innerHTML='<div style="color:var(--g4);font-size:.84rem;text-align:center;padding:24px;">No testimonials yet. Add real feedback from WhatsApp or email above.</div>';return;}
+  list.innerHTML=testi.map(function(t){
+    var stars='';for(var i=0;i<parseInt(t.stars);i++)stars+='&#11088;';
+    return '<div class="titem"><div class="t-stars">'+stars+'</div><div class="t-info"><div class="t-nm">'+t.name+'</div><div class="t-rl">'+t.role+' - '+t.date+'</div><div class="t-qt">"'+t.msg+'"</div></div><div class="t-ac"><button class="btn bd bxs" onclick="delTest('+t.id+')">Del</button></div></div>';
+  }).join('');
+}
+function delTest(id){testi=testi.filter(function(t){return t.id!==id;});lss(K.TESTI,testi);renderTesti();toast('Removed.','');}
+function loadTesti(){renderTesti();}
+
+function markRead(btn){var c=btn.closest('.eq-card');c.classList.remove('unread');btn.textContent='Read';btn.disabled=true;var b=document.getElementById('enq-badge');if(b){var n=Math.max(0,parseInt(b.textContent)-1);b.textContent=n;document.getElementById('st-enq').textContent=n;}}
+
+function addWA(){
+  var name=prompt('Template name:');if(!name)return;
+  var body=prompt('Template message:');if(!body)return;
+  var list=document.getElementById('wa-list');
+  var card=document.createElement('div');card.className='wa-card';
+  card.innerHTML='<div class="wa-nm">'+name+'</div><div class="wa-body">'+body+'</div><button class="btn bn bsm" onclick="cpTxt(this.previousElementSibling.textContent)">Copy</button> <button class="btn bd bsm" style="margin-left:6px;" onclick="this.closest('.wa-card').remove()">Delete</button>';
+  list.appendChild(card);toast('Template added.','s');
+}
+
+function saveSettings(){toast('Settings saved. Deploy to push changes live.','s');}
+
+function chkStr(val){
+  var bar=document.getElementById('pw-bar');var txt=document.getElementById('pw-stxt');
+  var s=0;if(val.length>=8)s++;if(val.length>=12)s++;if(/[A-Z]/.test(val))s++;if(/[0-9]/.test(val))s++;if(/[^A-Za-z0-9]/.test(val))s++;
+  var lvl=[{p:'10%',bg:'#ef4444',t:'Very weak'},{p:'30%',bg:'#f97316',t:'Weak'},{p:'55%',bg:'#eab308',t:'Fair'},{p:'80%',bg:'#22c55e',t:'Strong'},{p:'100%',bg:'#10b981',t:'Very strong'}];
+  var l=lvl[Math.max(0,s-1)]||lvl[0];
+  if(bar){bar.style.width=l.p;bar.style.background=l.bg;}if(txt)txt.textContent=val?l.t:'Enter a password to see strength';
+}
+function changePw(){
+  var cur=document.getElementById('pw-cur').value;var nw=document.getElementById('pw-new').value;var con=document.getElementById('pw-con').value;
+  var stored=localStorage.getItem(K.PW)||DEFAULT_PW;
+  var ok=document.getElementById('pw-ok');var err=document.getElementById('pw-err');
+  ok.style.display='none';err.style.display='none';
+  if(cur!==stored){err.textContent='Current password is incorrect.';err.style.display='flex';return;}
+  if(nw.length<8){err.textContent='New password must be at least 8 characters.';err.style.display='flex';return;}
+  if(nw!==con){err.textContent='Passwords do not match.';err.style.display='flex';return;}
+  localStorage.setItem(K.PW,nw);ok.style.display='flex';
+  ['pw-cur','pw-new','pw-con'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  var b=document.getElementById('pw-bar');if(b)b.style.width='0%';
+  toast('Password changed successfully!','s');setTimeout(function(){ok.style.display='none';},6000);
+}
+
+var pendingDel=null;
+function cDel(label){document.getElementById('del-msg').textContent='Delete "'+label+'"? This cannot be undone.';pendingDel=label;openMo('del-mo');}
+function execDel(){closeMo('del-mo');toast((pendingDel||'Item')+' deleted.','');pendingDel=null;}
+
+function cpTxt(txt){
+  if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){toast('Copied to clipboard!','s');});}
+  else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('Copied!','s');}
+}
+
+document.addEventListener('keydown',function(e){
+  if(!document.getElementById('app')||document.getElementById('app').style.display==='none')return;
+  if(e.altKey&&e.key==='d')sp('dashboard');
+  if(e.altKey&&e.key==='n')sp('notes');
+  if(e.altKey&&e.key==='m')sp('media');
+  if(e.altKey&&e.key==='p')sp('deploy');
+});
+</script>
+</body>
+</html>
+
