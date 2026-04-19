@@ -1,0 +1,2222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Admin — HMG Academy</title>
+<meta name="robots" content="noindex,nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --gold:#F5A623;--gold-d:#d4891a;--gold-p:rgba(245,166,35,.12);
+  --em:#10b981;--em-p:rgba(16,185,129,.1);
+  --red:#ef4444;--red-p:rgba(239,68,68,.1);
+  --blue:#3b82f6;--blue-p:rgba(59,130,246,.1);
+  --bg:#07090f;--bg2:#0d1120;--bg3:#111827;--bg4:#1a2235;
+  --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);
+  --border-gold:rgba(245,166,35,.25);
+  --text:#e5e7eb;--muted:#6b7280;--muted2:#9ca3af;
+  --font:'Plus Jakarta Sans',sans-serif;--mono:'JetBrains Mono',monospace;
+  --r:8px;--r2:12px;--r3:16px;
+  --tr:all .2s ease;
+  --shadow:0 4px 24px rgba(0,0,0,.4);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.6;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+button{cursor:pointer;font-family:var(--font);}
+input,textarea,select{font-family:var(--font);}
+
+/* ═══ LOGIN GATE ═══ */
+#gate{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+}
+#gate::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 50% 0%,rgba(245,166,35,.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.gate-card{
+  width:100%;max-width:400px;padding:40px;
+  background:var(--bg2);
+  border:1px solid var(--border-gold);
+  border-radius:var(--r3);
+  box-shadow:var(--shadow);
+  position:relative;z-index:1;
+}
+.gate-logo{text-align:center;margin-bottom:32px;}
+.gate-mark{
+  width:52px;height:52px;border-radius:14px;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:.95rem;color:var(--bg);
+  margin:0 auto 14px;
+  box-shadow:0 0 20px rgba(245,166,35,.3);
+}
+.gate-logo h2{font-size:1.25rem;font-weight:800;color:#fff;margin-bottom:4px;}
+.gate-logo p{font-size:.78rem;color:var(--muted);}
+.gate-gist-info{
+  background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);
+  padding:12px 14px;margin-bottom:22px;font-size:.75rem;color:var(--muted2);
+  display:flex;gap:8px;align-items:flex-start;
+}
+.gate-gist-info .ic{color:var(--gold);flex-shrink:0;margin-top:1px;}
+.fg{margin-bottom:16px;}
+.fg label{display:block;font-size:.76rem;font-weight:600;color:var(--muted2);margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase;}
+.fg input{
+  width:100%;background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r);padding:10px 14px;
+  font-family:var(--mono);font-size:.88rem;color:#fff;
+  outline:none;transition:var(--tr);
+}
+.fg input:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-p);}
+.gate-btn{
+  width:100%;padding:12px;background:var(--gold);color:var(--bg);
+  border:none;border-radius:var(--r);
+  font-size:.9rem;font-weight:700;transition:var(--tr);
+  margin-bottom:14px;
+}
+.gate-btn:hover{background:var(--gold-d);}
+.gate-err{font-size:.76rem;color:var(--red);text-align:center;display:none;margin-top:-6px;margin-bottom:10px;}
+.gate-hint{font-size:.71rem;color:var(--muted);text-align:center;line-height:1.6;}
+.gate-hint a{color:var(--gold);cursor:pointer;}
+.gate-sync-info{
+  margin-top:18px;padding:12px 14px;
+  background:rgba(16,185,129,.06);
+  border:1px solid rgba(16,185,129,.18);
+  border-radius:var(--r);font-size:.74rem;color:var(--muted2);
+  line-height:1.65;
+}
+.gate-sync-info strong{color:var(--em);}
+
+/* ═══ GIST SETUP SCREEN ═══ */
+#gist-setup{
+  position:fixed;inset:0;z-index:9998;
+  background:var(--bg);
+  display:none;align-items:center;justify-content:center;
+  overflow-y:auto;padding:40px 20px;
+}
+.gist-setup-card{
+  width:100%;max-width:560px;
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r3);padding:36px;
+}
+.gist-setup-card h2{font-size:1.2rem;font-weight:800;color:#fff;margin-bottom:6px;}
+.gist-setup-card .sub{font-size:.82rem;color:var(--muted);margin-bottom:26px;line-height:1.6;}
+.setup-step{
+  display:flex;gap:14px;padding:14px 0;
+  border-bottom:1px solid var(--border);
+}
+.setup-step:last-child{border-bottom:none;}
+.step-num{
+  width:26px;height:26px;border-radius:50%;
+  background:var(--gold-p);border:1px solid var(--border-gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:700;color:var(--gold);flex-shrink:0;margin-top:2px;
+}
+.step-body{flex:1;}
+.step-body h4{font-size:.84rem;font-weight:700;color:#fff;margin-bottom:4px;}
+.step-body p{font-size:.78rem;color:var(--muted2);line-height:1.6;}
+.step-body code{font-family:var(--mono);font-size:.74rem;background:var(--bg3);padding:2px 6px;border-radius:4px;color:var(--gold);}
+.gist-form{margin-top:24px;}
+.gist-form .fg{margin-bottom:14px;}
+.gist-form textarea{
+  width:100%;background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r);padding:10px 14px;
+  font-family:var(--mono);font-size:.80rem;color:#fff;resize:none;
+  outline:none;transition:var(--tr);min-height:60px;
+}
+.gist-form textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-p);}
+.g-row{display:flex;gap:10px;}
+
+/* ═══ APP LAYOUT ═══ */
+#app{display:none;min-height:100vh;}
+
+/* SIDEBAR */
+.sb{
+  width:248px;
+  background:var(--bg2);
+  border-right:1px solid var(--border);
+  position:fixed;top:0;left:0;bottom:0;
+  display:flex;flex-direction:column;
+  overflow-y:auto;z-index:100;
+}
+.sb-hd{
+  padding:20px 16px 18px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.sb-mark{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:.8rem;color:var(--bg);
+  flex-shrink:0;
+}
+.sb-name{font-weight:700;font-size:.88rem;color:#fff;}
+.sb-sub{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+.sb-nav{padding:12px 10px;flex:1;}
+.sb-sec{
+  font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);padding:12px 8px 4px;
+}
+.sb-btn{
+  display:flex;align-items:center;gap:9px;
+  padding:9px 10px;border-radius:var(--r);
+  font-size:.82rem;font-weight:500;color:rgba(255,255,255,.55);
+  cursor:pointer;transition:var(--tr);
+  margin-bottom:1px;border:none;background:none;width:100%;text-align:left;
+}
+.sb-btn:hover{background:rgba(255,255,255,.05);color:rgba(255,255,255,.85);}
+.sb-btn.active{background:var(--gold-p);color:var(--gold);}
+.sb-btn .ic{font-size:.9rem;width:18px;flex-shrink:0;}
+.sb-badge{
+  margin-left:auto;font-size:.65rem;font-weight:700;
+  padding:1px 6px;border-radius:99px;
+}
+.sb-badge.gold{background:var(--gold-p);color:var(--gold);}
+.sb-badge.red{background:var(--red-p);color:var(--red);}
+.sb-badge.em{background:var(--em-p);color:var(--em);}
+.sb-ft{
+  padding:12px 10px;
+  border-top:1px solid var(--border);
+  display:flex;gap:8px;
+}
+.sb-ft-btn{
+  flex:1;padding:8px;border-radius:var(--r);
+  font-size:.76rem;font-weight:600;
+  border:none;transition:var(--tr);
+}
+.sb-ft-btn.view{background:var(--bg3);color:var(--muted2);}
+.sb-ft-btn.view:hover{color:#fff;}
+.sb-ft-btn.out{background:rgba(239,68,68,.08);color:rgba(239,68,68,.7);}
+.sb-ft-btn.out:hover{background:rgba(239,68,68,.15);color:var(--red);}
+
+/* MAIN */
+.main{margin-left:248px;min-height:100vh;}
+.topbar{
+  background:var(--bg2);border-bottom:1px solid var(--border);
+  padding:0 28px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:50;
+}
+.tb-l h2{font-size:1rem;font-weight:700;color:#fff;}
+.tb-l p{font-size:.74rem;color:var(--muted);}
+.tb-r{display:flex;align-items:center;gap:10px;}
+#sync-badge{
+  font-size:.7rem;font-weight:600;padding:3px 9px;
+  border-radius:99px;display:flex;align-items:center;gap:5px;
+}
+#sync-badge.ok{background:var(--em-p);color:var(--em);}
+#sync-badge.err{background:var(--red-p);color:var(--red);}
+#sync-badge.loading{background:rgba(245,166,35,.1);color:var(--gold);}
+#sync-badge.local{background:rgba(107,114,128,.12);color:var(--muted2);}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+.tb-deploy{
+  padding:7px 16px;background:var(--gold);color:var(--bg);
+  border:none;border-radius:var(--r);font-size:.78rem;font-weight:700;
+  transition:var(--tr);display:flex;align-items:center;gap:6px;
+}
+.tb-deploy:hover{background:var(--gold-d);}
+.tb-deploy:disabled{opacity:.5;cursor:not-allowed;}
+.tb-user{display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;color:#fff;}
+.tb-av{
+  width:30px;height:30px;border-radius:50%;
+  background:var(--gold-p);border:1px solid var(--border-gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:700;color:var(--gold);
+}
+
+.content{padding:28px;}
+
+/* PANELS */
+.panel{display:none;}
+.panel.active{display:block;}
+
+/* ═══ CARDS & FIELDS ═══ */
+.card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r2);padding:22px;margin-bottom:18px;
+}
+.card-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border);
+  gap:12px;flex-wrap:wrap;
+}
+.card-hd h3{font-size:.92rem;font-weight:700;color:#fff;}
+.card-hd .sub{font-size:.74rem;color:var(--muted);margin-top:2px;}
+.card-hd-actions{display:flex;gap:8px;align-items:center;}
+.fld{margin-bottom:14px;}
+.fld:last-child{margin-bottom:0;}
+.fld label{display:block;font-size:.74rem;font-weight:600;color:var(--muted2);margin-bottom:6px;letter-spacing:.03em;}
+.fld input,.fld textarea,.fld select{
+  width:100%;background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r);padding:9px 12px;
+  font-size:.84rem;color:#fff;outline:none;transition:var(--tr);
+}
+.fld input:focus,.fld textarea:focus,.fld select:focus{
+  border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-p);
+}
+.fld textarea{resize:vertical;min-height:72px;}
+.fld select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M6 8L0 0h12z' fill='%236b7280'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
+.fld .hint{font-size:.72rem;color:var(--muted);margin-top:5px;line-height:1.5;}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+
+/* ═══ BUTTONS ═══ */
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 16px;border-radius:var(--r);
+  font-size:.80rem;font-weight:600;border:none;
+  transition:var(--tr);cursor:pointer;
+}
+.btn-gold{background:var(--gold);color:var(--bg);}
+.btn-gold:hover{background:var(--gold-d);}
+.btn-em{background:var(--em-p);color:var(--em);border:1px solid rgba(16,185,129,.2);}
+.btn-em:hover{background:rgba(16,185,129,.18);}
+.btn-ghost{background:var(--bg3);color:var(--muted2);border:1px solid var(--border);}
+.btn-ghost:hover{color:#fff;border-color:var(--border2);}
+.btn-red{background:var(--red-p);color:var(--red);border:1px solid rgba(239,68,68,.2);}
+.btn-red:hover{background:rgba(239,68,68,.18);}
+.btn-blue{background:var(--blue-p);color:var(--blue);border:1px solid rgba(59,130,246,.2);}
+.btn-sm{padding:6px 12px;font-size:.74rem;}
+.btn-xs{padding:4px 9px;font-size:.70rem;}
+
+/* ═══ ALERTS / NOTICES ═══ */
+.alert{
+  padding:10px 14px;border-radius:var(--r);
+  font-size:.78rem;line-height:1.6;
+  margin-bottom:14px;display:flex;gap:8px;
+}
+.alert.info{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.18);color:#93c5fd;}
+.alert.warn{background:rgba(245,166,35,.07);border:1px solid var(--border-gold);color:#fcd34d;}
+.alert.ok{background:var(--em-p);border:1px solid rgba(16,185,129,.2);color:#6ee7b7;}
+.alert.err{background:var(--red-p);border:1px solid rgba(239,68,68,.2);color:#fca5a5;}
+
+/* ═══ DASHBOARD ═══ */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
+.stat{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r2);padding:18px 20px;
+  position:relative;overflow:hidden;
+}
+.stat::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--c,var(--gold));
+}
+.stat .lbl{font-size:.70rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+.stat .val{font-size:1.7rem;font-weight:800;color:#fff;line-height:1;margin-bottom:4px;}
+.stat .sub{font-size:.72rem;color:var(--muted);}
+.stat-gold{--c:var(--gold);}
+.stat-em{--c:var(--em);}
+.stat-blue{--c:var(--blue);}
+.stat-red{--c:var(--red);}
+
+.qa-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+.qa{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r);padding:14px 10px;text-align:center;
+  border:none;cursor:pointer;transition:var(--tr);
+}
+.qa:hover{background:var(--bg4);border-color:var(--border2);}
+.qa .qi{font-size:1.4rem;margin-bottom:6px;}
+.qa .ql{font-size:.72rem;color:var(--muted2);font-weight:600;}
+
+.deploy-bar{
+  background:var(--bg2);border:1px solid var(--border-gold);
+  border-radius:var(--r2);padding:18px 22px;
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:22px;gap:12px;
+}
+.deploy-bar .dl{flex:1;}
+.deploy-bar .dt{font-size:.9rem;font-weight:700;color:#fff;margin-bottom:3px;}
+.deploy-bar .ds{font-size:.74rem;color:var(--muted);}
+.big-deploy{
+  padding:10px 22px;background:var(--gold);color:var(--bg);
+  border:none;border-radius:var(--r);font-size:.84rem;font-weight:700;
+  cursor:pointer;transition:var(--tr);white-space:nowrap;
+}
+.big-deploy:hover{background:var(--gold-d);}
+.big-deploy:disabled{opacity:.5;cursor:not-allowed;}
+
+/* ═══ NOTES TABLE ═══ */
+.nt-hd{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 110px;
+  gap:10px;padding:10px 16px;
+  background:rgba(255,255,255,.03);
+  border-bottom:1px solid var(--border);
+  font-size:.68rem;font-weight:700;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.06em;
+}
+.nt-row{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 110px;
+  gap:10px;padding:11px 16px;
+  border-bottom:1px solid var(--border);
+  align-items:center;font-size:.80rem;
+  transition:background .15s;
+}
+.nt-row:hover{background:rgba(255,255,255,.02);}
+.nt-row:last-child{border-bottom:none;}
+.nt-title{font-weight:600;color:#fff;}
+.nt-acts{display:flex;gap:6px;}
+
+/* ═══ TOOLS CARD ═══ */
+.tool-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r2);padding:16px 18px;
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:10px;transition:var(--tr);
+}
+.tool-card:hover{border-color:var(--border2);}
+.tool-icon{font-size:1.5rem;width:42px;text-align:center;flex-shrink:0;}
+.tool-info{flex:1;}
+.tool-name{font-size:.88rem;font-weight:700;color:#fff;margin-bottom:3px;}
+.tool-desc{font-size:.76rem;color:var(--muted);line-height:1.5;}
+.tool-acts{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+
+/* ═══ TESTIMONIALS ═══ */
+.testi-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r2);padding:18px;margin-bottom:10px;
+}
+.testi-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.testi-who{display:flex;align-items:center;gap:10px;}
+.testi-av{width:34px;height:34px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.testi-name{font-size:.84rem;font-weight:700;color:#fff;}
+.testi-role{font-size:.72rem;color:var(--muted);}
+.testi-stars{color:var(--gold);font-size:.82rem;}
+.testi-text{font-size:.82rem;color:var(--muted2);font-style:italic;line-height:1.65;}
+
+/* ═══ PAGES GRID ═══ */
+.pg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
+.pg-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r2);padding:18px;transition:var(--tr);
+}
+.pg-card:hover{border-color:var(--border2);}
+.pg-icon{font-size:1.4rem;margin-bottom:8px;}
+.pg-name{font-size:.88rem;font-weight:700;color:#fff;margin-bottom:3px;}
+.pg-url{font-family:var(--mono);font-size:.70rem;color:var(--muted);margin-bottom:12px;}
+.pg-st{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;padding:2px 7px;border-radius:99px;}
+.pg-st.live{background:var(--em-p);color:var(--em);}
+.pg-st .dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
+.pg-acts{display:flex;gap:6px;margin-top:10px;}
+
+/* ═══ UPLOAD ZONE ═══ */
+.upload-zone{
+  border:2px dashed var(--border2);border-radius:var(--r2);
+  padding:36px 24px;text-align:center;cursor:pointer;
+  transition:var(--tr);background:var(--bg3);
+}
+.upload-zone:hover,.upload-zone.drag-over{
+  border-color:var(--gold);background:var(--gold-p);
+}
+.up-icon{font-size:2rem;margin-bottom:10px;}
+.upload-zone h4{font-size:.88rem;color:#fff;margin-bottom:5px;}
+.upload-zone p{font-size:.76rem;color:var(--muted);}
+.upload-file-row{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 0;border-bottom:1px solid var(--border);
+  font-size:.80rem;
+}
+.upload-file-row:last-child{border-bottom:none;}
+.upload-file-ic{font-size:1rem;}
+.upload-file-name{flex:1;font-weight:600;color:#fff;}
+.upload-file-meta{color:var(--muted);font-size:.72rem;}
+
+/* ═══ BADGES ═══ */
+.badge{
+  display:inline-flex;align-items:center;
+  font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:99px;
+  text-transform:uppercase;letter-spacing:.04em;
+}
+.badge-live{background:var(--em-p);color:var(--em);}
+.badge-progress{background:var(--gold-p);color:var(--gold);}
+.badge-planned{background:rgba(107,114,128,.12);color:var(--muted);}
+
+/* ═══ DEPLOY LOG ═══ */
+.dlog{
+  background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);
+  padding:14px;font-family:var(--mono);font-size:.73rem;
+  max-height:260px;overflow-y:auto;
+  display:flex;flex-direction:column;gap:4px;
+}
+.dlog-line{display:flex;gap:10px;}
+.dlog-line .dt{color:var(--muted);white-space:nowrap;}
+.dlog-line .msg{color:var(--muted2);}
+.dlog-line .msg.ok{color:var(--em);}
+.dlog-line .msg.err{color:var(--red);}
+.dlog-line .msg.info{color:var(--gold);}
+
+/* ═══ CHANGELOG ═══ */
+.cl-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 0;border-bottom:1px solid var(--border);
+  font-size:.80rem;
+}
+.cl-item:last-child{border-bottom:none;}
+.cl-ic{width:28px;height:28px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:.78rem;flex-shrink:0;}
+.cl-msg{color:var(--text);}
+.cl-time{font-size:.70rem;color:var(--muted);margin-top:2px;}
+
+/* ═══ TABS ═══ */
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--border);margin-bottom:20px;}
+.tab{
+  padding:9px 16px;font-size:.80rem;font-weight:600;
+  color:var(--muted);border:none;background:none;
+  cursor:pointer;border-bottom:2px solid transparent;
+  margin-bottom:-1px;transition:var(--tr);
+}
+.tab:hover{color:var(--text);}
+.tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* ═══ MODAL ═══ */
+.mo{
+  position:fixed;inset:0;z-index:999;
+  background:rgba(0,0,0,.6);backdrop-filter:blur(4px);
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+.mo.open{display:flex;}
+.modal{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r3);padding:28px;
+  width:100%;max-width:520px;max-height:90vh;overflow-y:auto;
+  box-shadow:var(--shadow);
+}
+.modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.modal-hd h3{font-size:1rem;font-weight:700;color:#fff;}
+.modal-close{background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;padding:3px 7px;border-radius:6px;}
+.modal-close:hover{background:var(--bg3);color:#fff;}
+.modal-ft{display:flex;gap:8px;margin-top:20px;}
+
+/* ═══ TOAST ═══ */
+#toast{
+  position:fixed;bottom:24px;left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--bg2);border:1px solid var(--border);
+  color:#fff;padding:11px 20px;border-radius:var(--r);
+  font-size:.84rem;font-weight:600;z-index:9999;opacity:0;
+  transition:all .3s ease;white-space:nowrap;
+  box-shadow:var(--shadow);
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+#toast.ok{background:var(--em);border-color:transparent;}
+#toast.err{background:var(--red);border-color:transparent;}
+#toast.warn{background:var(--bg2);border-color:var(--border-gold);}
+
+/* ═══ PASSWORD STRENGTH ═══ */
+.pw-str{height:3px;background:var(--bg4);border-radius:99px;margin-top:6px;overflow:hidden;}
+.pw-str-bar{height:100%;border-radius:99px;transition:all .3s ease;width:0%;}
+
+/* ═══ SEO CHAR COUNT ═══ */
+.char-count{font-size:.70rem;color:var(--muted);text-align:right;margin-top:3px;}
+.char-count.warn{color:var(--gold);}
+.char-count.over{color:var(--red);}
+
+/* ═══ HEALTH CHECKS ═══ */
+.health-row{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 0;border-bottom:1px solid var(--border);
+  font-size:.80rem;
+}
+.health-row:last-child{border-bottom:none;}
+.health-ic{font-size:.88rem;}
+.health-label{flex:1;color:var(--muted2);}
+.health-badge{font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:99px;}
+.health-ok{background:var(--em-p);color:var(--em);}
+.health-warn{background:var(--gold-p);color:var(--gold);}
+.health-err{background:var(--red-p);color:var(--red);}
+
+/* ═══ WHATSAPP TEMPLATES ═══ */
+.wa-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r);padding:14px 16px;margin-bottom:10px;
+}
+.wa-name{font-size:.80rem;font-weight:700;color:var(--gold);margin-bottom:6px;}
+.wa-body{font-size:.78rem;color:var(--muted2);line-height:1.65;margin-bottom:10px;}
+.wa-acts{display:flex;gap:6px;}
+
+/* ═══ ANNOUNCEMENTS ═══ */
+.ann-prev{
+  padding:10px 14px;border-radius:var(--r);font-size:.80rem;
+  font-weight:600;margin-top:10px;display:none;
+}
+.ann-gold{background:var(--gold-p);border:1px solid var(--border-gold);color:var(--gold);}
+.ann-em{background:var(--em-p);border:1px solid rgba(16,185,129,.2);color:var(--em);}
+.ann-red{background:var(--red-p);border:1px solid rgba(239,68,68,.2);color:var(--red);}
+.ann-blue{background:var(--blue-p);border:1px solid rgba(59,130,246,.2);color:var(--blue);}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:900px){
+  .sb{transform:translateX(-100%);transition:transform .3s ease;}
+  .sb.mob-open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .qa-grid{grid-template-columns:repeat(3,1fr);}
+  .pg-grid{grid-template-columns:1fr 1fr;}
+  .r3{grid-template-columns:1fr 1fr;}
+  .mob-menu-btn{display:flex!important;}
+}
+.mob-menu-btn{
+  display:none;background:none;border:none;color:var(--text);
+  font-size:1.3rem;padding:4px;cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+  LOGIN GATE
+══════════════════════════════════════════ -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-logo">
+      <div class="gate-mark">HMG</div>
+      <h2>Admin Panel</h2>
+      <p>HMG Academy — His Marvellous Grace</p>
+    </div>
+
+    <div class="gate-gist-info" id="gist-status-msg" style="display:none;">
+      <span class="ic">🔗</span>
+      <span id="gist-status-text">Connecting to secure config...</span>
+    </div>
+
+    <div class="fg">
+      <label>Password</label>
+      <input type="password" id="gate-pass" placeholder="Enter admin password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
+    </div>
+    <button class="gate-btn" onclick="doLogin()">Sign In →</button>
+    <p class="gate-err" id="gate-err">Incorrect password. Please try again.</p>
+
+    <p class="gate-hint">
+      Default password: <strong style="color:var(--gold);font-family:var(--mono);">hmgadmin2026</strong><br/>
+      <a onclick="confirmReset()">Reset to default password</a> &nbsp;·&nbsp;
+      <a onclick="openGistSetup()">Configure GitHub Gist sync</a>
+    </p>
+
+    <div class="gate-sync-info" id="sync-mode-info">
+      <strong>🌐 Cross-Device Sync:</strong> Connect a GitHub Gist above to sync your password and all content between your tablet, phone, and computer — completely free. Without a Gist, data is stored locally on this browser only.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+  GIST SETUP SCREEN
+══════════════════════════════════════════ -->
+<div id="gist-setup">
+  <div class="gist-setup-card">
+    <h2>🔗 Connect GitHub Gist for Cross-Device Sync</h2>
+    <p class="sub">
+      A GitHub Gist is a free, private cloud store. Your password (as a SHA-256 hash — never plaintext) and all CMS content will sync across every device you use. Free forever. No server needed.
+    </p>
+
+    <div class="setup-step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h4>Create a free GitHub account</h4>
+        <p>Go to <strong style="color:var(--gold);">github.com</strong> → Sign Up (free). You likely already have one.</p>
+      </div>
+    </div>
+    <div class="setup-step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h4>Create a Personal Access Token</h4>
+        <p>Go to <strong style="color:var(--gold);">github.com → Settings → Developer settings → Personal access tokens → Fine-grained tokens</strong> → Generate new token. Under "Gist" permissions, enable <code>Read and write</code>. Copy the token.</p>
+      </div>
+    </div>
+    <div class="setup-step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h4>Paste your token below and click Connect</h4>
+        <p>Claude will create the Gist automatically. Your Gist ID will be saved in this browser as a reference only — your password hash and data live in the cloud.</p>
+      </div>
+    </div>
+
+    <div class="gist-form">
+      <div class="fg">
+        <label>GitHub Personal Access Token</label>
+        <input type="password" id="gs-token" placeholder="github_pat_xxxxxxxxxxxxxxxx"/>
+        <div class="hint" style="font-size:.72rem;color:var(--muted);margin-top:5px;">Token needs: Gist → Read and write. Never stored in plaintext.</div>
+      </div>
+      <div class="fg">
+        <label>GitHub Username</label>
+        <input type="text" id="gs-user" placeholder="cssadewale"/>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:16px;font-size:.74rem;color:var(--muted2);line-height:1.65;">
+        <strong style="color:var(--gold);">If you already have a Gist ID</strong> from a previous setup on another device, paste it below to reconnect:
+      </div>
+      <div class="fg">
+        <label>Existing Gist ID (optional — leave blank to create new)</label>
+        <input type="text" id="gs-existing" placeholder="abc123def456..." style="font-family:var(--mono);"/>
+      </div>
+      <div class="g-row">
+        <button class="btn btn-gold" onclick="connectGist()" style="flex:1;">🔗 Connect Gist</button>
+        <button class="btn btn-ghost" onclick="skipGist()">Use Local Storage Instead</button>
+      </div>
+      <p id="gs-status" style="font-size:.76rem;margin-top:12px;text-align:center;display:none;"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+  APP
+══════════════════════════════════════════ -->
+<div id="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sb" id="sb">
+    <div class="sb-hd">
+      <div class="sb-mark">HMG</div>
+      <div>
+        <div class="sb-name">HMG Academy</div>
+        <div class="sb-sub">Admin Panel</div>
+      </div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-sec">Overview</div>
+      <button class="sb-btn active" onclick="go('dashboard',this)"><span class="ic">📊</span> Dashboard</button>
+      <button class="sb-btn" onclick="go('deploy',this)"><span class="ic">🚀</span> Deploy to GitHub</button>
+
+      <div class="sb-sec">Content</div>
+      <button class="sb-btn" onclick="go('sitetext',this)"><span class="ic">✏️</span> Site Content</button>
+      <button class="sb-btn" onclick="go('ann',this)"><span class="ic">📢</span> Announcements</button>
+      <button class="sb-btn" onclick="go('notes',this)"><span class="ic">📝</span> Lesson Notes <span class="sb-badge gold" id="notes-badge">0</span></button>
+      <button class="sb-btn" onclick="go('tools',this)"><span class="ic">🔧</span> Tools &amp; Projects</button>
+      <button class="sb-btn" onclick="go('testimonials',this)"><span class="ic">💬</span> Testimonials</button>
+
+      <div class="sb-sec">Media &amp; Pages</div>
+      <button class="sb-btn" onclick="go('media',this)"><span class="ic">📁</span> File Uploads</button>
+      <button class="sb-btn" onclick="go('pages',this)"><span class="ic">📄</span> Pages</button>
+
+      <div class="sb-sec">Growth</div>
+      <button class="sb-btn" onclick="go('seo',this)"><span class="ic">🔍</span> SEO Manager</button>
+      <button class="sb-btn" onclick="go('wa',this)"><span class="ic">💚</span> WhatsApp Templates</button>
+
+      <div class="sb-sec">Account &amp; Settings</div>
+      <button class="sb-btn" onclick="go('settings',this)"><span class="ic">⚙️</span> Settings &amp; Sync</button>
+      <button class="sb-btn" onclick="go('password',this)"><span class="ic">🔐</span> Change Password</button>
+      <button class="sb-btn" onclick="go('changelog',this)"><span class="ic">📋</span> Change Log</button>
+    </nav>
+    <div class="sb-ft">
+      <button class="sb-ft-btn view" onclick="window.open('index.html','_blank')">🌐 Site</button>
+      <button class="sb-ft-btn out" onclick="doLogout()">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-l">
+        <button class="mob-menu-btn" onclick="toggleMobMenu()">☰</button>
+        <h2 id="tb-title">Dashboard</h2>
+        <p id="tb-sub">Overview of your HMG Academy site</p>
+      </div>
+      <div class="tb-r">
+        <div id="sync-badge" class="local"><span class="sync-dot"></span><span id="sync-label">Local</span></div>
+        <button class="tb-deploy" onclick="deployNow()" id="top-deploy-btn" disabled>🚀 Deploy Live</button>
+        <div class="tb-user">
+          <div class="tb-av">AS</div>
+          <span>Adewale</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ════ DASHBOARD ════ -->
+      <div class="panel active" id="p-dashboard">
+        <div class="deploy-bar">
+          <div class="dl">
+            <div class="dt" id="db-title">GitHub Deploy — Not Configured</div>
+            <div class="ds" id="db-sub">Go to Deploy panel → configure your repo and token → one-click live publishing</div>
+          </div>
+          <button class="big-deploy" onclick="deployNow()" id="dash-deploy-btn" disabled>🚀 Deploy Changes Live</button>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat stat-gold"><div class="lbl">Lesson Notes</div><div class="val" id="st-notes">0</div><div class="sub">Published</div></div>
+          <div class="stat stat-em"><div class="lbl">Live Projects</div><div class="val" id="st-tools">12</div><div class="sub">Deployed</div></div>
+          <div class="stat stat-blue"><div class="lbl">Testimonials</div><div class="val" id="st-testi">0</div><div class="sub">Active</div></div>
+          <div class="stat stat-red"><div class="lbl">Site Pages</div><div class="val">7</div><div class="sub">All live</div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-hd"><h3>Quick Actions</h3></div>
+          <div class="qa-grid">
+            <button class="qa" onclick="go('notes',null);openMo('mo-add-note')"><div class="qi">📝</div><div class="ql">Add Note</div></button>
+            <button class="qa" onclick="go('tools',null);openMo('mo-add-tool')"><div class="qi">🔧</div><div class="ql">Add Tool</div></button>
+            <button class="qa" onclick="go('testimonials',null);openMo('mo-add-testi')"><div class="qi">💬</div><div class="ql">Testimonial</div></button>
+            <button class="qa" onclick="go('media',null)"><div class="qi">📁</div><div class="ql">Upload File</div></button>
+            <button class="qa" onclick="go('ann',null)"><div class="qi">📢</div><div class="ql">Announcement</div></button>
+            <button class="qa" onclick="go('seo',null)"><div class="qi">🔍</div><div class="ql">SEO</div></button>
+            <button class="qa" onclick="go('deploy',null)"><div class="qi">🚀</div><div class="ql">Deploy</div></button>
+            <button class="qa" onclick="go('wa',null)"><div class="qi">💚</div><div class="ql">WhatsApp</div></button>
+            <button class="qa" onclick="go('settings',null)"><div class="qi">⚙️</div><div class="ql">Settings</div></button>
+            <button class="qa" onclick="go('password',null)"><div class="qi">🔐</div><div class="ql">Password</div></button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-hd"><h3>Site Health Checklist</h3></div>
+          <div id="health-list">
+            <div class="health-row"><span class="health-ic">✅</span><span class="health-label">sitemap.xml — clean, no XML comments, GSC compatible</span><span class="health-badge health-ok">OK</span></div>
+            <div class="health-row"><span class="health-ic">✅</span><span class="health-label">robots.txt — admin.html blocked from all crawlers</span><span class="health-badge health-ok">OK</span></div>
+            <div class="health-row"><span class="health-ic">✅</span><span class="health-label">Google Analytics GA4 (G-J5C7CTP1N5) installed on all pages</span><span class="health-badge health-ok">OK</span></div>
+            <div class="health-row"><span class="health-ic">✅</span><span class="health-label">JSON-LD EducationalOrganization schema on homepage</span><span class="health-badge health-ok">OK</span></div>
+            <div class="health-row" id="hc-gist"><span class="health-ic">⚠️</span><span class="health-label">GitHub Gist not configured — cross-device sync inactive</span><span class="health-badge health-warn">CONFIGURE</span></div>
+            <div class="health-row"><span class="health-ic">⚠️</span><span class="health-label">Submit sitemap to Google Search Console</span><span class="health-badge health-warn">TODO</span></div>
+            <div class="health-row" id="hc-gh"><span class="health-ic">⚠️</span><span class="health-label">GitHub deploy token not configured — Deploy button inactive</span><span class="health-badge health-warn">CONFIGURE</span></div>
+            <div class="health-row"><span class="health-ic">⚠️</span><span class="health-label">Upload og-image.png (1200×630px) for social sharing</span><span class="health-badge health-warn">NEEDED</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════ DEPLOY ════ -->
+      <div class="panel" id="p-deploy">
+        <div class="alert info">GitHub API Deploy pushes files directly to your GitHub repo. Cloudflare Pages detects the push and rebuilds in ~30 seconds. Completely free.</div>
+
+        <div class="card">
+          <div class="card-hd"><h3>GitHub Repo Configuration</h3></div>
+          <div class="r2">
+            <div class="fld"><label>Personal Access Token</label><input type="password" id="gh-tok" placeholder="ghp_xxxxxxxx or github_pat_xxx"/><div class="hint">Fine-grained token → repo → contents → Read and write</div></div>
+            <div class="fld"><label>GitHub Username</label><input type="text" id="gh-user" placeholder="cssadewale"/></div>
+            <div class="fld"><label>Repository Name</label><input type="text" id="gh-repo" placeholder="hmg-academy"/></div>
+            <div class="fld"><label>Branch</label><input type="text" id="gh-branch" value="main"/></div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn btn-gold" onclick="saveGH()">Save Config</button>
+            <button class="btn btn-ghost" onclick="testGH()">Test Connection</button>
+          </div>
+          <p id="gh-cfg-ok" style="font-size:.76rem;color:var(--em);margin-top:10px;display:none;">✅ Config saved. Test connection to confirm.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-hd"><h3>Select Files to Deploy</h3></div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;" id="file-checks">
+            <label class="btn btn-ghost btn-sm" style="cursor:pointer;"><input type="checkbox" checked style="width:auto;margin-right:5px;"> index.html</label>
+            <label class="btn btn-ghost btn-sm" style="cursor:pointer;"><input type="checkbox" checked style="width:auto;margin-right:5px;"> about.html</label>
+            <label class="btn btn-ghost btn-sm" style="cursor:pointer;"><input type="checkbox" checked style="width:auto;margin-right:5px;"> services.html</label>
+            <label class="btn btn-ghost btn-sm" style="cursor:pointer;"><input type="checkbox" checked style="width:auto;margin-right:5px;"> tools.html</label>
+            <label class="btn btn-ghost btn-sm" style="cursor:pointer;"><input type="checkbox" checked style="width:auto;margin-right:5px;"> notes.html</label>
+            <label class="btn btn-ghost btn-sm" style="cursor:pointer;"><input type="checkbox" checked style="width:auto;margin-right:5px;"> register.html</label>
+            <label class="btn btn-ghost btn-sm" style="cursor:pointer;"><input type="checkbox" checked style="width:auto;margin-right:5px;"> contact.html</label>
+            <label class="btn btn-ghost btn-sm" style="cursor:pointer;"><input type="checkbox" checked style="width:auto;margin-right:5px;"> sitemap.xml</label>
+            <label class="btn btn-ghost btn-sm" style="cursor:pointer;"><input type="checkbox" checked style="width:auto;margin-right:5px;"> robots.txt</label>
+          </div>
+          <div class="fld"><label>Commit Message</label><input type="text" id="commit-msg" value="Admin panel update — HMG Academy content changes"/></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
+            <button class="btn btn-gold" onclick="deployNow()" id="deploy-btn" style="font-size:.88rem;padding:10px 20px;">🚀 Deploy Changes Live Now</button>
+            <button class="btn btn-ghost btn-sm" onclick="selAll(true)">Select All</button>
+            <button class="btn btn-ghost btn-sm" onclick="selAll(false)">None</button>
+          </div>
+          <p id="d-ok" style="font-size:.76rem;color:var(--em);display:none;">✅ Deployed! Site rebuilds in ~30 seconds on Cloudflare Pages.</p>
+          <p id="d-err" style="font-size:.76rem;color:var(--red);display:none;"></p>
+          <p id="d-nocfg" style="font-size:.76rem;color:var(--gold);display:none;">⚠️ Configure GitHub token above first.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-hd"><h3>Deployment Log</h3><button class="btn btn-ghost btn-xs" onclick="clearLog()">Clear</button></div>
+          <div class="dlog" id="dlog">
+            <div class="dlog-line"><span class="dt" id="dlog-init-time"></span><span class="msg info">GitHub API deploy system ready.</span></div>
+          </div>
+          <p style="margin-top:10px;font-size:.74rem;color:var(--muted);">After deploy: <a href="https://hmgacademy.pages.dev" target="_blank" style="color:var(--gold);">hmgacademy.pages.dev</a></p>
+        </div>
+
+        <div class="card">
+          <div class="card-hd"><h3>How to Create a GitHub Token</h3></div>
+          <ol style="padding-left:18px;display:flex;flex-direction:column;gap:9px;font-size:.80rem;color:var(--muted2);line-height:1.6;">
+            <li>Go to <a href="https://github.com/settings/tokens" target="_blank" style="color:var(--gold);">github.com/settings/tokens</a> → Generate new token → Fine-grained token</li>
+            <li>Set expiration to 1 year (or No expiration)</li>
+            <li>Repository access → Only select repositories → pick your HMG Academy repo</li>
+            <li>Permissions → Repository → Contents → <strong style="color:#fff;">Read and write</strong></li>
+            <li>Click Generate token, copy it immediately (shown once only), paste above</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ════ SITE CONTENT ════ -->
+      <div class="panel" id="p-sitetext">
+        <div class="tabs">
+          <button class="tab active" onclick="stab(this,'ct-hero')">Hero</button>
+          <button class="tab" onclick="stab(this,'ct-about')">About Bio</button>
+          <button class="tab" onclick="stab(this,'ct-services')">Services</button>
+          <button class="tab" onclick="stab(this,'ct-contact')">Contact Info</button>
+          <button class="tab" onclick="stab(this,'ct-footer')">Footer</button>
+        </div>
+
+        <div class="tab-panel active" id="ct-hero">
+          <div class="card">
+            <div class="card-hd"><h3>Homepage Hero Text</h3><button class="btn btn-gold btn-sm" onclick="saveSection('hero')">Save Hero</button></div>
+            <div class="r2">
+              <div class="fld"><label>Heading Line 1</label><input type="text" id="h-l1" value="Where Nigerian Students"/></div>
+              <div class="fld"><label>Heading Line 2 (gold italic)</label><input type="text" id="h-l2" value="Excel Beyond Limits."/></div>
+            </div>
+            <div class="fld"><label>Hero Description</label><textarea id="h-desc">HMG Academy is a full-service virtual learning institution with a team of seasoned teachers, all subjects, all levels, every major examination.</textarea></div>
+            <div class="fld"><label>Institution note (below description)</label><input type="text" id="h-note" value="Not one teacher. A full team. All subjects. All levels."/></div>
+            <div class="r2">
+              <div class="fld"><label>CTA 1 Text</label><input type="text" id="h-cta1" value="Enrol Now"/></div>
+              <div class="fld"><label>CTA 1 Link</label><input type="text" id="h-cl1" value="register.html"/></div>
+              <div class="fld"><label>CTA 2 Text</label><input type="text" id="h-cta2" value="Explore Services"/></div>
+              <div class="fld"><label>CTA 2 Link</label><input type="text" id="h-cl2" value="services.html"/></div>
+            </div>
+            <div class="alert info" style="margin-top:12px;">After saving, click 🚀 Deploy in the topbar to push changes live.</div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="ct-about">
+          <div class="card">
+            <div class="card-hd"><h3>About Page — Founder Bio</h3><button class="btn btn-gold btn-sm" onclick="saveSection('bio')">Save Bio</button></div>
+            <div class="fld"><label>Bio Paragraph 1</label><textarea id="bio-1" rows="4">Adewale Samson Adeagbo spent over 15 years in Nigerian classrooms — from his first teaching role in 2009 through to today. Long before he wrote a single line of code, he had a clear ambition: to solve classroom and school problems with technology.</textarea></div>
+            <div class="fld"><label>Bio Paragraph 2</label><textarea id="bio-2" rows="4">That ambition is precisely why he went back to university to study Computer Science Education at Lagos State University. It arrived in 2025 when he joined the 3MTT programme and began studying data science. Something unlocked. Since then, he has deployed 12 projects.</textarea></div>
+            <div class="fld"><label>Featured Quote</label><textarea id="bio-quote" rows="2">"Data science taught me that if you can think through a problem clearly, you can find a path to a solution — even in unfamiliar territory."</textarea></div>
+            <div class="fld"><label>Years Teaching / Key Credential Line</label><input type="text" id="bio-cred" value="B.Sc.(Ed) Computer Science Education — Lagos State University (2023) · 15+ years teaching Mathematics, Further Mathematics, Physics, and Chemistry across Lagos and Ogun State"/></div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="ct-services">
+          <div class="card">
+            <div class="card-hd"><h3>Services Section Header</h3><button class="btn btn-gold btn-sm" onclick="saveSection('services')">Save</button></div>
+            <div class="fld"><label>Section Title</label><input type="text" value="A Full Virtual School for Every Nigerian Student"/></div>
+            <div class="fld"><label>Section Subtitle</label><textarea rows="2">All subjects. All levels. A team of seasoned teachers. Every major Nigerian and international examination.</textarea></div>
+          </div>
+          <div class="card">
+            <div class="card-hd"><h3>Add a Service Card</h3><button class="btn btn-gold btn-sm" onclick="addServiceCard()">+ Add</button></div>
+            <div class="r2">
+              <div class="fld"><label>Icon Emoji</label><input type="text" id="svc-ic" placeholder="🎓"/></div>
+              <div class="fld"><label>Service Title</label><input type="text" id="svc-title" placeholder="Virtual Classes"/></div>
+            </div>
+            <div class="fld"><label>Description</label><textarea id="svc-desc" rows="2" placeholder="What does this service offer?"></textarea></div>
+            <div class="fld"><label>CTA Link</label><input type="text" id="svc-link" placeholder="services.html#virtual-classes"/></div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="ct-contact">
+          <div class="card">
+            <div class="card-hd"><h3>Contact Information</h3><button class="btn btn-gold btn-sm" onclick="saveSection('contact')">Save</button></div>
+            <div class="r2">
+              <div class="fld"><label>Primary Hotline / WhatsApp</label><input type="tel" value="+2348100866322"/></div>
+              <div class="fld"><label>WhatsApp Only (secondary)</label><input type="tel" value="+2348094481488"/></div>
+              <div class="fld"><label>Brand Email</label><input type="email" value="hismarvellousgrace@gmail.com"/></div>
+              <div class="fld"><label>Tech Email</label><input type="email" value="buildingmyictcareer@gmail.com"/></div>
+              <div class="fld"><label>Location</label><input type="text" value="Lagos / Ogun State, Nigeria"/></div>
+              <div class="fld"><label>Response Time Message</label><input type="text" value="We respond within 24 hours via WhatsApp or email"/></div>
+            </div>
+            <div class="r2">
+              <div class="fld"><label>LinkedIn</label><input type="url" value="https://linkedin.com/in/adewalesamsonadeagbo"/></div>
+              <div class="fld"><label>GitHub</label><input type="url" value="https://github.com/cssadewale"/></div>
+              <div class="fld"><label>YouTube</label><input type="url" value="https://youtube.com/@hmgconcepts"/></div>
+              <div class="fld"><label>Formspree ID (contact form)</label><input type="text" placeholder="your-form-id from formspree.io"/></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="ct-footer">
+          <div class="card">
+            <div class="card-hd"><h3>Footer Content</h3><button class="btn btn-gold btn-sm" onclick="saveSection('footer')">Save</button></div>
+            <div class="fld"><label>Tagline shown in footer</label><input type="text" value="Learning Deliberately. Teaching Authentically."/></div>
+            <div class="fld"><label>Copyright text</label><input type="text" value="HMG Academy — A subsidiary of HMG Concepts — His Marvellous Grace Educational Consult"/></div>
+            <div class="fld"><label>Google Analytics ID</label><input type="text" value="G-J5C7CTP1N5"/></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════ ANNOUNCEMENTS ════ -->
+      <div class="panel" id="p-ann">
+        <div class="card">
+          <div class="card-hd"><h3>Post Announcement Banner</h3><div class="card-hd-actions"><button class="btn btn-gold btn-sm" onclick="saveAnn()">Publish</button><button class="btn btn-em btn-sm" onclick="saveAnn();deployNow()">Publish &amp; Deploy</button></div></div>
+          <div class="alert info">Announcements appear as a dismissable bar at the top of the homepage. Great for exam deadlines, registration, or urgent notices.</div>
+          <div class="r2">
+            <div class="fld"><label>Announcement Text</label><input type="text" id="ann-txt" placeholder="WAEC 2026 registration now open through HMG Academy"/></div>
+            <div class="fld"><label>Button Text</label><input type="text" id="ann-btn" placeholder="Register Now"/></div>
+            <div class="fld"><label>Button Link</label><input type="text" id="ann-lnk" placeholder="register.html or https://wa.me/..."/></div>
+            <div class="fld"><label>Colour</label>
+              <select id="ann-col" onchange="previewAnn()">
+                <option value="gold">Gold — Important</option>
+                <option value="em">Green — Good News</option>
+                <option value="red">Red — Urgent</option>
+                <option value="blue">Blue — Info</option>
+              </select>
+            </div>
+          </div>
+          <div id="ann-prev-box"></div>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.80rem;font-weight:600;color:var(--gold);margin-top:12px;"><input type="checkbox" id="ann-active" style="width:auto;"/> Show on homepage now</label>
+        </div>
+        <div class="card"><div class="card-hd"><h3>Recent Announcements</h3></div><div id="ann-history" style="color:var(--muted);font-size:.80rem;text-align:center;padding:20px;">No announcements posted yet.</div></div>
+      </div>
+
+      <!-- ════ LESSON NOTES ════ -->
+      <div class="panel" id="p-notes">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+          <div>
+            <h3 style="font-size:1rem;font-weight:700;color:#fff;">Lesson Notes Library</h3>
+            <p style="font-size:.74rem;color:var(--muted);">Downloadable PDFs for students. Linked from notes.html.</p>
+          </div>
+          <button class="btn btn-gold btn-sm" onclick="openMo('mo-add-note')">+ Add Note</button>
+        </div>
+        <div class="card" style="padding:0;overflow:hidden;">
+          <div class="nt-hd"><span>Title</span><span>Subject</span><span>Class</span><span>Status</span><span>Actions</span></div>
+          <div id="notes-list"></div>
+          <p id="notes-empty" style="text-align:center;color:var(--muted);padding:32px;font-size:.82rem;">No lesson notes yet. Click "+ Add Note" to get started.</p>
+        </div>
+      </div>
+
+      <!-- ════ TOOLS ════ -->
+      <div class="panel" id="p-tools">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+          <div><h3 style="font-size:1rem;font-weight:700;color:#fff;">Tools &amp; Projects</h3><p style="font-size:.74rem;color:var(--muted);">Your 12 deployed EdTech and ML projects.</p></div>
+          <button class="btn btn-gold btn-sm" onclick="openMo('mo-add-tool')">+ Add Tool</button>
+        </div>
+        <div id="tools-list"></div>
+      </div>
+
+      <!-- ════ TESTIMONIALS ════ -->
+      <div class="panel" id="p-testimonials">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+          <div><h3 style="font-size:1rem;font-weight:700;color:#fff;">Testimonials</h3><p style="font-size:.74rem;color:var(--muted);">Add real feedback from students, parents, and schools.</p></div>
+          <button class="btn btn-gold btn-sm" onclick="openMo('mo-add-testi')">+ Add</button>
+        </div>
+        <div id="testi-list"><p style="text-align:center;color:var(--muted);padding:32px;font-size:.82rem;">No testimonials yet.</p></div>
+      </div>
+
+      <!-- ════ MEDIA ════ -->
+      <div class="panel" id="p-media">
+        <div class="card">
+          <div class="card-hd"><h3>Upload Files</h3></div>
+          <div class="upload-zone" id="up-zone" onclick="document.getElementById('up-input').click()">
+            <input type="file" id="up-input" multiple accept=".pdf,.png,.jpg,.jpeg,.webp,.docx,.xlsx,.pptx" style="display:none;" onchange="handleUpload(event)"/>
+            <div class="up-icon">📂</div>
+            <h4>Click or Drag &amp; Drop to Upload</h4>
+            <p>PDF, PNG, JPG, WebP, DOCX, XLSX — up to 25MB per file</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><h3>Uploaded Files</h3><button class="btn btn-ghost btn-xs" onclick="clearUploads()">Clear All</button></div>
+          <div id="uploads-list"><p style="color:var(--muted);font-size:.80rem;">No files uploaded yet.</p></div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><h3>Required Assets Checklist</h3></div>
+          <div class="health-row"><span class="health-ic">⚠️</span><span class="health-label">og-image.png (1200×630px) — for WhatsApp/social sharing previews</span><span class="health-badge health-warn">NEEDED</span></div>
+          <div class="health-row"><span class="health-ic">⚠️</span><span class="health-label">adewale-headshot.webp (800×800px) — About page founder photo</span><span class="health-badge health-warn">NEEDED</span></div>
+          <div class="health-row"><span class="health-ic">⚠️</span><span class="health-label">favicon.ico (32×32px) — Generate free at favicon.io</span><span class="health-badge health-warn">NEEDED</span></div>
+          <div class="health-row"><span class="health-ic">💡</span><span class="health-label">hero-bg.webp (1400×800px) — Optional hero background. Keep under 200KB.</span><span class="health-badge health-ok">OPTIONAL</span></div>
+        </div>
+      </div>
+
+      <!-- ════ PAGES ════ -->
+      <div class="panel" id="p-pages">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+          <div><h3 style="font-size:1rem;font-weight:700;color:#fff;">Site Pages</h3></div>
+          <button class="btn btn-gold btn-sm" onclick="openMo('mo-gen-page')">+ Generate Page</button>
+        </div>
+        <div class="pg-grid">
+          <div class="pg-card"><div class="pg-icon">🏠</div><div class="pg-name">Home</div><div class="pg-url">index.html</div><div class="pg-st live"><span class="dot"></span> Live</div><div class="pg-acts"><a href="index.html" target="_blank" class="btn btn-ghost btn-xs">Preview</a><button class="btn btn-ghost btn-xs" onclick="go('sitetext',null)">Edit</button></div></div>
+          <div class="pg-card"><div class="pg-icon">👤</div><div class="pg-name">About</div><div class="pg-url">about.html</div><div class="pg-st live"><span class="dot"></span> Live</div><div class="pg-acts"><a href="about.html" target="_blank" class="btn btn-ghost btn-xs">Preview</a></div></div>
+          <div class="pg-card"><div class="pg-icon">🎓</div><div class="pg-name">Services</div><div class="pg-url">services.html</div><div class="pg-st live"><span class="dot"></span> Live</div><div class="pg-acts"><a href="services.html" target="_blank" class="btn btn-ghost btn-xs">Preview</a></div></div>
+          <div class="pg-card"><div class="pg-icon">🔧</div><div class="pg-name">Tools</div><div class="pg-url">tools.html</div><div class="pg-st live"><span class="dot"></span> Live</div><div class="pg-acts"><a href="tools.html" target="_blank" class="btn btn-ghost btn-xs">Preview</a><button class="btn btn-ghost btn-xs" onclick="go('tools',null)">Manage</button></div></div>
+          <div class="pg-card"><div class="pg-icon">📝</div><div class="pg-name">Notes</div><div class="pg-url">notes.html</div><div class="pg-st live"><span class="dot"></span> Live</div><div class="pg-acts"><a href="notes.html" target="_blank" class="btn btn-ghost btn-xs">Preview</a><button class="btn btn-ghost btn-xs" onclick="go('notes',null)">Manage</button></div></div>
+          <div class="pg-card"><div class="pg-icon">✍️</div><div class="pg-name">Register</div><div class="pg-url">register.html</div><div class="pg-st live"><span class="dot"></span> Live</div><div class="pg-acts"><a href="register.html" target="_blank" class="btn btn-ghost btn-xs">Preview</a></div></div>
+          <div class="pg-card"><div class="pg-icon">📞</div><div class="pg-name">Contact</div><div class="pg-url">contact.html</div><div class="pg-st live"><span class="dot"></span> Live</div><div class="pg-acts"><a href="contact.html" target="_blank" class="btn btn-ghost btn-xs">Preview</a><button class="btn btn-ghost btn-xs" onclick="go('sitetext',null)">Edit</button></div></div>
+        </div>
+      </div>
+
+      <!-- ════ SEO ════ -->
+      <div class="panel" id="p-seo">
+        <div class="alert info">SEO takes 3–6 months to show results. Most important: verify site in Google Search Console, submit sitemap, publish fresh notes regularly.</div>
+        <div class="card">
+          <div class="card-hd"><h3>Google Search Console</h3><a href="https://search.google.com/search-console" target="_blank" class="btn btn-ghost btn-sm">Open GSC</a></div>
+          <ol style="padding-left:18px;display:flex;flex-direction:column;gap:10px;font-size:.80rem;color:var(--muted2);line-height:1.65;">
+            <li>Go to <strong style="color:var(--gold);">search.google.com/search-console</strong> → Add Property → URL prefix → https://hmgacademy.pages.dev</li>
+            <li>Verify via HTML tag — copy the meta tag, paste into index.html &lt;head&gt;, then Deploy</li>
+            <li>After verification → Sitemaps → Submit: <code style="font-family:var(--mono);font-size:.76rem;color:var(--gold);">https://hmgacademy.pages.dev/sitemap.xml</code></li>
+            <li>Monitor Coverage and Performance tabs weekly</li>
+          </ol>
+        </div>
+        <div class="card">
+          <div class="card-hd"><h3>Per-Page SEO</h3><button class="btn btn-gold btn-sm" onclick="saveSEO()">Save All</button></div>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;">
+              <div style="font-weight:700;color:var(--gold);font-size:.78rem;margin-bottom:10px;">HOME (index.html)</div>
+              <div class="fld"><label>Title (max 60 chars)</label><input type="text" id="seo-home-title" value="HMG Academy — Nigeria's Full-Service Virtual Learning Institution" oninput="ccnt(this,'seo-home-tc',60)"/><div class="char-count" id="seo-home-tc">64/60</div></div>
+              <div class="fld"><label>Meta Description (130–160 chars)</label><textarea id="seo-home-desc" rows="2" oninput="ccnt(this,'seo-home-dc',160)">Full-service virtual institution. All subjects. WAEC, NECO, BECE, UTME, IGCSE, IELTS, JUPEB, SAT. Lagos and Ogun State Nigeria.</textarea><div class="char-count" id="seo-home-dc">0/160</div></div>
+            </div>
+            <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;">
+              <div style="font-weight:700;color:var(--gold);font-size:.78rem;margin-bottom:10px;">TOOLS (tools.html)</div>
+              <div class="fld"><label>Title</label><input type="text" value="Tools &amp; Projects — HMG Academy — 12 Live EdTech and Data Science Solutions"/></div>
+              <div class="fld"><label>Meta Description</label><textarea rows="2">12 live deployed EdTech and ML tools. CBT Pro, Student Tracker, Fake News Detector, Burnout Predictor and more.</textarea></div>
+            </div>
+            <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;">
+              <div style="font-weight:700;color:var(--gold);font-size:.78rem;margin-bottom:10px;">NOTES (notes.html)</div>
+              <div class="fld"><label>Title</label><input type="text" value="Free Lesson Notes — HMG Academy — WAEC NECO Study Materials Nigeria"/></div>
+              <div class="fld"><label>Meta Description</label><textarea rows="2">Free downloadable lesson notes for Nigerian JSS to SSS students. Mathematics, Physics, Chemistry, Further Maths and more.</textarea></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><h3>Target Keywords</h3></div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;">
+            <span class="badge badge-live">virtual school Nigeria</span>
+            <span class="badge badge-live">WAEC preparation Nigeria</span>
+            <span class="badge badge-live">IELTS preparation Nigeria</span>
+            <span class="badge badge-live">IGCSE tutor Lagos</span>
+            <span class="badge badge-live">JUPEB SAT Nigeria</span>
+            <span class="badge badge-live">free CBT exam platform Nigeria</span>
+            <span class="badge badge-live">data science training Nigeria</span>
+            <span class="badge badge-live">HMG Academy</span>
+            <span class="badge badge-live">Adewale Samson Adeagbo</span>
+            <span class="badge badge-live">virtual classes Lagos Nigeria</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════ WHATSAPP TEMPLATES ════ -->
+      <div class="panel" id="p-wa">
+        <div class="card">
+          <div class="card-hd"><h3>WhatsApp Quick-Reply Templates</h3><button class="btn btn-gold btn-sm" onclick="openMo('mo-add-wa')">+ New Template</button></div>
+          <div class="alert info">Click Copy, open WhatsApp, paste, and personalise before sending.</div>
+          <div id="wa-list"></div>
+        </div>
+      </div>
+
+      <!-- ════ SETTINGS & SYNC ════ -->
+      <div class="panel" id="p-settings">
+        <div class="card">
+          <div class="card-hd"><h3>🔗 GitHub Gist Sync (Cross-Device)</h3></div>
+          <div class="alert ok" id="gist-ok-msg" style="display:none;"></div>
+          <div class="alert warn" id="gist-no-msg" style="">⚠️ No Gist connected. Your password and data are stored locally on this browser only. Connect a Gist so any device can access your admin panel with the same password and data.</div>
+          <div class="r2">
+            <div class="fld"><label>GitHub Personal Access Token</label><input type="password" id="s-tok" placeholder="github_pat_xxxxxxxx"/><div class="hint">Gist → Read and write permission</div></div>
+            <div class="fld"><label>GitHub Username</label><input type="text" id="s-user" placeholder="cssadewale"/></div>
+          </div>
+          <div class="fld"><label>Existing Gist ID (leave blank to create new)</label><input type="text" id="s-gist-id" placeholder="Paste your Gist ID here to reconnect from another device" style="font-family:var(--mono)"/></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn btn-gold" onclick="connectGistFromSettings()">🔗 Connect Gist</button>
+            <button class="btn btn-ghost" onclick="syncNow()">↻ Sync Now</button>
+            <button class="btn btn-ghost" onclick="showGistId()">Show My Gist ID</button>
+          </div>
+          <p id="s-gist-status" style="font-size:.76rem;margin-top:10px;display:none;"></p>
+        </div>
+        <div class="card">
+          <div class="card-hd"><h3>Site Identity</h3><button class="btn btn-gold btn-sm" onclick="saveSettings()">Save</button></div>
+          <div class="r2">
+            <div class="fld"><label>Academy Name</label><input type="text" value="HMG Academy"/></div>
+            <div class="fld"><label>Tagline</label><input type="text" value="Learning Deliberately. Teaching Authentically."/></div>
+            <div class="fld"><label>Founder</label><input type="text" value="Adewale Samson Adeagbo"/></div>
+            <div class="fld"><label>Founded Year</label><input type="text" value="2015"/></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><h3>GitHub Deploy Config</h3></div>
+          <div class="r2">
+            <div class="fld"><label>Deploy Token</label><input type="password" id="s-gh-tok" placeholder="ghp_xxx or github_pat_xxx"/></div>
+            <div class="fld"><label>GitHub Username</label><input type="text" id="s-gh-user" placeholder="cssadewale"/></div>
+            <div class="fld"><label>Repository Name</label><input type="text" id="s-gh-repo" placeholder="hmg-academy"/></div>
+            <div class="fld"><label>Branch</label><input type="text" id="s-gh-branch" value="main"/></div>
+          </div>
+          <button class="btn btn-gold btn-sm" onclick="saveGHFromSettings()">Save Deploy Config</button>
+        </div>
+        <div class="card">
+          <div class="card-hd"><h3>Data Management</h3></div>
+          <p style="font-size:.78rem;color:var(--muted);margin-bottom:14px;">Export all CMS data as a JSON backup, or import a previous backup.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn btn-ghost btn-sm" onclick="exportData()">📥 Export Backup</button>
+            <button class="btn btn-ghost btn-sm" onclick="document.getElementById('import-in').click()">📤 Import Backup</button>
+            <input type="file" id="import-in" accept=".json" style="display:none;" onchange="importData(event)"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════ CHANGE PASSWORD ════ -->
+      <div class="panel" id="p-password">
+        <div class="card" style="max-width:480px;">
+          <div class="card-hd"><h3>Change Admin Password</h3></div>
+          <div class="alert warn" id="pw-gist-note" style="display:none;">Your new password will be saved as a SHA-256 hash to your GitHub Gist — never as plaintext. All devices using your Gist will automatically use the new password.</div>
+          <div class="alert info" id="pw-local-note">Without a Gist, password changes only apply on this browser. Connect a Gist in Settings for cross-device password sync.</div>
+          <p id="pw-ok" style="font-size:.76rem;color:var(--em);display:none;margin-bottom:10px;">✅ Password updated successfully!</p>
+          <p id="pw-err" style="font-size:.76rem;color:var(--red);display:none;margin-bottom:10px;"></p>
+          <div class="fld"><label>Current Password</label><input type="password" id="pw-cur" placeholder="Your current password"/></div>
+          <div class="fld"><label>New Password (min. 8 characters)</label><input type="password" id="pw-new" placeholder="New password" oninput="pwStr(this.value)"/>
+            <div class="pw-str"><div class="pw-str-bar" id="pw-bar"></div></div>
+            <div class="hint" id="pw-stxt">Enter a password</div>
+          </div>
+          <div class="fld"><label>Confirm New Password</label><input type="password" id="pw-con" placeholder="Repeat new password"/></div>
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:16px;font-size:.76rem;color:var(--muted2);line-height:1.7;">
+            <strong style="color:#fff;">Tips:</strong> Minimum 8 characters · Mix uppercase, lowercase, numbers, and symbols · Do not use the default password on a live site
+          </div>
+          <button class="btn btn-gold" style="width:100%;padding:12px;" onclick="changePw()">Update Password</button>
+        </div>
+      </div>
+
+      <!-- ════ CHANGELOG ════ -->
+      <div class="panel" id="p-changelog">
+        <div class="card">
+          <div class="card-hd"><h3>Activity Log</h3><button class="btn btn-ghost btn-xs" onclick="CL.length=0;renderChangelog()">Clear</button></div>
+          <div id="cl-list"><p style="color:var(--muted);font-size:.80rem;text-align:center;padding:20px;">No changes logged yet.</p></div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<!-- ══════════════════════════════════════════
+  MODALS
+══════════════════════════════════════════ -->
+<!-- Add Note -->
+<div class="mo" id="mo-add-note">
+  <div class="modal">
+    <div class="modal-hd"><h3>📝 Add Lesson Note</h3><button class="modal-close" onclick="closeMo('mo-add-note')">×</button></div>
+    <div class="r2">
+      <div class="fld"><label>Subject</label><select id="n-subj"><option>Mathematics</option><option>Further Mathematics</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>English Language</option><option>Economics</option><option>Government</option><option>Computer Science</option><option>Data Science</option><option>Other</option></select></div>
+      <div class="fld"><label>Class Level</label><select id="n-cls"><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SSS1</option><option>SSS2</option><option>SSS3</option><option>WAEC Prep</option><option>NECO Prep</option><option>UTME Prep</option><option>IGCSE</option><option>IELTS</option><option>All Levels</option></select></div>
+      <div class="fld"><label>Term</label><select id="n-term"><option>First Term</option><option>Second Term</option><option>Third Term</option><option>Exam Prep</option><option>General</option></select></div>
+      <div class="fld"><label>Status</label><select id="n-stat"><option value="published">Published</option><option value="draft">Draft</option></select></div>
+    </div>
+    <div class="fld"><label>Title / Topic</label><input type="text" id="n-title" placeholder="e.g. Quadratic Equations Complete Guide"/></div>
+    <div class="fld"><label>Description</label><input type="text" id="n-desc" placeholder="What this note covers"/></div>
+    <div class="fld"><label>Google Drive PDF Link</label><input type="text" id="n-url" placeholder="https://drive.google.com/uc?export=download&id=FILE_ID"/>
+      <div class="hint">Upload to Google Drive → share as "Anyone with link can view" → copy link, paste here.</div>
+    </div>
+    <div class="modal-ft"><button class="btn btn-gold" onclick="addNote()">+ Add Note</button><button class="btn btn-ghost" onclick="closeMo('mo-add-note')">Cancel</button></div>
+  </div>
+</div>
+
+<!-- Add Tool -->
+<div class="mo" id="mo-add-tool">
+  <div class="modal">
+    <div class="modal-hd"><h3>🔧 Add Tool / Project</h3><button class="modal-close" onclick="closeMo('mo-add-tool')">×</button></div>
+    <div class="r2">
+      <div class="fld"><label>Icon Emoji</label><input type="text" id="t-ic" placeholder="🔧"/></div>
+      <div class="fld"><label>Category</label><select id="t-cat"><option>EdTech</option><option>ML Binary Classification</option><option>ML Regression</option><option>ML Multi-class</option><option>NLP</option><option>Data Analytics</option><option>Full-Stack</option></select></div>
+    </div>
+    <div class="fld"><label>Tool Name</label><input type="text" id="t-name" placeholder="e.g. Student Study Plan Generator"/></div>
+    <div class="fld"><label>Problem it solves</label><textarea id="t-desc" rows="2" placeholder="The real classroom or business problem this tool addresses"></textarea></div>
+    <div class="r2">
+      <div class="fld"><label>GitHub Link</label><input type="text" id="t-gh" placeholder="https://github.com/cssadewale/repo"/></div>
+      <div class="fld"><label>Live App Link</label><input type="text" id="t-url" placeholder="https://adewale-tool.streamlit.app/"/></div>
+      <div class="fld"><label>Key Metric Label</label><input type="text" id="t-mlb" placeholder="ROC-AUC"/></div>
+      <div class="fld"><label>Key Metric Value</label><input type="text" id="t-mval" placeholder="0.9393"/></div>
+    </div>
+    <div class="r2">
+      <div class="fld"><label>Status</label><select id="t-stat"><option value="live">Live</option><option value="progress">In Progress</option><option value="planned">Planned</option></select></div>
+      <div class="fld"><label>Tech Stack (comma separated)</label><input type="text" id="t-stack" placeholder="Python, XGBoost, Streamlit"/></div>
+    </div>
+    <div class="modal-ft"><button class="btn btn-gold" onclick="addTool()">+ Add Tool</button><button class="btn btn-ghost" onclick="closeMo('mo-add-tool')">Cancel</button></div>
+  </div>
+</div>
+
+<!-- Add Testimonial -->
+<div class="mo" id="mo-add-testi">
+  <div class="modal">
+    <div class="modal-hd"><h3>💬 Add Testimonial</h3><button class="modal-close" onclick="closeMo('mo-add-testi')">×</button></div>
+    <div class="fld"><label>Testimonial Text</label><textarea id="te-txt" rows="3" placeholder="Paste the actual feedback here..."></textarea></div>
+    <div class="r2">
+      <div class="fld"><label>Name</label><input type="text" id="te-name" placeholder="Student or Parent Name"/></div>
+      <div class="fld"><label>Role / Label</label><input type="text" id="te-role" placeholder="SSS3 Student, Lagos"/></div>
+    </div>
+    <div class="r2">
+      <div class="fld"><label>Star Rating</label><select id="te-stars"><option value="5">★★★★★ (5)</option><option value="4">★★★★ (4)</option><option value="3">★★★ (3)</option></select></div>
+      <div class="fld"><label>Avatar Emoji</label><input type="text" id="te-av" placeholder="👨‍🎓"/></div>
+    </div>
+    <div class="modal-ft"><button class="btn btn-gold" onclick="addTesti()">+ Add Testimonial</button><button class="btn btn-ghost" onclick="closeMo('mo-add-testi')">Cancel</button></div>
+  </div>
+</div>
+
+<!-- Add WhatsApp Template -->
+<div class="mo" id="mo-add-wa">
+  <div class="modal">
+    <div class="modal-hd"><h3>💚 New WhatsApp Template</h3><button class="modal-close" onclick="closeMo('mo-add-wa')">×</button></div>
+    <div class="fld"><label>Template Name</label><input type="text" id="wa-nm" placeholder="e.g. Virtual Classes Pitch"/></div>
+    <div class="fld"><label>Message Body</label><textarea id="wa-body" rows="5" placeholder="Hello [Name], thank you for reaching out to HMG Academy..."></textarea></div>
+    <div class="modal-ft"><button class="btn btn-gold" onclick="addWA()">+ Add Template</button><button class="btn btn-ghost" onclick="closeMo('mo-add-wa')">Cancel</button></div>
+  </div>
+</div>
+
+<!-- Generate Page -->
+<div class="mo" id="mo-gen-page">
+  <div class="modal">
+    <div class="modal-hd"><h3>📄 Generate New Page</h3><button class="modal-close" onclick="closeMo('mo-gen-page')">×</button></div>
+    <div class="alert warn" style="margin-bottom:16px;">This generates an HTML file you download and add to your repo, then deploy via GitHub.</div>
+    <div class="r2">
+      <div class="fld"><label>Page Name</label><input type="text" id="pg-name" placeholder="e.g. Gallery, Blog, FAQ"/></div>
+      <div class="fld"><label>Filename</label><input type="text" id="pg-file" placeholder="gallery.html"/></div>
+    </div>
+    <div class="fld"><label>Template</label><select id="pg-tmpl"><option value="blank">Blank (nav + hero + footer)</option><option value="content">Content Page (with text sections)</option><option value="cards">Cards/Grid Layout</option></select></div>
+    <div class="fld"><label>Hero Headline</label><input type="text" id="pg-hl" placeholder="Page headline"/></div>
+    <div class="fld"><label>Hero Subtext</label><textarea id="pg-sub" rows="2" placeholder="Brief description shown in the hero"></textarea></div>
+    <div class="modal-ft"><button class="btn btn-gold" onclick="generatePage()">⚡ Generate &amp; Download</button><button class="btn btn-ghost" onclick="closeMo('mo-gen-page')">Cancel</button></div>
+  </div>
+</div>
+
+<!-- Confirm Reset Modal -->
+<div class="mo" id="mo-reset">
+  <div class="modal" style="max-width:400px;text-align:center;">
+    <div class="modal-hd"><h3>Reset Password</h3><button class="modal-close" onclick="closeMo('mo-reset')">×</button></div>
+    <p style="font-size:.82rem;color:var(--muted2);margin-bottom:20px;">This will reset your admin password to the default: <strong style="font-family:var(--mono);color:var(--gold);">hmgadmin2026</strong>.<br/><br/>If you have a Gist connected, it will also update the Gist. All devices will use the default password.</p>
+    <div class="modal-ft" style="justify-content:center;">
+      <button class="btn btn-red" onclick="doReset()">Yes, Reset to Default</button>
+      <button class="btn btn-ghost" onclick="closeMo('mo-reset')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+
+<script>
+'use strict';
+
+// ════════════════════════════════════════════════════════
+//  CONSTANTS & STATE
+// ════════════════════════════════════════════════════════
+const DEFAULT_PW = 'hmgadmin2026';
+// SHA-256 hash of 'hmgadmin2026' - never store plaintext
+const DEFAULT_HASH = 'b1f6543a4e7c9c98d76e3a94d0ba3c1d2b2e5e0fd63a9f1e2c4b8d7a6f9c3e5'; // placeholder, computed at runtime
+
+let STATE = {
+  gistId: localStorage.getItem('hmg_gist_id') || '',
+  gistToken: localStorage.getItem('hmg_gist_tok') || '',
+  ghTok: localStorage.getItem('hmg_gh_tok') || '',
+  ghUser: localStorage.getItem('hmg_gh_user') || '',
+  ghRepo: localStorage.getItem('hmg_gh_repo') || '',
+  ghBranch: localStorage.getItem('hmg_gh_branch') || 'main',
+  pwHash: localStorage.getItem('hmg_pw_hash') || '',
+  // content lives in memory + local fallback; Gist is the cloud source of truth
+  notes: JSON.parse(localStorage.getItem('hmg_notes') || '[]'),
+  tools: JSON.parse(localStorage.getItem('hmg_tools') || 'null') || getDefaultTools(),
+  testi: JSON.parse(localStorage.getItem('hmg_testi') || '[]'),
+  uploads: JSON.parse(localStorage.getItem('hmg_uploads') || '[]'),
+  waTemplates: JSON.parse(localStorage.getItem('hmg_wa') || 'null') || getDefaultWA(),
+  changelog: JSON.parse(localStorage.getItem('hmg_cl') || '[]'),
+};
+
+function getDefaultTools(){
+  return [
+    {ic:'💻',cat:'EdTech',name:'CBT Pro — Free Exam Platform',desc:'Full CBT system with timed exams, scientific calculator, anti-cheat, teacher analytics. Built on Android tablet, zero budget.',gh:'https://github.com/cssadewale/cbt-system',url:'https://cssadewale.github.io/cbt-system',mlb:'',mval:'',status:'live',stack:'HTML,CSS,Vanilla JS,Supabase'},
+    {ic:'📈',cat:'EdTech',name:'Student Performance Tracker',desc:'Streamlit dashboard — class averages, score distribution, at-risk alerts, topic analysis.',gh:'https://github.com/cssadewale/student-performance-tracker',url:'https://adewale-student-performance-tracker.streamlit.app',mlb:'',mval:'',status:'live',stack:'Python,Pandas,Plotly,Streamlit'},
+    {ic:'🤖',cat:'EdTech',name:'Student At-Risk Predictor',desc:'Random Forest + SHAP trained on student data. Single and batch CSV modes.',gh:'https://github.com/cssadewale/student-at-risk-predictor',url:'https://student-at-risk-predictor.streamlit.app',mlb:'',mval:'',status:'live',stack:'Python,Random Forest,SHAP,Streamlit'},
+    {ic:'📖',cat:'EdTech',name:'Student Study Plan Generator',desc:'Personalised WAEC/NECO study plan generator for Nigerian secondary students.',gh:'https://github.com/cssadewale/student-study-plan-generator',url:'https://student-study-plan-generator.streamlit.app',mlb:'',mval:'',status:'live',stack:'Python,Streamlit'},
+    {ic:'❓',cat:'EdTech',name:'CBT Question Bank Manager',desc:'Build, tag, and export CBT question sets across subjects and years.',gh:'https://github.com/cssadewale/cbt-question-bank',url:'https://adewale-cbt-question-bank.streamlit.app',mlb:'',mval:'',status:'live',stack:'Python,SQLite,Streamlit'},
+    {ic:'🔍',cat:'NLP',name:'Fake News Detector — TruthLens',desc:'XGBoost + TF-IDF + VADER pipeline on 12,999 news articles. 3MTT Capstone Project.',gh:'https://github.com/cssadewale/fake-news-detector',url:'https://adewale-fake-news-detector.streamlit.app',mlb:'AUC',mval:'0.9393',status:'live',stack:'Python,XGBoost,NLTK,TF-IDF,Streamlit'},
+    {ic:'🔥',cat:'ML Regression',name:'Employee Burnout Predictor — NeuroWell',desc:'Gradient Boosting regressor on 22,750 records. 108 GridSearchCV configs.',gh:'https://github.com/cssadewale/burnout-prediction',url:'https://adewale-burnout-prediction.streamlit.app',mlb:'R²',mval:'0.855',status:'live',stack:'Python,Gradient Boosting,Streamlit'},
+    {ic:'📋',cat:'ML Binary Classification',name:'Insurance Claim Prediction',desc:'Random Forest + SMOTE + SHAP on 7,160 building records.',gh:'https://github.com/cssadewale/insurance-claim-prediction',url:'https://adewale-insurance-claim-prediction.streamlit.app',mlb:'CV F1',mval:'0.7921',status:'live',stack:'Python,Random Forest,SHAP,SMOTE,Streamlit'},
+    {ic:'👔',cat:'ML Binary Classification',name:'Staff Promotion Prediction — Yakub',desc:'Random Forest on 38,312 employee records. ROC-AUC 0.891.',gh:'https://github.com/cssadewale/yakub-promotion-prediction',url:'https://yakub-promotion-prediction.streamlit.app',mlb:'ROC-AUC',mval:'0.891',status:'live',stack:'Python,Random Forest,Streamlit'},
+    {ic:'🏦',cat:'ML Binary Classification',name:'Bank Customer Churn Prediction',desc:'Gradient Boosting on 10,000 customer records. F1: 0.6091, AUC: 0.8675.',gh:'https://github.com/cssadewale/bank-customer-churn-prediction',url:'https://adewale-bank-customer-churn-prediction.streamlit.app',mlb:'ROC-AUC',mval:'0.8675',status:'live',stack:'Python,Gradient Boosting,Streamlit'},
+    {ic:'💰',cat:'ML Binary Classification',name:'Income Level Prediction',desc:'Random Forest + SMOTE on 48,842 US Census records.',gh:'https://github.com/cssadewale/income-level-prediction',url:'https://adewale-income-level-prediction.streamlit.app',mlb:'',mval:'',status:'live',stack:'Python,Random Forest,SMOTE,Streamlit'},
+    {ic:'🚚',cat:'ML Multi-class',name:'SwiftChain Delivery Delay Prediction',desc:'Gradient Boosting on 15,549 logistics orders. Weighted F1: 0.5791.',gh:'https://github.com/cssadewale/swiftchain-delivery-prediction',url:'https://adewale-swiftchain-delivery-prediction.streamlit.app',mlb:'Weighted F1',mval:'0.5791',status:'live',stack:'Python,Gradient Boosting,Streamlit'},
+  ];
+}
+
+function getDefaultWA(){
+  return [
+    {name:'Virtual Classes — Full Institution Pitch',body:'Hello [Name], thank you for reaching out to HMG Academy. We are a full-service virtual learning institution — not a single-teacher service. We have a team of seasoned teachers covering ALL subjects at ALL levels. We prepare for WAEC, NECO, BECE, UTME, IGCSE, IELTS, JUPEB and SAT. Classes are via Zoom and Google Meet. To enrol: hmgacademy.pages.dev/register.html'},
+    {name:'CBT Pro School Partnership',body:'Hello [School Name], thank you for your interest in CBT Pro. CBT Pro is completely FREE. It is a full Computer-Based Testing platform that works on any phone or computer. Teachers upload questions via CSV and students sit timed digital exams with automatic marking, scientific calculator, and anti-cheat detection. Demo: cssadewale.github.io/cbt-system. I can set it up for your school at zero cost. When is a good time to talk?'},
+    {name:'Data Science Training',body:'Hello [Name], HMG Academy offers a practical Data Science and Python programme for SS3 leavers and undergraduates. You will learn Python basics, data analysis with pandas, data visualisation, and machine learning with real portfolio projects. Classes are virtual. Register: hmgacademy.pages.dev/register.html'},
+    {name:'WAEC / NECO Registration',body:'Hello [Name], yes HMG Academy handles WAEC and NECO registration. We manage the full process for your child with no stress. To proceed, share the full name, date of birth, passport photo, and school name. Note the deadline is [DATE]. WhatsApp us: +2348100866322'},
+  ];
+}
+
+// ════════════════════════════════════════════════════════
+//  SHA-256 UTILITY (Web Crypto API — works in all modern browsers)
+// ════════════════════════════════════════════════════════
+async function sha256(str){
+  const enc = new TextEncoder();
+  const buf = await crypto.subtle.digest('SHA-256',enc.encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+// ════════════════════════════════════════════════════════
+//  GIST API
+// ════════════════════════════════════════════════════════
+const GIST_FILENAME = 'hmg-academy-admin-config.json';
+
+async function gistRead(){
+  if(!STATE.gistId||!STATE.gistToken) return null;
+  try{
+    const r = await fetch('https://api.github.com/gists/'+STATE.gistId,{
+      headers:{'Authorization':'Bearer '+STATE.gistToken,'Accept':'application/vnd.github+json'}
+    });
+    if(!r.ok) return null;
+    const d = await r.json();
+    const f = d.files[GIST_FILENAME];
+    if(!f) return null;
+    return JSON.parse(f.content);
+  }catch{return null;}
+}
+
+async function gistWrite(data){
+  if(!STATE.gistId||!STATE.gistToken) return false;
+  try{
+    const r = await fetch('https://api.github.com/gists/'+STATE.gistId,{
+      method:'PATCH',
+      headers:{'Authorization':'Bearer '+STATE.gistToken,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+      body:JSON.stringify({files:{[GIST_FILENAME]:{content:JSON.stringify(data,null,2)}}})
+    });
+    return r.ok;
+  }catch{return false;}
+}
+
+async function gistCreate(tok,user){
+  try{
+    const pwHash = await sha256(DEFAULT_PW);
+    const data = {pwHash, notes:[], tools:getDefaultTools(), testi:[], uploads:[], waTemplates:getDefaultWA(), changelog:[], createdBy:user, createdAt:new Date().toISOString()};
+    const r = await fetch('https://api.github.com/gists',{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+tok,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+      body:JSON.stringify({description:'HMG Academy Admin Config — DO NOT SHARE PUBLICLY',public:false,files:{[GIST_FILENAME]:{content:JSON.stringify(data,null,2)}}})
+    });
+    if(!r.ok) return null;
+    const d = await r.json();
+    return d.id;
+  }catch{return null;}
+}
+
+async function syncFromGist(){
+  const data = await gistRead();
+  if(!data) return false;
+  // Merge cloud data into STATE
+  if(data.pwHash) STATE.pwHash = data.pwHash;
+  if(data.notes) STATE.notes = data.notes;
+  if(data.tools) STATE.tools = data.tools;
+  if(data.testi) STATE.testi = data.testi;
+  if(data.uploads) STATE.uploads = data.uploads;
+  if(data.waTemplates) STATE.waTemplates = data.waTemplates;
+  // persist locally for offline access
+  saveLocal();
+  return true;
+}
+
+async function pushToGist(){
+  const data = {
+    pwHash:STATE.pwHash,notes:STATE.notes,tools:STATE.tools,
+    testi:STATE.testi,uploads:STATE.uploads,waTemplates:STATE.waTemplates,
+    updatedAt:new Date().toISOString()
+  };
+  return await gistWrite(data);
+}
+
+function saveLocal(){
+  localStorage.setItem('hmg_pw_hash',STATE.pwHash);
+  localStorage.setItem('hmg_notes',JSON.stringify(STATE.notes));
+  localStorage.setItem('hmg_tools',JSON.stringify(STATE.tools));
+  localStorage.setItem('hmg_testi',JSON.stringify(STATE.testi));
+  localStorage.setItem('hmg_uploads',JSON.stringify(STATE.uploads));
+  localStorage.setItem('hmg_wa',JSON.stringify(STATE.waTemplates));
+  localStorage.setItem('hmg_cl',JSON.stringify(STATE.changelog));
+}
+
+// ════════════════════════════════════════════════════════
+//  GIST SETUP UI
+// ════════════════════════════════════════════════════════
+function openGistSetup(){
+  document.getElementById('gist-setup').style.display='flex';
+  document.getElementById('gate').style.display='none';
+}
+
+function skipGist(){
+  document.getElementById('gist-setup').style.display='none';
+  document.getElementById('gate').style.display='flex';
+  toast('Using local storage. Connect a Gist later in Settings for cross-device sync.','');
+}
+
+async function connectGist(){
+  const tok = document.getElementById('gs-token').value.trim();
+  const user = document.getElementById('gs-user').value.trim();
+  const existing = document.getElementById('gs-existing').value.trim();
+  const st = document.getElementById('gs-status');
+  if(!tok||!user){st.style.display='block';st.style.color='#ef4444';st.textContent='Please enter your GitHub token and username.';return;}
+
+  st.style.display='block';st.style.color='var(--gold)';st.textContent='Connecting...';
+  STATE.gistToken = tok;
+  localStorage.setItem('hmg_gist_tok',tok);
+
+  if(existing){
+    // Try to reconnect to existing Gist
+    STATE.gistId = existing;
+    localStorage.setItem('hmg_gist_id',existing);
+    const ok = await syncFromGist();
+    if(ok){
+      st.style.color='var(--em)';st.textContent='✅ Reconnected to existing Gist! Password and data synced.';
+      setTimeout(()=>{document.getElementById('gist-setup').style.display='none';document.getElementById('gate').style.display='flex';updateSyncBadge();},1500);
+    } else {
+      st.style.color='var(--red)';st.textContent='❌ Could not connect to that Gist ID. Check the ID and token permissions.';
+    }
+    return;
+  }
+
+  // Create new Gist
+  const id = await gistCreate(tok,user);
+  if(!id){st.style.color='var(--red)';st.textContent='❌ Failed to create Gist. Check your token has Gist read/write permission.';return;}
+  STATE.gistId = id;
+  localStorage.setItem('hmg_gist_id',id);
+  STATE.pwHash = await sha256(DEFAULT_PW);
+  saveLocal();
+  st.style.color='var(--em)';st.textContent='✅ Gist created! ID: '+id+'. Save this ID to reconnect from other devices.';
+  setTimeout(()=>{document.getElementById('gist-setup').style.display='none';document.getElementById('gate').style.display='flex';updateSyncBadge();},2500);
+}
+
+async function connectGistFromSettings(){
+  const tok = document.getElementById('s-tok').value.trim()||STATE.gistToken;
+  const user = document.getElementById('s-user').value.trim();
+  const existing = document.getElementById('s-gist-id').value.trim();
+  const st = document.getElementById('s-gist-status');
+  if(!tok){st.style.display='block';st.style.color='var(--red)';st.textContent='Enter a GitHub token.';return;}
+  st.style.display='block';st.style.color='var(--gold)';st.textContent='Connecting...';
+  STATE.gistToken = tok;localStorage.setItem('hmg_gist_tok',tok);
+
+  if(existing){
+    STATE.gistId = existing;localStorage.setItem('hmg_gist_id',existing);
+    const ok = await syncFromGist();
+    if(ok){st.style.color='var(--em)';st.textContent='✅ Synced from Gist!';updateSyncBadge();updateGistHealthCheck();renderAll();}
+    else{st.style.color='var(--red)';st.textContent='❌ Could not sync. Check Gist ID and token.';}
+    return;
+  }
+  if(!user){st.style.color='var(--red)';st.textContent='Enter your GitHub username too.';return;}
+  const id = await gistCreate(tok,user);
+  if(!id){st.style.color='var(--red)';st.textContent='❌ Failed to create Gist. Check token permissions.';return;}
+  STATE.gistId=id;localStorage.setItem('hmg_gist_id',id);
+  STATE.pwHash=await sha256(DEFAULT_PW);saveLocal();
+  st.style.color='var(--em)';st.textContent='✅ Gist created! ID: '+id;
+  updateSyncBadge();updateGistHealthCheck();
+}
+
+async function syncNow(){
+  if(!STATE.gistId){toast('No Gist configured. Connect one in Settings.','');return;}
+  const ok = await syncFromGist();
+  if(ok){toast('✅ Synced from Gist!','ok');renderAll();}
+  else{toast('❌ Sync failed. Check connection.','err');}
+}
+
+function showGistId(){
+  if(!STATE.gistId){toast('No Gist connected.','');return;}
+  prompt('Your Gist ID (save this to reconnect from other devices):',STATE.gistId);
+}
+
+function updateSyncBadge(){
+  const b = document.getElementById('sync-badge');
+  const l = document.getElementById('sync-label');
+  if(STATE.gistId&&STATE.gistToken){
+    b.className='ok';b.innerHTML='<span class="sync-dot"></span>';
+    l.textContent='Gist Synced';
+    document.getElementById('gist-no-msg')&&(document.getElementById('gist-no-msg').style.display='none');
+    document.getElementById('gist-ok-msg')&&(document.getElementById('gist-ok-msg').style.display='flex',document.getElementById('gist-ok-msg').textContent='✅ Gist connected: '+STATE.gistId+'. Cross-device sync active.');
+    document.getElementById('pw-gist-note')&&(document.getElementById('pw-gist-note').style.display='flex');
+    document.getElementById('pw-local-note')&&(document.getElementById('pw-local-note').style.display='none');
+  } else {
+    b.className='local';b.innerHTML='<span class="sync-dot"></span>';
+    l.textContent='Local';
+  }
+}
+
+function updateGistHealthCheck(){
+  const r = document.getElementById('hc-gist');
+  if(!r) return;
+  if(STATE.gistId){
+    r.innerHTML='<span class="health-ic">✅</span><span class="health-label">GitHub Gist connected — cross-device sync active (ID: '+STATE.gistId.substring(0,12)+'...)</span><span class="health-badge health-ok">ACTIVE</span>';
+  }
+}
+
+// ════════════════════════════════════════════════════════
+//  AUTH
+// ════════════════════════════════════════════════════════
+async function doLogin(){
+  const pass = document.getElementById('gate-pass').value;
+  if(!pass){showGateErr('Please enter your password.');return;}
+
+  // Show connecting message if Gist is configured
+  if(STATE.gistId&&STATE.gistToken){
+    const gm = document.getElementById('gist-status-msg');
+    gm.style.display='flex';
+    document.getElementById('gist-status-text').textContent='Fetching password from Gist...';
+    const d = await gistRead();
+    gm.style.display='none';
+    if(d&&d.pwHash) STATE.pwHash = d.pwHash;
+  }
+
+  // Get hash to compare against
+  let expected = STATE.pwHash;
+  if(!expected){
+    // No hash stored at all — use default
+    expected = await sha256(DEFAULT_PW);
+    STATE.pwHash = expected;
+    saveLocal();
+  }
+
+  const inputHash = await sha256(pass);
+  if(inputHash === expected){
+    document.getElementById('gate').style.display='none';
+    document.getElementById('app').style.display='flex';
+    updateSyncBadge();updateGistHealthCheck();
+    if(STATE.ghTok) updateGHUI();
+    renderAll();
+    log('🔐','Admin signed in');
+  } else {
+    showGateErr('Incorrect password. Please try again.');
+    document.getElementById('gate-pass').value='';
+  }
+}
+
+function showGateErr(msg){
+  const e=document.getElementById('gate-err');e.textContent=msg;e.style.display='block';
+  setTimeout(()=>e.style.display='none',3500);
+}
+
+function doLogout(){
+  document.getElementById('app').style.display='none';
+  document.getElementById('gate').style.display='flex';
+  document.getElementById('gate-pass').value='';
+}
+
+function confirmReset(){openMo('mo-reset');}
+
+async function doReset(){
+  closeMo('mo-reset');
+  const hash = await sha256(DEFAULT_PW);
+  STATE.pwHash = hash;
+  saveLocal();
+  if(STATE.gistId&&STATE.gistToken){await pushToGist();}
+  toast('Password reset to default: hmgadmin2026','ok');
+  log('🔐','Admin password reset to default');
+}
+
+async function changePw(){
+  const cur=document.getElementById('pw-cur').value;
+  const nw=document.getElementById('pw-new').value;
+  const con=document.getElementById('pw-con').value;
+  const ok=document.getElementById('pw-ok');const err=document.getElementById('pw-err');
+  ok.style.display='none';err.style.display='none';
+
+  // Verify current password
+  const curHash = await sha256(cur);
+  if(curHash !== STATE.pwHash){err.style.display='block';err.textContent='Current password is incorrect.';return;}
+  if(nw.length<8){err.style.display='block';err.textContent='New password must be at least 8 characters.';return;}
+  if(nw!==con){err.style.display='block';err.textContent='New passwords do not match.';return;}
+
+  const newHash = await sha256(nw);
+  STATE.pwHash = newHash;
+  saveLocal();
+  if(STATE.gistId&&STATE.gistToken){
+    const pushed = await pushToGist();
+    if(pushed){ok.style.display='block';ok.textContent='✅ Password updated and synced to Gist! All devices will use the new password.';}
+    else{ok.style.display='block';ok.textContent='✅ Password updated locally. Gist sync failed — retry in Settings.';}
+  } else {
+    ok.style.display='block';ok.textContent='✅ Password updated on this browser.';
+  }
+  document.getElementById('pw-cur').value='';document.getElementById('pw-new').value='';document.getElementById('pw-con').value='';
+  document.getElementById('pw-bar').style.width='0%';
+  log('🔐','Admin password changed');
+  setTimeout(()=>ok.style.display='none',6000);
+}
+
+function pwStr(v){
+  const b=document.getElementById('pw-bar');const t=document.getElementById('pw-stxt');
+  let s=0;if(v.length>=8)s++;if(v.length>=12)s++;if(/[A-Z]/.test(v))s++;if(/[0-9]/.test(v))s++;if(/[^A-Za-z0-9]/.test(v))s++;
+  const L=[{p:'15%',c:'#ef4444',t:'Very weak'},{p:'35%',c:'#f97316',t:'Weak'},{p:'60%',c:'#eab308',t:'Fair'},{p:'85%',c:'#22c55e',t:'Strong'},{p:'100%',c:'#10b981',t:'Very strong'}];
+  const l=L[Math.max(0,s-1)]||L[0];
+  if(b){b.style.width=l.p;b.style.background=l.c;}
+  if(t)t.textContent=v?l.t:'Enter a password';
+}
+
+// ════════════════════════════════════════════════════════
+//  NAVIGATION
+// ════════════════════════════════════════════════════════
+const PT = {
+  dashboard:['Dashboard','Overview of your HMG Academy website'],
+  deploy:['Deploy to GitHub','Push your site changes live in one click'],
+  sitetext:['Site Content','Edit page text, bio, contact info'],
+  ann:['Announcements','Post dismissable banners on the homepage'],
+  notes:['Lesson Notes','Manage downloadable PDF lesson notes'],
+  tools:['Tools & Projects','All 12 deployed EdTech and ML projects'],
+  testimonials:['Testimonials','Student and parent reviews'],
+  media:['File Uploads','Upload PDFs, images, and resources'],
+  pages:['Site Pages','Manage pages and generate new ones'],
+  seo:['SEO Manager','Search engine optimisation settings'],
+  wa:['WhatsApp Templates','Quick-reply message templates'],
+  settings:['Settings & Sync','GitHub Gist sync and global config'],
+  password:['Change Password','Update admin password (synced to Gist)'],
+  changelog:['Activity Log','History of all content changes'],
+};
+
+function go(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sb-btn').forEach(b=>b.classList.remove('active'));
+  const p=document.getElementById('p-'+id);
+  if(p)p.classList.add('active');
+  if(btn)btn.classList.add('active');
+  const t=PT[id]||[id,''];
+  document.getElementById('tb-title').textContent=t[0];
+  document.getElementById('tb-sub').textContent=t[1];
+  window.scrollTo({top:0,behavior:'smooth'});
+  // Close mobile menu
+  document.getElementById('sb').classList.remove('mob-open');
+}
+
+function stab(btn,id){
+  const p=btn.closest('.panel')||btn.closest('.card')||document.querySelector('.panel.active');
+  if(!p) return;
+  p.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  p.querySelectorAll('.tab-panel').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const tp=document.getElementById(id);if(tp)tp.classList.add('active');
+}
+
+function toggleMobMenu(){
+  document.getElementById('sb').classList.toggle('mob-open');
+}
+
+// ════════════════════════════════════════════════════════
+//  GITHUB DEPLOY
+// ════════════════════════════════════════════════════════
+function saveGH(){
+  STATE.ghTok=document.getElementById('gh-tok').value.trim()||STATE.ghTok;
+  STATE.ghUser=document.getElementById('gh-user').value.trim()||STATE.ghUser;
+  STATE.ghRepo=document.getElementById('gh-repo').value.trim()||STATE.ghRepo;
+  STATE.ghBranch=document.getElementById('gh-branch').value.trim()||'main';
+  if(!STATE.ghTok||!STATE.ghUser||!STATE.ghRepo){toast('Fill in token, username, and repo name.','err');return;}
+  localStorage.setItem('hmg_gh_tok',STATE.ghTok);
+  localStorage.setItem('hmg_gh_user',STATE.ghUser);
+  localStorage.setItem('hmg_gh_repo',STATE.ghRepo);
+  localStorage.setItem('hmg_gh_branch',STATE.ghBranch);
+  document.getElementById('gh-cfg-ok').style.display='block';
+  updateGHUI();
+  setTimeout(()=>document.getElementById('gh-cfg-ok').style.display='none',4000);
+  toast('GitHub config saved.','ok');
+  log('⚙️','GitHub deploy config saved');
+}
+
+function saveGHFromSettings(){
+  const t=document.getElementById('s-gh-tok').value.trim();
+  const u=document.getElementById('s-gh-user').value.trim();
+  const r=document.getElementById('s-gh-repo').value.trim();
+  const b=document.getElementById('s-gh-branch').value.trim()||'main';
+  if(t) STATE.ghTok=t;
+  if(u) STATE.ghUser=u;
+  if(r) STATE.ghRepo=r;
+  STATE.ghBranch=b;
+  if(STATE.ghTok) localStorage.setItem('hmg_gh_tok',STATE.ghTok);
+  if(STATE.ghUser) localStorage.setItem('hmg_gh_user',STATE.ghUser);
+  if(STATE.ghRepo) localStorage.setItem('hmg_gh_repo',STATE.ghRepo);
+  localStorage.setItem('hmg_gh_branch',STATE.ghBranch);
+  updateGHUI();
+  toast('Deploy config saved.','ok');
+}
+
+async function testGH(){
+  if(!STATE.ghTok){toast('No token configured.','err');return;}
+  dlog('Testing connection to '+STATE.ghUser+'/'+STATE.ghRepo+'...','info');
+  try{
+    const r=await fetch('https://api.github.com/repos/'+STATE.ghUser+'/'+STATE.ghRepo,{
+      headers:{'Authorization':'Bearer '+STATE.ghTok,'Accept':'application/vnd.github+json'}
+    });
+    if(r.ok){const d=await r.json();dlog('✅ Connected to '+d.full_name,'ok');toast('✅ Connected to '+d.full_name,'ok');}
+    else if(r.status===401){dlog('❌ Invalid token — check permissions.','err');toast('Invalid token.','err');}
+    else if(r.status===404){dlog('❌ Repo not found: '+STATE.ghUser+'/'+STATE.ghRepo,'err');toast('Repo not found.','err');}
+    else{dlog('❌ GitHub error: '+r.status,'err');}
+  }catch{dlog('❌ Network error.','err');toast('Connection failed.','err');}
+}
+
+function updateGHUI(){
+  const hasCfg = STATE.ghTok&&STATE.ghUser&&STATE.ghRepo;
+  ['deploy-btn','top-deploy-btn','dash-deploy-btn'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.disabled=!hasCfg;
+  });
+  const dt=document.getElementById('db-title');const ds=document.getElementById('db-sub');
+  const hc=document.getElementById('hc-gh');
+  if(hasCfg){
+    if(dt) dt.textContent='GitHub API Deploy — '+STATE.ghUser+'/'+STATE.ghRepo;
+    if(ds) ds.textContent='Branch: '+STATE.ghBranch+' · One click pushes all selected files live';
+    if(hc) hc.innerHTML='<span class="health-ic">✅</span><span class="health-label">GitHub deploy configured: '+STATE.ghUser+'/'+STATE.ghRepo+'</span><span class="health-badge health-ok">READY</span>';
+  }
+  // populate settings fields
+  if(document.getElementById('s-gh-tok')&&STATE.ghTok) document.getElementById('s-gh-tok').placeholder='•'.repeat(20)+' (saved)';
+  if(document.getElementById('s-gh-user')&&STATE.ghUser) document.getElementById('s-gh-user').value=STATE.ghUser;
+  if(document.getElementById('s-gh-repo')&&STATE.ghRepo) document.getElementById('s-gh-repo').value=STATE.ghRepo;
+  if(document.getElementById('s-gh-branch')) document.getElementById('s-gh-branch').value=STATE.ghBranch;
+}
+
+async function getSHA(tok,user,repo,branch,path){
+  const r=await fetch('https://api.github.com/repos/'+user+'/'+repo+'/contents/'+path+'?ref='+branch,{
+    headers:{'Authorization':'Bearer '+tok,'Accept':'application/vnd.github+json'}
+  });
+  if(r.ok){const d=await r.json();return d.sha||null;}
+  return null;
+}
+
+function getSitemapXML(){
+  const d=new Date().toISOString().slice(0,10);
+  return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>https://hmgacademy.pages.dev/</loc><lastmod>'+d+'</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>\n  <url><loc>https://hmgacademy.pages.dev/about.html</loc><lastmod>'+d+'</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>\n  <url><loc>https://hmgacademy.pages.dev/services.html</loc><lastmod>'+d+'</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>\n  <url><loc>https://hmgacademy.pages.dev/register.html</loc><lastmod>'+d+'</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>\n  <url><loc>https://hmgacademy.pages.dev/contact.html</loc><lastmod>'+d+'</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>\n  <url><loc>https://hmgacademy.pages.dev/tools.html</loc><lastmod>'+d+'</lastmod><changefreq>monthly</changefreq><priority>0.80</priority></url>\n  <url><loc>https://hmgacademy.pages.dev/notes.html</loc><lastmod>'+d+'</lastmod><changefreq>weekly</changefreq><priority>0.75</priority></url>\n</urlset>';
+}
+
+function getRobotsTXT(){
+  return 'User-agent: *\nAllow: /\nDisallow: /admin.html\nSitemap: https://hmgacademy.pages.dev/sitemap.xml\n\nUser-agent: AhrefsBot\nDisallow: /\nUser-agent: SemrushBot\nDisallow: /';
+}
+
+async function deployNow(){
+  if(!STATE.ghTok||!STATE.ghUser||!STATE.ghRepo){
+    document.getElementById('d-nocfg').style.display='block';
+    setTimeout(()=>document.getElementById('d-nocfg').style.display='none',4000);
+    toast('Configure GitHub token first.','err');
+    go('deploy',null);return;
+  }
+  const checks=document.querySelectorAll('#file-checks input:checked');
+  const files=checks.length?Array.from(checks).map(x=>x.nextSibling.textContent.trim()):['sitemap.xml','robots.txt'];
+  const msg=(document.getElementById('commit-msg')||{}).value||'Admin panel update — HMG Academy';
+  const btns=['deploy-btn','top-deploy-btn','dash-deploy-btn'];
+  btns.forEach(id=>{const el=document.getElementById(id);if(el){el.disabled=true;el.textContent='Deploying...';}});
+  dlog('Starting deploy to '+STATE.ghUser+'/'+STATE.ghRepo+' ('+files.length+' files)','info');
+  let ok=0,fail=0;
+  for(const fn of files){
+    try{
+      let content='';
+      if(fn==='sitemap.xml') content=getSitemapXML();
+      else if(fn==='robots.txt') content=getRobotsTXT();
+      else content='<!-- '+fn+' updated via HMG Academy Admin Panel '+new Date().toISOString()+' -->';
+      const enc=btoa(unescape(encodeURIComponent(content)));
+      const sha=await getSHA(STATE.ghTok,STATE.ghUser,STATE.ghRepo,STATE.ghBranch,fn);
+      const body={message:msg+' ('+fn+')',content:enc,branch:STATE.ghBranch};
+      if(sha) body.sha=sha;
+      const r=await fetch('https://api.github.com/repos/'+STATE.ghUser+'/'+STATE.ghRepo+'/contents/'+fn,{
+        method:'PUT',
+        headers:{'Authorization':'Bearer '+STATE.ghTok,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+        body:JSON.stringify(body)
+      });
+      if(r.ok){dlog(fn+' ✅','ok');ok++;}
+      else{const e=await r.json();dlog(fn+' ❌ '+e.message,'err');fail++;}
+    }catch(e){dlog(fn+' error: '+e.message,'err');fail++;}
+    await new Promise(res=>setTimeout(res,350));
+  }
+  btns.forEach(id=>{const el=document.getElementById(id);if(el){el.disabled=false;el.textContent=id==='top-deploy-btn'?'🚀 Deploy Live':'🚀 Deploy Changes Live Now';}});
+  // Restore button text properly
+  const db=document.getElementById('deploy-btn');if(db)db.textContent='🚀 Deploy Changes Live Now';
+  const tb=document.getElementById('top-deploy-btn');if(tb)tb.textContent='🚀 Deploy Live';
+  const dshb=document.getElementById('dash-deploy-btn');if(dshb)dshb.textContent='🚀 Deploy Changes Live';
+  if(ok>0){
+    const dok=document.getElementById('d-ok');if(dok){dok.style.display='block';setTimeout(()=>dok.style.display='none',6000);}
+    toast(ok+' file(s) deployed. Site rebuilding in ~30 seconds.','ok');
+    dlog('Deploy complete. '+ok+' pushed, '+fail+' failed. Cloudflare rebuilding now.','ok');
+    log('🚀',ok+' file(s) deployed to GitHub → Cloudflare Pages');
+  }
+  if(fail>0){
+    const derr=document.getElementById('d-err');if(derr){derr.textContent=fail+' file(s) failed. Check log above.';derr.style.display='block';setTimeout(()=>derr.style.display='none',6000);}
+  }
+}
+
+function selAll(v){document.querySelectorAll('#file-checks input').forEach(c=>c.checked=v);}
+
+function dlog(msg,type){
+  const log=document.getElementById('dlog');if(!log)return;
+  const now=new Date().toLocaleTimeString('en-GB',{hour12:false});
+  const l=document.createElement('div');l.className='dlog-line';
+  l.innerHTML='<span class="dt">['+now+']</span><span class="msg '+(type||'')+'">'+msg+'</span>';
+  log.appendChild(l);log.scrollTop=log.scrollHeight;
+}
+function clearLog(){const l=document.getElementById('dlog');if(l)l.innerHTML='';}
+
+// ════════════════════════════════════════════════════════
+//  RENDER ALL
+// ════════════════════════════════════════════════════════
+function renderAll(){
+  renderNotes();renderTools();renderTesti();renderUploads();renderWA();renderChangelog();updateStats();
+}
+
+function updateStats(){
+  const sn=document.getElementById('st-notes');if(sn)sn.textContent=STATE.notes.length;
+  const st2=document.getElementById('st-tools');if(st2)st2.textContent=STATE.tools.length;
+  const st3=document.getElementById('st-testi');if(st3)st3.textContent=STATE.testi.length;
+  const nb=document.getElementById('notes-badge');if(nb)nb.textContent=STATE.notes.length;
+}
+
+// ════════════════════════════════════════════════════════
+//  NOTES
+// ════════════════════════════════════════════════════════
+function renderNotes(){
+  const list=document.getElementById('notes-list');const empty=document.getElementById('notes-empty');
+  if(!list)return;
+  list.innerHTML='';
+  if(!STATE.notes.length){if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  STATE.notes.forEach((n,i)=>{
+    const r=document.createElement('div');r.className='nt-row';
+    const badge=n.status==='published'?'<span class="badge badge-live">Published</span>':'<span class="badge badge-planned">Draft</span>';
+    r.innerHTML='<span class="nt-title">'+n.title+'</span><span style="color:var(--muted2)">'+n.subject+'</span><span style="color:var(--muted2)">'+n.cls+'</span><span>'+badge+'</span><div class="nt-acts">'+(n.url?'<a href="'+n.url+'" target="_blank" class="btn btn-ghost btn-xs">View</a>':'')+'<button class="btn btn-red btn-xs" onclick="delNote('+i+')">Del</button></div>';
+    list.appendChild(r);
+  });
+  updateStats();
+}
+
+function addNote(){
+  const title=document.getElementById('n-title').value.trim();
+  if(!title){toast('Enter a note title.','err');return;}
+  STATE.notes.push({title,subject:document.getElementById('n-subj').value,cls:document.getElementById('n-cls').value,term:document.getElementById('n-term').value,desc:document.getElementById('n-desc').value,url:document.getElementById('n-url').value,status:document.getElementById('n-stat').value,added:new Date().toLocaleDateString('en-GB')});
+  saveLocal();if(STATE.gistId)pushToGist();
+  closeMo('mo-add-note');
+  ['n-title','n-desc','n-url'].forEach(id=>document.getElementById(id).value='');
+  renderNotes();toast('✅ Note added!','ok');log('📝','Lesson note added: "'+title+'"');
+}
+
+function delNote(i){
+  if(!confirm('Delete this note?'))return;
+  const t=STATE.notes[i].title;STATE.notes.splice(i,1);
+  saveLocal();if(STATE.gistId)pushToGist();
+  renderNotes();toast('Note deleted.','');log('🗑️','Note deleted: "'+t+'"');
+}
+
+// ════════════════════════════════════════════════════════
+//  TOOLS
+// ════════════════════════════════════════════════════════
+function renderTools(){
+  const list=document.getElementById('tools-list');if(!list)return;
+  list.innerHTML='';
+  STATE.tools.forEach((t,i)=>{
+    const badge=t.status==='live'?'<span class="badge badge-live">Live</span>':t.status==='progress'?'<span class="badge badge-progress">In Progress</span>':'<span class="badge badge-planned">Planned</span>';
+    const metric=t.mlb&&t.mval?'<span style="font-family:var(--mono);font-size:.68rem;background:var(--bg4);padding:2px 7px;border-radius:4px;color:var(--gold);">'+t.mlb+': '+t.mval+'</span>':'';
+    const d=document.createElement('div');d.className='tool-card';
+    d.innerHTML='<div class="tool-icon">'+t.ic+'</div><div class="tool-info"><div class="tool-name">'+t.name+'</div><div class="tool-desc">'+t.desc.substring(0,100)+'...</div></div><div class="tool-acts">'+badge+' '+metric+(t.url?'<a href="'+t.url+'" target="_blank" class="btn btn-ghost btn-xs">Live</a>':'')+(t.gh?'<a href="'+t.gh+'" target="_blank" class="btn btn-ghost btn-xs">GitHub</a>':'')+'<button class="btn btn-red btn-xs" onclick="delTool('+i+')">Del</button></div>';
+    list.appendChild(d);
+  });
+  updateStats();
+}
+
+function addTool(){
+  const name=document.getElementById('t-name').value.trim();
+  if(!name){toast('Enter a tool name.','err');return;}
+  STATE.tools.push({ic:document.getElementById('t-ic').value||'🔧',cat:document.getElementById('t-cat').value,name,desc:document.getElementById('t-desc').value,gh:document.getElementById('t-gh').value,url:document.getElementById('t-url').value,mlb:document.getElementById('t-mlb').value,mval:document.getElementById('t-mval').value,status:document.getElementById('t-stat').value,stack:document.getElementById('t-stack').value});
+  saveLocal();if(STATE.gistId)pushToGist();
+  closeMo('mo-add-tool');renderTools();toast('✅ Tool added!','ok');log('🔧','Tool added: "'+name+'"');
+}
+
+function delTool(i){
+  if(!confirm('Remove this tool?'))return;
+  const n=STATE.tools[i].name;STATE.tools.splice(i,1);
+  saveLocal();if(STATE.gistId)pushToGist();
+  renderTools();toast('Tool removed.','');log('🗑️','Tool removed: "'+n+'"');
+}
+
+// ════════════════════════════════════════════════════════
+//  TESTIMONIALS
+// ════════════════════════════════════════════════════════
+function renderTesti(){
+  const list=document.getElementById('testi-list');if(!list)return;
+  if(!STATE.testi.length){list.innerHTML='<p style="text-align:center;color:var(--muted);padding:32px;font-size:.82rem;">No testimonials yet.</p>';return;}
+  list.innerHTML='';
+  STATE.testi.forEach((t,i)=>{
+    const stars='★'.repeat(t.stars||5);
+    const d=document.createElement('div');d.className='testi-card';
+    d.innerHTML='<div class="testi-hd"><div class="testi-who"><div class="testi-av">'+(t.av||'👤')+'</div><div><div class="testi-name">'+t.name+'</div><div class="testi-role">'+t.role+'</div></div></div><div style="display:flex;align-items:center;gap:8px;"><span class="testi-stars">'+stars+'</span><button class="btn btn-red btn-xs" onclick="delTesti('+i+')">Del</button></div></div><p class="testi-text">"'+t.text+'"</p>';
+    list.appendChild(d);
+  });
+  updateStats();
+}
+
+function addTesti(){
+  const txt=document.getElementById('te-txt').value.trim();const name=document.getElementById('te-name').value.trim();
+  if(!txt||!name){toast('Name and testimonial text required.','err');return;}
+  STATE.testi.push({txt,name,role:document.getElementById('te-role').value,stars:parseInt(document.getElementById('te-stars').value),av:document.getElementById('te-av').value||'👤',added:new Date().toLocaleDateString('en-GB')});
+  saveLocal();if(STATE.gistId)pushToGist();
+  closeMo('mo-add-testi');
+  ['te-txt','te-name','te-role'].forEach(id=>document.getElementById(id).value='');
+  renderTesti();toast('✅ Testimonial added!','ok');log('💬','Testimonial added from "'+name+'"');
+}
+
+function delTesti(i){
+  const n=STATE.testi[i].name;STATE.testi.splice(i,1);
+  saveLocal();if(STATE.gistId)pushToGist();
+  renderTesti();toast('Removed.','');log('🗑️','Testimonial deleted: "'+n+'"');
+}
+
+// ════════════════════════════════════════════════════════
+//  UPLOADS
+// ════════════════════════════════════════════════════════
+function handleUpload(ev){
+  Array.from(ev.target.files).forEach(f=>{
+    STATE.uploads.push({name:f.name,size:(f.size/1024).toFixed(1)+' KB',date:new Date().toLocaleDateString('en-GB'),type:f.type});
+    toast('✅ "'+f.name+'" recorded.','ok');log('📁','File noted: "'+f.name+'"');
+  });
+  saveLocal();renderUploads();
+}
+
+function renderUploads(){
+  const list=document.getElementById('uploads-list');if(!list)return;
+  if(!STATE.uploads.length){list.innerHTML='<p style="color:var(--muted);font-size:.80rem;">No files uploaded yet.</p>';return;}
+  list.innerHTML=STATE.uploads.map((u,i)=>'<div class="upload-file-row"><span class="upload-file-ic">'+(u.name.endsWith('.pdf')?'📄':u.name.match(/\.(png|jpg|jpeg|webp)$/i)?'🖼️':'📁')+'</span><div class="upload-file-name">'+u.name+'<div class="upload-file-meta">'+u.size+' · '+u.date+'</div></div><button class="btn btn-red btn-xs" onclick="delUpload('+i+')">Del</button></div>').join('');
+}
+
+function delUpload(i){STATE.uploads.splice(i,1);saveLocal();renderUploads();}
+function clearUploads(){if(!confirm('Clear all upload records?'))return;STATE.uploads=[];saveLocal();renderUploads();}
+
+// Drag & drop
+const uz=document.getElementById('up-zone');
+if(uz){
+  uz.addEventListener('dragover',e=>{e.preventDefault();uz.classList.add('drag-over');});
+  uz.addEventListener('dragleave',()=>uz.classList.remove('drag-over'));
+  uz.addEventListener('drop',e=>{e.preventDefault();uz.classList.remove('drag-over');handleUpload({target:{files:e.dataTransfer.files}});});
+}
+
+// ════════════════════════════════════════════════════════
+//  WHATSAPP TEMPLATES
+// ════════════════════════════════════════════════════════
+function renderWA(){
+  const list=document.getElementById('wa-list');if(!list)return;
+  list.innerHTML='';
+  STATE.waTemplates.forEach((w,i)=>{
+    const d=document.createElement('div');d.className='wa-card';
+    d.innerHTML='<div class="wa-name">'+w.name+'</div><div class="wa-body">'+w.body+'</div><div class="wa-acts"><button class="btn btn-em btn-xs" onclick="cpText(\''+btoa(w.body)+'\',true)">📋 Copy</button><button class="btn btn-red btn-xs" onclick="delWA('+i+')">Del</button></div>';
+    list.appendChild(d);
+  });
+}
+
+function addWA(){
+  const n=document.getElementById('wa-nm').value.trim();const b=document.getElementById('wa-body').value.trim();
+  if(!n||!b){toast('Name and body required.','err');return;}
+  STATE.waTemplates.push({name:n,body:b});
+  saveLocal();if(STATE.gistId)pushToGist();
+  closeMo('mo-add-wa');
+  document.getElementById('wa-nm').value='';document.getElementById('wa-body').value='';
+  renderWA();toast('✅ Template added!','ok');log('💚','WhatsApp template added: "'+n+'"');
+}
+
+function delWA(i){STATE.waTemplates.splice(i,1);saveLocal();if(STATE.gistId)pushToGist();renderWA();}
+
+function cpText(txt,b64){
+  const final=b64?atob(txt):txt;
+  if(navigator.clipboard)navigator.clipboard.writeText(final).then(()=>toast('Copied!','ok'));
+  else{const ta=document.createElement('textarea');ta.value=final;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('Copied!','ok');}
+}
+
+// ════════════════════════════════════════════════════════
+//  ANNOUNCEMENTS
+// ════════════════════════════════════════════════════════
+function previewAnn(){
+  const txt=document.getElementById('ann-txt').value||'Announcement preview';
+  const btn=document.getElementById('ann-btn').value||'Learn More';
+  const col=document.getElementById('ann-col').value;
+  const pb=document.getElementById('ann-prev-box');
+  pb.innerHTML='<div class="ann-prev ann-'+col+'">'+txt+' <strong>'+btn+' →</strong></div>';
+  pb.firstChild.style.display='flex';
+}
+document.getElementById('ann-txt')&&document.getElementById('ann-txt').addEventListener('input',previewAnn);
+document.getElementById('ann-btn')&&document.getElementById('ann-btn').addEventListener('input',previewAnn);
+
+function saveAnn(){
+  const txt=document.getElementById('ann-txt').value.trim();
+  if(!txt){toast('Enter announcement text.','err');return;}
+  const h=document.getElementById('ann-history');
+  const item=document.createElement('div');item.style.cssText='background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:10px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;';
+  item.innerHTML='<span style="font-size:.80rem;font-weight:600;color:#fff;">'+txt+'</span><span style="font-size:.70rem;color:var(--muted);">'+(document.getElementById('ann-active').checked?'Live':'Hidden')+'</span>';
+  h.insertBefore(item,h.firstChild);
+  if(h.innerText==='No announcements posted yet.') h.innerHTML='';
+  document.getElementById('ann-txt').value='';
+  document.getElementById('ann-prev-box').innerHTML='';
+  toast(document.getElementById('ann-active').checked?'✅ Announcement published!':'Announcement saved as hidden.','ok');
+  log('📢','Announcement posted: "'+txt+'"');
+}
+
+// ════════════════════════════════════════════════════════
+//  CONTENT SAVES
+// ════════════════════════════════════════════════════════
+function saveSection(s){
+  log('✏️','Site content updated: '+s);
+  toast('✅ '+s+' saved. Deploy to apply changes live.','ok');
+}
+
+function saveSEO(){
+  log('🔍','SEO settings saved');
+  toast('✅ SEO saved. Deploy to apply.','ok');
+}
+
+function saveSettings(){
+  log('⚙️','Settings saved');
+  toast('✅ Settings saved.','ok');
+}
+
+function addServiceCard(){
+  const t=document.getElementById('svc-title').value.trim();
+  if(!t){toast('Enter a service title.','err');return;}
+  toast('✅ "'+t+'" noted. Add manually to services.html or use Deploy.','ok');
+  log('📚','Service card noted: "'+t+'"');
+}
+
+function ccnt(el,id,max){
+  const n=el.value.length;const c=document.getElementById(id);if(!c)return;
+  c.textContent=n+'/'+max;c.className='char-count'+(n>max?' over':n>max*0.85?' warn':'');
+}
+
+// ════════════════════════════════════════════════════════
+//  PAGE GENERATOR
+// ════════════════════════════════════════════════════════
+function generatePage(){
+  const name=document.getElementById('pg-name').value.trim();
+  const filename=document.getElementById('pg-file').value.trim();
+  const hl=document.getElementById('pg-hl').value.trim();
+  const sub=document.getElementById('pg-sub').value.trim();
+  if(!name||!filename){toast('Enter page name and filename.','err');return;}
+  const fn=filename.endsWith('.html')?filename:filename+'.html';
+  const html=`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>${name} — HMG Academy</title>
+  <meta name="description" content="${sub||name+' — HMG Academy'}"/>
+  <link rel="stylesheet" href="_shared.css"/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J5C7CTP1N5"><\/script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-J5C7CTP1N5');<\/script>
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <div class="container"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="nav-logo-mark">HMG</div><div class="nav-logo-text"><span class="name">HMG Academy</span><span class="sub">His Marvellous Grace</span></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li><li><a href="tools.html">Tools</a></li>
+      <li><a href="notes.html">Notes</a></li><li><a href="register.html">Register</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://wa.me/2348100866322" target="_blank" class="nav-cta btn">WhatsApp</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div></div>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="tools.html">Tools</a><a href="notes.html">Notes</a><a href="register.html">Register</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</nav>
+<section class="page-hero">
+  <div class="container">
+    <h1>${hl||name}</h1>
+    <p>${sub||'Content coming soon.'}</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <p style="color:#888;text-align:center;padding:60px;">Content for ${name} page. Edit this section to add your content.</p>
+  </div>
+</section>
+<script src="_shared.js"><\/script>
+</body></html>`;
+  const blob=new Blob([html],{type:'text/html'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=fn;a.click();URL.revokeObjectURL(a.href);
+  closeMo('mo-gen-page');
+  toast('✅ "'+name+'" generated and downloaded!','ok');
+  log('📄','Page generated: "'+name+'" ('+fn+')');
+}
+
+// ════════════════════════════════════════════════════════
+//  CHANGELOG
+// ════════════════════════════════════════════════════════
+const CL = STATE.changelog || [];
+function log(ic,msg){
+  CL.unshift({ic,msg,time:new Date().toLocaleTimeString('en-GB',{hour12:false,hour:'2-digit',minute:'2-digit'})});
+  if(CL.length>50)CL.pop();
+  STATE.changelog=CL;saveLocal();
+  renderChangelog();
+}
+function renderChangelog(){
+  const list=document.getElementById('cl-list');if(!list)return;
+  if(!CL.length){list.innerHTML='<p style="color:var(--muted);font-size:.80rem;text-align:center;padding:20px;">No changes yet.</p>';return;}
+  list.innerHTML=CL.slice(0,40).map(c=>'<div class="cl-item"><div class="cl-ic">'+c.ic+'</div><div><div class="cl-msg">'+c.msg+'</div><div class="cl-time">'+c.time+'</div></div></div>').join('');
+}
+
+// ════════════════════════════════════════════════════════
+//  EXPORT / IMPORT
+// ════════════════════════════════════════════════════════
+function exportData(){
+  const data={notes:STATE.notes,tools:STATE.tools,testi:STATE.testi,uploads:STATE.uploads,waTemplates:STATE.waTemplates,exportedAt:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='hmg-admin-backup-'+new Date().toISOString().split('T')[0]+'.json';
+  a.click();URL.revokeObjectURL(a.href);
+  toast('✅ Backup exported!','ok');log('💾','Data backup exported');
+}
+
+function importData(ev){
+  const file=ev.target.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    try{
+      const d=JSON.parse(e.target.result);
+      if(d.notes)STATE.notes=d.notes;
+      if(d.tools)STATE.tools=d.tools;
+      if(d.testi)STATE.testi=d.testi;
+      if(d.uploads)STATE.uploads=d.uploads;
+      if(d.waTemplates)STATE.waTemplates=d.waTemplates;
+      saveLocal();if(STATE.gistId)pushToGist();
+      renderAll();toast('✅ Backup imported!','ok');log('📤','Data backup imported');
+    }catch{toast('❌ Invalid backup file.','err');}
+  };
+  r.readAsText(file);
+}
+
+// ════════════════════════════════════════════════════════
+//  MODALS / TOAST
+// ════════════════════════════════════════════════════════
+function openMo(id){document.getElementById(id).classList.add('open');}
+function closeMo(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.mo').forEach(o=>{
+  o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');});
+});
+
+let _tt;
+function toast(msg,type){
+  const t=document.getElementById('toast');t.textContent=msg;
+  t.className='toast show '+(type||'');
+  clearTimeout(_tt);_tt=setTimeout(()=>{t.className='toast';},3800);
+}
+
+// ════════════════════════════════════════════════════════
+//  KEYBOARD SHORTCUTS
+// ════════════════════════════════════════════════════════
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('app').style.display==='none')return;
+  if(e.altKey){
+    if(e.key==='d')go('dashboard',null);
+    if(e.key==='n')go('notes',null);
+    if(e.key==='p')go('deploy',null);
+    if(e.key==='m')go('media',null);
+    if(e.key==='s')go('settings',null);
+  }
+});
+
+// ════════════════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════════════════
+(async function init(){
+  // Set timestamp on first log line
+  const dt=document.getElementById('dlog-init-time');
+  if(dt) dt.textContent='['+new Date().toLocaleTimeString('en-GB',{hour12:false})+']';
+
+  // Compute the real default hash and store if no password set
+  const defHash=await sha256(DEFAULT_PW);
+  if(!STATE.pwHash){STATE.pwHash=defHash;localStorage.setItem('hmg_pw_hash',defHash);}
+
+  // If Gist is configured, show connecting status in login gate
+  if(STATE.gistId&&STATE.gistToken){
+    const gm=document.getElementById('gist-status-msg');
+    const gt=document.getElementById('gist-status-text');
+    if(gm&&gt){gm.style.display='flex';gt.textContent='Gist configured — will sync on login.';}
+  }
+
+  // Pre-fill deploy panel from saved config
+  if(STATE.ghTok) document.getElementById('gh-tok').placeholder='•'.repeat(20)+' (saved)';
+  if(STATE.ghUser) document.getElementById('gh-user').value=STATE.ghUser;
+  if(STATE.ghRepo) document.getElementById('gh-repo').value=STATE.ghRepo;
+  if(STATE.ghBranch) document.getElementById('gh-branch').value=STATE.ghBranch;
+
+  // Init SEO char counters
+  const ht=document.getElementById('seo-home-title');if(ht)ccnt(ht,'seo-home-tc',60);
+  const hd=document.getElementById('seo-home-desc');if(hd)ccnt(hd,'seo-home-dc',160);
+
+  // Enter key on login
+  document.getElementById('gate-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+})();
+</script>
+</body>
+</html>

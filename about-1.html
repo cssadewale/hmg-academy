@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — HMG Academy | Adewale Samson Adeagbo | Lagos & Ogun State Nigeria</title>
+  <meta name="description" content="HMG Academy is a strictly virtual EdTech school founded in 2015 by Adewale Samson Adeagbo — educator with 15+ years, data scientist, and AI-Augmented Solutions Developer. We cover all subjects, all levels, and all major Nigerian and international exams." />
+  <meta name="keywords" content="HMG Academy about, Adewale Samson Adeagbo, Nigerian educator data scientist, virtual school Nigeria, WAEC NECO IELTS IGCSE SAT tutoring Nigeria" />
+  <meta name="author" content="Adewale Samson Adeagbo" />
+  <link rel="canonical" href="https://hmgacademy.pages.dev/about.html" />
+  <meta property="og:title" content="About HMG Academy — Adewale Samson Adeagbo" />
+  <meta property="og:description" content="15+ years teaching, now building data science tools that serve Nigerian students. HMG Academy: all subjects, all levels, all major exams." />
+  <meta property="og:image" content="https://hmgacademy.pages.dev/assets/og-image.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://hmgacademy.pages.dev/about.html" />
+  <link rel="stylesheet" href="_shared.css" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J5C7CTP1N5"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-J5C7CTP1N5');</script>
+
+  <style>
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before { content:''; position:absolute; left:7px; top:8px; bottom:8px; width:2px; background:linear-gradient(180deg,var(--gold) 0%,var(--navy-pale) 100%); }
+    .timeline-item { position:relative; margin-bottom:36px; }
+    .timeline-dot { position:absolute; left:-29px; top:5px; width:14px; height:14px; border-radius:50%; background:var(--gold); border:2.5px solid var(--white); box-shadow:0 0 0 2px var(--gold); }
+    .timeline-year { font-family:var(--font-body); font-size:0.72rem; font-weight:700; color:var(--gold-muted); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:4px; }
+    .timeline-title { font-size:1rem; font-weight:700; color:var(--navy); margin-bottom:6px; }
+    .timeline-desc { font-size:0.88rem; color:var(--grey-600); line-height:1.68; }
+
+    /* ── SKILLS GRID ── */
+    .skills-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:32px; }
+    .skill-group h4 { font-size:0.78rem; font-weight:700; color:var(--navy); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:12px; }
+    .skill-tags { display:flex; flex-wrap:wrap; gap:7px; }
+    .skill-tag { font-size:0.76rem; font-weight:500; padding:4px 11px; border-radius:99px; background:var(--grey-100); color:var(--grey-600); border:1px solid var(--grey-200); }
+    .skill-tag.primary { background:var(--navy-pale); color:var(--navy); border-color:rgba(15,37,71,0.15); }
+
+    /* ── DUAL IDENTITY CARDS ── */
+    .identity-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin:48px 0; }
+    .identity-card { border-radius:var(--radius-lg); padding:36px 32px; position:relative; overflow:hidden; }
+    .identity-card.edu { background:linear-gradient(135deg,rgba(13,158,106,0.07) 0%,rgba(13,158,106,0.03) 100%); border:1.5px solid rgba(13,158,106,0.20); }
+    .identity-card.ds { background:linear-gradient(135deg,var(--navy-pale) 0%,rgba(46,84,144,0.05) 100%); border:1.5px solid rgba(15,37,71,0.15); }
+    .identity-card-icon { font-size:2.2rem; margin-bottom:16px; }
+    .identity-card h3 { font-size:1.18rem; margin-bottom:10px; }
+    .identity-card p { font-size:0.90rem; color:var(--grey-600); line-height:1.74; margin-bottom:16px; }
+    .identity-card ul { display:flex; flex-direction:column; gap:8px; }
+    .identity-card ul li { font-size:0.86rem; color:var(--grey-600); padding-left:16px; position:relative; }
+    .identity-card ul li::before { content:'→'; position:absolute; left:0; color:var(--gold); font-size:0.78rem; }
+
+    /* ── EXAM BADGES ── */
+    .exam-badges { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+    .exam-badge { background:var(--navy-pale); border:1px solid rgba(15,37,71,0.18); border-radius:var(--radius-sm); padding:6px 14px; font-size:0.78rem; font-weight:700; color:var(--navy); }
+    .exam-badge.int { background:rgba(13,158,106,0.08); border-color:rgba(13,158,106,0.20); color:var(--emerald); }
+
+    /* ── PORTFOLIO PROJECTS ── */
+    .portfolio-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:32px; }
+    .portfolio-card { background:var(--white); border:1px solid var(--grey-200); border-radius:var(--radius); padding:22px; transition:var(--transition); }
+    .portfolio-card:hover { box-shadow:var(--shadow-md); transform:translateY(-3px); border-color:rgba(15,37,71,0.18); }
+    .portfolio-card .metric { font-family:var(--font-display); font-size:1.3rem; font-weight:700; color:var(--gold-muted); margin-bottom:4px; }
+    .portfolio-card h5 { font-size:0.90rem; font-weight:700; color:var(--navy); margin-bottom:6px; }
+    .portfolio-card p { font-size:0.80rem; color:var(--grey-400); line-height:1.5; }
+    .portfolio-card a { font-size:0.78rem; color:var(--navy); font-weight:600; display:inline-flex; align-items:center; gap:4px; margin-top:10px; transition:color 0.2s; }
+    .portfolio-card a:hover { color:var(--gold-muted); }
+
+    /* ── SCHOOLS ── */
+    .schools-list { display:flex; flex-wrap:wrap; gap:9px; margin-top:16px; }
+    .school-tag { background:var(--grey-100); border:1px solid var(--grey-200); border-radius:var(--radius-sm); padding:7px 14px; font-size:0.82rem; color:var(--grey-600); font-weight:500; }
+
+    /* ── CERTS ── */
+    .certs-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-top:24px; }
+    .cert-card { background:var(--white); border:1px solid var(--grey-200); border-radius:var(--radius-sm); padding:14px 18px; font-size:0.82rem; color:var(--grey-600); display:flex; align-items:flex-start; gap:10px; }
+    .cert-card .icon { font-size:1.1rem; flex-shrink:0; }
+    .cert-card strong { color:var(--navy); display:block; font-size:0.85rem; margin-bottom:2px; }
+
+    /* ── HMG SUBSIDIARIES ── */
+    .sub-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:32px; }
+    .sub-card { background:white; border:1px solid var(--grey-200); border-radius:var(--radius); padding:24px; text-align:center; transition:var(--transition); }
+    .sub-card:hover { box-shadow:var(--shadow-sm); transform:translateY(-2px); }
+    .sub-card .sub-icon { font-size:2rem; margin-bottom:12px; }
+    .sub-card h4 { font-size:0.96rem; color:var(--navy); margin-bottom:8px; }
+    .sub-card p { font-size:0.82rem; color:var(--grey-600); line-height:1.6; }
+
+    @media (max-width:768px) {
+      .identity-grid { grid-template-columns:1fr; }
+      .portfolio-grid { grid-template-columns:1fr 1fr; }
+      .skills-grid { grid-template-columns:1fr; }
+      .sub-grid { grid-template-columns:1fr; }
+    }
+    @media (max-width:480px) { .portfolio-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="HMG Academy Home">
+        <div class="nav-logo-mark">HMG</div>
+        <div class="nav-logo-text"><span class="name">HMG Academy</span><span class="sub">His Marvellous Grace</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="notes.html">Notes</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="https://wa.me/2348100866322" target="_blank" rel="noopener" class="nav-cta btn">💬 WhatsApp</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="tools.html">Tools</a><a href="notes.html">Notes</a><a href="register.html">Register</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://wa.me/2348100866322" target="_blank" rel="noopener" class="mobile-wa">💬 Chat on WhatsApp</a>
+  </nav>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero" aria-label="About page header">
+  <div class="container page-hero-inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a><span class="sep">›</span><span class="current">About</span>
+    </nav>
+    <h1>The Story Behind HMG Academy</h1>
+    <p>Not a marketing page. A real story about 15+ years in Nigerian classrooms, a long-held dream, an Android tablet — and what happens when an educator who always wanted to solve classroom problems with technology finally finds the tools to do it.</p>
+  </div>
+</section>
+
+<!-- DUAL IDENTITY -->
+<section class="section" aria-label="About Adewale">
+  <div class="container">
+    <div class="section-eyebrow">Who Runs HMG Academy</div>
+    <h2 class="section-title">One Person. Two Callings.</h2>
+    <p class="section-subtitle">Adewale Samson Adeagbo is not a data scientist who happens to teach. He is not a teacher who dabbles in tech. He is both — deliberately, simultaneously, and by design.</p>
+
+    <div class="identity-grid reveal">
+      <div class="identity-card edu">
+        <div class="identity-card-icon">🏫</div>
+        <h3>The Educator — 15+ Years</h3>
+        <p>Adewale began teaching in 2009 and has been in Nigerian secondary school classrooms every year since. He teaches Mathematics, Further Mathematics, Physics, and Chemistry from JSS1 to SSS3. He has served as Head Teacher and Principal, counselled students, registered thousands for national exams, and built HMG Academy as a full virtual school with a team of seasoned teachers covering <strong>all subjects</strong> and <strong>all major Nigerian and international examinations</strong>.</p>
+        <ul>
+          <li>Mathematics, Further Maths, Physics, Chemistry (personal specialist subjects)</li>
+          <li>HMG Academy covers ALL subjects through our experienced teacher team</li>
+          <li>WAEC · NECO · GCE · BECE · UTME · Post-UTME</li>
+          <li>International: IGCSE · IELTS · JUPEB · SAT</li>
+          <li>Head Teacher / Principal — High Favour School (2015–2019)</li>
+          <li>Founder & Director — HMG Concepts (est. 2015)</li>
+        </ul>
+      </div>
+      <div class="identity-card ds">
+        <div class="identity-card-icon">📊</div>
+        <h3>The AI-Augmented Solutions Developer</h3>
+        <p>Adewale's formal tech journey began with the <strong>3MTT programme in 2025</strong> — the turning point that transformed 15+ years of classroom observations into deployable technical solutions. He is a data scientist who uses AI fluency to build solutions in any field — not just education. 10+ projects deployed. 7 industries served.</p>
+        <ul>
+          <li>Data Scientist — 10+ deployed ML models and EdTech tools</li>
+          <li>AI-Augmented Solutions Developer — builds in new fields using AI as force multiplier</li>
+          <li>CBT Pro — live exam platform used by real students (built on Android tablet, zero budget)</li>
+          <li>3MTT · WorldQuant University · DSN × Google · SkillBuild Hub Ambassador</li>
+          <li>B.Sc.(Ed) Computer Science Education — LASU (2023)</li>
+          <li>Philosophy: "Think clearly. Build anyway."</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN STORY -->
+<section class="section section-alt" aria-label="Origin story">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;" class="reveal">
+      <div>
+        <div class="section-eyebrow">The Real Story</div>
+        <h2 class="section-title">Why HMG Academy Exists</h2>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2009</div>
+            <div class="timeline-title">First Classroom</div>
+            <div class="timeline-desc">Adewale begins teaching in Lagos secondary schools. He immediately notices the gap between what students need and what the available tools offer — manual processes, paper-based everything, no reliable data about student performance.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2015</div>
+            <div class="timeline-title">HMG Concepts Founded</div>
+            <div class="timeline-desc">His Marvellous Grace Educational Consult is established — starting as a tutoring service, growing into the multi-subsidiary educational organisation it is today. HMG Academy, HMG Technologies, and HMG Media are born under this umbrella.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2019</div>
+            <div class="timeline-title">The University Decision</div>
+            <div class="timeline-desc">After 10 years in classrooms, Adewale returns to tertiary education — enrolling at Lagos State University to study Computer Science Education. The specific ambition: to build the technical foundation needed to solve classroom and school problems with technology.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2023</div>
+            <div class="timeline-title">B.Sc.(Ed) Completed</div>
+            <div class="timeline-desc">Graduates from LASU with a degree in Computer Science Education. The foundation is laid — but the full problem-solving clarity he sought does not arrive immediately at graduation.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background:var(--emerald);box-shadow:0 0 0 2px var(--emerald);"></div>
+            <div class="timeline-year">2025 — THE TURNING POINT</div>
+            <div class="timeline-title">3MTT Changes Everything</div>
+            <div class="timeline-desc">Adewale joins the Federal Government's 3MTT programme — Data Science track. Something unlocks. His inquisitiveness deepens. The classroom problems he had been observing for 16 years suddenly have clear technical pathways. CBT Pro launches. The ML projects begin. The AI-Augmented Solutions Developer identity takes shape.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background:var(--navy-light);box-shadow:0 0 0 2px var(--navy-light);"></div>
+            <div class="timeline-year">2026 — Now</div>
+            <div class="timeline-title">HMG Academy — Fully Live</div>
+            <div class="timeline-desc">HMG Academy operates as a full virtual school. 10+ projects deployed. DSN × Google, SkillBuild Ambassador, WorldQuant University. Every project documented. The journey is public — and honest.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal-right">
+        <div class="section-eyebrow">Technical Skills</div>
+        <h2 class="section-title">What He Works With</h2>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h4>🐍 Python Stack</h4>
+            <div class="skill-tags">
+              <span class="skill-tag primary">Pandas</span>
+              <span class="skill-tag primary">NumPy</span>
+              <span class="skill-tag primary">Scikit-Learn</span>
+              <span class="skill-tag primary">XGBoost</span>
+              <span class="skill-tag primary">SHAP</span>
+              <span class="skill-tag">Streamlit</span>
+              <span class="skill-tag">Plotly</span>
+              <span class="skill-tag">NLTK</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>📊 Data & Analytics</h4>
+            <div class="skill-tags">
+              <span class="skill-tag primary">SQL</span>
+              <span class="skill-tag primary">Power BI</span>
+              <span class="skill-tag primary">Excel Advanced</span>
+              <span class="skill-tag">Tableau</span>
+              <span class="skill-tag">Supabase</span>
+              <span class="skill-tag">Google Sheets</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>⚙️ AI-Augmented Building</h4>
+            <div class="skill-tags">
+              <span class="skill-tag primary">AI Orchestration</span>
+              <span class="skill-tag primary">Git / GitHub</span>
+              <span class="skill-tag">Cloudflare Pages</span>
+              <span class="skill-tag">GitHub Pages</span>
+              <span class="skill-tag">Supabase</span>
+              <span class="skill-tag">Jupyter</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>🏫 Teaching Subjects</h4>
+            <div class="skill-tags">
+              <span class="skill-tag primary">Mathematics</span>
+              <span class="skill-tag primary">Further Maths</span>
+              <span class="skill-tag primary">Physics</span>
+              <span class="skill-tag primary">Chemistry</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:40px;">
+          <div class="section-eyebrow" style="margin-top:0;">Schools in Career</div>
+          <div class="schools-list">
+            <span class="school-tag">God of Seed Academy</span>
+            <span class="school-tag">Dave Model School</span>
+            <span class="school-tag">High Favour School</span>
+            <span class="school-tag">Fredaks Group</span>
+            <span class="school-tag">Anchor Heights</span>
+            <span class="school-tag">Roas Model School</span>
+            <span class="school-tag">Ennycharles College</span>
+            <span class="school-tag">Marie Group</span>
+            <span class="school-tag">Chrisville</span>
+            <span class="school-tag">Success Heights</span>
+            <span class="school-tag">Tokafid</span>
+            <span class="school-tag">+ more</span>
+          </div>
+          <p style="font-size:0.80rem;color:var(--grey-400);margin-top:10px;">Also tutors on: Tuteria · Prepclass · Gate Academy · Dolessons</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMS SUPPORTED -->
+<section class="section" aria-label="Examinations supported">
+  <div class="container reveal">
+    <div style="text-align:center;max-width:700px;margin:0 auto;">
+      <div class="section-eyebrow">HMG Academy Exam Coverage</div>
+      <h2 class="section-title">Every Major Exam. One Academy.</h2>
+      <p class="section-subtitle">HMG Academy is a full virtual school — not limited to Adewale's personal subjects. Our team of experienced teachers covers all subjects for all major Nigerian and international examinations.</p>
+    </div>
+    <div style="margin-top:40px;">
+      <h4 style="font-size:0.78rem;font-weight:700;color:var(--navy);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px;">Nigerian Examinations</h4>
+      <div class="exam-badges">
+        <span class="exam-badge">WAEC (SSCE)</span>
+        <span class="exam-badge">NECO (SSCE)</span>
+        <span class="exam-badge">GCE</span>
+        <span class="exam-badge">BECE (Junior WAEC)</span>
+        <span class="exam-badge">UTME (JAMB)</span>
+        <span class="exam-badge">Post-UTME</span>
+      </div>
+      <h4 style="font-size:0.78rem;font-weight:700;color:var(--navy);letter-spacing:0.08em;text-transform:uppercase;margin-top:24px;margin-bottom:14px;">International Examinations</h4>
+      <div class="exam-badges">
+        <span class="exam-badge int">IGCSE</span>
+        <span class="exam-badge int">IELTS</span>
+        <span class="exam-badge int">JUPEB</span>
+        <span class="exam-badge int">SAT</span>
+      </div>
+      <p style="font-size:0.85rem;color:var(--grey-400);margin-top:20px;">Not sure if we cover your exam? <a href="https://wa.me/2348100866322?text=Hello%20HMG%20Academy%2C%20I%20want%20to%20ask%20about%20exam%20preparation." target="_blank" rel="noopener" style="color:var(--gold-muted);font-weight:600;">Ask us on WhatsApp →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- DEPLOYED PROJECTS -->
+<section class="section section-alt" aria-label="Deployed projects">
+  <div class="container reveal">
+    <div class="section-eyebrow">Live Projects — HMG Technologies</div>
+    <h2 class="section-title">Built for Real Classrooms</h2>
+    <p class="section-subtitle">Every tool here started as a real problem observed in a real Nigerian classroom. Not academic exercises — live, deployed solutions.</p>
+
+    <div class="portfolio-grid">
+      <div class="portfolio-card">
+        <div class="metric">LIVE</div>
+        <h5>CBT Pro</h5>
+        <p>Free exam platform used by real students. CSV upload, timed exams, anti-cheat, teacher dashboard. Built on Android tablet, zero budget.</p>
+        <a href="https://cssadewale.github.io/cbt-system" target="_blank" rel="noopener">Try CBT Pro →</a>
+      </div>
+      <div class="portfolio-card">
+        <div class="metric">0.9393</div>
+        <h5>Fake News Detector</h5>
+        <p>NLP classifier — 12,999 articles, XGBoost, TF-IDF, VADER sentiment. AUC 0.9393. 3MTT Capstone Project.</p>
+        <a href="https://adewale-fake-news-detector.streamlit.app/" target="_blank" rel="noopener">Live App →</a>
+      </div>
+      <div class="portfolio-card">
+        <div class="metric">R² 0.855</div>
+        <h5>Burnout Rate Predictor</h5>
+        <p>Regression model — 22,750 records. Gradient Boosting. R²: 0.855. Predicts employee burnout from HR data.</p>
+        <a href="https://adewale-burnout-prediction.streamlit.app/" target="_blank" rel="noopener">Live App →</a>
+      </div>
+      <div class="portfolio-card">
+        <div class="metric">38K+</div>
+        <h5>Staff Promotion Predictor</h5>
+        <p>38,312 Nigerian employee records. Random Forest. ROC-AUC 0.891. Replaces subjective promotion decisions.</p>
+        <a href="https://yakub-promotion-prediction.streamlit.app/" target="_blank" rel="noopener">Live App →</a>
+      </div>
+      <div class="portfolio-card">
+        <div class="metric">EdTech</div>
+        <h5>Student Performance Tracker</h5>
+        <p>Upload class results → instant analytics. Class average, score distribution, top/bottom performers, at-risk students.</p>
+        <a href="https://adewale-student-performance-tracker.streamlit.app/" target="_blank" rel="noopener">Live App →</a>
+      </div>
+      <div class="portfolio-card">
+        <div class="metric">EdTech</div>
+        <h5>CBT Question Bank Manager</h5>
+        <p>Build, organise, search, and export CBT question banks. One-click export to CBT Pro CSV format.</p>
+        <a href="https://adewale-cbt-question-bank.streamlit.app/" target="_blank" rel="noopener">Live App →</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px;">
+      <a href="tools.html" class="btn btn-navy">View All Tools & Projects →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section" aria-label="Certifications and programmes">
+  <div class="container reveal">
+    <div class="section-eyebrow">Verified Learning</div>
+    <h2 class="section-title">Programmes & Certifications</h2>
+    <p class="section-subtitle">Every certification reflects a deliberate choice to grow — not just to collect badges.</p>
+    <div class="certs-grid">
+      <div class="cert-card"><div class="icon">🌐</div><div><strong>DSN × Google DeepTech_Ready</strong>DSML Track, Cohort 3 · 2026</div></div>
+      <div class="cert-card"><div class="icon">🏆</div><div><strong>SkillBuild Hub Ambassador</strong>IBM SkillsBuild · Cohort 4 · 2026</div></div>
+      <div class="cert-card"><div class="icon">🎓</div><div><strong>Applied Data Science Lab</strong>WorldQuant University · Ongoing</div></div>
+      <div class="cert-card"><div class="icon">🇳🇬</div><div><strong>3MTT Data Science Programme</strong>Federal Govt of Nigeria · 2025</div></div>
+      <div class="cert-card"><div class="icon">📊</div><div><strong>Python Data Fundamentals</strong>DataCamp · 7 Sub-courses · 2025</div></div>
+      <div class="cert-card"><div class="icon">🤖</div><div><strong>AI Fundamentals</strong>IBM SkillsBuild · 2025</div></div>
+      <div class="cert-card"><div class="icon">🎯</div><div><strong>Generative AI in Data Analysis</strong>Open Visualization Academy · 2025</div></div>
+      <div class="cert-card"><div class="icon">💼</div><div><strong>Career Readiness & Digital Economy</strong>CareerEX / Access Bank · 2025</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HMG CONCEPTS SUBSIDIARIES -->
+<section class="section section-alt" aria-label="HMG Concepts family">
+  <div class="container reveal">
+    <div style="text-align:center;max-width:680px;margin:0 auto;">
+      <div class="section-eyebrow">The Parent Organisation</div>
+      <h2 class="section-title">HMG Concepts — His Marvellous Grace Educational Consult</h2>
+      <p style="font-size:1.02rem;color:var(--grey-600);line-height:1.80;margin-bottom:12px;">Founded in 2015, HMG Concepts is the umbrella organisation that holds three subsidiaries — each serving a different dimension of education and technology in Nigeria.</p>
+    </div>
+    <div class="sub-grid" style="margin-top:36px;">
+      <div class="sub-card">
+        <div class="sub-icon">🎓</div>
+        <h4>HMG Academy</h4>
+        <p>The virtual EdTech school. All subjects, all levels, all major Nigerian and international exams. Strictly online delivery — no physical classes.</p>
+      </div>
+      <div class="sub-card">
+        <div class="sub-icon">💻</div>
+        <h4>HMG Technologies</h4>
+        <p>The software and tech arm. CBT Pro, student analytics tools, ML projects, and all digital products built for education and beyond.</p>
+      </div>
+      <div class="sub-card">
+        <div class="sub-icon">📹</div>
+        <h4>HMG Media</h4>
+        <p>YouTube channel, tutorials, educational content, and public storytelling for Nigerian students and teachers. Learning beyond classroom walls.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px;">
+      <a href="https://hmgconcepts.business.site" target="_blank" rel="noopener" class="btn btn-ghost">Visit HMG Concepts →</a>
+      <a href="https://linkedin.com/in/hmgconcepts" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-left:12px;">HMG on LinkedIn →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" aria-label="Call to action">
+  <div class="container reveal">
+    <div style="background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 100%);border-radius:var(--radius-xl);padding:64px 48px;text-align:center;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:radial-gradient(circle,rgba(232,160,32,0.10) 0%,transparent 70%);"></div>
+      <h2 style="color:white;font-size:clamp(1.6rem,3vw,2.3rem);margin-bottom:14px;">Ready to Work Together?</h2>
+      <p style="color:rgba(255,255,255,0.65);font-size:1rem;margin-bottom:32px;position:relative;z-index:1;">Whether you are a student, parent, school, or fellow educator — there is a place for you in the HMG ecosystem.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;">
+        <a href="register.html" class="btn btn-gold">✍️ Register Now</a>
+        <a href="contact.html" class="btn btn-white-ghost">📬 Contact Us</a>
+        <a href="https://wa.me/2348100866322?text=Hello%20HMG%20Academy%2C%20I%20am%20interested%20in%20your%20services." target="_blank" rel="noopener" class="btn btn-wa">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer aria-label="Site footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><div class="nav-logo-mark">HMG</div><div class="nav-logo-text"><span class="name" style="color:white;">HMG Academy</span><span class="sub">His Marvellous Grace</span></div></a>
+        <p>A subsidiary of HMG Concepts, founded in 2015. Virtual classes, CBT exams, lesson notes — all subjects, all levels, all major exams.</p>
+        <div class="footer-socials">
+          <a href="https://linkedin.com/in/adewalesamsonadeagbo" target="_blank" rel="noopener" class="social-btn" title="Personal LinkedIn">in</a>
+          <a href="https://linkedin.com/in/hmgconcepts" target="_blank" rel="noopener" class="social-btn" title="HMG Concepts LinkedIn" style="font-size:0.62rem;">HMG</a>
+          <a href="https://github.com/cssadewale" target="_blank" rel="noopener" class="social-btn" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
+          <a href="https://youtube.com/@hmgconcepts" target="_blank" rel="noopener" class="social-btn" title="YouTube" style="color:#FF0000;">▶</a>
+          <a href="https://instagram.com/hmgconcepts" target="_blank" rel="noopener" class="social-btn" title="Instagram Brand">ig</a>
+          <a href="https://wa.me/2348100866322" target="_blank" rel="noopener" class="social-btn" style="background:rgba(37,211,102,0.18);color:#25D366;">💬</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Navigation</h4><ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        <li><a href="notes.html">Lesson Notes</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="services.html#virtual-classes">Virtual Classes</a></li>
+        <li><a href="https://cssadewale.github.io/cbt-system" target="_blank" rel="noopener">CBT Pro ↗</a></li>
+        <li><a href="notes.html">Lesson Notes</a></li>
+        <li><a href="services.html#tutoring">1-on-1 Tutoring</a></li>
+        <li><a href="services.html#data-science">Data Science Training</a></li>
+        <li><a href="services.html#exam-reg">Exam Registration</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4>
+        <div class="footer-contact-item">📞 <a href="tel:+2348100866322">+234 810 086 6322 (Hotline)</a></div>
+        <div class="footer-contact-item">💬 <a href="https://wa.me/2348094481488" target="_blank" rel="noopener">+234 809 448 1488 (WA only)</a></div>
+        <div class="footer-contact-item">📧 <a href="mailto:hismarvellousgrace@gmail.com">hismarvellousgrace@gmail.com</a></div>
+        <div class="footer-contact-item">📍 Lagos / Ogun State, Nigeria</div>
+        <div class="footer-contact-item">🌐 <a href="https://hmgconcepts.business.site" target="_blank" rel="noopener">hmgconcepts.business.site</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> HMG Academy · A subsidiary of HMG Concepts. All rights reserved.</p>
+      <p>Built with ❤️ by <a href="about.html">Adewale Samson Adeagbo</a> · Hosted free on Cloudflare Pages</p>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/2348100866322?text=Hello%20HMG%20Academy%2C%20I%20am%20interested%20in%20your%20services." target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="wa-label">Chat on WhatsApp</span>
+</a>
+
+<script src="_shared.js"></script>
+</body>
+</html>
