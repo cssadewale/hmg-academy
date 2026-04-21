@@ -1192,7 +1192,7 @@ These items are required for the site to be fully production-ready:
 | YouTube | [youtube.com/@hmgconcepts](https://youtube.com/@hmgconcepts) |
 | Facebook | [facebook.com/hmgconceptspg](https://facebook.com/hmgconceptspg) |
 | X (Twitter) | [x.com/hmgconcepts](https://x.com/hmgconcepts) |
-| Website | [hmgconcepts.business.site](https://hmgconcepts.business.site) |
+| Website | [hmgacademy.pages.dev](https://hmgacademy.pages.dev) |
 
 ### Personal / Technical
 
