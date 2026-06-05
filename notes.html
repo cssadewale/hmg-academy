@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Lesson Notes &amp; Resources | HMG Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>body { font-family: 'Inter', system_ui, sans-serif; } .navy-bg { background-color: #0a1628; } .premium-card { background-color: #1e2937; border: 1px solid #334155; }</style>
+</head>
+<body class="bg-[#0a1628] text-[#f8fafc] navy-bg">
+    <nav class="bg-[#0a1628]/95 backdrop-blur-md border-b border-[#334155] sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6"><div class="flex justify-between items-center h-16">
+            <div class="flex items-center gap-3"><img src="assets/images/hmg-academy-logo.png" alt="HMG Academy Logo" class="h-9 w-auto" onerror="this.style.display='none'"><span class="font-bold">HMG Academy</span></div>
+            <div class="hidden md:flex items-center gap-6 text-sm"><a href="index.html" class="hover:text-[#eab308]">Home</a><a href="services.html" class="hover:text-[#eab308]">Services</a><a href="tools.html" class="hover:text-[#eab308]">Tools</a><a href="contact.html" class="hover:text-[#eab308]">Contact</a></div>
+            <a href="https://wa.me/2348100866322" target="_blank" class="px-4 py-2 bg-[#eab308] text-[#0a1628] text-sm font-semibold rounded-2xl flex items-center gap-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div></div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-6 py-12">
+        <h1 class="text-4xl font-bold">Free Lesson Notes &amp; Resources</h1>
+        <p class="mt-3 text-[#cbd5e1]">Sample materials from our team of seasoned teachers. Full packs available via WhatsApp.</p>
+
+        <div class="mt-8 grid md:grid-cols-2 gap-4">
+            <div class="premium-card p-6 rounded-3xl">
+                <h3 class="font-semibold">Mathematics (JSS2–SSS2)</h3>
+                <div class="text-sm mt-2 text-[#94a3b8]">Algebra, Geometry, Trigonometry, Calculus intro. With worked examples and exam-style questions.</div>
+                <button onclick="requestResource('Mathematics notes pack')" class="mt-4 text-xs px-4 py-1.5 border border-[#7c3aed] text-[#7c3aed] rounded-2xl">Request Full Pack via WhatsApp</button>
+            </div>
+            <div class="premium-card p-6 rounded-3xl">
+                <h3 class="font-semibold">Further Mathematics (SSS1–SSS3)</h3>
+                <div class="text-sm mt-2 text-[#94a3b8]">Complex numbers, vectors, mechanics, statistics. Tailored for WAEC/NECO excellence.</div>
+                <button onclick="requestResource('Further Maths notes')" class="mt-4 text-xs px-4 py-1.5 border border-[#7c3aed] text-[#7c3aed] rounded-2xl">Request Full Pack via WhatsApp</button>
+            </div>
+            <div class="premium-card p-6 rounded-3xl">
+                <h3 class="font-semibold">Physics &amp; Chemistry (JSS–SSS)</h3>
+                <div class="text-sm mt-2 text-[#94a3b8]">Core concepts with practical Nigerian examples and past questions.</div>
+                <button onclick="requestResource('Physics & Chemistry notes')" class="mt-4 text-xs px-4 py-1.5 border border-[#7c3aed] text-[#7c3aed] rounded-2xl">Request Full Pack via WhatsApp</button>
+            </div>
+            <div class="premium-card p-6 rounded-3xl">
+                <h3 class="font-semibold">Data Science &amp; Computer Studies</h3>
+                <div class="text-sm mt-2 text-[#94a3b8]">From basics to Python/SQL introduction. Aligned with our LMS platforms.</div>
+                <button onclick="requestResource('Data Science intro notes')" class="mt-4 text-xs px-4 py-1.5 border border-[#7c3aed] text-[#7c3aed] rounded-2xl">Request Full Pack via WhatsApp</button>
+            </div>
+        </div>
+
+        <div class="mt-8 text-xs text-[#94a3b8]">All resources are free for enrolled students and partner schools. Request via WhatsApp for the complete term packs.</div>
+    </div>
+
+    <script>
+        function requestResource(topic) {
+            const msg = encodeURIComponent(`Hello HMG Academy, I would like the full free lesson notes pack for: ${topic}`);
+            window.open(`https://wa.me/2348100866322?text=${msg}`, '_blank');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Home Schooling | HMG Academy — Nursery to SSS3 with Tutor Support</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>body { font-family: 'Inter', system_ui, sans-serif; } .navy-bg { background-color: #0a1628; } .premium-card { background-color: #1e2937; border: 1px solid #334155; }</style>
+</head>
+<body class="bg-[#0a1628] text-[#f8fafc] navy-bg">
+    <nav class="bg-[#0a1628]/95 backdrop-blur-md border-b border-[#334155] sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6"><div class="flex justify-between items-center h-16">
+            <div class="flex items-center gap-3"><img src="assets/images/hmg-academy-logo.png" alt="HMG Academy Logo" class="h-9 w-auto" onerror="this.style.display='none'"><span class="font-bold">HMG Academy</span></div>
+            <div class="hidden md:flex items-center gap-6 text-sm"><a href="index.html" class="hover:text-[#eab308]">Home</a><a href="services.html" class="hover:text-[#eab308]">Services</a><a href="book-tutor.html" class="hover:text-[#eab308]">Find a Tutor</a><a href="contact.html" class="hover:text-[#eab308]">Contact</a></div>
+            <a href="https://wa.me/2348100866322" target="_blank" class="px-4 py-2 bg-[#eab308] text-[#0a1628] text-sm font-semibold rounded-2xl flex items-center gap-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div></div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-6 py-12">
+        <h1 class="text-5xl font-bold">Virtual Home Schooling</h1>
+        <p class="mt-2 text-xl text-[#cbd5e1]">Nursery–SSS3 • Home/Online Tutors + Structured LMS • 5-Step Results Process</p>
+
+        <!-- Enhanced with HMG Academy/HMG Academy elements -->
+        <div class="mt-8 grid md:grid-cols-2 gap-6">
+            <div class="premium-card p-6 rounded-3xl">
+                <h3 class="font-semibold mb-3">Modes (HMG Academy-inspired)</h3>
+                <ul class="text-sm space-y-2">
+                    <li><strong>Full Virtual Home Schooling</strong> — Classroom brought to your home with dedicated tutors.</li>
+                    <li><strong>Online One-on-One</strong> — Immersive with state-of-the-art digital tools.</li>
+                    <li><strong>Early Years Foundation</strong> — Strong foundations for young learners.</li>
+                    <li><strong>Exam Preparation Focus</strong> — WAEC, UTME, IGCSE, IELTS, etc.</li>
+                </ul>
+            </div>
+            <div class="premium-card p-6 rounded-3xl">
+                <h3 class="font-semibold mb-3">Our Innovative Approach (6 Steps)</h3>
+                <div class="text-sm">Insights Assessment → Adaptive Plans (via 11 LMS) → Vetted Tutor Matching → Periodic Evaluation (CBT Pro) → Progress Reports (parent dashboard) → Continuous Uplift.</div>
+            </div>
+        </div>
+
+        <!-- Parent Dashboard Demo (enhanced) -->
+        <div class="mt-10">
+            <h2 class="text-3xl font-bold mb-4">Parent Dashboard Demo (Progress Reports &amp; Reviews)</h2>
+            <div class="premium-card p-6 rounded-3xl">
+                <!-- Same interactive dashboard as before, assume copied or re-include JS -->
+                <div id="students-list-demo"></div>
+                <button onclick="addStudentDemo()" class="mt-4 px-4 py-2 bg-[#7c3aed] text-white rounded-2xl text-sm">+ Add Student (Demo)</button>
+                <button onclick="generateReportDemo()" class="ml-2 px-4 py-2 bg-emerald-600 rounded-2xl text-sm">Generate Progress Report</button>
+                <div id="report-output-demo" class="mt-4 text-xs bg-[#0f172a] p-4 rounded-2xl hidden font-mono whitespace-pre-wrap"></div>
+            </div>
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="book-tutor.html" class="px-8 py-3 bg-[#eab308] text-[#0a1628] font-semibold rounded-3xl">Add Tutor Support to Your Home Schooling</a>
+        </div>
+    </div>
+
+    <script>
+        // Simple demo dashboard (localStorage)
+        let demoStudents = JSON.parse(localStorage.getItem('hmg_demo_students_v3') || '[]');
+        function saveDemo() { localStorage.setItem('hmg_demo_students_v3', JSON.stringify(demoStudents)); }
+        function renderDemo() {
+            const c = document.getElementById('students-list-demo');
+            c.innerHTML = demoStudents.length ? demoStudents.map((s,i) => `<div class="p-3 bg-[#0f172a] rounded mb-2">${s.name} (${s.level}) — ${s.completed}/${s.total} lessons <button onclick="markDemo(${i})" class="text-xs ml-2 bg-emerald-600 px-2 rounded">Mark Complete</button></div>`).join('') : 'Add a student to demo progress tracking.';
+        }
+        window.addStudentDemo = () => {
+            const name = prompt('Student name?'); if(!name) return;
+            const level = prompt('Level?', 'JSS2'); 
+            demoStudents.push({name, level, completed:0, total:24});
+            saveDemo(); renderDemo();
+        };
+        window.markDemo = (i) => { if(demoStudents[i].completed < demoStudents[i].total) demoStudents[i].completed++; saveDemo(); renderDemo(); };
+        window.generateReportDemo = () => {
+            const out = document.getElementById('report-output-demo');
+            let r = 'HMG ACADEMY WEEKLY REPORT\n\n';
+            demoStudents.forEach(s => r += `${s.name} (${s.level}): ${s.completed}/${s.total} (${Math.round(s.completed/s.total*100)}%)\n`);
+            out.textContent = r + '\nContact via WhatsApp for full support.';
+            out.classList.remove('hidden');
+        };
+        window.onload = function() { renderDemo(); if(demoStudents.length===0){ demoStudents=[{name:'Chinedu',level:'JSS2',completed:18,total:24}]; saveDemo(); renderDemo(); } };
+    </script>
+</body>
+</html>
