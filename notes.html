@@ -3,183 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson Notes — HMG Academy | Free WAEC/NECO Study Materials</title>
-    <meta name="description" content="Free, WAEC/NECO-aligned lesson notes written by experienced teachers. Clear, structured, and honestly made for Nigerian secondary school students.">
+    <title>Free Lesson Notes &amp; Resources | HMG Academy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        body { font-family: 'Inter', system_ui, sans-serif; }
-        .font-display { font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif; font-weight: 600; }
-        .premium-nav {
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-        }
-    </style>
+    <style>body { font-family: 'Inter', system_ui, sans-serif; } .navy-bg { background-color: #0a1628; } .premium-card { background-color: #1e2937; border: 1px solid #334155; }</style>
 </head>
-<body class="bg-slate-50">
-    <nav class="premium-nav border-b border-slate-700 sticky top-0 z-50 text-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-x-3">
-                    <div class="flex items-center justify-center w-12 h-12 rounded-xl overflow-hidden bg-white/10">
-                        <img src="assets/images/hmg-academy-logo.png" alt="HMG Academy Logo" class="w-full h-full object-contain scale-110" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white text-xl font-bold\'>HA</div>'">
-                    </div>
-                    <div class="font-display font-bold text-xl tracking-tighter text-white">HMG Academy</div>
-                </div>
-                <div class="hidden md:flex items-center gap-x-6 text-sm font-medium">
-                    <a href="index.html" class="nav-link text-white hover:text-purple-300">Home</a>
-                    <a href="about.html" class="nav-link text-white hover:text-purple-300">About</a>
-                    <a href="services.html" class="nav-link text-white hover:text-purple-300">Services</a>
-                    <a href="homeschooling.html" class="nav-link text-white hover:text-purple-300">Home Schooling</a>
-                    <a href="tools.html" class="nav-link text-white hover:text-purple-300">Tools</a>
-                    <a href="notes.html" class="nav-link text-white hover:text-purple-300 font-semibold">Notes</a>
-                    <a href="faq.html" class="nav-link text-white hover:text-purple-300">FAQ</a>
-                    <a href="partners.html" class="nav-link text-white hover:text-purple-300">For Schools</a>
-                    <a href="contact.html" class="nav-link text-white hover:text-purple-300">Contact</a>
-                </div>
-                <a href="https://wa.me/2348100866322" target="_blank" class="hidden sm:flex items-center gap-x-2 bg-emerald-600 text-white text-sm font-semibold px-5 py-2.5 rounded-2xl"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-            </div>
-        </div>
+<body class="bg-[#0a1628] text-[#f8fafc] navy-bg">
+    <nav class="bg-[#0a1628]/95 backdrop-blur-md border-b border-[#334155] sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6"><div class="flex justify-between items-center h-16">
+            <div class="flex items-center gap-3"><img src="assets/images/hmg-academy-logo.png" alt="HMG Academy Logo" class="h-9 w-auto" onerror="this.style.display='none'"><span class="font-bold">HMG Academy</span></div>
+            <div class="hidden md:flex items-center gap-6 text-sm"><a href="index.html" class="hover:text-[#eab308]">Home</a><a href="services.html" class="hover:text-[#eab308]">Services</a><a href="tools.html" class="hover:text-[#eab308]">Tools</a><a href="contact.html" class="hover:text-[#eab308]">Contact</a></div>
+            <a href="https://wa.me/2348100866322" target="_blank" class="px-4 py-2 bg-[#eab308] text-[#0a1628] text-sm font-semibold rounded-2xl flex items-center gap-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div></div>
     </nav>
 
-    <div class="max-w-7xl mx-auto px-6 pt-10 pb-8">
-        <h1 class="font-display text-4xl tracking-tighter font-bold">Lesson Notes Library</h1>
-        <p class="mt-3 text-lg text-slate-600 max-w-2xl">Free, WAEC/NECO-aligned notes written by the same hand that teaches. Clear, structured, and honestly made for Nigerian secondary school students.</p>
-        
-        <div class="mt-6 inline-flex items-center gap-x-2 bg-emerald-100 text-emerald-700 text-xs font-semibold px-4 py-1.5 rounded-full">100% FREE • NO PAYWALL • EVER</div>
-    </div>
+    <div class="max-w-4xl mx-auto px-6 py-12">
+        <h1 class="text-4xl font-bold">Free Lesson Notes &amp; Resources</h1>
+        <p class="mt-3 text-[#cbd5e1]">Sample materials from our team of seasoned teachers. Full packs available via WhatsApp.</p>
 
-    <div class="max-w-7xl mx-auto px-6">
-        <!-- Categories -->
-        <div class="flex flex-wrap gap-2 mb-8">
-            <button onclick="filterNotes('all')" class="active px-5 py-1.5 text-sm rounded-2xl bg-white border border-emerald-200 font-medium">All Notes</button>
-            <button onclick="filterNotes('maths')" class="px-5 py-1.5 text-sm rounded-2xl bg-white border hover:border-slate-300">Mathematics</button>
-            <button onclick="filterNotes('further')" class="px-5 py-1.5 text-sm rounded-2xl bg-white border hover:border-slate-300">Further Maths</button>
-            <button onclick="filterNotes('physics')" class="px-5 py-1.5 text-sm rounded-2xl bg-white border hover:border-slate-300">Physics</button>
-            <button onclick="filterNotes('chemistry')" class="px-5 py-1.5 text-sm rounded-2xl bg-white border hover:border-slate-300">Chemistry</button>
-            <button onclick="filterNotes('other')" class="px-5 py-1.5 text-sm rounded-2xl bg-white border hover:border-slate-300">Other Subjects</button>
-        </div>
-        
-        <!-- Notes Grid (placeholder content) -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5" id="notes-grid">
-            <!-- Sample notes - replace with real when available -->
-            <div class="note-card bg-white border border-slate-200 rounded-3xl p-6" data-subject="maths">
-                <div class="flex items-center justify-between">
-                    <div class="font-semibold">Algebra Basics (WAEC Aligned)</div>
-                    <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">Mathematics</span>
-                </div>
-                <div class="text-xs text-slate-500 mt-1">JSS 3 / SSS 1 • 24 pages</div>
-                <p class="mt-3 text-sm text-slate-600">Clear explanations of variables, equations, inequalities with worked examples from past WAEC papers.</p>
-                <div class="mt-5 flex gap-x-2">
-                    <button class="text-xs font-semibold bg-emerald-600 text-white px-4 py-1.5 rounded-xl">Download PDF</button>
-                    <span class="text-xs text-slate-500 self-center">Updated Jan 2026</span>
-                </div>
+        <div class="mt-8 grid md:grid-cols-2 gap-4">
+            <div class="premium-card p-6 rounded-3xl">
+                <h3 class="font-semibold">Mathematics (JSS2–SSS2)</h3>
+                <div class="text-sm mt-2 text-[#94a3b8]">Algebra, Geometry, Trigonometry, Calculus intro. With worked examples and exam-style questions.</div>
+                <button onclick="requestResource('Mathematics notes pack')" class="mt-4 text-xs px-4 py-1.5 border border-[#7c3aed] text-[#7c3aed] rounded-2xl">Request Full Pack via WhatsApp</button>
             </div>
-            
-            <div class="note-card bg-white border border-slate-200 rounded-3xl p-6" data-subject="further">
-                <div class="flex items-center justify-between">
-                    <div class="font-semibold">Differentiation &amp; Integration Intro</div>
-                    <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">Further Maths</span>
-                </div>
-                <div class="text-xs text-slate-500 mt-1">SSS 2 / SSS 3 • 18 pages</div>
-                <p class="mt-3 text-sm text-slate-600">Step-by-step introduction with graphs and real exam-style questions. Includes common student pitfalls.</p>
-                <div class="mt-5 flex gap-x-2">
-                    <button class="text-xs font-semibold bg-emerald-600 text-white px-4 py-1.5 rounded-xl">Download PDF</button>
-                    <span class="text-xs text-slate-500 self-center">Updated Dec 2025</span>
-                </div>
+            <div class="premium-card p-6 rounded-3xl">
+                <h3 class="font-semibold">Further Mathematics (SSS1–SSS3)</h3>
+                <div class="text-sm mt-2 text-[#94a3b8]">Complex numbers, vectors, mechanics, statistics. Tailored for WAEC/NECO excellence.</div>
+                <button onclick="requestResource('Further Maths notes')" class="mt-4 text-xs px-4 py-1.5 border border-[#7c3aed] text-[#7c3aed] rounded-2xl">Request Full Pack via WhatsApp</button>
             </div>
-            
-            <div class="note-card bg-white border border-slate-200 rounded-3xl p-6" data-subject="physics">
-                <div class="flex items-center justify-between">
-                    <div class="font-semibold">Mechanics: Motion &amp; Forces</div>
-                    <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">Physics</span>
-                </div>
-                <div class="text-xs text-slate-500 mt-1">JSS 3 – SSS 2 • 32 pages</div>
-                <p class="mt-3 text-sm text-slate-600">Vectors, Newton’s laws, friction, projectiles — explained with diagrams and WAEC past questions.</p>
-                <div class="mt-5 flex gap-x-2">
-                    <button class="text-xs font-semibold bg-emerald-600 text-white px-4 py-1.5 rounded-xl">Download PDF</button>
-                    <span class="text-xs text-slate-500 self-center">Updated Feb 2026</span>
-                </div>
+            <div class="premium-card p-6 rounded-3xl">
+                <h3 class="font-semibold">Physics &amp; Chemistry (JSS–SSS)</h3>
+                <div class="text-sm mt-2 text-[#94a3b8]">Core concepts with practical Nigerian examples and past questions.</div>
+                <button onclick="requestResource('Physics & Chemistry notes')" class="mt-4 text-xs px-4 py-1.5 border border-[#7c3aed] text-[#7c3aed] rounded-2xl">Request Full Pack via WhatsApp</button>
             </div>
-            
-            <div class="note-card bg-white border border-slate-200 rounded-3xl p-6" data-subject="chemistry">
-                <div class="flex items-center justify-between">
-                    <div class="font-semibold">Atomic Structure &amp; Bonding</div>
-                    <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">Chemistry</span>
-                </div>
-                <div class="text-xs text-slate-500 mt-1">SSS 1 • 21 pages</div>
-                <p class="mt-3 text-sm text-slate-600">Electron configuration, ionic/covalent/metallic bonding, with practice questions and explanations.</p>
-                <div class="mt-5 flex gap-x-2">
-                    <button class="text-xs font-semibold bg-emerald-600 text-white px-4 py-1.5 rounded-xl">Download PDF</button>
-                    <span class="text-xs text-slate-500 self-center">Updated Jan 2026</span>
-                </div>
-            </div>
-            
-            <div class="note-card bg-white border border-slate-200 rounded-3xl p-6" data-subject="other">
-                <div class="flex items-center justify-between">
-                    <div class="font-semibold">English Language: Comprehension Strategies</div>
-                    <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">English</span>
-                </div>
-                <div class="text-xs text-slate-500 mt-1">All Levels • 15 pages</div>
-                <p class="mt-3 text-sm text-slate-600">Practical techniques for WAEC/NECO comprehension passages. Vocabulary building included.</p>
-                <div class="mt-5 flex gap-x-2">
-                    <button class="text-xs font-semibold bg-emerald-600 text-white px-4 py-1.5 rounded-xl">Download PDF</button>
-                    <span class="text-xs text-slate-500 self-center">Coming soon</span>
-                </div>
-            </div>
-            
-            <div class="note-card bg-white border border-slate-200 rounded-3xl p-6" data-subject="maths">
-                <div class="flex items-center justify-between">
-                    <div class="font-semibold">Statistics &amp; Probability</div>
-                    <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">Mathematics</span>
-                </div>
-                <div class="text-xs text-slate-500 mt-1">SSS 2 • 19 pages</div>
-                <p class="mt-3 text-sm text-slate-600">Mean, median, mode, probability trees, and WAEC-style questions with full solutions.</p>
-                <div class="mt-5 flex gap-x-2">
-                    <button class="text-xs font-semibold bg-emerald-600 text-white px-4 py-1.5 rounded-xl">Download PDF</button>
-                    <span class="text-xs text-slate-500 self-center">Updated Nov 2025</span>
-                </div>
+            <div class="premium-card p-6 rounded-3xl">
+                <h3 class="font-semibold">Data Science &amp; Computer Studies</h3>
+                <div class="text-sm mt-2 text-[#94a3b8]">From basics to Python/SQL introduction. Aligned with our LMS platforms.</div>
+                <button onclick="requestResource('Data Science intro notes')" class="mt-4 text-xs px-4 py-1.5 border border-[#7c3aed] text-[#7c3aed] rounded-2xl">Request Full Pack via WhatsApp</button>
             </div>
         </div>
-        
-        <div class="mt-8 text-center">
-            <p class="text-sm text-slate-500">Notes are being expanded regularly. Request a specific topic or subject via WhatsApp.</p>
-            <a href="https://wa.me/2348100866322?text=Hello%2C%20I%20am%20looking%20for%20lesson%20notes%20on%20a%20specific%20topic." target="_blank" class="mt-4 inline-flex items-center gap-x-2 text-emerald-600 font-semibold text-sm">Request a Note via WhatsApp →</a>
-        </div>
-    </div>
 
-    <div class="max-w-7xl mx-auto px-6 py-12 border-t">
-        <div class="max-w-md">
-            <h3 class="font-semibold">Why Free Notes?</h3>
-            <p class="mt-2 text-sm text-slate-600">I've been in enough classrooms to know that access to good study material is often the difference between a student passing and failing. Every note on this page was written from scratch — not copied from a textbook. They reflect a decade of teaching the same topics, understanding where students get stuck, and writing explanations that actually work.</p>
-            <p class="mt-4 text-xs text-emerald-600 font-medium">If you find them useful, share them. That’s the whole point.</p>
-        </div>
+        <div class="mt-8 text-xs text-[#94a3b8]">All resources are free for enrolled students and partner schools. Request via WhatsApp for the complete term packs.</div>
     </div>
-
-    <footer class="bg-slate-900 text-slate-400 py-8 text-xs text-center">HMG Academy Lesson Notes — Knowledge should not have a paywall.</footer>
 
     <script>
-        function filterNotes(subject) {
-            const cards = document.querySelectorAll('.note-card');
-            cards.forEach(card => {
-                if (subject === 'all') {
-                    card.style.display = 'block';
-                } else {
-                    if (card.dataset.subject === subject) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }
-            });
-            
-            // Update active button styles (simple)
-            document.querySelectorAll('button').forEach(btn => btn.classList.remove('bg-emerald-100', 'border-emerald-300'));
-            event.target.classList.add('bg-emerald-100', 'border-emerald-300');
+        function requestResource(topic) {
+            const msg = encodeURIComponent(`Hello HMG Academy, I would like the full free lesson notes pack for: ${topic}`);
+            window.open(`https://wa.me/2348100866322?text=${msg}`, '_blank');
         }
-        
-        // Default: show all
-        console.log('%c[HMG Academy Notes] Notes page ready. Sample notes shown — replace with real PDFs when available.', 'color:#64748b');
     </script>
 </body>
 </html>

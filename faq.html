@@ -3,15 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ — HMG Academy</title>
+    <title>FAQ | HMG Academy</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>body { font-family: 'Inter', system_ui, sans-serif; } .navy-bg { background-color: #0a1628; } .premium-card { background-color: #1e2937; border: 1px solid #334155; }</style>
 </head>
-<body class="bg-slate-50 p-8 max-w-4xl mx-auto">
-    <h1 class="text-3xl font-bold">FAQ</h1>
-    <details class="mt-6 bg-white p-6 rounded-2xl border"><summary class="font-semibold">What makes HMG Academy different?</summary><p class="mt-2 text-sm">Full virtual institution with team of teachers, real infrastructure (CBT Pro, notes, tools), built with free tools only, no paid AI APIs.</p></details>
-    <details class="mt-4 bg-white p-6 rounded-2xl border"><summary class="font-semibold">Do you use paid AI APIs?</summary><p class="mt-2 text-sm">No. We use rule-based logic and free tools for cost-effectiveness.</p></details>
-    <details class="mt-4 bg-white p-6 rounded-2xl border"><summary class="font-semibold">What is Virtual Home Schooling?</summary><p class="mt-2 text-sm">Complete homeschool program Nursery–SSS3 with live classes, parent support, dashboards, exam prep, all free tools included.</p></details>
-    <details class="mt-4 bg-white p-6 rounded-2xl border"><summary class="font-semibold">What enterprise features are free?</summary><p class="mt-2 text-sm">CBT Pro for schools, performance trackers, simulators, parent reporting demos — all built with free infrastructure.</p></details>
-    <a href="index.html" class="mt-8 inline-block text-emerald-600">Back to Home</a>
+<body class="bg-[#0a1628] text-[#f8fafc] navy-bg">
+    <nav class="bg-[#0a1628]/95 backdrop-blur-md border-b border-[#334155] sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6"><div class="flex justify-between items-center h-16">
+            <div class="flex items-center gap-3"><img src="assets/images/hmg-academy-logo.png" alt="HMG Academy Logo" class="h-9 w-auto" onerror="this.style.display='none'"><span class="font-bold">HMG Academy</span></div>
+            <div class="hidden md:flex items-center gap-6 text-sm"><a href="index.html" class="hover:text-[#eab308]">Home</a><a href="services.html" class="hover:text-[#eab308]">Services</a><a href="tools.html" class="hover:text-[#eab308]">Tools</a><a href="contact.html" class="hover:text-[#eab308]">Contact</a></div>
+            <a href="https://wa.me/2348100866322" target="_blank" class="px-4 py-2 bg-[#eab308] text-[#0a1628] text-sm font-semibold rounded-2xl flex items-center gap-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div></div>
+    </nav>
+
+    <div class="max-w-3xl mx-auto px-6 py-12">
+        <h1 class="text-4xl font-bold mb-8">Frequently Asked Questions</h1>
+        
+        <div class="space-y-4">
+            <div class="premium-card p-5 rounded-3xl">
+                <div class="font-semibold">Is everything really free for students and schools?</div>
+                <div class="mt-2 text-sm text-[#cbd5e1]">Core learner access to CBT Pro, all 11 LMS platforms, and basic Virtual Home Schooling resources is free. Some advanced enterprise features or custom school rollouts may have nominal support fees. We are committed to ₦0 core access.</div>
+            </div>
+            <div class="premium-card p-5 rounded-3xl">
+                <div class="font-semibold">Do you use paid AI APIs?</div>
+                <div class="mt-2 text-sm text-[#cbd5e1]">No. We deliberately avoid paid AI APIs because they are not cost-effective for Nigerian schools and students. We use free tools (SQL.js, localStorage, rule-based systems, open models when needed) so tools remain accessible and scalable.</div>
+            </div>
+            <div class="premium-card p-5 rounded-3xl">
+                <div class="font-semibold">How does Virtual Home Schooling work?</div>
+                <div class="mt-2 text-sm text-[#cbd5e1]">Live sessions via WhatsApp + free video tools, structured curriculum in our Junior/Senior Class LMS, weekly plans, parent dashboard (demo on the page), mastery certificates. Full Nigerian curriculum + international exam prep.</div>
+            </div>
+            <div class="premium-card p-5 rounded-3xl">
+                <div class="font-semibold">Can schools deploy CBT Pro and the LMS for free?</div>
+                <div class="mt-2 text-sm text-[#cbd5e1]">Yes. CBT Pro is completely free for schools. LMS platforms are free for learners. We provide full training and documentation using our 5-step "How We Work" process.</div>
+            </div>
+            <div class="premium-card p-5 rounded-3xl">
+                <div class="font-semibold">Where are all the projects hosted?</div>
+                <div class="mt-2 text-sm text-[#cbd5e1]">CBT Pro on Vercel, LMS on Vercel, ML models and tools on Streamlit Community Cloud, simulators on Vercel/GitHub Pages. All free hosting. Links are the exact live versions.</div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

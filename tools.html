@@ -3,195 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tools &amp; Projects — HMG Academy | Live EdTech &amp; Data Solutions</title>
-    <meta name="description" content="12+ live EdTech and data science tools built for real Nigerian classrooms. CBT Pro, student analytics, ML models, simulators — all free and deployed.">
+    <title>Tools, Projects &amp; Platforms | HMG Academy — 34+ Live Projects</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body { font-family: 'Inter', system_ui, sans-serif; }
-        .font-display { font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif; font-weight: 600; }
-        .section-header { font-size: 2rem; line-height: 2.25rem; font-weight: 700; letter-spacing: -0.025em; }
-        .premium-nav {
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-        }
+        .navy-bg { background-color: #0a1628; }
+        .premium-card { background-color: #1e2937; border: 1px solid #334155; }
+        .live-badge { background: #166534; color: #4ade80; font-size: 10px; padding: 1px 7px; border-radius: 9999px; }
     </style>
 </head>
-<body class="bg-slate-50">
-    <nav class="premium-nav border-b border-slate-700 sticky top-0 z-50 text-white">
+<body class="bg-[#0a1628] text-[#f8fafc] navy-bg">
+    <!-- Nav -->
+    <nav class="bg-[#0a1628]/95 backdrop-blur-md border-b border-[#334155] sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-x-3">
-                    <div class="flex items-center justify-center w-12 h-12 rounded-xl overflow-hidden bg-white/10">
-                        <img src="assets/images/hmg-academy-logo.png" alt="HMG Academy Logo" class="w-full h-full object-contain scale-110" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white text-xl font-bold\'>HA</div>'">
-                    </div>
-                    <div class="font-display font-bold text-xl tracking-tighter text-white">HMG Academy</div>
+                <div class="flex items-center gap-3">
+                    <img src="assets/images/hmg-academy-logo.png" alt="HMG Academy Logo" class="h-9 w-auto" onerror="this.style.display='none'">
+                    <span class="font-bold">HMG Academy</span>
                 </div>
-                <div class="hidden md:flex items-center gap-x-6 text-sm font-medium">
-                    <a href="index.html" class="nav-link text-white hover:text-purple-300">Home</a>
-                    <a href="about.html" class="nav-link text-white hover:text-purple-300">About</a>
-                    <a href="services.html" class="nav-link text-white hover:text-purple-300">Services</a>
-                    <a href="homeschooling.html" class="nav-link text-white hover:text-purple-300">Home Schooling</a>
-                    <a href="tools.html" class="nav-link text-white hover:text-purple-300 font-semibold">Tools</a>
-                    <a href="notes.html" class="nav-link text-white hover:text-purple-300">Notes</a>
-                    <a href="faq.html" class="nav-link text-white hover:text-purple-300">FAQ</a>
-                    <a href="partners.html" class="nav-link text-white hover:text-purple-300">For Schools</a>
-                    <a href="contact.html" class="nav-link text-white hover:text-purple-300">Contact</a>
+                <div class="hidden md:flex items-center gap-6 text-sm">
+                    <a href="index.html" class="hover:text-[#eab308]">Home</a>
+                    <a href="services.html" class="hover:text-[#eab308]">Services</a>
+                    <a href="homeschooling.html" class="hover:text-[#eab308]">Home Schooling</a>
+                    <a href="contact.html" class="hover:text-[#eab308]">Contact</a>
                 </div>
-                <a href="https://wa.me/2348100866322" target="_blank" class="hidden sm:flex items-center gap-x-2 bg-emerald-600 text-white text-sm font-semibold px-5 py-2.5 rounded-2xl"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="https://wa.me/2348100866322" target="_blank" class="px-4 py-2 bg-[#eab308] text-[#0a1628] text-sm font-semibold rounded-2xl flex items-center gap-2">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
             </div>
         </div>
     </nav>
 
-    <div class="max-w-7xl mx-auto px-6 pt-10 pb-8">
-        <div>
-            <a href="index.html" class="text-sm text-emerald-600 hover:underline">&larr; Back</a>
-            <h1 class="mt-4 font-display text-5xl tracking-tighter font-bold">Tools Built for Real Classrooms</h1>
-            <p class="mt-3 text-lg text-slate-600 max-w-2xl">Every project on this page started not with a dataset — but with a problem that real students, teachers, or schools were struggling with. 12+ live, deployed solutions. All free to use.</p>
-        </div>
-        
-        <div class="mt-8 flex flex-wrap gap-3 text-xs">
-            <div class="px-4 py-1.5 bg-white border rounded-2xl">12 Live Projects</div>
-            <div class="px-4 py-1.5 bg-white border rounded-2xl">7 Industries Served</div>
-            <div class="px-4 py-1.5 bg-white border rounded-2xl">0.9393 Highest AUC</div>
-            <div class="px-4 py-1.5 bg-white border rounded-2xl">48K+ Largest Dataset</div>
-            <div class="px-4 py-1.5 bg-emerald-100 text-emerald-700 rounded-2xl font-medium">All Free • Zero Cost</div>
-        </div>
-    </div>
-
-    <!-- EdTech Tools -->
-    <div class="max-w-7xl mx-auto px-6 pb-12">
-        <div class="uppercase text-xs tracking-widest font-semibold text-emerald-600 mb-4">🏫 EDTECH TOOLS (LIVE • USED BY REAL STUDENTS)</div>
-        
-        <div class="grid md:grid-cols-2 gap-5">
-            <!-- CBT Pro -->
-            <div class="bg-white border border-slate-200 rounded-3xl p-7">
-                <div class="flex justify-between">
-                    <div>
-                        <div class="live-badge bg-emerald-600">LIVE IN CLASSROOMS</div>
-                        <div class="font-semibold text-xl mt-2">CBT Pro — Free Exam Platform</div>
-                    </div>
-                    <div class="text-3xl">💻</div>
-                </div>
-                <p class="mt-4 text-sm text-slate-600">Full-stack CBT: 7-col CSV upload, timed sessions, per-student randomisation, anti-cheat, auto-marking, certificates with WhatsApp share, 4-tab teacher analytics, optional Gemini AI explanations. Built on Android tablet with ₦0 budget.</p>
-                <div class="mt-5 flex gap-3 text-xs">
-                    <a href="https://cbtsystem-hmgacademy.vercel.app/" target="_blank" class="flex-1 text-center bg-emerald-600 text-white py-2 rounded-2xl font-semibold">Open Platform</a>
-                    <a href="https://github.com/cssadewale/cbt-system" target="_blank" class="flex-1 text-center border py-2 rounded-2xl font-semibold">GitHub</a>
-                </div>
-                <div class="mt-4 text-[10px] text-slate-500">Teacher Portal • Student Portal • Full analytics</div>
+    <div class="max-w-7xl mx-auto px-6 py-12">
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <span class="text-[#7c3aed] text-sm font-semibold tracking-widest">34+ LIVE PROJECTS</span>
+                <h1 class="text-5xl font-bold">Tools &amp; Platforms</h1>
+                <p class="text-[#94a3b8]">All built with free tools. All documented honestly. All solving real problems.</p>
             </div>
+            <div class="text-right text-sm">
+                <div>16 EdTech • 18 DataTech</div>
+                <div class="text-[#94a3b8]">EdTech Builder + DataTech Builder</div>
+            </div>
+        </div>
+
+        <!-- CBT Pro Flagship -->
+        <div class="premium-card p-8 rounded-3xl mb-8">
+            <div class="flex flex-col md:flex-row md:items-center gap-4">
+                <div class="flex-1">
+                    <div class="flex items-center gap-3">
+                        <span class="live-badge">LIVE IN CLASSROOMS</span>
+                        <span class="text-emerald-400 font-semibold">CBT Pro (CBT.ng)</span>
+                    </div>
+                    <p class="mt-2">Full-stack free CBT platform. Built on Android tablet with Acode. ₦0 budget. Real students today.</p>
+                    <div class="mt-3 flex gap-3">
+                        <a href="https://cbtsystem-hmgacademy.vercel.app/" target="_blank" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-sm rounded-2xl font-medium">Open Live Platform →</a>
+                        <a href="https://github.com/hmgacademyhub" target="_blank" class="px-4 py-2 border border-emerald-600 text-emerald-400 text-sm rounded-2xl font-medium">GitHub</a>
+                    </div>
+                </div>
+                <div class="text-xs text-[#94a3b8] max-w-xs">
+                    CSV upload • Per-student randomisation • Anti-cheat • 4-tab analytics • WhatsApp certificates • Supabase RLS
+                </div>
+            </div>
+        </div>
+
+        <!-- 5 Academic Tools -->
+        <h2 class="text-2xl font-semibold mb-4">Academic / EdTech Builder Tools (5)</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+            <div class="premium-card p-5 rounded-3xl text-sm">
+                <div class="font-semibold">CBT Question Bank Manager</div>
+                <div class="text-xs text-[#94a3b8] mt-1">Build, tag, export question banks for CBT Pro.</div>
+                <a href="https://hmgacademy-cbt-question-bank.streamlit.app/" target="_blank" class="mt-3 block text-[#7c3aed] text-sm">Live App →</a>
+                <a href="https://github.com/hmgacademyhub/cbt-question-bank" target="_blank" class="text-xs text-[#64748b]">GitHub</a>
+            </div>
+            <div class="premium-card p-5 rounded-3xl text-sm">
+                <div class="font-semibold">Student Study Plan Generator</div>
+                <div class="text-xs text-[#94a3b8] mt-1">Personalised WAEC/NECO revision plans.</div>
+                <a href="https://hmgacademy-student-study-plan-generator.streamlit.app/" target="_blank" class="mt-3 block text-[#7c3aed] text-sm">Live App →</a>
+                <a href="https://github.com/hmgacademyhub/student-study-plan-generator" target="_blank" class="text-xs text-[#64748b]">GitHub</a>
+            </div>
+            <div class="premium-card p-5 rounded-3xl text-sm">
+                <div class="font-semibold">Schooldocforge</div>
+                <div class="text-xs text-[#94a3b8] mt-1">School admin documents &amp; report cards.</div>
+                <a href="https://schooldocforge-hmgacademy.vercel.app/" target="_blank" class="mt-3 block text-[#7c3aed] text-sm">Live Tool →</a>
+            </div>
+            <div class="premium-card p-5 rounded-3xl text-sm">
+                <div class="font-semibold">TimetableCraft</div>
+                <div class="text-xs text-[#94a3b8] mt-1">Intelligent school timetable builder.</div>
+                <a href="https://hmgacademy-timetablecraft.streamlit.app/" target="_blank" class="mt-3 block text-[#7c3aed] text-sm">Live App →</a>
+                <a href="https://github.com/hmgacademyhub/timetablecraft" target="_blank" class="text-xs text-[#64748b]">GitHub</a>
+            </div>
+        </div>
+
+        <!-- 11 LMS -->
+        <h2 class="text-2xl font-semibold mb-4" id="lms">HMG Academy LMS Platforms (11)</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+            <div class="premium-card p-4 rounded-3xl text-sm">
+                <div class="font-semibold">SQL Learn (Ultimate)</div>
+                <div class="text-xs mt-1">30 modules • In-browser SQL.js playground • Weekly planner • Capstones</div>
+                <a href="https://sqllearn-hmgacademy.vercel.app/" target="_blank" class="block mt-2 text-[#7c3aed] text-sm">Open Platform →</a>
+            </div>
+            <div class="premium-card p-4 rounded-3xl text-sm">
+                <div class="font-semibold">Streamlit Learn</div>
+                <div class="text-xs mt-1">From notebook to deployed data app</div>
+                <a href="https://streamlitlearn-hmgacademy.vercel.app/" target="_blank" class="block mt-2 text-[#7c3aed] text-sm">Open Platform →</a>
+            </div>
+            <div class="premium-card p-4 rounded-3xl text-sm">
+                <div class="font-semibold">Excel Learn</div>
+                <div class="text-xs mt-1">Basic to advanced + dashboards</div>
+                <a href="https://excellearn-hmgacademy.vercel.app/" target="_blank" class="block mt-2 text-[#7c3aed] text-sm">Open Platform →</a>
+            </div>
+            <div class="premium-card p-4 rounded-3xl text-sm">
+                <div class="font-semibold">Data Science Learn</div>
+                <div class="text-xs mt-1">EDA → Feature Engineering → Deployment</div>
+                <a href="https://datascience-hmgacademy.vercel.app/" target="_blank" class="block mt-2 text-[#7c3aed] text-sm">Open Platform →</a>
+            </div>
+            <div class="premium-card p-4 rounded-3xl text-sm">
+                <div class="font-semibold">Data Analysis Learn</div>
+                <div class="text-xs mt-1">Full analyst toolkit (Excel/SQL/Python/Viz)</div>
+                <a href="https://dataanalysis-hmgacademy.vercel.app/" target="_blank" class="block mt-2 text-[#7c3aed] text-sm">Open Platform →</a>
+            </div>
+            <div class="premium-card p-4 rounded-3xl text-sm">
+                <div class="font-semibold">Python For Data Science (PyDataFlow)</div>
+                <div class="text-xs mt-1">First print() to deployed ML model</div>
+                <a href="https://pydataflow-hmgacademy.vercel.app/" target="_blank" class="block mt-2 text-[#7c3aed] text-sm">Open Platform →</a>
+            </div>
+            <div class="premium-card p-4 rounded-3xl text-sm">
+                <div class="font-semibold">VizLearn (Data Visualization in Python)</div>
+                <div class="text-xs mt-1">Matplotlib, Seaborn, Plotly</div>
+                <a href="https://vizlearn-hmgacademy.vercel.app/" target="_blank" class="block mt-2 text-[#7c3aed] text-sm">Open Platform →</a>
+            </div>
+            <div class="premium-card p-4 rounded-3xl text-sm">
+                <div class="font-semibold">ML Lab (Machine Learning)</div>
+                <div class="text-xs mt-1">Classification, regression, NLP, evaluation</div>
+                <a href="https://mllab-hmgacademy.vercel.app/" target="_blank" class="block mt-2 text-[#7c3aed] text-sm">Open Platform →</a>
+            </div>
+            <div class="premium-card p-4 rounded-3xl text-sm">
+                <div class="font-semibold">Junior Class (JSS1–JSS3)</div>
+                <div class="text-xs mt-1">Full Nigerian curriculum + active learning + mastery certs</div>
+                <a href="https://juniorclass-hmgacademy.vercel.app/" target="_blank" class="block mt-2 text-[#7c3aed] text-sm">Open Platform →</a>
+            </div>
+            <div class="premium-card p-4 rounded-3xl text-sm">
+                <div class="font-semibold">Senior Class (SSS1–SSS3)</div>
+                <div class="text-xs mt-1">Science/Arts/Commercial • WAEC/NECO focused</div>
+                <a href="https://seniorclass-hmgacademy.vercel.app/" target="_blank" class="block mt-2 text-[#7c3aed] text-sm">Open Platform →</a>
+            </div>
+            <div class="premium-card p-4 rounded-3xl text-sm">
+                <div class="font-semibold">QueryPilot</div>
+                <div class="text-xs mt-1">Intelligent SQL query assistant &amp; learning tool</div>
+                <a href="https://querypilot-hmgacademy.vercel.app/" target="_blank" class="block mt-2 text-[#7c3aed] text-sm">Open Platform →</a>
+            </div>
+        </div>
+
+        <!-- 7 ML Projects -->
+        <h2 class="text-2xl font-semibold mb-4" id="ml">Machine Learning &amp; Data Science Models (7)</h2>
+        <div class="grid md:grid-cols-2 gap-4 mb-10">
+            <div class="premium-card p-5 rounded-3xl text-sm">
+                <div class="flex justify-between"><span class="font-semibold">Insurance Claim Prediction</span> <span class="live-badge">LIVE</span></div>
+                <div class="text-xs mt-1">Random Forest + SMOTE + SHAP • 7,014 records • CV F1 ~0.79 • 6 business recommendations • FastAPI</div>
+                <div class="mt-2 flex gap-3 text-xs">
+                    <a href="https://cssadewale-insurance-claim-prediction.streamlit.app/" target="_blank" class="text-[#7c3aed]">Live App →</a>
+                    <a href="https://github.com/cssadewale/insurance-claim-prediction" target="_blank" class="text-[#64748b]">GitHub</a>
+                </div>
+            </div>
+            <div class="premium-card p-5 rounded-3xl text-sm">
+                <div class="flex justify-between"><span class="font-semibold">Staff Promotion Prediction (Yakub Trading Group)</span> <span class="live-badge">LIVE</span></div>
+                <div class="text-xs mt-1">Random Forest + SHAP • 38,312 Nigerian records • AUC 0.891</div>
+                <div class="mt-2 flex gap-3 text-xs">
+                    <a href="https://cssadewale-staff-promotion-prediction.streamlit.app/" target="_blank" class="text-[#7c3aed]">Live App →</a>
+                    <a href="https://github.com/cssadewale/staff-promotion-prediction" target="_blank" class="text-[#64748b]">GitHub</a>
+                </div>
+            </div>
+            <div class="premium-card p-5 rounded-3xl text-sm">
+                <div class="flex justify-between"><span class="font-semibold">Bank Customer Churn Prediction</span> <span class="live-badge">LIVE</span></div>
+                <div class="text-xs mt-1">Gradient Boosting • 10,000 records • F1 0.609 • AUC 0.868</div>
+                <div class="mt-2 flex gap-3 text-xs">
+                    <a href="https://cssadewale-bank-customer-churn-prediction.streamlit.app/" target="_blank" class="text-[#7c3aed]">Live App →</a>
+                    <a href="https://github.com/cssadewale/bank-customer-churn-prediction" target="_blank" class="text-[#64748b]">GitHub</a>
+                </div>
+            </div>
+            <div class="premium-card p-5 rounded-3xl text-sm">
+                <div class="flex justify-between"><span class="font-semibold">Income Level Prediction</span> <span class="live-badge">LIVE</span></div>
+                <div class="text-xs mt-1">Random Forest + SMOTE • 48,842 records • 5-model comparison</div>
+                <div class="mt-2 flex gap-3 text-xs">
+                    <a href="https://cssadewale-income-level-prediction.streamlit.app/" target="_blank" class="text-[#7c3aed]">Live App →</a>
+                    <a href="https://github.com/cssadewale/income-level-prediction" target="_blank" class="text-[#64748b]">GitHub</a>
+                </div>
+            </div>
+            <div class="premium-card p-5 rounded-3xl text-sm">
+                <div class="flex justify-between"><span class="font-semibold">TruthLens — Fake News Detector (3MTT Capstone)</span> <span class="live-badge">LIVE</span></div>
+                <div class="text-xs mt-1">XGBoost + TF-IDF 20K + VADER • 12,999 articles • AUC 0.9393 (highest) • Acc 86.75%</div>
+                <div class="mt-2 flex gap-3 text-xs">
+                    <a href="https://cssadewale-fake-news-detector.streamlit.app/" target="_blank" class="text-[#7c3aed]">Live App →</a>
+                    <a href="https://github.com/cssadewale/fake-news-detector" target="_blank" class="text-[#64748b]">GitHub</a>
+                </div>
+            </div>
+            <div class="premium-card p-5 rounded-3xl text-sm">
+                <div class="flex justify-between"><span class="font-semibold">SwiftChain Delivery Delay Prediction</span> <span class="live-badge">LIVE</span></div>
+                <div class="text-xs mt-1">Gradient Boosting • 15,549 orders • Documented data leakage fix • Acc 62%</div>
+                <div class="mt-2 flex gap-3 text-xs">
+                    <a href="https://cssadewale-swiftchain-delivery-prediction.streamlit.app/" target="_blank" class="text-[#7c3aed]">Live App →</a>
+                    <a href="https://github.com/cssadewale/swiftchain-delivery-prediction" target="_blank" class="text-[#64748b]">GitHub</a>
+                </div>
+            </div>
+            <div class="premium-card p-5 rounded-3xl text-sm col-span-2 md:col-span-1">
+                <div class="flex justify-between"><span class="font-semibold">Employee Burnout Rate Predictor (NeuroWell)</span> <span class="live-badge">LIVE</span></div>
+                <div class="text-xs mt-1">Gradient Boosting (108 GridSearchCV) • 22,750 records • R² 0.855 • Mental fatigue 85.9% importance</div>
+                <div class="mt-2 flex gap-3 text-xs">
+                    <a href="https://cssadewale-burnout-prediction.streamlit.app/" target="_blank" class="text-[#7c3aed]">Live App →</a>
+                    <a href="https://github.com/cssadewale/burnout-prediction" target="_blank" class="text-[#64748b]">GitHub</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 11 Simulators + InstaDocs -->
+        <h2 class="text-2xl font-semibold mb-4">Data Tool Simulators (11) + InstaDocs</h2>
+        <div class="grid md:grid-cols-3 gap-4 mb-8">
+            <div class="premium-card p-4 rounded-3xl text-xs">
+                <div class="font-medium mb-1">MS Excel, PgAdmin, MS SQL Server, MySQL Workbench, VS Code, Azure Data Studio, DuckDB, Power BI, Tableau, Azure Simulators</div>
+                <div class="text-[#94a3b8]">Browser-based. Zero install. Zero licence. Perfect for training.</div>
+                <div class="mt-2 text-[10px] text-[#7c3aed]">See full list &amp; links on cssadewale.pages.dev/projects.html</div>
+            </div>
+            <div class="premium-card p-4 rounded-3xl text-sm col-span-2">
+                <div class="font-semibold">InstaDocs Hub: Corporate Edition (New)</div>
+                <div class="text-xs mt-1">Enterprise-grade free document generator for Invoices, Certificates, Reports. 18+ sectors • 50+ types • PDF/DOCX/PNG/HTML export. Browser-only, zero server data.</div>
+                <a href="https://instadocs-hmgtechnologies.vercel.app/" target="_blank" class="mt-2 block text-[#7c3aed]">Open InstaDocs →</a>
+                <a href="https://github.com/hmgtechnologies/instadocs" target="_blank" class="text-xs">GitHub</a>
+            </div>
+        </div>
+
+        <!-- Deep Explanations Section -->
+        <div class="mt-10">
+            <h2 class="text-3xl font-bold mb-6">Deep Dive: Detailed Explanations of Key Systems</h2>
             
-            <div class="bg-white border border-slate-200 rounded-3xl p-7">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <div class="font-semibold">Student Performance Tracker</div>
-                        <div class="text-xs text-emerald-600">Analytics • Pandas • Plotly</div>
-                    </div>
-                    <span class="text-3xl">📊</span>
+            <div class="space-y-8 text-sm">
+                <div class="premium-card p-6 rounded-3xl">
+                    <h3 class="font-semibold text-lg">Why No Paid AI APIs?</h3>
+                    <p class="mt-2 text-[#cbd5e1]">Cost discipline is core. Paid APIs create recurring fees that make tools unaffordable for Nigerian schools and students. We use free alternatives (SQL.js, localStorage, rule-based logic where sufficient, open models when needed) so everything remains accessible at scale. AI is a force multiplier for clear thinking — never a cost centre.</p>
                 </div>
-                <p class="mt-3 text-sm text-slate-600">Upload a class result CSV and instantly get analytics — class average, score distribution, top/bottom performers, students at risk. Built for teachers who deserve data, not guesswork.</p>
-                <a href="https://adewale-student-performance-tracker.streamlit.app/" target="_blank" class="mt-4 inline-block text-emerald-600 text-sm font-semibold">Open Live App →</a>
-            </div>
-            
-            <div class="bg-white border border-slate-200 rounded-3xl p-7">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <div class="font-semibold">CBT Question Bank Manager</div>
-                        <div class="text-xs text-emerald-600">SQLite • Full-Stack • Streamlit</div>
-                    </div>
-                    <span class="text-3xl">📚</span>
+                
+                <div class="premium-card p-6 rounded-3xl">
+                    <h3 class="font-semibold text-lg">Curriculum Design in the LMS Platforms</h3>
+                    <p class="mt-2 text-[#cbd5e1]">Every LMS follows a deliberate progression: Foundations → Core Skills → Application → Portfolio/Capstone. Role-based paths (e.g. Educator vs Data Scientist) ensure relevance. Weekly planners and active learning checks prevent passive consumption. All progress stored in browser localStorage for privacy and zero backend cost.</p>
                 </div>
-                <p class="mt-3 text-sm text-slate-600">Build, organise, tag, search, and reuse CBT question sets across subjects and exam years. One-click export to CBT Pro CSV format. No more lost question banks before exam season.</p>
-                <a href="https://adewale-cbt-question-bank.streamlit.app/" target="_blank" class="mt-4 inline-block text-emerald-600 text-sm font-semibold">Open Live App →</a>
-            </div>
-            
-            <div class="bg-white border border-slate-200 rounded-3xl p-7">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <div class="font-semibold">Student At-Risk Predictor</div>
-                        <div class="text-xs text-emerald-600">ML • SHAP • Early Warning</div>
-                    </div>
-                    <span class="text-3xl">⚠️</span>
+                
+                <div class="premium-card p-6 rounded-3xl">
+                    <h3 class="font-semibold text-lg">Parent Accountability in Virtual Home Schooling &amp; LMS</h3>
+                    <p class="mt-2 text-[#cbd5e1]">Parents get visibility through dashboards (see interactive demo), weekly reports, and mastery certificates only issued on verified completion. This is not surveillance — it is partnership. Teachers and parents work from the same data.</p>
                 </div>
-                <p class="mt-3 text-sm text-slate-600">Identifies students likely to fail before exam season — so teachers can intervene early. Every prediction explained with SHAP.</p>
-                <a href="https://student-at-risk-predictor.streamlit.app/" target="_blank" class="mt-4 inline-block text-emerald-600 text-sm font-semibold">Open Live App →</a>
             </div>
         </div>
     </div>
 
-    <!-- ML Models -->
-    <div class="max-w-7xl mx-auto px-6 pb-12">
-        <div class="uppercase text-xs tracking-widest font-semibold text-emerald-600 mb-4">📊 MACHINE LEARNING MODELS (7 DEPLOYED • 7 INDUSTRIES)</div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 text-sm">
-            <div class="bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="font-semibold">TruthLens — Fake News Detector</div>
-                <div class="text-xs text-emerald-600">NLP • XGBoost • 3MTT Capstone • AUC 0.9393</div>
-                <p class="mt-2 text-xs text-slate-600">TF-IDF + VADER + XGBoost on 12,999 real articles. Highest in portfolio.</p>
-                <a href="https://adewale-fake-news-detector.streamlit.app/" target="_blank" class="text-emerald-600 text-xs font-semibold mt-3 inline-block">Live App →</a>
-            </div>
-            <div class="bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="font-semibold">Employee Burnout Rate Predictor</div>
-                <div class="text-xs text-emerald-600">Regression • Gradient Boosting • R² 0.855</div>
-                <p class="mt-2 text-xs text-slate-600">22,750 records. Mental fatigue = 85.9% importance. Actionable HR insights.</p>
-                <a href="https://adewale-burnout-prediction.streamlit.app/" target="_blank" class="text-emerald-600 text-xs font-semibold mt-3 inline-block">Live App →</a>
-            </div>
-            <div class="bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="font-semibold">Staff Promotion Prediction</div>
-                <div class="text-xs text-emerald-600">Random Forest • 38,312 Nigerian records • AUC 0.891</div>
-                <p class="mt-2 text-xs text-slate-600">Replaces subjective promotion decisions with data-driven predictions. SHAP explainable.</p>
-                <a href="https://yakub-promotion-prediction.streamlit.app/" target="_blank" class="text-emerald-600 text-xs font-semibold mt-3 inline-block">Live App →</a>
-            </div>
-            <div class="bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="font-semibold">Bank Customer Churn Prediction</div>
-                <div class="text-xs text-emerald-600">Gradient Boosting • 10,000 records</div>
-                <p class="mt-2 text-xs text-slate-600">Predicts which customers are likely to leave. Key finding: age is #1 driver.</p>
-                <a href="https://adewale-bank-customer-churn-prediction.streamlit.app/" target="_blank" class="text-emerald-600 text-xs font-semibold mt-3 inline-block">Live App →</a>
-            </div>
-            <div class="bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="font-semibold">Insurance Claim Prediction</div>
-                <div class="text-xs text-emerald-600">Random Forest + SMOTE • 7,160 records</div>
-                <p class="mt-2 text-xs text-slate-600">Predicts fraudulent or high-cost claims. 6 business recommendations included.</p>
-                <a href="https://adewale-insurance-claim-prediction.streamlit.app/" target="_blank" class="text-emerald-600 text-xs font-semibold mt-3 inline-block">Live App →</a>
-            </div>
-            <div class="bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="font-semibold">Income Level Prediction &amp; SwiftChain Delivery</div>
-                <div class="text-xs text-emerald-600">Multiple models • Largest datasets</div>
-                <p class="mt-2 text-xs text-slate-600">Financial inclusion (48k records) and logistics delay prediction (15k orders, with documented data leakage fix).</p>
-                <a href="https://cssadewale.pages.dev/projects.html" target="_blank" class="text-emerald-600 text-xs font-semibold mt-3 inline-block">See full details in portfolio →</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Simulators & More -->
-    <div class="max-w-7xl mx-auto px-6 pb-16">
-        <div class="uppercase text-xs tracking-widest font-semibold text-emerald-600 mb-4">🛠️ DATA TOOL SIMULATORS (11 BROWSER-BASED • ZERO INSTALL)</div>
-        <div class="text-sm text-slate-600 mb-6">Interactive environments replicating professional tools — perfect for training and practice without licences or installs.</div>
-        
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 text-xs">
-            <div class="bg-white border rounded-2xl p-4">Power BI Simulator</div>
-            <div class="bg-white border rounded-2xl p-4">Tableau Simulator</div>
-            <div class="bg-white border rounded-2xl p-4">MS Excel Simulator</div>
-            <div class="bg-white border rounded-2xl p-4">PgAdmin / PostgreSQL</div>
-            <div class="bg-white border rounded-2xl p-4">MS SQL Server</div>
-            <div class="bg-white border rounded-2xl p-4">MySQL Workbench</div>
-            <div class="bg-white border rounded-2xl p-4">VS Code Simulator</div>
-            <div class="bg-white border rounded-2xl p-4">Azure Data Studio</div>
-            <div class="bg-white border rounded-2xl p-4">DuckDB Simulator</div>
-            <div class="bg-white border rounded-2xl p-4">Azure Simulator</div>
-            <div class="bg-white border rounded-2xl p-4 col-span-2 md:col-span-1">ChatLens (AI chat)</div>
-        </div>
-        <div class="mt-4 text-xs"><a href="https://cssadewale.pages.dev/projects.html#simulators" target="_blank" class="text-emerald-600 font-semibold">View all simulators in founder portfolio →</a></div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-6 pb-12 text-center text-sm">
-        <p class="text-slate-600">More projects in active development. Follow on GitHub for updates.</p>
-        <div class="mt-4 flex justify-center gap-x-4">
-            <a href="https://github.com/cssadewale" target="_blank" class="inline-flex items-center gap-x-2 text-emerald-600 font-semibold">🐙 GitHub @cssadewale</a>
-            <a href="https://cssadewale.pages.dev/projects.html" target="_blank" class="inline-flex items-center gap-x-2 text-emerald-600 font-semibold">Full 34 Projects Portfolio ↗</a>
-        </div>
-    </div>
-
-    <footer class="bg-slate-900 text-slate-400 py-8 text-xs text-center">HMG Academy Tools — Built with clear thinking + AI leverage for Nigerian realities.</footer>
+    <footer class="border-t border-[#334155] py-8 text-xs text-[#64748b]">
+        <div class="max-w-7xl mx-auto px-6">All links point to the exact live versions provided by the founder. See DEPLOYMENT.md for how to host this site.</div>
+    </footer>
 </body>
 </html>

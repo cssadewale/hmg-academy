@@ -3,33 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HMG Academy — Nigeria's Full-Service Virtual Learning Institution</title>
-    <meta name="description" content="HMG Academy is a full-service virtual learning institution with a team of seasoned teachers. All subjects, all levels, Nigerian and international exams. Free CBT Pro platform. Est. 2015.">
+    <title>HMG Academy — Nigeria's Full-Service Virtual Learning Institution | 2026</title>
+    <meta name="description" content="HMG Academy: Strictly virtual school (Nursery–SSS3), WAEC/NECO/IGCSE/IELTS prep, Free CBT Pro, 11 LMS platforms, Data Science training, 34+ live projects. Part of HMG Concepts. Learning Deliberately. Teaching Authentically.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
         
         :root {
-            --primary: #0f172a;
-            --accent-purple: #7c3aed;
-            --accent-gold: #f59e0b;
+            --navy: #0a1628;
+            --purple: #7c3aed;
+            --gold: #eab308;
         }
         
         body {
             font-family: 'Inter', system_ui, sans-serif;
         }
         
-        .font-display {
-            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
-            font-weight: 600;
+        .heading-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .navy-bg {
+            background-color: #0a1628;
+        }
+        
+        .premium-gradient {
+            background: linear-gradient(135deg, #0a1628 0%, #1e2937 100%);
+        }
+        
+        .gold-accent {
+            color: #eab308;
+        }
+        
+        .purple-accent {
+            color: #7c3aed;
         }
 
         .section-header {
-            font-size: 2.25rem;
-            line-height: 2.5rem;
-            font-weight: 700;
-            letter-spacing: -0.025em;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, #7c3aed, #eab308);
+            border-radius: 3px;
+        }
+
+        .tool-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
         }
 
         .nav-link {
@@ -37,705 +70,576 @@
         }
         
         .nav-link:hover {
-            color: #a5b4fc;
-        }
-
-        .card {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            color: #eab308;
         }
 
         .stat-number {
-            font-size: 2.25rem;
-            line-height: 2.5rem;
-            font-weight: 700;
-            color: #0f172a;
+            font-variant-numeric: tabular-nums;
         }
 
-        .hmg-gradient {
-            background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%);
+        .premium-card {
+            background: #1e2937;
+            border: 1px solid #334155;
         }
 
-        .accent-purple {
+        .high-contrast-text {
+            color: #f8fafc;
+        }
+
+        .logo-glow {
+            filter: drop-shadow(0 0 8px rgba(234, 179, 8, 0.3));
+        }
+
+        .ecosystem-link {
+            transition: all 0.2s ease;
+        }
+        
+        .ecosystem-link:hover {
             color: #7c3aed;
+            transform: translateX(4px);
         }
 
-        .accent-gold {
-            color: #f59e0b;
+        .mobile-menu {
+            animation: slideDown 0.3s ease forwards;
         }
 
-        .premium-shadow {
-            box-shadow: 0 10px 15px -3px rgb(15 23 42 / 0.1), 0 4px 6px -4px rgb(15 23 42 / 0.1);
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .nav-active {
-            color: #a5b4fc;
-            font-weight: 600;
-        }
-
-        .emoji-icon {
-            font-size: 1.5rem;
-            line-height: 1;
-        }
-
-        .tool-card {
-            border: 1px solid #e2e8f0;
-        }
-
-        .live-badge {
-            background-color: #10b981;
-            color: white;
-            font-size: 0.65rem;
-            padding: 1px 8px;
-            border-radius: 9999px;
-            font-weight: 600;
-        }
-
-        .hmg-blue {
-            color: #6366f1;
-        }
-
-        /* Premium dark theme for logo sync */
-        .dark-hero {
-            background: linear-gradient(135deg, #0f172a 0%, #1e1135 100%);
-            color: white;
-        }
-
-        .premium-nav {
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
+        .feature-detail {
+            border-left: 3px solid #7c3aed;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
-    <!-- Top Announcement Banner -->
-    <div class="bg-gradient-to-r from-purple-700 to-emerald-600 text-white py-2.5 text-sm">
-        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
-            <div class="flex items-center gap-x-3">
-                <span class="font-semibold">🎉 WAEC/NECO 2026 registration is now open</span>
-                <span class="hidden sm:inline">— let HMG Academy handle yours.</span>
-            </div>
-            <a href="#register" 
-               class="inline-flex items-center gap-x-2 bg-white text-purple-700 hover:bg-purple-50 transition-colors px-4 py-1.5 rounded-full text-xs font-semibold shadow-sm">
-                Register Now <i class="fas fa-arrow-right ml-1"></i>
-            </a>
-        </div>
-    </div>
-
-    <!-- Navbar -->
-    <nav class="premium-nav border-b border-slate-700 sticky top-0 z-50 text-white">
+<body class="bg-[#0a1628] text-[#f8fafc] navy-bg">
+    <!-- Navigation -->
+    <nav class="bg-[#0a1628]/95 backdrop-blur-md border-b border-[#334155] sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-center h-16">
+            <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
-                <div class="flex items-center gap-x-3">
-                    <div class="flex items-center justify-center w-12 h-12 rounded-xl overflow-hidden bg-white/10">
-                        <img src="assets/images/hmg-academy-logo.png" 
-                             alt="HMG Academy Logo" 
-                             class="w-full h-full object-contain scale-110"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white text-xl font-bold\'>HA</div>'">
+                <div class="flex items-center gap-3">
+                    <img src="assets/images/hmg-academy-logo.png" alt="HMG Academy Logo" class="h-12 w-auto logo-glow" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="hidden items-center gap-2">
+                        <span class="text-3xl font-bold text-white">HMG</span>
+                        <span class="text-3xl font-bold gold-accent">ACADEMY</span>
                     </div>
                     <div>
-                        <div class="font-display font-bold text-xl tracking-tighter text-white">HMG Academy</div>
-                        <div class="text-[10px] text-slate-400 -mt-1">His Marvellous Grace</div>
+                        <span class="text-sm font-medium tracking-widest text-[#94a3b8]">EST. 2015</span>
                     </div>
                 </div>
 
                 <!-- Desktop Nav -->
-                <div class="hidden md:flex items-center gap-x-6 text-sm font-medium">
-                    <a href="index.html" class="nav-link nav-active">Home</a>
-                    <a href="about.html" class="nav-link">About</a>
-                    <a href="services.html" class="nav-link">Services</a>
-                    <a href="homeschooling.html" class="nav-link">Home Schooling</a>
-                    <a href="tools.html" class="nav-link">Tools</a>
-                    <a href="notes.html" class="nav-link">Notes</a>
-                    <a href="faq.html" class="nav-link">FAQ</a>
-                    <a href="partners.html" class="nav-link">For Schools</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
+                <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="index.html" class="nav-link text-white">Home</a>
+                    <a href="about.html" class="nav-link text-white">About</a>
+                    <a href="services.html" class="nav-link text-white">Services</a>
+                    <a href="tools.html" class="nav-link text-white">Tools &amp; Projects</a>
+                    <a href="homeschooling.html" class="nav-link text-white">Virtual Home Schooling</a>
+                    <a href="notes.html" class="nav-link text-white">Notes</a>
+                    <a href="contact.html" class="nav-link text-white">Contact</a>
                 </div>
 
-                <div class="flex items-center gap-x-3">
-                    <!-- Ecosystem -->
-                    <div class="hidden lg:block">
-                        <div class="relative group">
-                            <button class="flex items-center gap-x-1.5 text-sm font-medium px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">
-                                Ecosystem <i class="fas fa-chevron-down text-xs ml-1"></i>
-                            </button>
-                            <div class="absolute right-0 mt-2 w-64 bg-white border border-slate-200 rounded-2xl shadow-xl py-2 hidden group-hover:block z-50">
-                                <a href="https://hmgconcepts.pages.dev/" target="_blank" class="flex items-center gap-x-3 px-4 py-2.5 hover:bg-slate-50 text-sm">
-                                    <span class="text-lg">★</span>
-                                    <span>HMG Concepts (Host)</span>
-                                </a>
-                                <a href="https://hmgtechnologies.pages.dev/" target="_blank" class="flex items-center gap-x-3 px-4 py-2.5 hover:bg-slate-50 text-sm">
-                                    <span class="text-lg">💻</span>
-                                    <span>HMG Technologies</span>
-                                </a>
-                                <a href="https://hmgmedia.pages.dev/" target="_blank" class="flex items-center gap-x-3 px-4 py-2.5 hover:bg-slate-50 text-sm">
-                                    <span class="text-lg">🎬</span>
-                                    <span>HMG Media</span>
-                                </a>
-                                <a href="https://hmggospel.pages.dev/" target="_blank" class="flex items-center gap-x-3 px-4 py-2.5 hover:bg-slate-50 text-sm">
-                                    <span class="text-lg">✝️</span>
-                                    <span>HMG Gospel</span>
-                                </a>
-                                <div class="border-t my-1"></div>
-                                <a href="https://cssadewale.pages.dev/" target="_blank" class="flex items-center gap-x-3 px-4 py-2.5 hover:bg-slate-50 text-sm">
-                                    <span class="text-lg">🧑‍💻</span>
-                                    <span>Founder's Portfolio</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- WhatsApp CTA -->
-                    <a href="https://wa.me/2348100866322?text=Hello%20HMG%20Academy%2C%20I%20would%20like%20to%20learn%20more." 
+                <!-- Actions -->
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="https://wa.me/2348100866322?text=Hello%20HMG%20Academy%2C%20I%20would%20like%20to%20enquire%20about%20your%20programmes." 
                        target="_blank"
-                       class="hidden sm:flex items-center gap-x-2 bg-emerald-600 hover:bg-emerald-700 transition-colors text-white text-sm font-semibold px-5 py-2.5 rounded-2xl">
-                        <i class="fab fa-whatsapp text-lg"></i>
-                        <span class="hidden md:inline">Chat on WhatsApp</span>
-                        <span class="md:hidden">WhatsApp</span>
+                       class="flex items-center gap-2 bg-[#eab308] hover:bg-[#facc15] text-[#0a1628] font-semibold px-5 py-2.5 rounded-2xl text-sm transition-all active:scale-[0.985]">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp Us</span>
                     </a>
+                    <a href="register.html" 
+                       class="px-5 py-2.5 border border-[#7c3aed] hover:bg-[#7c3aed] hover:text-white text-[#7c3aed] font-semibold rounded-2xl text-sm transition-all">
+                        Enrol Now
+                    </a>
+                </div>
 
-                    <!-- Mobile Menu -->
-                    <div class="md:hidden">
-                        <button id="mobile-menu-btn" class="p-2 text-slate-600 hover:text-slate-900">
-                            <i class="fas fa-bars text-xl"></i>
-                        </button>
-                    </div>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn"
+                        class="md:hidden w-11 h-11 flex items-center justify-center text-white hover:bg-[#1e2937] rounded-2xl transition-colors">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0a1628] border-t border-[#334155]">
+            <div class="px-6 py-6 flex flex-col gap-1 text-sm font-medium">
+                <a href="index.html" class="py-3 px-4 hover:bg-[#1e2937] rounded-2xl">Home</a>
+                <a href="about.html" class="py-3 px-4 hover:bg-[#1e2937] rounded-2xl">About</a>
+                <a href="services.html" class="py-3 px-4 hover:bg-[#1e2937] rounded-2xl">Services</a>
+                <a href="tools.html" class="py-3 px-4 hover:bg-[#1e2937] rounded-2xl">Tools &amp; Projects</a>
+                <a href="homeschooling.html" class="py-3 px-4 hover:bg-[#1e2937] rounded-2xl">Virtual Home Schooling</a>
+                <a href="notes.html" class="py-3 px-4 hover:bg-[#1e2937] rounded-2xl">Notes &amp; Resources</a>
+                <a href="contact.html" class="py-3 px-4 hover:bg-[#1e2937] rounded-2xl">Contact</a>
+                
+                <div class="pt-4 border-t border-[#334155] flex flex-col gap-3">
+                    <a href="https://wa.me/2348100866322?text=Hello%20HMG%20Academy%2C%20I%20would%20like%20to%20enquire%20about%20your%20programmes." 
+                       target="_blank"
+                       class="flex items-center justify-center gap-2 bg-[#eab308] text-[#0a1628] font-semibold py-3 rounded-2xl">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Chat on WhatsApp</span>
+                    </a>
+                    <a href="register.html" 
+                       class="flex items-center justify-center border border-[#7c3aed] text-[#7c3aed] font-semibold py-3 rounded-2xl">
+                        Enrol Now
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200">
-        <div class="px-6 py-4 space-y-1 text-sm font-medium">
-            <a href="index.html" class="block py-2 nav-active">Home</a>
-            <a href="about.html" class="block py-2">About</a>
-            <a href="services.html" class="block py-2">Services</a>
-            <a href="tools.html" class="block py-2">Tools &amp; Projects</a>
-            <a href="notes.html" class="block py-2">Lesson Notes</a>
-            <a href="contact.html" class="block py-2">Contact</a>
-            <div class="pt-3 border-t">
-                <a href="https://hmgconcepts.pages.dev/" target="_blank" class="block py-1.5 text-slate-600">HMG Concepts</a>
-                <a href="https://hmgtechnologies.pages.dev/" target="_blank" class="block py-1.5 text-slate-600">Technologies</a>
-                <a href="https://hmgmedia.pages.dev/" target="_blank" class="block py-1.5 text-slate-600">Media</a>
-                <a href="https://hmggospel.pages.dev/" target="_blank" class="block py-1.5 text-slate-600">Gospel</a>
-                <a href="https://cssadewale.pages.dev/" target="_blank" class="block py-1.5 text-slate-600">Personal Portfolio</a>
-            </div>
-            <a href="https://wa.me/2348100866322?text=Hello%20HMG%20Academy" target="_blank"
-               class="mt-3 flex items-center justify-center gap-x-2 w-full bg-emerald-600 text-white py-3 rounded-2xl font-semibold">
-                <i class="fab fa-whatsapp"></i> Chat on WhatsApp
-            </a>
-        </div>
-    </div>
-
-    <!-- Hero -->
-    <header class="dark-hero max-w-7xl mx-auto px-6 pt-12 pb-16 text-white">
-        <div class="grid lg:grid-cols-12 gap-x-8 items-center">
-            <div class="lg:col-span-7">
-                <div class="inline-flex items-center gap-x-2 bg-white/10 border border-white/20 text-white text-xs font-semibold tracking-widest px-3.5 py-1.5 rounded-full mb-6">
-                    <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
-                    EST. 2015 • LAGOS, NIGERIA
-                </div>
-                
-                <h1 class="text-5xl lg:text-6xl leading-[1.05] tracking-tighter font-display font-bold text-white">
-                    Where Nigerian<br>Students <span class="text-purple-400">Excel</span><br>Beyond Limits.
-                </h1>
-                
-                <p class="mt-6 max-w-lg text-xl text-slate-300">
-                    A full-service virtual learning institution — not a personal tutoring arrangement. 
-                    A team of seasoned, experienced teachers serving every student, every subject, every major exam. 
-                    <strong class="text-white">Now offering complete Virtual Home Schooling programs.</strong>
-                </p>
-                
-                <div class="mt-8 flex flex-wrap items-center gap-4">
-                    <a href="register.html" 
-                       class="inline-flex items-center justify-center gap-x-2 bg-white text-slate-900 hover:bg-slate-100 transition-colors font-semibold px-8 py-3.5 rounded-3xl text-base">
-                        <i class="fas fa-user-plus mr-2"></i> Enrol Now
-                    </a>
-                    <a href="services.html" 
-                       class="inline-flex items-center justify-center gap-x-2 border border-white/30 hover:bg-white/10 transition-colors font-semibold px-8 py-3.5 rounded-3xl text-base text-white">
-                        Explore Services
-                    </a>
-                    <a href="https://wa.me/2348100866322?text=Hello%20HMG%20Academy%2C%20I%20want%20to%20enrol%20my%20child." 
-                       target="_blank"
-                       class="inline-flex items-center gap-x-2 text-sm font-medium text-slate-300 hover:text-white">
-                        <i class="fab fa-whatsapp text-emerald-400 text-lg"></i>
-                        <span>Talk to us on WhatsApp</span>
-                    </a>
-                </div>
-                
-                <div class="mt-8 flex items-center gap-x-6 text-sm">
-                    <div class="flex -space-x-1">
-                        <div class="w-7 h-7 bg-slate-300 rounded-full border-2 border-white/50 overflow-hidden"><img src="https://i.pravatar.cc/28?img=32" class="w-full h-full object-cover"></div>
-                        <div class="w-7 h-7 bg-slate-300 rounded-full border-2 border-white/50 overflow-hidden"><img src="https://i.pravatar.cc/28?img=47" class="w-full h-full object-cover"></div>
-                        <div class="w-7 h-7 bg-slate-300 rounded-full border-2 border-white/50 overflow-hidden"><img src="https://i.pravatar.cc/28?img=28" class="w-full h-full object-cover"></div>
+    <!-- Hero Section -->
+    <header class="relative pt-12 pb-16 md:pt-16 md:pb-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-10 items-center">
+                <!-- Text Content -->
+                <div class="md:col-span-7">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-[#1e2937] border border-[#334155] rounded-3xl text-sm mb-6">
+                        <div class="w-2 h-2 bg-[#eab308] rounded-full animate-pulse"></div>
+                        <span class="font-medium">2026 WAEC / NECO / IGCSE Registration Open</span>
                     </div>
-                    <div class="text-slate-400 text-xs">Trusted by 500+ students &amp; families</div>
+                    
+                    <h1 class="text-6xl md:text-7xl font-bold leading-[1.05] tracking-tighter mb-6">
+                        Nigeria's Full-Service<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#7c3aed] to-[#eab308]">Virtual Learning Institution</span>
+                    </h1>
+                    
+                    <p class="max-w-xl text-xl text-[#cbd5e1] mb-8">
+                        Strictly virtual. Team of seasoned teachers. Nursery through SSS3. 
+                        All major exams (WAEC, NECO, GCE, BECE, UTME, IGCSE, IELTS, JUPEB, SAT). 
+                        Free CBT Pro. 11 LMS platforms. Data Science training. 34+ live projects.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="register.html" 
+                           class="px-8 py-4 bg-white text-[#0a1628] font-semibold rounded-3xl flex items-center gap-3 hover:bg-[#f1f5f9] transition-all text-lg shadow-lg">
+                            <span>Enrol Now — It's Free to Start</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        
+                        <a href="https://wa.me/2348100866322?text=Hello%20HMG%20Academy%2C%20I%20am%20a%20parent%2Fstudent%2Fschool%20and%20would%20like%20more%20information%20about%20Virtual%20Home%20Schooling%20and%20CBT%20Pro." 
+                           target="_blank"
+                           class="px-8 py-4 border-2 border-white/70 hover:bg-white/10 font-semibold rounded-3xl flex items-center gap-3 text-lg transition-all">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                            <span>Chat with Us</span>
+                        </a>
+                    </div>
+
+                    <div class="mt-8 flex items-center gap-4 text-sm">
+                        <div class="flex -space-x-2">
+                            <div class="w-7 h-7 bg-[#7c3aed] rounded-full border-2 border-[#0a1628]"></div>
+                            <div class="w-7 h-7 bg-[#eab308] rounded-full border-2 border-[#0a1628]"></div>
+                            <div class="w-7 h-7 bg-[#334155] rounded-full border-2 border-[#0a1628]"></div>
+                        </div>
+                        <span class="text-[#94a3b8]">Trusted by 500+ students &amp; 20+ schools across Nigeria</span>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="lg:col-span-5 mt-10 lg:mt-0">
-                <div class="bg-white/10 border border-white/20 backdrop-blur rounded-3xl p-7">
-                    <div class="flex items-center gap-x-3 mb-5">
-                        <div class="emoji-icon">🏫</div>
-                        <div>
-                            <div class="font-semibold text-lg">Institution Status</div>
-                            <div class="flex items-center gap-x-2 text-sm">
-                                <span class="live-badge">ALL SYSTEMS LIVE</span>
+
+                <!-- Hero Visual: Logo + Founder -->
+                <div class="md:col-span-5 relative">
+                    <div class="premium-card rounded-3xl p-6 shadow-2xl border border-[#334155]">
+                        <div class="flex flex-col items-center text-center">
+                            <img src="assets/images/hmg-academy-logo.png" alt="HMG Academy Logo" 
+                                 class="w-40 h-auto mb-6 logo-glow" onerror="this.style.display='none'">
+                            
+                            <div class="mb-4">
+                                <img src="assets/images/founder.jpg" alt="Adewale Samson Adeagbo, Founder of HMG Academy" 
+                                     class="w-28 h-28 rounded-2xl object-cover border-4 border-[#7c3aed]/30 shadow-inner mx-auto">
+                            </div>
+                            
+                            <div>
+                                <p class="font-semibold">Adewale Samson Adeagbo</p>
+                                <p class="text-sm text-[#94a3b8]">Founder &amp; Visioner • 15+ Years Teaching</p>
+                                <p class="text-xs mt-1 text-[#7c3aed]">B.Sc.(Ed) Computer Science Education, LASU • 3MTT Data Science Catalyst</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="grid grid-cols-2 gap-4 text-sm">
-                        <div>
-                            <div class="text-slate-300">Founded</div>
-                            <div class="font-semibold text-white">2015</div>
-                        </div>
-                        <div>
-                            <div class="text-slate-300">Model</div>
-                            <div class="font-semibold text-white">100% Virtual • Team-Based</div>
-                        </div>
-                        <div>
-                            <div class="text-slate-300">Exams Covered</div>
-                            <div class="font-semibold text-white">10+ (Local + International)</div>
-                        </div>
-                        <div>
-                            <div class="text-slate-300">Subjects</div>
-                            <div class="font-semibold text-white">All • Expert Teachers</div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-6 pt-6 border-t border-white/20 text-xs text-slate-300">
-                        Not one teacher. A full team of seasoned educators.
+                    <div class="absolute -bottom-3 -right-3 bg-[#1e2937] border border-[#334155] text-xs px-4 py-2 rounded-2xl flex items-center gap-2 shadow">
+                        <i class="fas fa-globe text-[#eab308]"></i>
+                        <span class="font-medium">Strictly Virtual • Anywhere in Nigeria</span>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Stats -->
-    <div class="max-w-7xl mx-auto px-6 pb-12">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-800 rounded-3xl overflow-hidden">
-            <div class="bg-slate-900 p-6 text-white">
-                <div class="text-4xl font-display font-bold tracking-tighter">15+</div>
-                <div class="text-sm font-medium text-slate-300 mt-1">Years Teaching Experience</div>
-                <div class="text-xs text-emerald-400 mt-3 font-medium">Across nursery, primary &amp; secondary</div>
-            </div>
-            <div class="bg-slate-900 p-6 text-white">
-                <div class="text-4xl font-display font-bold tracking-tighter">10+</div>
-                <div class="text-sm font-medium text-slate-300 mt-1">Major Exams Supported</div>
-                <div class="text-xs text-emerald-400 mt-3 font-medium">WAEC • NECO • IGCSE • IELTS • SAT • JUPEB + more</div>
-            </div>
-            <div class="bg-slate-900 p-6 text-white">
-                <div class="text-4xl font-display font-bold tracking-tighter">All</div>
-                <div class="text-sm font-medium text-slate-300 mt-1">Subjects — Expert Team</div>
-                <div class="text-xs text-emerald-400 mt-3 font-medium">Mathematics to Data Science • No gaps</div>
-            </div>
-            <div class="bg-slate-900 p-6 text-white">
-                <div class="text-4xl font-display font-bold tracking-tighter">Free</div>
-                <div class="text-sm font-medium text-slate-300 mt-1">CBT Pro Platform</div>
-                <div class="text-xs text-emerald-400 mt-3 font-medium">Live in real classrooms today • ₦0 forever</div>
+    <!-- Stats Bar -->
+    <div class="border-y border-[#334155] bg-[#0f172a]">
+        <div class="max-w-7xl mx-auto px-6 py-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+                <div>
+                    <div class="text-4xl font-bold text-[#eab308]">15+</div>
+                    <div class="text-sm text-[#94a3b8] mt-1">Years Teaching All Levels</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-[#eab308]">34+</div>
+                    <div class="text-sm text-[#94a3b8] mt-1">Live Deployed Projects</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-[#eab308]">16</div>
+                    <div class="text-sm text-[#94a3b8] mt-1">EdTech Tools &amp; LMS</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-[#eab308]">500+</div>
+                    <div class="text-sm text-[#94a3b8] mt-1">Students Reached</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-[#eab308]">₦0</div>
+                    <div class="text-sm text-[#94a3b8] mt-1">CBT Pro Budget for Schools</div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- What We Offer -->
-    <div id="services" class="max-w-7xl mx-auto px-6 py-16">
-        <div class="flex items-end justify-between mb-8">
+    <!-- Featured Tools Overview (New Drops) -->
+    <section class="max-w-7xl mx-auto px-6 pt-16 pb-12">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
             <div>
-                <div class="uppercase tracking-[2px] text-xs font-semibold text-emerald-600">EVERYTHING A STUDENT NEEDS</div>
-                <h2 class="section-header mt-1">One Platform.<br>Complete Support.</h2>
+                <span class="text-[#7c3aed] font-semibold tracking-widest text-sm">2026 DEVELOPMENTS</span>
+                <h2 class="text-4xl font-bold mt-1">Featured Tools &amp; Platforms</h2>
+                <p class="text-[#94a3b8] mt-2">All live. All built with free tools. All for Nigerian realities.</p>
             </div>
-            <a href="services.html" class="hidden sm:flex items-center gap-x-2 text-sm font-semibold text-slate-600 hover:text-slate-900">
-                View full services <i class="fas fa-arrow-right"></i>
+            <a href="tools.html" class="text-[#7c3aed] hover:text-[#eab308] font-medium flex items-center gap-2">
+                View All 34 Projects <i class="fas fa-arrow-right"></i>
             </a>
         </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            <!-- Service Cards -->
-            <div class="card bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="flex items-center gap-x-3 mb-4">
-                    <span class="text-3xl">🎓</span>
-                    <div class="font-semibold text-lg">Virtual Classes — All Subjects</div>
-                </div>
-                <p class="text-slate-600 text-sm leading-relaxed">Live, structured sessions for JSS1–SSS3 and beyond. Delivered by specialist teachers via Zoom and Google Meet. Scheduled, results-focused. All subjects covered by our expert team.</p>
-                <div class="mt-5 flex items-center gap-x-2 text-xs">
-                    <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full font-medium">JSS 1 – SSS 3</span>
-                    <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full font-medium">WAEC/NECO Aligned</span>
-                </div>
-                <a href="services.html#virtual-classes" class="mt-6 inline-flex text-sm font-semibold text-emerald-600 hover:text-emerald-700 items-center gap-x-1">Explore classes →</a>
-            </div>
-            
-            <div class="card bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="flex items-center gap-x-3 mb-4">
-                    <span class="text-3xl">💻</span>
-                    <div class="font-semibold text-lg">CBT Pro — Free Exam Platform</div>
-                </div>
-                <p class="text-slate-600 text-sm leading-relaxed">Full Computer-Based Testing platform built for Nigerian schools at zero cost. Timed exams, scientific calculator, anti-cheat, teacher dashboard, auto-certificates. Live now with real students.</p>
-                <div class="mt-4">
-                    <span class="live-badge">LIVE IN CLASSROOMS</span>
-                </div>
-                <div class="mt-4">
-                    <a href="https://cbtsystem-hmgacademy.vercel.app/" target="_blank" class="inline-flex items-center gap-x-2 text-sm font-semibold text-emerald-600 hover:text-emerald-700">
-                        Open CBT Pro <i class="fas fa-external-link-alt text-xs"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="card bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="flex items-center gap-x-3 mb-4">
-                    <span class="text-3xl">🌍</span>
-                    <div class="font-semibold text-lg">International Exam Prep</div>
-                </div>
-                <p class="text-slate-600 text-sm leading-relaxed">Specialist preparation for IGCSE, IELTS, JUPEB, and SAT — taught by qualified teachers who understand exactly what these examinations require.</p>
-                <a href="services.html#international" class="mt-6 inline-flex text-sm font-semibold text-emerald-600 hover:text-emerald-700 items-center gap-x-1">See programme →</a>
-            </div>
-            
-            <div class="card bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="flex items-center gap-x-3 mb-4">
-                    <span class="text-3xl">📝</span>
-                    <div class="font-semibold text-lg">Lesson Notes &amp; Study Materials</div>
-                </div>
-                <p class="text-slate-600 text-sm leading-relaxed">WAEC/NECO-aligned lesson notes downloadable as PDF. Written by teachers who know the Nigerian curriculum from the inside. Free for all students.</p>
-                <a href="notes.html" class="mt-6 inline-flex text-sm font-semibold text-emerald-600 hover:text-emerald-700 items-center gap-x-1">Browse notes →</a>
-            </div>
-            
-            <div class="card bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="flex items-center gap-x-3 mb-4">
-                    <span class="text-3xl">📊</span>
-                    <div class="font-semibold text-lg">Data Science Training</div>
-                </div>
-                <p class="text-slate-600 text-sm leading-relaxed">A practical Python and Machine Learning programme for post-secondary students. Real tools, real projects, real portfolio — built to take you from zero to employable.</p>
-                <a href="services.html#data-science" class="mt-6 inline-flex text-sm font-semibold text-emerald-600 hover:text-emerald-700 items-center gap-x-1">View curriculum →</a>
-            </div>
-            
-            <div class="card bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="flex items-center gap-x-3 mb-4">
-                    <span class="text-3xl">✍️</span>
-                    <div class="font-semibold text-lg">Exam Registration &amp; Admission</div>
-                </div>
-                <p class="text-slate-600 text-sm leading-relaxed">We handle WAEC, NECO, GCE, and UTME registration for students — removing the stress from parents and families. Admission processing to tertiary institutions also available.</p>
-                <a href="contact.html" class="mt-6 inline-flex text-sm font-semibold text-emerald-600 hover:text-emerald-700 items-center gap-x-1">Enquire now →</a>
-            </div>
-        </div>
-        
-        <!-- New: Virtual Home Schooling Highlight -->
-        <div class="mt-8 bg-gradient-to-r from-purple-900/10 to-emerald-900/10 border border-purple-200 rounded-3xl p-6">
-            <div class="flex flex-col md:flex-row items-start md:items-center gap-4">
-                <div class="flex-1">
-                    <div class="font-semibold text-lg">New: Virtual Home Schooling</div>
-                    <div class="text-sm text-slate-600 mt-1">Full structured homeschool program (Nursery–SSS3) with live classes, parent dashboard, progress tracking, exam prep, and all our free tools. Designed for families who want Academy-quality education with homeschool flexibility.</div>
-                </div>
-                <a href="homeschooling.html" class="inline-flex items-center gap-x-2 bg-purple-600 text-white px-6 py-2 rounded-2xl text-sm font-semibold whitespace-nowrap">Learn More &amp; Enrol →</a>
-            </div>
-        </div>
-    </div>
 
-    <!-- The Distinction -->
-    <div class="max-w-7xl mx-auto px-6 py-12 bg-white border-y border-slate-200">
-        <div class="max-w-3xl">
-            <div class="uppercase text-xs font-semibold tracking-widest text-emerald-600 mb-2">IMPORTANT DISTINCTION</div>
-            <h2 class="section-header">HMG Academy Is a Full Virtual Institution</h2>
-            <p class="mt-4 text-lg text-slate-600">Many virtual platforms are run by a single teacher. HMG Academy is different — it is a properly structured virtual school with a <strong>team of seasoned, experienced educators</strong>, built to serve every student, at every level, for every examination.</p>
-        </div>
-        
-        <div class="mt-10 grid md:grid-cols-3 gap-6 text-sm">
-            <div class="flex gap-x-4">
-                <div class="mt-1 text-2xl">👥</div>
-                <div>
-                    <div class="font-semibold">A Team of Seasoned Teachers</div>
-                    <div class="text-slate-600 mt-1">Experienced educators across all subject areas. Every student is matched to a specialist, not whoever is available.</div>
-                </div>
-            </div>
-            <div class="flex gap-x-4">
-                <div class="mt-1 text-2xl">📚</div>
-                <div>
-                    <div class="font-semibold">All Subjects, All Levels</div>
-                    <div class="text-slate-600 mt-1">From Nursery through SSS3 — Mathematics, Sciences, Languages, Arts, Commercial subjects and more. No gaps.</div>
-                </div>
-            </div>
-            <div class="flex gap-x-4">
-                <div class="mt-1 text-2xl">🌍</div>
-                <div>
-                    <div class="font-semibold">Nigerian AND International Exams</div>
-                    <div class="text-slate-600 mt-1">WAEC, NECO, BECE, UTME — and IGCSE, IELTS, JUPEB, SAT. We prepare students for wherever their ambition takes them.</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Live Tools Highlight -->
-    <div class="max-w-7xl mx-auto px-6 py-16">
-        <div class="flex items-end justify-between mb-8">
-            <div>
-                <div class="uppercase tracking-[2px] text-xs font-semibold text-emerald-600">EDTECH BUILT IN-HOUSE</div>
-                <h2 class="section-header mt-1">Real Tools.<br>Real Students.<br>Live Now.</h2>
-            </div>
-            <a href="tools.html" class="text-sm font-semibold flex items-center gap-x-2 text-slate-600 hover:text-slate-900">See all 9+ live projects <i class="fas fa-arrow-right"></i></a>
-        </div>
-        
-        <div class="grid lg:grid-cols-2 gap-6">
-            <!-- CBT Pro -->
-            <div class="card bg-white border border-slate-200 rounded-3xl p-7">
-                <div class="flex justify-between items-start">
+        <!-- Quick Grids -->
+        <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <!-- LMS Featured -->
+            <div class="premium-card rounded-3xl p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-[#7c3aed]/10 rounded-2xl flex items-center justify-center text-[#7c3aed]">
+                        <i class="fas fa-graduation-cap text-xl"></i>
+                    </div>
                     <div>
-                        <div class="live-badge mb-3">LIVE • USED BY REAL STUDENTS</div>
-                        <div class="font-semibold text-2xl">CBT Pro — Free Nigerian School Exam Platform</div>
+                        <h3 class="font-semibold">11 HMG Academy LMS</h3>
+                        <p class="text-xs text-[#94a3b8]">Educator + Data Science + AI-Augmented</p>
                     </div>
-                    <div class="text-4xl">💻</div>
                 </div>
-                
-                <p class="mt-4 text-sm text-slate-600">Full CBT system — CSV question upload, timed sessions, scientific calculator, anti-cheat tab detection, teacher analytics dashboard, certificate generation, WhatsApp sharing. Built with AI assistance. Zero cost to schools or students.</p>
-                
-                <div class="mt-6 grid grid-cols-2 gap-x-4 text-xs">
-                    <div class="flex items-center gap-x-2"><span class="font-medium">Budget:</span> <span class="text-emerald-600 font-semibold">₦0</span></div>
-                    <div class="flex items-center gap-x-2"><span class="font-medium">Built on:</span> <span>Android Tablet</span></div>
-                    <div class="flex items-center gap-x-2"><span class="font-medium">Backend:</span> <span>Supabase + RLS</span></div>
-                    <div class="flex items-center gap-x-2"><span class="font-medium">Analytics:</span> <span>4-tab dashboard</span></div>
+                <div class="text-sm space-y-2 text-[#cbd5e1]">
+                    <div class="flex justify-between"><span>SQL Learn</span> <a href="https://sqllearn-hmgacademy.vercel.app/" target="_blank" class="text-[#7c3aed] hover:underline">Live →</a></div>
+                    <div class="flex justify-between"><span>Streamlit Learn</span> <a href="https://streamlitlearn-hmgacademy.vercel.app/" target="_blank" class="text-[#7c3aed] hover:underline">Live →</a></div>
+                    <div class="flex justify-between"><span>Excel Learn</span> <a href="https://excellearn-hmgacademy.vercel.app/" target="_blank" class="text-[#7c3aed] hover:underline">Live →</a></div>
+                    <div class="flex justify-between"><span>Data Science Learn</span> <a href="https://datascience-hmgacademy.vercel.app/" target="_blank" class="text-[#7c3aed] hover:underline">Live →</a></div>
+                    <div class="flex justify-between"><span>Junior &amp; Senior Class</span> <a href="https://juniorclass-hmgacademy.vercel.app/" target="_blank" class="text-[#7c3aed] hover:underline">Live →</a></div>
                 </div>
-                
-                <div class="mt-6 flex gap-x-3">
-                    <a href="https://cbtsystem-hmgacademy.vercel.app/" target="_blank" class="flex-1 text-center bg-emerald-600 hover:bg-emerald-700 transition-colors text-white text-sm font-semibold py-2.5 rounded-2xl">Open Live Platform</a>
-                    <a href="https://github.com/cssadewale/cbt-system" target="_blank" class="flex-1 text-center border border-slate-300 hover:bg-slate-50 text-sm font-semibold py-2.5 rounded-2xl">GitHub</a>
-                </div>
+                <div class="mt-4 text-xs text-[#94a3b8]">+ 6 more (PyDataFlow, VizLearn, ML Lab, QueryPilot, Data Analysis Learn) • All free, no paid AI APIs</div>
+                <a href="tools.html# lms" class="mt-4 block text-center text-sm font-medium text-[#7c3aed] hover:text-[#eab308]">See all 11 LMS →</a>
             </div>
-            
-            <div class="space-y-4">
-                <div class="card bg-white border border-slate-200 rounded-3xl p-5 flex gap-x-4 items-start">
-                    <div class="text-3xl mt-1">📊</div>
-                    <div class="flex-1">
-                        <div class="font-semibold">Student Performance Tracker</div>
-                        <div class="text-xs text-slate-500 mt-1">Upload class result CSV → instant analytics, at-risk students, distributions. Built for teachers.</div>
-                        <a href="https://adewale-student-performance-tracker.streamlit.app/" target="_blank" class="text-emerald-600 text-xs font-semibold mt-2 inline-block">Open live app →</a>
-                    </div>
-                </div>
-                <div class="card bg-white border border-slate-200 rounded-3xl p-5 flex gap-x-4 items-start">
-                    <div class="text-3xl mt-1">📚</div>
-                    <div class="flex-1">
-                        <div class="font-semibold">CBT Question Bank Manager</div>
-                        <div class="text-xs text-slate-500 mt-1">Build, organise, tag, search question sets. One-click export to CBT Pro CSV.</div>
-                        <a href="https://adewale-cbt-question-bank.streamlit.app/" target="_blank" class="text-emerald-600 text-xs font-semibold mt-2 inline-block">Open live app →</a>
-                    </div>
-                </div>
-                <div class="text-xs text-slate-500 pl-1">+ Student At-Risk Predictor, Study Plan Generator, and more. <a href="tools.html" class="font-semibold text-emerald-600">View all →</a></div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Founder -->
-    <div class="max-w-7xl mx-auto px-6 py-16 bg-slate-900 text-white rounded-3xl">
-        <div class="grid lg:grid-cols-12 gap-x-10 items-center">
-            <div class="lg:col-span-5">
-                <div class="uppercase tracking-widest text-emerald-400 text-xs font-semibold mb-3">THE VISIONER</div>
-                <h2 class="font-display text-4xl leading-tight tracking-tighter">Adewale Samson Adeagbo</h2>
-                <div class="mt-2 text-emerald-300 text-lg">Founder &amp; Director • AI-Augmented Solutions Developer • Data Scientist • Educator (15+ Years)</div>
-                
-                <div class="mt-6 text-sm leading-relaxed text-slate-300">
-                    15+ years in Nigerian classrooms. B.Sc.(Ed) Computer Science Education (LASU 2023). The breakthrough came through 3MTT in 2025. 
-                    Every platform — including this website and CBT Pro — was built by leveraging AI as a force multiplier while thinking clearly about the problem.
+            <!-- ML Projects -->
+            <div class="premium-card rounded-3xl p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-[#eab308]/10 rounded-2xl flex items-center justify-center text-[#eab308]">
+                        <i class="fas fa-chart-line text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">7 ML / Data Science Models</h3>
+                        <p class="text-xs text-[#94a3b8]">7 Industries • Honest Metrics</p>
+                    </div>
                 </div>
-                
-                <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="about.html" class="inline-flex items-center gap-x-2 text-sm font-semibold border border-white/30 hover:bg-white/10 transition-colors px-5 py-2 rounded-2xl">Full Story →</a>
-                    <a href="https://cssadewale.pages.dev/" target="_blank" class="inline-flex items-center gap-x-2 text-sm font-semibold border border-white/30 hover:bg-white/10 transition-colors px-5 py-2 rounded-2xl">Personal Portfolio ↗</a>
+                <div class="text-sm space-y-1.5 text-[#cbd5e1]">
+                    <div>TruthLens Fake News Detector <span class="text-[#eab308] text-xs">(AUC 0.9393)</span></div>
+                    <div>Staff Promotion (Yakub) <span class="text-[#eab308] text-xs">(AUC 0.891)</span></div>
+                    <div>Employee Burnout Predictor <span class="text-[#eab308] text-xs">(R² 0.855)</span></div>
+                    <div>Insurance Claim, Bank Churn, Income Level, SwiftChain</div>
                 </div>
+                <a href="tools.html#ml" class="mt-4 block text-center text-sm font-medium text-[#7c3aed] hover:text-[#eab308]">Explore all 7 models with metrics →</a>
             </div>
-            
-            <div class="lg:col-span-7 mt-10 lg:mt-0">
-                <div class="flex items-center gap-x-4">
-                    <div class="w-20 h-20 flex-shrink-0 rounded-2xl overflow-hidden border border-white/20 bg-slate-800">
-                        <img src="assets/images/founder.jpg" 
-                             alt="Adewale Samson Adeagbo, Founder of HMG Academy"
-                             class="w-full h-full object-cover"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-20 h-20 bg-slate-700 flex items-center justify-center text-3xl rounded-2xl\'>👤</div>'">
-                    </div>
-                    <div class="text-sm leading-relaxed">
-                        “Data science taught me that if you can think through a problem clearly, you can find a path to a solution — even in unfamiliar territory.”<br>
-                        <span class="block mt-3 text-emerald-300 text-xs">— The HMG Academy commitment</span>
-                    </div>
-                </div>
-                
-                <div class="mt-8 grid grid-cols-3 gap-4 text-xs">
-                    <div class="border border-white/10 rounded-2xl p-4">
-                        <div class="font-semibold">🏫 EdTech Builder</div>
-                        <div class="text-[10px] text-slate-400 mt-1">CBT Pro, LMS platforms, analytics tools</div>
-                    </div>
-                    <div class="border border-white/10 rounded-2xl p-4">
-                        <div class="font-semibold">📊 DataTech Builder</div>
-                        <div class="text-[10px] text-slate-400 mt-1">7 ML models • 11 simulators</div>
-                    </div>
-                    <div class="border border-white/10 rounded-2xl p-4">
-                        <div class="font-semibold">✝️ FaithTech Builder</div>
-                        <div class="text-[10px] text-slate-400 mt-1">HMG Gospel platforms</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Ecosystem -->
-    <div class="max-w-7xl mx-auto px-6 py-16">
-        <div class="text-center mb-10">
-            <div class="uppercase tracking-[2px] text-xs font-semibold text-emerald-600">ONE BRAND • FOUR MISSIONS</div>
-            <h2 class="section-header mt-2">Part of the HMG Concepts Ecosystem</h2>
-            <p class="text-slate-600 mt-3 max-w-md mx-auto">HMG Academy is one living arm of a larger conviction-driven organisation.</p>
+            <!-- Flagship CBT + Academic Tools -->
+            <div class="premium-card rounded-3xl p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-400">
+                        <i class="fas fa-laptop text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">CBT Pro + 5 Academic Tools</h3>
+                        <p class="text-xs text-[#94a3b8]">Built on Android tablet • ₦0 budget</p>
+                    </div>
+                </div>
+                <div class="text-sm space-y-2">
+                    <div class="font-medium">CBT Pro (Flagship)</div>
+                    <div class="text-xs text-[#94a3b8]">CSV upload • Timed exams • Anti-cheat • 4-tab analytics • WhatsApp certificates • Supabase</div>
+                    <a href="https://cbtsystem-hmgacademy.vercel.app/" target="_blank" class="inline-block mt-1 text-emerald-400 hover:underline text-sm">Live Teacher/Student Portal →</a>
+                    
+                    <div class="pt-3 border-t border-[#334155] text-xs">
+                        <span class="font-medium">Also live:</span> CBT Question Bank Manager • Student Study Plan Generator • Schooldocforge • TimetableCraft
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a href="https://hmgconcepts.pages.dev/" target="_blank" class="group card bg-white border border-slate-200 rounded-3xl p-6 block hover:border-emerald-200">
-                <div class="text-3xl mb-3">★</div>
-                <div class="font-semibold text-lg group-hover:text-emerald-600 transition-colors">HMG Concepts</div>
-                <div class="text-xs text-slate-500 mt-1">The host brand. Education • Technology • Media • Gospel.</div>
-            </a>
-            <a href="https://hmgtechnologies.pages.dev/" target="_blank" class="group card bg-white border border-slate-200 rounded-3xl p-6 block hover:border-emerald-200">
-                <div class="text-3xl mb-3">💻</div>
-                <div class="font-semibold text-lg group-hover:text-emerald-600 transition-colors">HMG Technologies</div>
-                <div class="text-xs text-slate-500 mt-1">AI-augmented tools, CBT systems, data solutions for Nigeria.</div>
-                <div class="text-emerald-600 text-xs mt-4 font-medium">Visit ↗</div>
-            </a>
-            <a href="https://hmgmedia.pages.dev/" target="_blank" class="group card bg-white border border-slate-200 rounded-3xl p-6 block hover:border-emerald-200">
-                <div class="text-3xl mb-3">🎬</div>
-                <div class="font-semibold text-lg group-hover:text-emerald-600 transition-colors">HMG Media</div>
-                <div class="text-xs text-slate-500 mt-1">Purpose-led content, storytelling &amp; brand visibility.</div>
-                <div class="text-emerald-600 text-xs mt-4 font-medium">Visit ↗</div>
-            </a>
-            <a href="https://hmggospel.pages.dev/" target="_blank" class="group card bg-white border border-slate-200 rounded-3xl p-6 block hover:border-emerald-200">
-                <div class="text-3xl mb-3">✝️</div>
-                <div class="font-semibold text-lg group-hover:text-emerald-600 transition-colors">HMG Gospel</div>
-                <div class="text-xs text-slate-500 mt-1">Christ-centred digital outreach &amp; discipleship.</div>
-                <div class="text-emerald-600 text-xs mt-4 font-medium">Visit ↗</div>
+
+        <div class="text-center">
+            <a href="tools.html" class="inline-flex items-center gap-2 px-6 py-3 border border-[#334155] hover:bg-[#1e2937] rounded-3xl text-sm font-medium">
+                <span>Browse Complete Tools &amp; Projects Catalogue (34+)</span>
+                <i class="fas fa-arrow-right"></i>
             </a>
         </div>
-        
-        <div class="text-center mt-8">
-            <a href="https://hmgconcepts.pages.dev/ecosystem.html" target="_blank" class="text-sm font-semibold inline-flex items-center gap-x-2 text-emerald-600 hover:text-emerald-700">Explore the full ecosystem →</a>
+    </section>
+
+    <!-- How We Work -->
+    <section class="max-w-7xl mx-auto px-6 py-12 border-t border-[#334155]">
+        <div class="max-w-3xl mx-auto text-center mb-10">
+            <span class="text-[#7c3aed] font-semibold tracking-[3px] text-sm">OUR PROVEN PROCESS</span>
+            <h2 class="text-4xl font-bold mt-2">How We Work</h2>
+            <p class="text-[#94a3b8] mt-3">The exact 5-step method used across HMG Academy, Technologies, and all 34+ projects. Clear thinking first. AI as leverage.</p>
         </div>
-    </div>
+
+        <div class="grid md:grid-cols-5 gap-4">
+            <div class="premium-card p-6 rounded-3xl">
+                <div class="text-[#7c3aed] font-mono text-xs mb-1">01</div>
+                <div class="font-semibold mb-2">Understand the Problem</div>
+                <div class="text-sm text-[#94a3b8]">Conversation. Question behind the question. Real Nigerian classroom or business pain points.</div>
+            </div>
+            <div class="premium-card p-6 rounded-3xl">
+                <div class="text-[#7c3aed] font-mono text-xs mb-1">02</div>
+                <div class="font-semibold mb-2">Scope &amp; Propose</div>
+                <div class="text-sm text-[#94a3b8]">Define scope clearly. Transparent cost (often ₦0 for core learner tools) and timeline.</div>
+            </div>
+            <div class="premium-card p-6 rounded-3xl">
+                <div class="text-[#7c3aed] font-mono text-xs mb-1">03</div>
+                <div class="font-semibold mb-2">Build with AI Leverage</div>
+                <div class="text-sm text-[#94a3b8]">Educator clarity + Data science rigour + AI augmentation = faster, higher-quality delivery.</div>
+            </div>
+            <div class="premium-card p-6 rounded-3xl">
+                <div class="text-[#7c3aed] font-mono text-xs mb-1">04</div>
+                <div class="font-semibold mb-2">Test &amp; Refine</div>
+                <div class="text-sm text-[#94a3b8]">Real users (teachers, students, schools). Honest feedback. Document failures and fixes.</div>
+            </div>
+            <div class="premium-card p-6 rounded-3xl">
+                <div class="text-[#7c3aed] font-mono text-xs mb-1">05</div>
+                <div class="font-semibold mb-2">Deploy &amp; Train</div>
+                <div class="text-sm text-[#94a3b8]">Full documentation. Team training. Tools must be genuinely used — not just handed over.</div>
+            </div>
+        </div>
+        <p class="text-center text-xs text-[#64748b] mt-4">"We don't build technology for its own sake. We build it because a problem demands a solution."</p>
+    </section>
+
+    <!-- Why HMG Academy Different -->
+    <section class="max-w-7xl mx-auto px-6 py-12">
+        <div class="premium-card rounded-3xl p-8 md:p-12">
+            <div class="grid md:grid-cols-2 gap-10">
+                <div>
+                    <h3 class="text-3xl font-bold">Not a Tutoring Service.<br>A Full Virtual Institution.</h3>
+                    <p class="mt-4 text-[#cbd5e1]">A team of seasoned teachers (not one tutor). All subjects. All levels. All major exams. Real LMS, real CBT, real data science training, real parent accountability tools.</p>
+                    
+                    <div class="mt-6 space-y-3 text-sm">
+                        <div class="flex gap-3"><i class="fas fa-check text-[#eab308] mt-1"></i> <span>Team-powered delivery (Mathematics, Further Maths, Physics, Chemistry, English, Economics, Data Science, CS, etc.)</span></div>
+                        <div class="flex gap-3"><i class="fas fa-check text-[#eab308] mt-1"></i> <span>Free flagship CBT Pro live in real classrooms today</span></div>
+                        <div class="flex gap-3"><i class="fas fa-check text-[#eab308] mt-1"></i> <span>11 purpose-built LMS platforms (no paid AI APIs)</span></div>
+                        <div class="flex gap-3"><i class="fas fa-check text-[#eab308] mt-1"></i> <span>Parent dashboard, progress tracking, mastery certificates</span></div>
+                    </div>
+                </div>
+                <div class="text-sm text-[#cbd5e1]">
+                    <div class="uppercase tracking-widest text-xs text-[#7c3aed] font-medium mb-3">Built for Nigerian Realities</div>
+                    <ul class="space-y-2">
+                        <li class="flex gap-2"><span class="text-[#eab308]">•</span> Works on low-end devices and slow connections</li>
+                        <li class="flex gap-2"><span class="text-[#eab308]">•</span> Zero recurring costs for core learner access</li>
+                        <li class="flex gap-2"><span class="text-[#eab308]">•</span> Honest documentation (including what didn't work)</li>
+                        <li class="flex gap-2"><span class="text-[#eab308]">•</span> WhatsApp-first communication (fastest in Nigeria)</li>
+                        <li class="flex gap-2"><span class="text-[#eab308]">•</span> LocalStorage privacy — no unnecessary data collection</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Testimonials -->
-    <div class="max-w-7xl mx-auto px-6 py-12">
-        <div class="mb-8">
-            <div class="uppercase tracking-[2px] text-xs font-semibold text-emerald-600">REAL VOICES</div>
-            <h2 class="section-header">What People Say</h2>
+    <section class="max-w-7xl mx-auto px-6 py-12 border-t border-[#334155]">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold">What Students, Teachers &amp; Partners Say</h2>
         </div>
         
-        <div class="grid md:grid-cols-3 gap-5">
-            <div class="bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="flex gap-x-1 text-amber-500 mb-4">★★★★★</div>
-                <p class="text-sm leading-relaxed">“Mr Adewale doesn't just teach you how to solve the problem — he teaches you how to think. My Further Maths went from D7 to B2 in one term.”</p>
-                <div class="mt-5 text-xs">
-                    <span class="font-semibold">Tolu F.</span><br>
-                    <span class="text-slate-500">SSS3 Student · Lagos</span>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="premium-card p-6 rounded-3xl">
+                <div class="flex gap-1 text-[#eab308] mb-3">★★★★★</div>
+                <p class="text-sm">"Mr Adewale doesn't just teach you how to solve the problem — he teaches you how to think. My Further Maths went from D7 to B2 in one term."</p>
+                <div class="mt-4 text-xs">
+                    <span class="font-medium">Tolu F.</span> — SSS3 Student, Lagos
                 </div>
             </div>
-            <div class="bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="flex gap-x-1 text-amber-500 mb-4">★★★★★</div>
-                <p class="text-sm leading-relaxed">“I’ve seen many free exam tools for Nigerian schools. Most break when it matters. CBT Pro is genuinely different — my students finished mocks without a single issue.”</p>
-                <div class="mt-5 text-xs">
-                    <span class="font-semibold">Adeyemi O.</span><br>
-                    <span class="text-slate-500">STEM Teacher · Lagos</span>
+            <div class="premium-card p-6 rounded-3xl">
+                <div class="flex gap-1 text-[#eab308] mb-3">★★★★★</div>
+                <p class="text-sm">"I've seen many free exam tools for Nigerian schools. Most break when it matters. CBT Pro is genuinely different — my students finished mocks without a single issue."</p>
+                <div class="mt-4 text-xs">
+                    <span class="font-medium">Adeyemi O.</span> — STEM Teacher, Lagos Secondary School
                 </div>
             </div>
-            <div class="bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="flex gap-x-1 text-amber-500 mb-4">★★★★★</div>
-                <p class="text-sm leading-relaxed">“Everything is built with genuine care for the Nigerian context — slow internet, low-end devices, real classroom chaos. That thinking is rare.”</p>
-                <div class="mt-5 text-xs">
-                    <span class="font-semibold">Biodun O.</span><br>
-                    <span class="text-slate-500">School Administrator · Ogun</span>
+            <div class="premium-card p-6 rounded-3xl">
+                <div class="flex gap-1 text-[#eab308] mb-3">★★★★★</div>
+                <p class="text-sm">"The data-tool simulators were exactly what our trainees needed. No installation, no cost, no barriers — they could practise from any device."</p>
+                <div class="mt-4 text-xs">
+                    <span class="font-medium">Funke A.</span> — Training Coordinator, Lagos
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Ecosystem -->
+    <section class="max-w-7xl mx-auto px-6 py-12">
+        <div class="text-center mb-8">
+            <span class="text-[#7c3aed] font-semibold text-sm tracking-widest">PART OF HMG CONCEPTS</span>
+            <h2 class="text-3xl font-bold mt-1">One Brand. Four Missions.</h2>
+        </div>
         
-        <div class="text-xs text-center mt-6 text-slate-500">More testimonials and partner feedback available on request.</div>
-    </div>
+        <div class="grid md:grid-cols-4 gap-4">
+            <a href="https://hmgconcepts.pages.dev/" target="_blank" class="premium-card p-5 rounded-3xl hover:border-[#7c3aed] transition-colors group">
+                <div class="font-semibold group-hover:text-[#7c3aed]">HMG Concepts (Host)</div>
+                <div class="text-xs text-[#94a3b8] mt-1">Education · Technology · Media · Gospel</div>
+            </a>
+            <a href="https://hmgtechnologies.pages.dev/" target="_blank" class="premium-card p-5 rounded-3xl hover:border-[#7c3aed] transition-colors group">
+                <div class="font-semibold group-hover:text-[#7c3aed]">HMG Technologies</div>
+                <div class="text-xs text-[#94a3b8] mt-1">AI-Augmented Tools • 34+ Projects</div>
+            </a>
+            <a href="https://hmgmedia.pages.dev/" target="_blank" class="premium-card p-5 rounded-3xl hover:border-[#7c3aed] transition-colors group">
+                <div class="font-semibold group-hover:text-[#7c3aed]">HMG Media</div>
+                <div class="text-xs text-[#94a3b8] mt-1">Purpose-Led Content &amp; Storytelling</div>
+            </a>
+            <a href="https://hmggospel.pages.dev/" target="_blank" class="premium-card p-5 rounded-3xl hover:border-[#7c3aed] transition-colors group">
+                <div class="font-semibold group-hover:text-[#7c3aed]">HMG Gospel</div>
+                <div class="text-xs text-[#94a3b8] mt-1">Christ-Centred Digital Outreach</div>
+            </a>
+        </div>
+        
+        <div class="text-center mt-6">
+            <a href="https://cssadewale.pages.dev/" target="_blank" class="text-sm text-[#94a3b8] hover:text-[#eab308]">View Founder Portfolio (cssadewale.pages.dev) →</a>
+        </div>
+    </section>
 
     <!-- Final CTA -->
-    <div id="register" class="max-w-7xl mx-auto px-6 py-16">
-        <div class="bg-emerald-600 text-white rounded-3xl p-10 md:p-14 text-center">
-            <div class="max-w-lg mx-auto">
-                <h2 class="font-display text-4xl tracking-tighter">Your Child’s Education Deserves Better.</h2>
-                <p class="mt-4 text-emerald-100">HMG Academy is a full institution — a seasoned team, all subjects, every major examination. Enrol today and experience the difference that deliberate, expert teaching makes.</p>
-                
-                <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="register.html" class="inline-flex justify-center items-center gap-x-2 bg-white text-emerald-700 font-semibold px-8 py-3 rounded-3xl hover:bg-emerald-50 transition-colors">✍️ Enrol a Student Now</a>
-                    <a href="https://wa.me/2348100866322?text=Hello%20HMG%20Academy%2C%20I%20want%20to%20enrol%20my%20child." target="_blank" class="inline-flex justify-center items-center gap-x-2 border border-white/70 hover:bg-white/10 font-semibold px-8 py-3 rounded-3xl transition-colors">💬 Chat on WhatsApp</a>
-                </div>
-                
-                <div class="mt-6 text-xs text-emerald-200">No commitment until we speak. We respond within 24 hours.</div>
+    <div class="bg-[#1e2937] border-t border-[#334155]">
+        <div class="max-w-4xl mx-auto px-6 py-14 text-center">
+            <h2 class="text-4xl font-bold">Ready to Learn Deliberately?</h2>
+            <p class="mt-3 text-[#cbd5e1] max-w-md mx-auto">Join hundreds of students and dozens of schools using our free, battle-tested platforms.</p>
+            
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="register.html" class="px-8 py-4 bg-[#eab308] hover:bg-[#facc15] text-[#0a1628] font-semibold rounded-3xl inline-flex items-center justify-center gap-3 text-lg">Enrol Now</a>
+                <a href="https://wa.me/2348100866322" target="_blank" class="px-8 py-4 border border-white/70 hover:bg-white/5 font-semibold rounded-3xl inline-flex items-center justify-center gap-3 text-lg">Talk to Us on WhatsApp</a>
             </div>
+            
+            <p class="mt-6 text-xs text-[#64748b]">WhatsApp is fastest. Response within hours (often minutes).</p>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-12 text-sm">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-y-10">
-            <div class="md:col-span-5">
-                <div class="flex items-center gap-x-3 mb-4">
-                    <div class="w-8 h-8 bg-white/10 rounded-xl flex items-center justify-center text-white text-sm font-bold">HA</div>
-                    <div class="text-white font-semibold text-lg tracking-tighter">HMG Academy</div>
+    <footer class="bg-[#0a1628] border-t border-[#334155] py-10 text-sm">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between gap-y-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="font-bold">HMG Academy</span>
+                    </div>
+                    <p class="text-[#94a3b8] max-w-xs">Part of HMG Concepts — His Marvellous Grace Educational Consult.<br>Learning Deliberately. Teaching Authentically.</p>
                 </div>
-                <div class="max-w-xs">His Marvellous Grace Academy — Nigeria's full-service virtual learning institution. Learning Deliberately. Teaching Authentically.</div>
-                <div class="mt-4 text-xs">Part of <a href="https://hmgconcepts.pages.dev/" class="text-white hover:underline">HMG Concepts</a></div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-6 text-sm">
+                    <div>
+                        <div class="font-semibold mb-2 text-[#cbd5e1]">Navigate</div>
+                        <div class="space-y-1 text-[#94a3b8]">
+                            <a href="about.html" class="block hover:text-white">About the Visioner</a>
+                            <a href="services.html" class="block hover:text-white">Services &amp; Programmes</a>
+                            <a href="tools.html" class="block hover:text-white">Tools &amp; Projects</a>
+                            <a href="homeschooling.html" class="block hover:text-white">Virtual Home Schooling</a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-semibold mb-2 text-[#cbd5e1]">Connect</div>
+                        <div class="space-y-1 text-[#94a3b8]">
+                            <a href="https://wa.me/2348100866322" target="_blank" class="block hover:text-white">WhatsApp +234 810 086 6322</a>
+                            <a href="contact.html" class="block hover:text-white">Contact &amp; Enquiries</a>
+                            <a href="register.html" class="block hover:text-white">Register / Enrol</a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-semibold mb-2 text-[#cbd5e1]">Ecosystem</div>
+                        <div class="space-y-1 text-[#94a3b8]">
+                            <a href="https://hmgconcepts.pages.dev/" target="_blank" class="block hover:text-white">HMG Concepts</a>
+                            <a href="https://hmgtechnologies.pages.dev/" target="_blank" class="block hover:text-white">HMG Technologies</a>
+                            <a href="https://cssadewale.pages.dev/" target="_blank" class="block hover:text-white">Founder Portfolio</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <div class="md:col-span-3">
-                <div class="font-semibold text-white mb-3">Quick Links</div>
-                <div class="space-y-1.5">
-                    <a href="about.html" class="block hover:text-white">Our Story</a>
-                    <a href="services.html" class="block hover:text-white">Services</a>
-                    <a href="tools.html" class="block hover:text-white">Live Tools</a>
-                    <a href="notes.html" class="block hover:text-white">Free Notes</a>
-                    <a href="https://cbtsystem-hmgacademy.vercel.app/" target="_blank" class="block hover:text-white">Open CBT Pro</a>
+            <div class="mt-10 pt-6 border-t border-[#334155] text-xs text-[#64748b] flex flex-col md:flex-row gap-2 md:items-center justify-between">
+                <div>© 2026 HMG Academy. All rights reserved. Built with free tools only. No paid AI APIs.</div>
+                <div class="flex gap-4">
+                    <a href="privacy.html" class="hover:text-white">Privacy (LocalStorage Only)</a>
+                    <a href="faq.html" class="hover:text-white">FAQ</a>
+                    <a href="partners.html" class="hover:text-white">Partners &amp; Ecosystem</a>
                 </div>
             </div>
-            
-            <div class="md:col-span-4">
-                <div class="font-semibold text-white mb-3">Contact</div>
-                <div class="space-y-3">
-                    <a href="https://wa.me/2348100866322" target="_blank" class="flex items-center gap-x-2 hover:text-white"><i class="fab fa-whatsapp"></i> +234 810 086 6322 (Fastest)</a>
-                    <div>+234 809 448 1488</div>
-                    <a href="mailto:buildingmyictcareer@gmail.com" class="block hover:text-white">buildingmyictcareer@gmail.com</a>
-                    <div>Lagos / Ogun State, Nigeria</div>
-                </div>
-                <div class="mt-6 text-xs">Response within 24 hours • Usually faster on WhatsApp</div>
-            </div>
-        </div>
-        
-        <div class="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-white/10 text-xs flex flex-col md:flex-row justify-between gap-y-2 items-center">
-            <div>© 2026 HMG Academy — His Marvellous Grace. All rights reserved.</div>
-            <div class="flex gap-x-5">
-                <a href="https://hmgconcepts.pages.dev/" class="hover:text-white">HMG Concepts</a>
-                <a href="https://cssadewale.pages.dev/" class="hover:text-white">Founder's Portfolio</a>
-                <a href="https://hmgtechnologies.pages.dev/" class="hover:text-white">Technologies</a>
-                <a href="privacy.html" class="hover:text-white">Privacy</a>
-            </div>
-            <div class="text-[10px]">This site uses only essential browser storage. No tracking cookies.</div>
         </div>
     </footer>
 
-    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // Tailwind script for any dynamic classes if needed
+        // Tailwind script
         function initializeTailwind() {
-            // Already using CDN, but can extend here
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .navy-bg { background-color: #0a1628; }
+                .premium-card { background-color: #1e2937; border: 1px solid #334155; }
+            `;
+            document.head.appendChild(style);
         }
         
         // Mobile menu
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+        function initMobileMenu() {
+            const btn = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
+            
+            if (btn && menu) {
+                btn.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                    const icon = btn.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('fa-bars');
+                        icon.classList.toggle('fa-times');
+                    }
+                });
+            }
+        }
         
-        // Simple WhatsApp form helper (for any future forms)
-        console.log('%c[HMG Academy] New website initialized. Ready for asset uploads (logo + founder photo).', 'color:#64748b');
+        // Simple form handler for any quick forms (if present on home)
+        function initQuickForms() {
+            document.querySelectorAll('form[data-whatsapp]').forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const data = new FormData(form);
+                    let message = "Hello HMG Academy,%0A%0A";
+                    for (let [key, value] of data.entries()) {
+                        message += `${key}: ${value}%0A`;
+                    }
+                    window.open(`https://wa.me/2348100866322?text=${message}`, '_blank');
+                });
+            });
+        }
         
-        // Keyboard accessibility note
-        // All CTAs are proper links for best UX
+        // Init everything
+        function init() {
+            initializeTailwind();
+            initMobileMenu();
+            initQuickForms();
+            
+            // Keyboard accessibility for mobile menu
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "Escape") {
+                    const menu = document.getElementById('mobile-menu');
+                    if (menu && !menu.classList.contains('hidden')) {
+                        menu.classList.add('hidden');
+                    }
+                }
+            });
+            
+            console.log('%c[HMG Academy v2] Index loaded with full ecosystem integration.', 'color:#64748b');
+        }
+        
+        window.onload = init;
     </script>
 </body>
 </html>
