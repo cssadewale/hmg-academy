@@ -1,55 +1,26 @@
-# HMG Academy Assets Upload Guide
+# HMG Academy Assets
 
-This folder is ready for your brand assets. The website is designed to automatically use them once uploaded — no code changes needed.
+This folder contains brand assets for the HMG Academy website.
 
-## Required Files (Upload These)
+## Current Assets
+- `hmg-academy-logo.png` — Official HMG Academy logo (premium dark navy/purple/gold design with graduation cap, open book, laurels, and text). Use this for all pages.
+- `founder.jpg` — High-quality photo of Founder & Visioner Adewale Samson Adeagbo.
 
-1. **hmg-academy-logo.png** (or .svg if preferred)
-   - Your official HMG Academy logo.
-   - Recommended: Transparent background, 512x512 or similar square/rect.
-   - Used in navbar, footer, hero.
+## How to Update Assets (GitHub / Cloudflare Pages)
+1. Replace `hmg-academy-logo.png` or `founder.jpg` with your new files (keep exact filenames).
+2. Commit and push to your GitHub repo.
+3. The site will automatically use the new assets on next deploy (no code changes needed).
+4. Recommended sizes:
+   - Logo: PNG, transparent or dark background friendly, ~1000px wide or as provided.
+   - Founder photo: JPG, professional headshot or portrait, high resolution but optimized (<500KB ideal for fast load).
 
-2. **founder.jpg** (or founder.png)
-   - High-quality professional photo of Adewale Samson Adeagbo (the Visioner).
-   - Recommended: Headshot or upper-body, good lighting, professional yet approachable. 800x800+ px.
-   - Used in About, Founder section, testimonials if needed.
+## Fallback
+If assets are missing, the site uses graceful text fallbacks (e.g., "HMG ACADEMY" text logo in nav/hero).
 
-## Optional / Future Assets
-- og-image.jpg or social-preview.jpg (for sharing cards, 1200x630 recommended)
-- favicon.ico or favicon.png (for browser tab)
-- hero-bg.jpg or background image if you want custom hero (currently gradient/decorative)
-- Any additional icons or illustrations (keep minimal for performance)
+## Design Notes
+- Logo syncs with theme: dark navy (#0a1628), deep purple accents (#7c3aed), gold highlights (#facc15 or #eab308).
+- High-contrast text (#f8fafc white/light for dark sections; dark for any light cards).
+- All images have alt text for accessibility.
 
-## How to Upload (Easiest for .pages.dev / GitHub Pages)
-
-**Best Option: GitHub (if deploying from repo)**
-1. Go to your GitHub repo for this site (or create one).
-2. Upload the files directly into `assets/images/` folder.
-3. Commit and push.
-4. The site (if using GitHub Pages or Cloudflare Pages connected to repo) will automatically detect and display the new assets for ALL visitors.
-
-**Alternative: Direct to Hosting**
-- If using Cloudflare Pages or similar dashboard: Upload via file manager or deploy tool into the assets/images path.
-
-**Local Testing**
-- Just place the files in this folder.
-- Run a local server: `python -m http.server 8000` (from project root) or use Live Server in VS Code.
-- View at http://localhost:8000
-
-## Fallbacks
-- If files are missing, the site uses:
-  - Text-based logo fallback ("HMG ACADEMY") with styling.
-  - Generic placeholder or emoji for founder photo.
-- Site remains fully functional and professional even without uploads.
-
-## Tips
-- Optimize images (compress with TinyPNG or similar) for fast load.
-- Use consistent naming if you add variants (e.g. founder-dark.jpg).
-- Update this README if you add more assets.
-- For logo updates later: Same process — just replace the file in the folder and redeploy.
-
-Once uploaded, the entire HMG Academy site (and future pages) will reflect your real branding instantly.
-
-Questions? Contact via WhatsApp +234 810 086 6322.
-
-— Built as part of HMG Concepts ecosystem rebuild.
+Part of HMG Concepts — His Marvellous Grace Educational Consult.
+Contact: +234 810 086 6322 | buildingmyictcareer@gmail.com
