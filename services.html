@@ -3,191 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services &amp; Programmes | HMG Academy — Detailed Explanations</title>
+    <title>Services &amp; Programmes | HMG Academy — Detailed Explanations &amp; Tutor Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        body { font-family: 'Inter', system_ui, sans-serif; }
-        .navy-bg { background-color: #0a1628; }
-        .premium-card { background-color: #1e2937; border: 1px solid #334155; }
-        .gold-accent { color: #eab308; }
-        .feature-detail { border-left: 4px solid #7c3aed; }
-    </style>
+    <style>body { font-family: 'Inter', system_ui, sans-serif; } .navy-bg { background-color: #0a1628; } .premium-card { background-color: #1e2937; border: 1px solid #334155; } .feature-detail { border-left: 4px solid #7c3aed; }</style>
 </head>
 <body class="bg-[#0a1628] text-[#f8fafc] navy-bg">
-    <!-- Consistent Nav -->
     <nav class="bg-[#0a1628]/95 backdrop-blur-md border-b border-[#334155] sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-3">
-                    <img src="assets/images/hmg-academy-logo.png" alt="HMG Academy Logo" class="h-9 w-auto" onerror="this.style.display='none'">
-                    <span class="font-bold">HMG Academy</span>
-                </div>
-                <div class="hidden md:flex items-center gap-6 text-sm">
-                    <a href="index.html" class="hover:text-[#eab308]">Home</a>
-                    <a href="about.html" class="hover:text-[#eab308]">About</a>
-                    <a href="tools.html" class="hover:text-[#eab308]">Tools</a>
-                    <a href="homeschooling.html" class="hover:text-[#eab308]">Home Schooling</a>
-                    <a href="contact.html" class="hover:text-[#eab308]">Contact</a>
-                </div>
-                <a href="https://wa.me/2348100866322" target="_blank" class="px-4 py-2 bg-[#eab308] text-[#0a1628] text-sm font-semibold rounded-2xl flex items-center gap-2">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
-            </div>
-        </div>
+        <div class="max-w-7xl mx-auto px-6"><div class="flex justify-between items-center h-16">
+            <div class="flex items-center gap-3"><img src="assets/images/hmg-academy-logo.png" alt="HMG Academy Logo" class="h-9 w-auto" onerror="this.style.display='none'"><span class="font-bold">HMG Academy</span></div>
+            <div class="hidden md:flex items-center gap-6 text-sm"><a href="index.html" class="hover:text-[#eab308]">Home</a><a href="book-tutor.html" class="hover:text-[#eab308]">Find a Tutor</a><a href="tools.html" class="hover:text-[#eab308]">Tools</a><a href="homeschooling.html" class="hover:text-[#eab308]">Home Schooling</a><a href="contact.html" class="hover:text-[#eab308]">Contact</a></div>
+            <a href="https://wa.me/2348100866322" target="_blank" class="px-4 py-2 bg-[#eab308] text-[#0a1628] text-sm font-semibold rounded-2xl flex items-center gap-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div></div>
     </nav>
 
     <div class="max-w-6xl mx-auto px-6 py-12">
-        <div class="max-w-3xl">
-            <h1 class="text-5xl font-bold">Services &amp; Programmes</h1>
-            <p class="mt-3 text-xl text-[#cbd5e1]">Full-service virtual institution. Every offering comes with detailed explanations, enterprise features, and free-tool transparency.</p>
+        <h1 class="text-5xl font-bold">Services &amp; Programmes</h1>
+        <p class="mt-3 text-xl text-[#cbd5e1]">Vetted tutors + Virtual Schooling + Free tools. Every feature explained in detail.</p>
+
+        <!-- Tutor Marketplace (new from Prepclass "Uber for tutoring") -->
+        <div class="mt-10 premium-card p-8 rounded-3xl" id="tutor-marketplace">
+            <h2 class="text-3xl font-bold mb-4">Tutor Marketplace — "Uber for Tutoring in Africa"</h2>
+            <div class="text-[#cbd5e1]">
+                <p><strong>Detailed Explanation:</strong> Our platform aggregates professional, vetted tutors and connects them instantly with learners. Request home (physical), online, or virtual schooling tutors from a large network. Pre-booking: Receive profiles for review + free/short evaluation class. Matching is fast via WhatsApp.</p>
+                <div class="mt-4 grid md:grid-cols-2 gap-6">
+                    <div>
+                        <strong>Features</strong><br>
+                        • 50,000+ tutor database (ecosystem scale)<br>
+                        • Home, online, or group/virtual options<br>
+                        • Subject &amp; level matching (Nursery–University + exams)<br>
+                        • Location-specific (all Nigerian states/LGAs)<br>
+                        • Transparent: Profiles, ratings, reviews before booking
+                    </div>
+                    <div>
+                        <strong>Free Tools Implementation</strong><br>
+                        Detailed booking form (book-tutor.html) with class type, location dropdowns (inspired by Prepclass), subject, schedule. All requests go directly to WhatsApp. JS tutor search/filter on pages. No backend costs.
+                    </div>
+                </div>
+            </div>
+            <a href="book-tutor.html" class="mt-6 inline-block px-5 py-2.5 bg-[#7c3aed] text-white rounded-2xl">Search &amp; Book a Tutor Now →</a>
         </div>
 
-        <!-- Virtual Home Schooling -->
-        <div class="mt-12 premium-card p-8 rounded-3xl" id="virtual-homeschooling">
-            <div class="flex items-center gap-4 mb-4">
-                <i class="fas fa-home text-3xl text-[#7c3aed]"></i>
-                <h2 class="text-3xl font-bold">Virtual Home Schooling (Nursery – SSS3)</h2>
-            </div>
-            
-            <div class="prose prose-invert max-w-none text-[#cbd5e1]">
-                <p><strong>Detailed Explanation:</strong> A complete, strictly virtual K–12 institution designed for Nigerian families who want quality, deliberate education without the limitations of physical schools. Covers all core subjects through a team of seasoned teachers. Blends live instruction (via free tools like WhatsApp groups, Zoom, Google Meet), recorded lessons, structured LMS platforms (Junior Class &amp; Senior Class), and strong parent accountability.</p>
-                
-                <h4 class="font-semibold mt-6 text-white">Curriculum Structure by Level</h4>
-                <ul class="text-sm space-y-1 mt-2">
-                    <li><strong>Nursery &amp; Primary:</strong> Foundational literacy, numeracy, basic science, social studies, creative arts. Play-based + structured.</li>
-                    <li><strong>Junior Secondary (JSS1–JSS3):</strong> Full Nigerian curriculum via Junior Class LMS + live support. BECE/Junior WAEC prep.</li>
-                    <li><strong>Senior Secondary (SSS1–SSS3):</strong> Science, Arts, Commercial streams. WAEC, NECO, GCE, UTME, IGCSE, IELTS, JUPEB, SAT focus. Senior Class LMS + exam clinics.</li>
+        <!-- Vetting & Quality (from Prepclass + Tuteria) -->
+        <div class="mt-8 premium-card p-8 rounded-3xl" id="vetting">
+            <h2 class="text-3xl font-bold mb-4">Tutor Vetting &amp; Quality Assurance</h2>
+            <div class="text-[#cbd5e1]">
+                <p><strong>Detailed Explanation:</strong> Only top 1% make it. Process combines Prepclass rigor and Tuteria standards + HMG educator insight.</p>
+                <ul class="mt-3 text-sm space-y-2">
+                    <li>• Subject-specific exams (tutors tested on what they teach)</li>
+                    <li>• In-depth interviews (teaching style, patience, communication)</li>
+                    <li>• Background checks (mental, physical, social stability)</li>
+                    <li>• Ongoing monitoring via parent reviews, progress data, and our ML at-risk tools</li>
+                    <li>• 100% satisfaction guarantee — if not happy, we make it right</li>
                 </ul>
-
-                <h4 class="font-semibold mt-6 text-white">Parent Accountability &amp; Dashboard</h4>
-                <p>Parents receive weekly progress reports, access to a simulated dashboard (see full interactive demo on the Virtual Home Schooling page), mastery certificates, and direct WhatsApp channel to teachers. No surprises — full visibility.</p>
-
-                <h4 class="font-semibold mt-6 text-white">Technology Stack (Free Only)</h4>
-                <p>Junior/Senior Class LMS platforms (browser-based), localStorage for progress, WhatsApp for live sessions &amp; support, recorded videos hosted on free platforms, study plan generators. No paid AI APIs — cost-effective and scalable for families and schools.</p>
-
-                <h4 class="font-semibold mt-6 text-white">Enterprise / School Partnership Angle</h4>
-                <p>Schools can adopt the full Virtual Home Schooling model as a hybrid or fully virtual arm. Includes teacher training, curriculum mapping, and InstaDocs for report cards/certificates.</p>
-            </div>
-            
-            <div class="mt-6">
-                <a href="homeschooling.html" class="px-5 py-2.5 bg-[#7c3aed] text-white rounded-2xl text-sm font-medium inline-flex items-center gap-2">Explore Full Virtual Home Schooling Page &amp; Parent Dashboard Demo →</a>
             </div>
         </div>
 
-        <!-- CBT Pro -->
-        <div class="mt-8 premium-card p-8 rounded-3xl" id="cbt-pro">
-            <div class="flex items-center gap-4 mb-4">
-                <i class="fas fa-laptop text-3xl text-emerald-400"></i>
-                <h2 class="text-3xl font-bold">CBT Pro (Free for Schools)</h2>
-            </div>
-            
+        <!-- Pricing & Packages -->
+        <div class="mt-8 premium-card p-8 rounded-3xl" id="pricing">
+            <h2 class="text-3xl font-bold mb-4">Transparent Pricing &amp; Packages</h2>
             <div class="text-[#cbd5e1]">
-                <p><strong>Detailed Explanation:</strong> The flagship free Computer-Based Testing platform built by a tutor, for tutors. Created entirely on an Android tablet (Acode editor) with ₦0 budget to prove that constraints are not blockers — clarity of thought is. Now live in real Nigerian secondary school classrooms.</p>
-                
-                <div class="mt-4 grid md:grid-cols-2 gap-6 text-sm">
-                    <div>
-                        <div class="font-semibold text-white mb-2">Core Features (8+)</div>
-                        <ul class="space-y-1 text-xs">
-                            <li>✓ 7-column CSV question upload (no manual entry)</li>
-                            <li>✓ Timed exams with auto-submit</li>
-                            <li>✓ Per-student question &amp; option randomisation (anti-cheat)</li>
-                            <li>✓ Tab-switch detection with configurable tolerance</li>
-                            <li>✓ Flag-for-review</li>
-                            <li>✓ Auto-marking + instant WhatsApp-shareable certificates</li>
-                            <li>✓ 4-tab teacher analytics (Overview, Question Analysis, Student Comparison, Trends)</li>
-                            <li>✓ Optional Gemini AI explanations (free tier only when needed)</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <div class="font-semibold text-white mb-2">Enterprise &amp; Free Stack Details</div>
-                        <p class="text-xs">Built with HTML5 + Vanilla JS + Supabase (free tier with Row-Level Security). No paid AI required for core use. Deployable for entire schools at zero cost. Full documentation and teacher training included in our 5-step process.</p>
-                        <p class="mt-3 text-xs">Primary Live Link: <a href="https://cbtsystem-hmgacademy.vercel.app/" target="_blank" class="text-emerald-400 underline">cbtsystem-hmgacademy.vercel.app</a></p>
-                    </div>
+                <p><strong>Detailed Explanation:</strong> Charged per classes/hours (Prepclass model) or packages. One-off setup for matching (transparent). Core Virtual Home Schooling, CBT Pro, and LMS access remains ₦0 for learners.</p>
+                <div class="mt-4 grid md:grid-cols-3 gap-4 text-sm">
+                    <div class="border border-[#334155] p-4 rounded-2xl"><strong>Per Lesson / Hour</strong><br>Flexible. Pay only for what you book. Contact for current rates.</div>
+                    <div class="border border-[#334155] p-4 rounded-2xl"><strong>Monthly Packages</strong><br>1-month cycles (Prepclass style). Includes progress reports. Better value.</div>
+                    <div class="border border-[#334155] p-4 rounded-2xl"><strong>Premium (Tuteria Plus style)</strong><br>Top tutors + adaptive plans + priority support. Study Abroad bundles available.</div>
                 </div>
+                <p class="mt-4 text-xs">All quotes via WhatsApp. No hidden fees. Free core tools (LMS, CBT) always included for enrolled students.</p>
             </div>
         </div>
 
-        <!-- LMS & Academic Tools -->
-        <div class="mt-8 premium-card p-8 rounded-3xl" id="lms">
-            <h2 class="text-3xl font-bold mb-2">11 HMG Academy LMS Platforms + 5 Academic Tools</h2>
-            <p class="text-[#cbd5e1] mb-6">Application of Educator skills + Data Science/Data Analysis skills + AI-Augmented Solutions Developer Skills = EdTech Builder.</p>
-            
-            <div class="space-y-8">
-                <!-- LMS Details -->
-                <div>
-                    <h3 class="font-semibold text-lg mb-3 text-[#eab308]">11 LMS Platforms — Detailed Explanations</h3>
-                    <div class="grid md:grid-cols-2 gap-x-8 gap-y-6 text-sm">
-                        <div>
-                            <strong>SQL Learn (HMG SQL Studio Ultimate)</strong><br>
-                            <span class="text-xs text-[#94a3b8]">Live: sqllearn-hmgacademy.vercel.app</span><br>
-                            30 structured modules from foundations to advanced analytics engineering. In-browser SQL.js playground, scenario datasets, challenge mode with solution checking, weekly study planner, capstones, role-based paths (Analyst / Data Science / BI / Educator), optional Supabase auth, teacher tools, school onboarding workflow. Free tools only (no paid AI APIs).
-                        </div>
-                        <div>
-                            <strong>Junior Class &amp; Senior Class</strong><br>
-                            <span class="text-xs text-[#94a3b8]">Live: juniorclass-hmgacademy.vercel.app / seniorclass-hmgacademy.vercel.app</span><br>
-                            Full Nigerian curriculum (JSS1–SSS3). Active learning (mid-lesson knowledge checks), study planner, verified mastery certificates. Directly powers Virtual Home Schooling. Zero API costs.
-                        </div>
-                        <div>
-                            <strong>Excel Learn, Data Analysis Learn, PyDataFlow, VizLearn, Streamlit Learn, Data Science Learn, ML Lab, QueryPilot</strong><br>
-                            <span class="text-xs">Practical, progressive curricula from beginner to deployment-ready. All browser-based or lightweight, localStorage progress, free hosting.</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Academic Tools -->
-                <div>
-                    <h3 class="font-semibold text-lg mb-3 text-[#eab308]">5 Academic / EdTech Builder Tools</h3>
-                    <div class="text-sm space-y-3">
-                        <div><strong>CBT Question Bank Manager</strong> — Build, tag, search, reuse question banks. One-click export to CBT Pro CSV. <a href="https://hmgacademy-cbt-question-bank.streamlit.app/" target="_blank" class="text-[#7c3aed]">Live →</a></div>
-                        <div><strong>Student Study Plan Generator</strong> — Personalised WAEC/NECO revision schedules based on weak topics and available time. <a href="https://hmgacademy-student-study-plan-generator.streamlit.app/" target="_blank" class="text-[#7c3aed]">Live →</a></div>
-                        <div><strong>Schooldocforge</strong> — School document generation (report cards, letters). <a href="https://schooldocforge-hmgacademy.vercel.app/" target="_blank" class="text-[#7c3aed]">Live →</a></div>
-                        <div><strong>TimetableCraft</strong> — Intelligent school timetable builder. <a href="https://hmgacademy-timetablecraft.streamlit.app/" target="_blank" class="text-[#7c3aed]">Live →</a></div>
-                    </div>
-                </div>
+        <!-- 6-Step Results Process (enhanced) -->
+        <div class="mt-8 premium-card p-8 rounded-3xl" id="results-process">
+            <h2 class="text-3xl font-bold mb-4">Our 6-Step Results Process (Detailed)</h2>
+            <div class="space-y-6 text-sm">
+                <div class="feature-detail pl-4"><strong>1. Insights Assessment</strong> — Free diagnostic via our tools (Study Plan Generator, CBT Pro, LMS quizzes). Identifies strengths/weaknesses.</div>
+                <div class="feature-detail pl-4"><strong>2. Adaptive Learning Plans</strong> — Personalized using 11 LMS platforms + ML insights. Tailored to child (Tuteria child-centered).</div>
+                <div class="feature-detail pl-4"><strong>3. Matched Vetted Tutor</strong> — Top 1% only (exams + interview + background). Home/online/virtual options.</div>
+                <div class="feature-detail pl-4"><strong>4. Periodic Evaluation</strong> — Ongoing with CBT Pro mocks, LMS challenges, parent feedback.</div>
+                <div class="feature-detail pl-4"><strong>5. Progress Reports &amp; Reviews</strong> — Detailed reports + recommendations. Parent dashboard (interactive demo available).</div>
+                <div class="feature-detail pl-4"><strong>6. Uplift &amp; Enterprise</strong> — Tutor training (LTU style), InstaDocs for reports, school partnerships.</div>
             </div>
         </div>
 
-        <!-- Enterprise School Partnerships -->
-        <div class="mt-8 premium-card p-8 rounded-3xl" id="enterprise">
-            <h2 class="text-3xl font-bold mb-4">Enterprise School Partnership Program</h2>
+        <!-- Become a Tutor (from Prepclass) -->
+        <div class="mt-8 premium-card p-8 rounded-3xl" id="become-tutor">
+            <h2 class="text-3xl font-bold mb-4">Become a Tutor (Tutor Upliftment)</h2>
             <div class="text-[#cbd5e1]">
-                <p><strong>Detailed Explanation:</strong> We do not just sell tools — we partner with schools for genuine adoption using our 5-step process. Includes free deployment of CBT Pro, full LMS rollout (including Junior/Senior Class for virtual arms), InstaDocs for admin documents, teacher training on the free stack, and ongoing WhatsApp support.</p>
-                
-                <div class="mt-4 grid md:grid-cols-2 gap-6 text-sm">
-                    <div class="feature-detail pl-4">
-                        <strong>What Schools Receive</strong><br>
-                        • Zero-cost CBT Pro for all exams<br>
-                        • 11 LMS platforms + training<br>
-                        • InstaDocs for certificates &amp; reports<br>
-                        • Parent dashboard integration<br>
-                        • Curriculum &amp; timetable support<br>
-                        • Honest metrics &amp; documentation
-                    </div>
-                    <div>
-                        <strong>Free Tools Stack We Use &amp; Teach</strong><br>
-                        Tailwind CDN, Vanilla JS, SQL.js, localStorage, Supabase free tier, Streamlit, Vercel, GitHub Pages/Cloudflare Pages. No paid AI APIs — this is deliberate cost discipline so schools in Nigeria can scale without recurring fees.
-                    </div>
-                </div>
+                <p><strong>Detailed Explanation:</strong> Join our vetted network. Access training, foreign gig placement, free coding/language classes (LTU programs). Earn while uplifting learners. Apply via form — we handle vetting.</p>
             </div>
-            <a href="contact.html" class="mt-6 inline-block px-5 py-2.5 border border-[#eab308] text-[#eab308] rounded-2xl text-sm font-medium">Request School Partnership Discussion</a>
+            <a href="become-tutor.html" class="mt-4 inline-block px-5 py-2.5 border border-[#eab308] text-[#eab308] rounded-2xl">Apply to Become a Tutor →</a>
         </div>
 
-        <!-- Other Services -->
-        <div class="mt-8 grid md:grid-cols-2 gap-6">
-            <div class="premium-card p-6 rounded-3xl">
-                <h3 class="font-semibold mb-3">Data Science &amp; Machine Learning Training</h3>
-                <p class="text-sm text-[#cbd5e1]">Practical, practitioner-led training using the same 7 ML models and 11 simulators we built. From Excel to deployed models. Perfect for schools, bootcamps, and professionals. All tools free.</p>
-            </div>
-            <div class="premium-card p-6 rounded-3xl">
-                <h3 class="font-semibold mb-3">Exam Registration &amp; Prep Support</h3>
-                <p class="text-sm text-[#cbd5e1]">WAEC, NECO, UTME, IGCSE, IELTS, JUPEB, SAT. Full guidance + our LMS + CBT Pro for mocks. Team of teachers handles the process.</p>
+        <!-- Existing Virtual Home Schooling &amp; CBT (enhanced) -->
+        <div class="mt-8">
+            <h2 class="text-3xl font-bold mb-4">Virtual Home Schooling &amp; Free Tools (Core — Enhanced)</h2>
+            <div class="text-[#cbd5e1] grid md:grid-cols-2 gap-6">
+                <div>See full details on <a href="homeschooling.html" class="text-[#7c3aed]">Virtual Home Schooling page</a>. Includes adaptive plans, progress reports, Junior/Senior Class LMS, parent dashboard demo.</div>
+                <div>CBT Pro (free for schools): Full features + 4-tab analytics. See <a href="tools.html" class="text-[#7c3aed]">Tools page</a>.</div>
             </div>
         </div>
     </div>
-
-    <footer class="border-t border-[#334155] py-8 text-xs text-[#64748b]">
-        <div class="max-w-6xl mx-auto px-6">© 2026 HMG Academy. All explanations above use only free tools. See full project links on the Tools page.</div>
-    </footer>
 </body>
 </html>

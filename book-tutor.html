@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find &amp; Book a Professional Tutor | HMG Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>body { font-family: 'Inter', system_ui, sans-serif; } .navy-bg { background-color: #0a1628; } .premium-card { background-color: #1e2937; border: 1px solid #334155; }</style>
+</head>
+<body class="bg-[#0a1628] text-[#f8fafc] navy-bg">
+    <nav class="bg-[#0a1628]/95 backdrop-blur-md border-b border-[#334155] sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6"><div class="flex justify-between items-center h-16">
+            <div class="flex items-center gap-3"><img src="assets/images/hmg-academy-logo.png" alt="HMG Academy Logo" class="h-9 w-auto" onerror="this.style.display='none'"><span class="font-bold">HMG Academy</span></div>
+            <div class="hidden md:flex items-center gap-6 text-sm"><a href="index.html" class="hover:text-[#eab308]">Home</a><a href="services.html" class="hover:text-[#eab308]">Services</a><a href="homeschooling.html" class="hover:text-[#eab308]">Home Schooling</a><a href="contact.html" class="hover:text-[#eab308]">Contact</a></div>
+            <a href="https://wa.me/2348100866322" target="_blank" class="px-4 py-2 bg-[#eab308] text-[#0a1628] text-sm font-semibold rounded-2xl flex items-center gap-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div></div>
+    </nav>
+
+    <div class="max-w-3xl mx-auto px-6 py-12">
+        <h1 class="text-4xl font-bold">Find &amp; Book a Professional Tutor</h1>
+        <p class="mt-2 text-[#cbd5e1]">Top 1% vetted tutors. Home, online or virtual. 100% satisfaction guaranteed. Pre-booking evaluation available.</p>
+
+        <!-- Tutor Search Simulation -->
+        <div class="mt-8 premium-card p-6 rounded-3xl">
+            <h3 class="font-semibold mb-4">Search Tutors (Demo — Real booking via form below)</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                <input id="search-subject" type="text" placeholder="Subject (e.g. Mathematics, IELTS)" class="bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-2 text-sm">
+                <select id="search-level" class="bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-2 text-sm">
+                    <option value="">Any Level</option>
+                    <option>Nursery/Primary</option>
+                    <option>JSS1–JSS3</option>
+                    <option>SSS1–SSS3 / WAEC</option>
+                    <option>UTME / JAMB</option>
+                    <option>IELTS / TOEFL / GMAT</option>
+                    <option>University / Professional</option>
+                </select>
+                <select id="search-type" class="bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-2 text-sm">
+                    <option value="">Any Type</option>
+                    <option>Home (Physical)</option>
+                    <option>Online</option>
+                    <option>Virtual Home Schooling</option>
+                </select>
+            </div>
+            <button onclick="filterTutors()" class="px-5 py-2 bg-[#7c3aed] text-white rounded-2xl text-sm">Search</button>
+            <div id="search-results" class="mt-4 grid gap-3"></div>
+        </div>
+
+        <!-- Detailed Booking Form (inspired by Prepclass + Tuteria) -->
+        <form id="book-form" class="mt-8 premium-card p-6 rounded-3xl space-y-4">
+            <h3 class="font-semibold">Schedule Your Class (Online, Physical Home, or Virtual)</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs mb-1 text-[#94a3b8]">Title</label>
+                    <select name="Title" class="w-full bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-3 text-sm">
+                        <option>Mr.</option><option>Mrs.</option><option>Ms.</option><option>Dr.</option><option>Prof.</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs mb-1 text-[#94a3b8]">First Name</label>
+                    <input type="text" name="First Name" required class="w-full bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-3 text-sm">
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs mb-1 text-[#94a3b8]">Last Name</label>
+                <input type="text" name="Last Name" required class="w-full bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-3 text-sm">
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs mb-1 text-[#94a3b8]">Class Type</label>
+                    <select name="Class Type" required class="w-full bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-3 text-sm">
+                        <option value="">Select</option>
+                        <option>Online One-on-One</option>
+                        <option>Physical (Home)</option>
+                        <option>Virtual Home Schooling (Group/Individual)</option>
+                        <option>Group Class (Academy Style)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs mb-1 text-[#94a3b8]">Subject / Course</label>
+                    <input type="text" name="Subject" required placeholder="Mathematics, IELTS, UTME, Physics..." class="w-full bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-3 text-sm">
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs mb-1 text-[#94a3b8]">Level / Exam</label>
+                    <select name="Level" required class="w-full bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-3 text-sm">
+                        <option value="">Select</option>
+                        <option>Nursery / Primary</option>
+                        <option>JSS1–JSS3 (BECE)</option>
+                        <option>SSS1–SSS3 (WAEC/NECO)</option>
+                        <option>UTME / JAMB 2026</option>
+                        <option>IGCSE / SAT / Common Entrance</option>
+                        <option>IELTS / TOEFL / GMAT / GRE</option>
+                        <option>University / Professional</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs mb-1 text-[#94a3b8]">Preferred Schedule (hours/week)</label>
+                    <input type="text" name="Schedule" placeholder="e.g. 3 hours/week, evenings" class="w-full bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-3 text-sm">
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs mb-1 text-[#94a3b8]">State / Location</label>
+                    <select name="State" class="w-full bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-3 text-sm">
+                        <option>Lagos</option><option>Abuja</option><option>Rivers</option><option>Ogun</option><option>Other (specify in message)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs mb-1 text-[#94a3b8]">Specific LGA / Area</label>
+                    <input type="text" name="Location" placeholder="e.g. Ikeja, Lekki, Gwarinpa" class="w-full bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-3 text-sm">
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs mb-1 text-[#94a3b8]">Email</label>
+                <input type="email" name="Email" class="w-full bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-3 text-sm">
+            </div>
+            <div>
+                <label class="block text-xs mb-1 text-[#94a3b8]">Phone / WhatsApp (Primary)</label>
+                <input type="tel" name="Phone" required class="w-full bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-3 text-sm">
+            </div>
+            <div>
+                <label class="block text-xs mb-1 text-[#94a3b8]">Additional Details (goals, current challenges, preferred tutor gender if any)</label>
+                <textarea name="Message" rows="3" class="w-full bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-3 text-sm" placeholder="E.g. Need tutor for WAEC Maths &amp; English. Child is shy. Prefer evening slots."></textarea>
+            </div>
+            <div class="text-xs text-[#94a3b8]">
+                Pre-booking: We send tutor profiles for review + offer a free/short evaluation class (like Prepclass). One-time setup support fee may apply for matching (contact for details). 100% satisfaction guaranteed.
+            </div>
+            <button type="submit" class="w-full py-3 bg-[#eab308] hover:bg-[#facc15] text-[#0a1628] font-semibold rounded-3xl">Submit Booking Request (Opens WhatsApp)</button>
+            <p class="text-[10px] text-center text-[#64748b]">Form sends structured prefilled WhatsApp. No server storage. Free core tools only.</p>
+        </form>
+    </div>
+
+    <script>
+        // Tutor filter simulation
+        const allTutors = [
+            { name: "Oluwatobi", subjects: "Mathematics Sciences WAEC UTME", level: "SSS1–SSS3 / WAEC", type: "Home (Physical), Online", location: "Lagos" },
+            { name: "Aisha Bello", subjects: "English IELTS TOEFL SAT", level: "IELTS / TOEFL / GMAT / GRE", type: "Online", location: "Abuja" },
+            { name: "Chinedu Okoro", subjects: "Physics Chemistry JAMB IGCSE", level: "JSS1–JSS3 (BECE)", type: "Home (Physical)", location: "Port Harcourt" }
+        ];
+        window.filterTutors = function() {
+            const subject = document.getElementById('search-subject').value.toLowerCase();
+            const level = document.getElementById('search-level').value;
+            const type = document.getElementById('search-type').value;
+            const results = document.getElementById('search-results');
+            results.innerHTML = '';
+            const filtered = allTutors.filter(t => 
+                (!subject || t.subjects.toLowerCase().includes(subject)) &&
+                (!level || t.level.includes(level)) &&
+                (!type || t.type.includes(type))
+            );
+            if (filtered.length === 0) {
+                results.innerHTML = '<div class="text-sm text-[#94a3b8]">No matches. Try broader search or use the full form below.</div>';
+                return;
+            }
+            filtered.forEach(t => {
+                const div = document.createElement('div');
+                div.className = 'p-3 bg-[#0f172a] rounded-2xl text-sm';
+                div.innerHTML = `<strong>${t.name}</strong> — ${t.subjects} | ${t.level} | ${t.type} (${t.location})<br><a href="#book-form" class="text-[#7c3aed] text-xs">Select this tutor in form below →</a>`;
+                results.appendChild(div);
+            });
+        };
+
+        // Form to WhatsApp
+        document.getElementById('book-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            let message = "Hello HMG Academy,%0A%0A*New Tutor Booking Request*%0A%0A";
+            for (let [key, value] of formData.entries()) {
+                message += `${key}: ${value}%0A`;
+            }
+            message += "%0APlease match me with a tutor and send profiles + evaluation options. Thank you!";
+            window.open(`https://wa.me/2348100866322?text=${message}`, '_blank');
+        });
+    </script>
+</body>
+</html>

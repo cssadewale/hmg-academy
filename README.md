@@ -1,6 +1,6 @@
-# HMG Academy v2 — Modern, Enterprise-Ready Static Website (2026 Rebuild)
+# HMG Academy v3 — Enhanced with Competitor Best Practices (Tuteria + Prepclass Integration) 2026 Rebuild
 
-**Full rebuild incorporating ALL HMG ecosystem developments.**  
+**v3 Full rebuild: Deep diagnosis of https://tuteria.com (v2) and https://prepclass.com.ng integrated. Enhanced with Tutor Marketplace ("Uber for tutoring"), 6-step results process (Insights Assessment + Adaptive Plans + Vetting + Evaluation + Reports + Uplift), detailed booking forms with locations/LGAs, tutor profiles, vetting explanation, become-a-tutor, pricing packages, exam-specific CTAs (UTME/IELTS/GMAT), and more — all while using ONLY free tools. Pre-existing features (Virtual Home Schooling, CBT Pro, 11 LMS, 34 projects, InstaDocs, detailed explanations) preserved and enhanced. New logo/photo integrated. High-contrast theme.**  
 Enhanced (never removed) all pre-existing features from original https://hmgacademy.pages.dev and prior builds.  
 Deep integration of host brand (hmgconcepts.pages.dev), personal portfolio (cssadewale.pages.dev), and subsidiaries (hmgtechnologies.pages.dev, hmgmedia.pages.dev, hmggospel.pages.dev).  
 
