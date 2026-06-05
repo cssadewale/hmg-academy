@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog &amp; Resources | HMG Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>body { font-family: 'Inter', system_ui, sans-serif; } .navy-bg { background-color: #0a1628; } .premium-card { background-color: #1e2937; border: 1px solid #334155; }</style>
+</head>
+<body class="bg-[#0a1628] text-[#f8fafc] navy-bg">
+    <nav class="bg-[#0a1628]/95 backdrop-blur-md border-b border-[#334155] sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6"><div class="flex justify-between items-center h-16">
+            <div class="flex items-center gap-3"><img src="assets/images/hmg-academy-logo.png" alt="HMG Academy Logo" class="h-9 w-auto" onerror="this.style.display='none'"><span class="font-bold">HMG Academy</span></div>
+            <div class="hidden md:flex items-center gap-6 text-sm"><a href="index.html" class="hover:text-[#eab308]">Home</a><a href="services.html" class="hover:text-[#eab308]">Services</a><a href="book-tutor.html" class="hover:text-[#eab308]">Find a Tutor</a><a href="homeschooling.html" class="hover:text-[#eab308]">Virtual Home Schooling</a><a href="contact.html" class="hover:text-[#eab308]">Contact</a></div>
+            <a href="https://wa.me/2348100866322" target="_blank" class="px-4 py-2 bg-[#eab308] text-[#0a1628] text-sm font-semibold rounded-2xl flex items-center gap-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div></div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-6 py-12">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+            <div>
+                <h1 class="text-5xl font-bold">Blog &amp; Resources</h1>
+                <p class="text-[#94a3b8] mt-2">Writeups, articles, exam tips, and insights from our team. Strictly virtual learning focus.</p>
+            </div>
+            <a href="contact.html" class="text-sm px-4 py-2 border border-[#7c3aed] text-[#7c3aed] rounded-2xl hover:bg-[#7c3aed] hover:text-white">Submit Your Writeup (WhatsApp)</a>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="mb-8 flex flex-col md:flex-row gap-4">
+            <input id="blog-search" type="text" placeholder="Search articles..." onkeyup="filterBlog()" class="flex-1 bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-3 text-sm">
+            <select id="blog-category" onchange="filterBlog()" class="bg-[#0f172a] border border-[#334155] rounded-2xl px-4 py-3 text-sm">
+                <option value="">All Categories</option>
+                <option>Virtual Learning</option>
+                <option>Exam Prep</option>
+                <option>EdTech &amp; Tools</option>
+                <option>Data Science</option>
+                <option>Tutor Insights</option>
+            </select>
+        </div>
+
+        <!-- Blog Posts Grid -->
+        <div id="blog-posts" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Populated by JS -->
+        </div>
+
+        <div class="mt-10 premium-card p-6 rounded-3xl">
+            <h3 class="font-semibold mb-2">How to Add New Articles (for GitHub deployment)</h3>
+            <p class="text-sm text-[#94a3b8]">This is a static site. To add a new post:
+                <br>1. Edit the `posts` array in the &lt;script&gt; section of this blog.html file (add title, excerpt, category, date, fullContent).
+                <br>2. Or create a new file like `post-your-title.html` and link it from here.
+                <br>3. Commit and push to GitHub — it updates automatically.
+                <br>Alternatively, send your writeup via WhatsApp and we can add it for you.
+            </p>
+            <a href="contact.html" class="mt-3 inline-block text-sm text-[#7c3aed]">Submit via WhatsApp →</a>
+        </div>
+    </div>
+
+    <script>
+        const posts = [
+            {
+                id: 1,
+                title: "Why Virtual Home Schooling Works Better in Nigeria",
+                excerpt: "In a country with traffic, security concerns, and varying school quality, virtual schooling offers consistency and access to the best tutors.",
+                category: "Virtual Learning",
+                date: "2026-05-20",
+                fullContent: "Full article content here... (replace with your actual writeup). Key points: flexibility, cost savings, access to specialist tutors, integration with CBT Pro and LMS for measurable progress."
+            },
+            {
+                id: 2,
+                title: "5 Strategies to Score 300+ in UTME 2026",
+                excerpt: "From our top tutors and data from thousands of students — these methods actually work.",
+                category: "Exam Prep",
+                date: "2026-05-15",
+                fullContent: "Detailed strategies: 1. Consistent CBT practice with randomization. 2. Targeted weak area remediation using our Study Plan Generator. 3. Past questions mastery. 4. Time management drills. 5. Mental preparation."
+            },
+            {
+                id: 3,
+                title: "The Power of Free Tools in EdTech: No Paid AI Needed",
+                excerpt: "How we built 34+ live projects and 11 LMS platforms without recurring AI costs — and why it matters for Nigerian learners.",
+                category: "EdTech &amp; Tools",
+                date: "2026-05-10",
+                fullContent: "Explanation of our stack: Tailwind CDN, Vanilla JS, SQL.js, localStorage, Streamlit, Supabase free tier. Benefits: zero cost to schools, scalable, privacy-first, honest engineering."
+            },
+            {
+                id: 4,
+                title: "How Our 6-Step Process Guarantees Results",
+                excerpt: "Insights Assessment → Adaptive Plans → Vetted Tutors → Evaluation → Reports → Uplift. Real stories from students who improved dramatically.",
+                category: "Tutor Insights",
+                date: "2026-05-05",
+                fullContent: "Walkthrough of the process with examples from our ecosystem. Emphasis on data-driven adjustments and parent involvement via dashboard."
+            }
+        ];
+
+        function renderBlog(filteredPosts) {
+            const container = document.getElementById('blog-posts');
+            container.innerHTML = '';
+            filteredPosts.forEach(post => {
+                const div = document.createElement('div');
+                div.className = 'premium-card p-6 rounded-3xl flex flex-col';
+                div.innerHTML = `
+                    <div class="text-xs text-[#7c3aed] mb-1">${post.category} • ${post.date}</div>
+                    <h3 class="font-semibold text-lg mb-2">${post.title}</h3>
+                    <p class="text-sm text-[#cbd5e1] flex-1">${post.excerpt}</p>
+                    <button onclick="showPost(${post.id})" class="mt-4 text-sm text-[#7c3aed] hover:text-[#eab308] self-start">Read Full Article →</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function filterBlog() {
+            const search = document.getElementById('blog-search').value.toLowerCase();
+            const cat = document.getElementById('blog-category').value;
+            const filtered = posts.filter(p => 
+                (p.title.toLowerCase().includes(search) || p.excerpt.toLowerCase().includes(search)) &&
+                (!cat || p.category === cat)
+            );
+            renderBlog(filtered);
+        }
+
+        function showPost(id) {
+            const post = posts.find(p => p.id === id);
+            if (!post) return;
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4';
+            modal.innerHTML = `
+                <div class="premium-card max-w-2xl w-full rounded-3xl p-8 max-h-[90vh] overflow-auto">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs text-[#7c3aed]">${post.category} • ${post.date}</div>
+                            <h2 class="text-2xl font-bold mt-1">${post.title}</h2>
+                        </div>
+                        <button onclick="this.closest('.fixed').remove()" class="text-2xl">&times;</button>
+                    </div>
+                    <div class="mt-6 text-[#cbd5e1] whitespace-pre-line">${post.fullContent}</div>
+                    <div class="mt-6 text-xs text-[#94a3b8]">This is a sample. Replace with your full article when adding new posts.</div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        window.onload = function() {
+            renderBlog(posts);
+        }
+    </script>
+</body>
+</html>
