@@ -1,223 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register — HMG Academy | Enrol for Classes & Training</title>
-  <meta name="description" content="Register for HMG Academy virtual classes, one-on-one tutoring, data science training, or CBT exam access. Lagos and Ogun State, Nigeria." />
-  <link rel="canonical" href="https://hmgacademy.pages.dev/register.html" />
-  <link rel="stylesheet" href="_shared.css" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J5C7CTP1N5"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
-  <style>
-    .register-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:64px; align-items:start; }
-    .register-form-card { background:white; border:1px solid var(--grey-200); border-radius:var(--radius-lg); padding:40px; box-shadow:var(--shadow-sm); }
-    .register-form-card h2 { font-size:1.5rem; color:var(--navy); margin-bottom:6px; }
-    .register-form-card .sub { font-size:0.90rem; color:var(--grey-400); margin-bottom:28px; }
-    .form-group { margin-bottom:18px; }
-    .form-group label { display:block; font-size:0.82rem; font-weight:600; color:var(--navy); margin-bottom:7px; }
-    .form-group input, .form-group select, .form-group textarea {
-      width:100%; padding:12px 14px; border:1.5px solid var(--grey-200);
-      border-radius:var(--radius-sm); font-family:var(--font-body); font-size:0.92rem;
-      color:var(--grey-800); transition:border-color 0.2s, box-shadow 0.2s; outline:none;
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      border-color:var(--navy); box-shadow:0 0 0 3px rgba(15,37,71,0.08);
-    }
-    .form-group textarea { resize:vertical; min-height:100px; }
-    .form-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-    .form-note { font-size:0.78rem; color:var(--grey-400); margin-top:8px; }
-    .form-success { display:none; text-align:center; padding:32px 24px; }
-    .form-success .icon { font-size:3rem; margin-bottom:14px; }
-    .form-success h3 { color:var(--emerald); margin-bottom:10px; }
-    .form-success p { font-size:0.90rem; color:var(--grey-600); }
-    .register-sidebar { position:sticky; top:90px; }
-    .sidebar-info-card { background:var(--navy-pale); border:1px solid rgba(15,37,71,0.12); border-radius:var(--radius); padding:24px; margin-bottom:18px; }
-    .sidebar-info-card h4 { font-size:0.88rem; font-weight:700; color:var(--navy); margin-bottom:12px; }
-    .info-item { display:flex; align-items:flex-start; gap:10px; margin-bottom:10px; font-size:0.84rem; color:var(--grey-600); }
-    .info-icon { flex-shrink:0; font-size:1rem; margin-top:1px; }
-    .whatsapp-card { background:#25D366; border-radius:var(--radius); padding:24px; color:white; text-align:center; }
-    .whatsapp-card h4 { color:white; margin-bottom:8px; font-size:1rem; }
-    .whatsapp-card p { color:rgba(255,255,255,0.80); font-size:0.84rem; margin-bottom:16px; }
-    @media (max-width:900px) { .register-grid { grid-template-columns:1fr; } .register-sidebar { position:static; } }
-    @media (max-width:480px) { .form-row-2 { grid-template-columns:1fr; } .register-form-card { padding:24px 20px; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register / Enrol — HMG Academy</title>
+    <meta name="description" content="Enrol for HMG Academy virtual classes, tutoring, data science training, or exam registration. Fill the form and we will reach out within 24 hours.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', system_ui, sans-serif; }
+        .font-display { font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif; font-weight: 600; }
+        .premium-nav {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
 </head>
-<body>
-<nav class="navbar">
-  <div class="container"><div class="nav-inner">
-    <a href="index.html" class="nav-logo"><div class="nav-logo-mark">HMG</div><div class="nav-logo-text"><span class="name">HMG Academy</span><span class="sub">His Marvellous Grace</span></div></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li>
-      <li><a href="tools.html">Tools</a></li><li><a href="notes.html">Notes</a></li><li><a href="register.html" class="active">Register</a></li><li><a href="contact.html">Contact</a></li>
-      <li><a href="https://wa.me/2348100866322" target="_blank" rel="noopener" class="nav-cta btn">💬 WhatsApp</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-  </div></div>
-  <nav class="mobile-nav" id="mobile-nav">
-    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
-    <a href="tools.html">Tools</a><a href="notes.html">Notes</a><a href="register.html">Register</a><a href="contact.html">Contact</a>
-    <a href="https://wa.me/2348100866322" target="_blank" rel="noopener" class="mobile-wa">💬 Chat on WhatsApp</a>
-  </nav>
-</nav>
-
-<section class="page-hero">
-  <div class="container page-hero-inner">
-    <nav class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span class="current">Register</span></nav>
-    <h1>Join HMG Academy</h1>
-    <p>Fill in the form below and we'll reach out within 24 hours to discuss your needs and get you started. No commitment until we've spoken.</p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="register-grid">
-      <!-- FORM -->
-      <div class="register-form-card reveal-left">
-        <h2>Registration Form</h2>
-        <p class="sub">Tell us a little about yourself and what you're looking for.</p>
-        <div id="formContent">
-          <div class="form-row-2">
-            <div class="form-group"><label for="reg-fname">First Name *</label><input type="text" id="reg-fname" placeholder="Tunde" required /></div>
-            <div class="form-group"><label for="reg-lname">Last Name *</label><input type="text" id="reg-lname" placeholder="Adeola" required /></div>
-          </div>
-          <div class="form-group"><label for="reg-email">Email Address *</label><input type="email" id="reg-email" placeholder="tunde@example.com" required /></div>
-          <div class="form-group"><label for="reg-phone">WhatsApp / Phone Number *</label><input type="tel" id="reg-phone" placeholder="+234 800 000 0000" required /></div>
-          <div class="form-group">
-            <label for="reg-service">Service You're Interested In *</label>
-            <select id="reg-service" required>
-              <option value="">— Select a service —</option>
-              <option>Virtual Classes (JSS or SSS)</option>
-              <option>One-on-One Tutoring</option>
-              <option>Data Science Training</option>
-              <option>CBT Pro (Student Access)</option>
-              <option>Lesson Notes</option>
-              <option>Exam Registration (WAEC/NECO/JAMB)</option>
-              <option>Multiple Services</option>
-            </select>
-          </div>
-          <div class="form-row-2">
-            <div class="form-group">
-              <label for="reg-class">Current Class Level</label>
-              <select id="reg-class">
-                <option value="">— Select —</option>
-                <option>JSS 1</option><option>JSS 2</option><option>JSS 3</option>
-                <option>SSS 1</option><option>SSS 2</option><option>SSS 3</option>
-                <option>Graduated / Adult Learner</option>
-              </select>
+<body class="bg-slate-50">
+    <nav class="premium-nav border-b border-slate-700 sticky top-0 z-50 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-x-3">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-xl overflow-hidden bg-white/10">
+                        <img src="assets/images/hmg-academy-logo.png" alt="HMG Academy Logo" class="w-full h-full object-contain scale-110" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white text-xl font-bold\'>HA</div>'">
+                    </div>
+                    <div class="font-display font-bold text-xl tracking-tighter text-white">HMG Academy</div>
+                </div>
+                <div class="hidden md:flex items-center gap-x-6 text-sm font-medium">
+                    <a href="index.html" class="nav-link text-white hover:text-purple-300">Home</a>
+                    <a href="about.html" class="nav-link text-white hover:text-purple-300">About</a>
+                    <a href="services.html" class="nav-link text-white hover:text-purple-300">Services</a>
+                    <a href="homeschooling.html" class="nav-link text-white hover:text-purple-300">Home Schooling</a>
+                    <a href="tools.html" class="nav-link text-white hover:text-purple-300">Tools</a>
+                    <a href="notes.html" class="nav-link text-white hover:text-purple-300">Notes</a>
+                    <a href="faq.html" class="nav-link text-white hover:text-purple-300">FAQ</a>
+                    <a href="partners.html" class="nav-link text-white hover:text-purple-300">For Schools</a>
+                    <a href="contact.html" class="nav-link text-white hover:text-purple-300">Contact</a>
+                </div>
+                <a href="https://wa.me/2348100866322" target="_blank" class="hidden sm:flex items-center gap-x-2 bg-emerald-600 text-white text-sm font-semibold px-5 py-2.5 rounded-2xl"><i class="fab fa-whatsapp"></i> WhatsApp</a>
             </div>
-            <div class="form-group">
-              <label for="reg-subjects">Subject(s) of Interest</label>
-              <select id="reg-subjects">
-                <option value="">— Select —</option>
-                <option>Mathematics</option><option>Further Mathematics</option>
-                <option>Physics</option><option>Chemistry</option><option>Computer Science</option>
-                <option>Data Science / Python</option><option>Multiple Subjects</option>
-              </select>
+        </div>
+    </nav>
+
+    <div class="max-w-3xl mx-auto px-6 pt-10 pb-8">
+        <a href="index.html" class="text-sm text-emerald-600 hover:underline">&larr; Back to Home</a>
+        <h1 class="mt-4 font-display text-4xl tracking-tighter font-bold">Join HMG Academy</h1>
+        <p class="mt-3 text-lg text-slate-600">Fill in the form below and we'll reach out within 24 hours to discuss your needs and get you started. No commitment until we've spoken.</p>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-6 pb-16">
+        <div class="bg-white border border-slate-200 rounded-3xl p-8">
+            <form id="register-form" onsubmit="submitRegistration(event)">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs font-medium text-slate-600">First Name *</label>
+                        <input type="text" id="firstName" required class="mt-1 w-full border border-slate-300 rounded-xl px-4 py-2.5 text-sm">
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium text-slate-600">Last Name *</label>
+                        <input type="text" id="lastName" required class="mt-1 w-full border border-slate-300 rounded-xl px-4 py-2.5 text-sm">
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <div>
+                        <label class="text-xs font-medium text-slate-600">Email Address *</label>
+                        <input type="email" id="email" required class="mt-1 w-full border border-slate-300 rounded-xl px-4 py-2.5 text-sm">
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium text-slate-600">WhatsApp / Phone Number *</label>
+                        <input type="tel" id="phone" required class="mt-1 w-full border border-slate-300 rounded-xl px-4 py-2.5 text-sm">
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <label class="text-xs font-medium text-slate-600">Service You're Interested In *</label>
+                    <select id="service" required class="mt-1 w-full border border-slate-300 rounded-xl px-4 py-2.5 text-sm bg-white">
+                        <option value="">— Select a service —</option>
+                        <option value="Virtual Classes (JSS or SSS)">Virtual Classes (JSS or SSS)</option>
+                        <option value="One-on-One Tutoring">One-on-One Tutoring</option>
+                        <option value="Data Science Training">Data Science Training</option>
+                        <option value="CBT Pro (Student Access)">CBT Pro (Student Access)</option>
+                        <option value="Lesson Notes">Lesson Notes</option>
+                        <option value="Exam Registration (WAEC/NECO/JAMB)">Exam Registration (WAEC/NECO/JAMB)</option>
+                        <option value="Multiple Services">Multiple Services</option>
+                    </select>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <div>
+                        <label class="text-xs font-medium text-slate-600">Current Class Level</label>
+                        <select id="level" class="mt-1 w-full border border-slate-300 rounded-xl px-4 py-2.5 text-sm bg-white">
+                            <option value="">— Select —</option>
+                            <option value="JSS 1">JSS 1</option>
+                            <option value="JSS 2">JSS 2</option>
+                            <option value="JSS 3">JSS 3</option>
+                            <option value="SSS 1">SSS 1</option>
+                            <option value="SSS 2">SSS 2</option>
+                            <option value="SSS 3">SSS 3</option>
+                            <option value="Graduated / Adult Learner">Graduated / Adult Learner</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium text-slate-600">Subject(s) of Interest</label>
+                        <select id="subject" class="mt-1 w-full border border-slate-300 rounded-xl px-4 py-2.5 text-sm bg-white">
+                            <option value="">— Select —</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Further Mathematics">Further Mathematics</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Data Science / Python">Data Science / Python</option>
+                            <option value="Multiple Subjects">Multiple Subjects</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <label class="text-xs font-medium text-slate-600">Anything Else We Should Know?</label>
+                    <textarea id="other" rows="3" class="mt-1 w-full border border-slate-300 rounded-2xl px-4 py-3 text-sm" placeholder="E.g. specific exam year, challenges, schedule preferences..."></textarea>
+                </div>
+                
+                <div class="mt-4">
+                    <label class="text-xs font-medium text-slate-600">How Did You Hear About Us?</label>
+                    <select id="hear" class="mt-1 w-full border border-slate-300 rounded-xl px-4 py-2.5 text-sm bg-white">
+                        <option value="">— Select —</option>
+                        <option value="WhatsApp">WhatsApp</option>
+                        <option value="Word of mouth / Referral">Word of mouth / Referral</option>
+                        <option value="Google Search">Google Search</option>
+                        <option value="LinkedIn">LinkedIn</option>
+                        <option value="GitHub">GitHub</option>
+                        <option value="Former student">Former student</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="mt-6 w-full bg-emerald-600 hover:bg-emerald-700 transition-colors text-white font-semibold py-3.5 rounded-2xl">✍️ Submit Registration</button>
+                
+                <div class="text-xs text-center mt-3 text-slate-500">* Required fields. Your information is kept private.</div>
+            </form>
+        </div>
+        
+        <!-- What happens next -->
+        <div class="mt-8 bg-white border border-slate-200 rounded-3xl p-7 text-sm">
+            <div class="font-semibold mb-4">🎉 Registration Received!</div>
+            <p class="text-slate-600">Thank you! We'll reach out via WhatsApp or email within <strong>24 hours</strong> to discuss next steps. In the meantime, feel free to explore CBT Pro or browse our lesson notes.</p>
+            
+            <div class="mt-5 flex flex-wrap gap-3">
+                <a href="https://cbtsystem-hmgacademy.vercel.app/" target="_blank" class="text-emerald-600 font-semibold text-sm">Open CBT Pro →</a>
+                <a href="notes.html" class="text-emerald-600 font-semibold text-sm">Browse Notes →</a>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="reg-message">Anything Else We Should Know?</label>
-            <textarea id="reg-message" placeholder="Tell us about your goals, current challenges, or any specific topics you need help with..."></textarea>
-          </div>
-          <div class="form-group">
-            <label for="reg-how">How Did You Hear About Us?</label>
-            <select id="reg-how">
-              <option value="">— Select —</option>
-              <option>WhatsApp</option><option>Word of mouth / Referral</option>
-              <option>Google Search</option><option>LinkedIn</option>
-              <option>GitHub</option><option>Former student</option><option>Other</option>
-            </select>
-          </div>
-          <p class="form-note">* Required fields. Your information is kept private and will only be used to contact you about HMG Academy services.</p>
-          <button class="btn btn-gold btn-lg" style="width:100%; justify-content:center; margin-top:8px;" onclick="submitForm()">✍️ Submit Registration</button>
+            
+            <div class="mt-6 border-t pt-5">
+                <div class="font-medium mb-2 text-xs">📋 What Happens Next?</div>
+                <ol class="text-xs text-slate-600 space-y-1 list-decimal list-inside">
+                    <li>You submit this form</li>
+                    <li>We review your details within 24 hours</li>
+                    <li>We contact you via WhatsApp or email to discuss your needs</li>
+                    <li>We agree on a schedule, format, and next step — no obligation</li>
+                </ol>
+            </div>
         </div>
-        <div class="form-success" id="formSuccess">
-          <div class="icon">🎉</div>
-          <h3>Registration Received!</h3>
-          <p>Thank you! We'll reach out via WhatsApp or email within <strong>24 hours</strong> to discuss next steps. In the meantime, feel free to explore CBT Pro or browse our lesson notes.</p>
-          <div style="display:flex; gap:10px; justify-content:center; margin-top:20px; flex-wrap:wrap;">
-            <a href="https://cssadewale.github.io/cbt-system" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Open CBT Pro</a>
-            <a href="notes.html" class="btn btn-ghost btn-sm">Browse Notes</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- SIDEBAR -->
-      <div class="register-sidebar reveal-right">
-        <div class="sidebar-info-card">
-          <h4>📋 What Happens Next?</h4>
-          <div class="info-item"><span class="info-icon">1️⃣</span><span>You submit this form</span></div>
-          <div class="info-item"><span class="info-icon">2️⃣</span><span>We review your details within 24 hours</span></div>
-          <div class="info-item"><span class="info-icon">3️⃣</span><span>We contact you via WhatsApp or email to discuss your needs</span></div>
-          <div class="info-item"><span class="info-icon">4️⃣</span><span>We agree on a schedule, format, and next step — no obligation</span></div>
-        </div>
-
-        <div class="sidebar-info-card">
-          <h4>📚 What's Available</h4>
-          <div class="info-item"><span class="info-icon">✅</span><span>Virtual classes — JSS 1 to SSS 3</span></div>
-          <div class="info-item"><span class="info-icon">✅</span><span>Maths, Further Maths, Physics, Chemistry, CS</span></div>
-          <div class="info-item"><span class="info-icon">✅</span><span>One-on-one tutoring (online & in-person)</span></div>
-          <div class="info-item"><span class="info-icon">✅</span><span>Data science training programme</span></div>
-          <div class="info-item"><span class="info-icon">✅</span><span>Free CBT Pro exam platform</span></div>
-          <div class="info-item"><span class="info-icon">✅</span><span>WAEC/NECO/JAMB exam registration support</span></div>
-        </div>
-
-        <div class="whatsapp-card">
-          <h4>💬 Prefer WhatsApp?</h4>
-          <p>Skip the form — send us a message directly and we'll set things up from there.</p>
-          <a href="https://wa.me/2348100866322?text=Hello%20HMG%20Academy%2C%20I%20would%20like%20to%20register%20for%20your%20services." target="_blank" rel="noopener" class="btn btn-white-ghost" style="width:100%; justify-content:center;">Chat Now →</a>
-        </div>
-      </div>
     </div>
-  </div>
-</section>
 
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="nav-logo"><div class="nav-logo-mark">HMG</div><div class="nav-logo-text"><span class="name" style="color:white;">HMG Academy</span><span class="sub">His Marvellous Grace</span></div></a>
-        <p>A subsidiary of HMG Concepts, founded in 2015. Serving students across Lagos and Ogun State, Nigeria.</p>
-        <div class="footer-socials">
-          <a href="https://linkedin.com/in/adewalesamsonadeagbo" target="_blank" class="social-btn">in</a>
-          <a href="https://github.com/cssadewale" target="_blank" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
-          <a href="https://wa.me/2348100866322" target="_blank" class="social-btn" style="background:rgba(37,211,102,0.18);color:#25D366;">💬</a>
-        </div>
-      </div>
-      <div class="footer-col"><h4>Navigation</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="tools.html">Tools</a></li><li><a href="notes.html">Notes</a></li><li><a href="register.html">Register</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html#virtual-classes">Virtual Classes</a></li><li><a href="https://cssadewale.github.io/cbt-system" target="_blank">CBT Pro</a></li><li><a href="notes.html">Lesson Notes</a></li><li><a href="services.html#tutoring">1-on-1 Tutoring</a></li><li><a href="services.html#data-science">Data Science</a></li></ul></div>
-      <div class="footer-col"><h4>Contact</h4>
-        <div class="footer-contact-item">📧 <a href="mailto:buildingmyictcareer@gmail.com">buildingmyictcareer@gmail.com</a></div>
-        <div class="footer-contact-item">💬 <a href="https://wa.me/2348100866322" target="_blank">+234 809 448 1488</a></div>
-        <div class="footer-contact-item">📍 Lagos / Ogun State, Nigeria</div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; <span id="year"></span> HMG Academy · A subsidiary of HMG Concepts. All rights reserved.</p>
-      <p>Built with ❤️ by <a href="about.html">Adewale Samson Adeagbo</a></p>
-    </div>
-  </div>
-</footer>
-<a href="https://wa.me/2348100866322?text=Hello%20HMG%20Academy%2C%20I%20would%20like%20to%20register." target="_blank" rel="noopener" class="wa-float"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span class="wa-label">Chat on WhatsApp</span></a>
-<script src="_shared.js"></script>
-<script>
-function submitForm() {
-  const fname = document.getElementById('reg-fname').value.trim();
-  const email = document.getElementById('reg-email').value.trim();
-  const phone = document.getElementById('reg-phone').value.trim();
-  const service = document.getElementById('reg-service').value;
-  if (!fname || !email || !phone || !service) {
-    alert('Please fill in all required fields marked with *');
-    return;
-  }
-  // Build WhatsApp message
-  const msg = `Hello HMG Academy! I just submitted a registration form.%0A%0AName: ${encodeURIComponent(fname + ' ' + document.getElementById('reg-lname').value)}%0AEmail: ${encodeURIComponent(email)}%0APhone: ${encodeURIComponent(phone)}%0AService: ${encodeURIComponent(service)}%0AClass: ${encodeURIComponent(document.getElementById('reg-class').value)}%0ASubjects: ${encodeURIComponent(document.getElementById('reg-subjects').value)}`;
-  document.getElementById('formContent').style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
-  // Open WhatsApp after short delay
-  setTimeout(() => { window.open('https://wa.me/2348100866322?text=' + msg, '_blank'); }, 800);
-}
-</script>
+    <footer class="bg-slate-900 text-slate-400 py-8 text-xs text-center">HMG Academy — Enrol today. Excel tomorrow.</footer>
+
+    <script>
+        function submitRegistration(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value || 'Not provided';
+            const service = document.getElementById('service').value;
+            const level = document.getElementById('level').value || 'Not specified';
+            const subject = document.getElementById('subject').value || 'Not specified';
+            const other = document.getElementById('other').value || 'None';
+            const hear = document.getElementById('hear').value || 'Not specified';
+            
+            const message = `Hello HMG Academy,%0A%0A*Registration Request*%0A%0AName: ${firstName} ${lastName}%0APhone/WhatsApp: ${phone}%0AEmail: ${email}%0AService: ${service}%0ALevel: ${level}%0ASubject(s): ${subject}%0AOther Info: ${other}%0AHeard via: ${hear}%0A%0A(Submitted via website registration form)`;
+            
+            const whatsappUrl = `https://wa.me/2348100866322?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Show success UI
+            const formContainer = document.querySelector('#register-form').parentElement;
+            formContainer.innerHTML = `
+                <div class="text-center py-8">
+                    <div class="text-5xl mb-4">🎉</div>
+                    <div class="font-semibold text-xl">Thank you! Your registration has been submitted.</div>
+                    <p class="mt-3 text-slate-600">WhatsApp has been opened with your details. We will contact you within 24 hours.</p>
+                    <div class="mt-6">
+                        <a href="index.html" class="inline-flex items-center gap-x-2 bg-emerald-600 text-white px-6 py-2.5 rounded-2xl text-sm font-semibold">Back to Home</a>
+                    </div>
+                </div>
+            `;
+        }
+        
+        console.log('%c[HMG Academy Register] Enrolment form ready — uses WhatsApp prefill.', 'color:#64748b');
+    </script>
 </body>
 </html>
