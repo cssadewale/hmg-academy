@@ -1,174 +1,245 @@
-# HMG Academy v2 — Deployment Guide (Free Only)
+# HMG Academy v9 — Deployment Guide
 
-**Goal:** Deploy this self-contained static site to a free platform so it becomes your live website (e.g., hmgacademy.pages.dev or custom).
+This guide explains how to deploy HMG Academy v9, the enterprise EdTech platform and operations suite.
 
-**Requirements:** 
-- A free GitHub account (for GitHub Pages) **OR** a free Cloudflare account (for Cloudflare Pages).
-- No paid tools, no AI APIs, no servers.
-- The site uses only Tailwind CSS via CDN (no build step), Vanilla JS, and static assets.
-- All forms are WhatsApp prefill (works immediately after deploy).
+## What v9 contains
 
-**Recommended Free Platforms (Both Excellent):**
-1. **GitHub Pages** (easiest if you already use GitHub for the projects).
-2. **Cloudflare Pages** (often faster global CDN, free custom domains, great analytics).
+- Static-first public website
+- Admin CMS dashboard
+- cPanel-like operations hub
+- PWA support
+- Role portals
+- LMS gateway
+- Tutor marketplace
+- Enterprise school portal
+- Admissions CRM
+- Finance/invoice center
+- Timetable planner
+- Notification center
+- Content workflow
+- Reports center
+- Security center
+- School onboarding wizard
+- Supabase-ready CMS and platform data layer
 
-**Both support the exact structure here (root HTML files + /assets/images/).**
+## Free tools used
+
+- GitHub Pages or Cloudflare Pages
+- Supabase free tier
+- GitHub Actions
+- Vite
+- Browser APIs
+- WhatsApp links
+
+## Not used
+
+- No paid AI APIs
+- No paid hosting required
+- No paid CMS required
+- No paid CRM required
+- No paid invoicing software required
 
 ---
 
-## Option 1: Deploy to GitHub Pages (Recommended for Most Users)
+# 1. Static deployment
 
-### Step 1: Prepare Your Local Files (One-Time)
-- The folder you have is `Academy v2/`. This is your complete site.
-- Inside it you have all .html files at root + `assets/images/` (with your uploaded logo and founder photo already copied in).
+## GitHub Pages
 
-### Step 2: Create a New GitHub Repository (Free)
-1. Go to https://github.com (log in or create free account).
-2. Click the **+** icon (top right) → **New repository**.
-3. Repository name: `hmgacademy` (or `academy` or whatever you want — this will determine the URL like yourusername.github.io/hmgacademy).
-4. **Important**: Make it **Public** (required for free GitHub Pages).
-5. **Do NOT** initialize with README (you will push your files).
-6. Click **Create repository**.
+1. Open or create your GitHub repository.
+2. Upload the **contents** of `academy v9` to the repository root.
+3. Ensure `index.html` is in the root.
+4. Commit with message:
 
-### Step 3: Upload Your Files to GitHub
-**Easiest method (no Git command line needed):**
-1. On the new repo page, click **uploading an existing file** (or the "Add file" dropdown → "Upload files").
-2. Drag and drop **ALL** the contents of your `Academy v2/` folder into the GitHub upload area:
-   - All the .html files (index.html, about.html, etc.)
-   - The entire `assets/` folder (including images and README.md inside it)
-   - README.md and DEPLOYMENT.md
-3. In the commit message box, type something like "Initial HMG Academy v2 deploy".
-4. Check **"Commit directly to the main branch"**.
-5. Click **Commit changes**.
+`Deploy HMG Academy v9 enterprise platform`
 
-**Alternative (if you prefer command line / Git):**
+5. Go to **Settings** → **Pages**.
+6. Source: Deploy from branch.
+7. Branch: `main`.
+8. Folder: `/root`.
+9. Save and wait for deployment.
+
+## Cloudflare Pages
+
+1. Push the files to GitHub.
+2. Go to Cloudflare Dashboard.
+3. Open **Workers & Pages**.
+4. Create Pages project.
+5. Connect your repository.
+6. For raw static deployment:
+   - Framework: None
+   - Build command: blank
+   - Output directory: `/`
+7. Deploy.
+
+## Vite deployment option
+
+If using Vite build:
+
 ```bash
-cd "/path/to/your/Academy v2"
-git init
-git add .
-git commit -m "Initial HMG Academy v2 deploy"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/hmgacademy.git
-git push -u origin main
+npm install
+npm run build
 ```
 
-### Step 4: Enable GitHub Pages
-1. In your repo, go to **Settings** tab (top).
-2. In the left sidebar, click **Pages**.
-3. Under "Build and deployment":
-   - Source: **Deploy from a branch**
-   - Branch: **main** (or master)
-   - Folder: **/ (root)**
-4. Click **Save**.
-5. Wait 1–2 minutes. GitHub will show a green "Your site is published at https://YOUR-USERNAME.github.io/hmgacademy/" (or whatever your repo name is).
+Then deploy the `dist` folder.
 
-### Step 5: Verify & Custom Domain (Optional, Free)
-- Visit the URL above. Test all pages, forms (they should open WhatsApp with prefilled text), links (especially the live tool links like CBT Pro, LMS, ML apps), and images (logo + founder photo must load).
-- To use a custom domain (e.g., academy.hmgconcepts.com or hmgacademy.com):
-  1. Buy a cheap domain (Namecheap, GoDaddy, etc. — many under $10/year).
-  2. In GitHub Pages settings, add your custom domain and follow their DNS instructions (add CNAME record).
-  3. Cloudflare is often easier for free custom domains (see Option 2).
-
-### Step 6: Future Updates (Asset Changes, Content Tweaks)
-- Edit any .html file or replace `assets/images/hmg-academy-logo.png` / `founder.jpg` locally.
-- Upload the changed files the same way (or `git push`).
-- GitHub Pages auto-redeploys in ~1 minute.
-- See `assets/images/README.md` for exact asset update instructions (no code changes needed).
-
-**Common Issues & Fixes:**
-- Images not loading: Make sure filenames are exact (`hmg-academy-logo.png`, `founder.jpg`) and in `assets/images/`.
-- Mobile menu not working: JavaScript is vanilla and included inline — should work everywhere.
-- Forms: They construct a WhatsApp URL — test on phone or desktop (wa.me link works universally).
+For HMG Academy, raw static deployment is still the simplest.
 
 ---
 
-## Option 2: Deploy to Cloudflare Pages (Often Faster + Better Free Custom Domains)
+# 2. Supabase CMS setup
 
-### Step 1: Prepare Files (Same as Above)
-Same as GitHub Step 1–2. Have your `Academy v2/` folder ready with all files.
+Do this if you want live admin edits visible to all users.
 
-### Step 2: Create Cloudflare Account & Project
-1. Go to https://dash.cloudflare.com (sign up free — uses email or GitHub login).
-2. After login, in the sidebar click **Pages**.
-3. Click **Create a project** → **Connect to Git** (or "Upload assets" for direct upload — easiest for beginners).
+1. Create Supabase free project.
+2. Create admin user under Authentication.
+3. Run CMS SQL from:
 
-**Easiest: Direct Upload (no Git needed)**
-1. Choose **"Upload assets"**.
-2. Drag the entire contents of `Academy v2/` (or zip the folder and upload — Cloudflare accepts folder upload).
-3. Give the project a name (e.g., `hmg-academy-v2`).
-4. Click **Deploy site**.
+`docs/SUPABASE_CMS_SETUP.md`
 
-**Git-based (recommended for ongoing updates):**
-1. Connect your GitHub account.
-2. Select the repo you created in Option 1 (or create one).
-3. Cloudflare will detect it's a static site.
-4. Build settings: Leave as default (no build command needed — it's pure static HTML).
-5. Click **Save and Deploy**.
+4. Create public Storage bucket:
 
-### Step 3: Get Your Live URL
-- Cloudflare gives you a free `*.pages.dev` URL immediately (e.g., hmg-academy-v2.pages.dev).
-- It is usually live in under 1 minute.
+`hmg-media`
 
-### Step 4: Add Custom Domain (Free & Easy on Cloudflare)
-1. In your Pages project dashboard, go to **Custom domains**.
-2. Click **Add domain**.
-3. Enter your domain (you must own it).
-4. Follow the prompts — Cloudflare will give you the exact DNS records to add at your registrar (often just one CNAME).
-5. SSL (HTTPS) is automatic and free.
+5. Update:
 
-### Step 5: Verify
-- Visit the URL.
-- Test everything (links, forms, images, mobile).
-- Update assets the same way as GitHub (push or re-upload changed files).
+`assets/js/config.js`
 
----
+Replace:
 
-## Post-Deployment Checklist (Do This After Every Deploy)
-1. Open the live site on desktop + mobile.
-2. Click every nav link and confirm pages load.
-3. Test 2–3 WhatsApp forms (fill, submit — should open WhatsApp with full prefilled message including your name/phone/role/service/message).
-4. Click all "Live" buttons for CBT Pro, the 11 LMS, 7 ML apps, 11 Simulators, InstaDocs — confirm they open the correct external apps.
-5. Check logo and founder photo load (high quality, no distortion).
-6. Scroll through "Detailed Explanations" sections — confirm text is readable (high contrast).
-7. Test the **Parent Dashboard Demo** on homeschooling.html (add a fake student, mark lessons complete, generate report — data should persist in browser localStorage even after refresh).
-8. Check ecosystem links in footer/nav go to the correct external sites.
-9. (Optional) Submit a test enquiry and confirm you receive the WhatsApp.
+```js
+window.HMG_SUPABASE = null;
+```
 
-**If anything is broken:** Re-upload the fixed file(s) — redeploy is instant on both platforms.
+With:
+
+```js
+window.HMG_SUPABASE = {
+  url: "https://YOUR_PROJECT_ID.supabase.co",
+  anonKey: "YOUR_SUPABASE_ANON_KEY",
+  table: "hmg_backup_storage"
+};
+```
+
+6. Redeploy.
+7. Login to `admin.html`.
+8. Create and publish a CMS page.
 
 ---
 
-## Updating the Site Later (Content, New Features, Assets)
-- Edit the .html files in a text editor (VS Code recommended — free).
-- For new images: Replace the files in `assets/images/` (keep exact names).
-- Push/upload the changed files only.
-- Both GitHub Pages and Cloudflare Pages redeploy automatically.
+# 3. Supabase platform schema
 
-**Pro Tip for Large Updates:** Keep a local copy of `Academy v2/`. Make changes, then upload the whole folder again (or use Git for version control).
+Do this if you want real student/parent/tutor/school data.
 
----
+Run:
 
-## Why These Platforms Are Perfect & Free
-- **Zero cost**: No hosting fees, no bandwidth charges for normal traffic.
-- **Fast global delivery**: Cloudflare especially.
-- **HTTPS automatic**.
-- **Custom domains supported** (free on Cloudflare, easy on GitHub).
-- **No build tools needed**: Pure static files = instant deploys.
-- **Matches our philosophy**: Free tools only, cost-effective for Nigerian schools and partners.
+`docs/SUPABASE_PLATFORM_SCHEMA.md`
 
-## Alternative (Quick Test Only)
-You can open `index.html` directly in a browser from your computer (double-click) for local preview. All JS and forms will work locally. Not for public sharing.
+Then configure proper RLS policies.
+
+Recommended role rules:
+
+- Student: own records only
+- Parent: linked child records only
+- Tutor: assigned learners only
+- School admin: own school records only
+- Super admin: all records
 
 ---
 
-**You now have a fully deployable, enterprise-grade, free-tool website.**
+# 4. Test PWA
 
-If you need help with any step (screenshots, specific domain setup, or minor content tweaks), just WhatsApp +234 810 086 6322 with the step number you're on.
+PWA requires HTTPS or localhost.
 
-**Live site examples from the ecosystem (for reference):**  
-- https://hmgconcepts.pages.dev/ (GitHub Pages style)  
-- https://cssadewale.pages.dev/ (similar static approach)
+Test:
 
-Congratulations on the v2 launch!
+- `manifest.webmanifest`
+- `service-worker.js`
+- `offline.html`
+- Install prompt
+- Offline fallback
 
-— HMG Academy Team (Built with deliberate care, 2026)
+---
+
+# 5. Generate search index
+
+If pages change, regenerate:
+
+```bash
+npm install
+npm run generate:search
+```
+
+Commit the updated:
+
+`search-index.json`
+
+---
+
+# 6. Check links
+
+Before deployment:
+
+```bash
+npm run check:links
+```
+
+---
+
+# 7. Enterprise feature testing
+
+Test these pages:
+
+- `operations-suite.html`
+- `admissions-crm.html`
+- `finance-center.html`
+- `timetable-planner.html`
+- `notification-center.html`
+- `content-workflow.html`
+- `form-builder-v9.html`
+- `reports-center.html`
+- `security-center.html`
+- `api-docs.html`
+- `school-onboarding.html`
+
+Test these functions:
+
+- Add CRM lead
+- Move CRM lead through stages
+- Generate invoice
+- Add timetable slot
+- Add notification
+- Generate form HTML
+- Print report
+- Export operations data
+
+---
+
+# 8. Post-deployment checklist
+
+1. Open `index.html`.
+2. Open `platform.html`.
+3. Open `operations-suite.html`.
+4. Test command palette with `Ctrl/⌘ + K`.
+5. Test admin dashboard.
+6. Test cPanel page.
+7. Test Supabase if configured.
+8. Test WhatsApp forms.
+9. Test LMS/tool links.
+10. Test PWA install/offline.
+11. Export backups.
+
+---
+
+# 9. Security notes
+
+- Never expose Supabase service role key in frontend.
+- Use anon key only with correct RLS.
+- Keep admin password strong.
+- Export backups regularly.
+- Do not store highly sensitive student data in public CMS content.
+
+---
+
+# 10. No paid AI API policy
+
+HMG Academy v9 does not use paid AI APIs. This keeps the platform cost-effective and aligned with HMG's free-tool discipline.

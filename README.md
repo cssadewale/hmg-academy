@@ -1,91 +1,141 @@
-# HMG Academy v3 — Enhanced Strictly Virtual Learning Platform (2026 Rebuild)
+# HMG Academy v9 — Enterprise EdTech Platform and Operations Suite
 
-**Full rebuild: Strictly virtual/online services only (no onsite or physical tutoring).**  
-Enhanced with advanced Tutor Marketplace (virtual matching), 6-step HMG Results Framework (Insights Assessment + Adaptive Learning Plans + Vetted Virtual Tutors + Periodic Evaluation + Progress Reports & Reviews + Continuous Uplift), detailed booking forms, searchable tutor profiles, transparent vetting process, "Become a Tutor" application, pricing packages, dedicated Exam Prep Hub, full Blog for articles and writeups, and many more expert features — all using ONLY free tools.  
+HMG Academy v9 is the enhanced enterprise version of the HMG Academy platform.
 
-Pre-existing features from prior builds (Virtual Home Schooling Nursery–SSS3, free CBT Pro, 11 LMS platforms, 7 ML projects, InstaDocs, detailed explanations everywhere, parent dashboard demo, ecosystem integration) are preserved and significantly enhanced.  
+It preserves all v8 features and adds a stronger operations layer for admissions, finance, scheduling, notifications, content governance, reports, security and school onboarding.
 
-New logo and founder photo integrated. High-contrast premium theme (dark navy/purple/gold) synced to the logo — all text clearly visible.
+## Architecture
 
-**Core Philosophy (unified across HMG ecosystem):**  
-“Learning Deliberately. Teaching Authentically.”  
-Problem-first. AI as force multiplier (not replacement). Constraints = brief. Built for Nigerian realities (slow internet, low-end devices, limited budgets). Honest documentation (failures + metrics). Free-tool cost discipline. Faith foundation. No paid AI APIs (not cost-effective for scale in our context).
+HMG Academy v9 continues the recommended architecture:
 
-**All tools and platforms are 100% free to use for learners/schools (core access).**  
-Built exclusively with free tools: Tailwind CSS (CDN), Vanilla JS, HTML5, localStorage, SQL.js, Supabase (free tier for CBT), Streamlit (free hosting), Vercel (free), GitHub Pages/Cloudflare Pages, etc. No recurring costs.
+> Static-first JAMstack EdTech platform + Supabase CMS + PWA + LMS gateway + tutor marketplace + enterprise school portal.
 
-## Files Structure (Self-Contained, Deploy-Ready)
-- `index.html` — Home/landing ...
-- `about.html` — ...
-- `services.html` — ...
-- `tools.html` — ...
-- `homeschooling.html` — ...
-- `book-tutor.html` — ...
-- `how-it-works.html` — ...
-- `exam-prep.html` — ...
-- `blog.html` — ...
-- `success-stories.html` — ...
-- `for-parents.html` — ...
-- `for-schools.html` — ...
-- `resources.html` — ...
-- `vetting-process.html` — ...
-- `curriculum.html` — ...
-- `webinars.html` — ...
-- `admin.html` — ...
-- `become-tutor.html` — ...
-- `notes.html` — ...
-- `register.html` — ...
-- `contact.html` — ...
-- `faq.html` — ...
-- `partners.html` — ...
-- `privacy.html` — ...
+## Core principle
 
-## Key Enhancements & New Features (v3 — Strictly Virtual)
-- **Strictly Virtual/Online Only**: Every service, page, and description emphasizes live online sessions (Zoom/Google Meet), virtual group/academy classes, or full Virtual Home Schooling. No physical or onsite services.
-- **Advanced Tutor Marketplace**: Searchable tutor profiles with ratings/reviews/subjects (JS-powered). Detailed virtual-only booking form with class types (Online One-on-One, Virtual Group, Virtual Home Schooling Support), schedule, time zone support.
-- **6-Step HMG Results Framework**: Fully detailed on dedicated page and throughout. Blends assessment, adaptive plans (via LMS + ML), vetting, evaluation (CBT Pro), reports (parent dashboard), and uplift.
-- **Transparent Vetting Process**: Detailed explanation of how tutors are selected (subject exams, interviews, background checks, ongoing monitoring).
-- **Pricing Packages**: Transparent options (per lesson, monthly, premium) explained with "contact for quote" (WhatsApp).
-- **Dedicated Pages Added**:
-  - How It Works (full 6-step with explanations).
-  - Exam Prep Hub (UTME, WAEC, IELTS, GMAT, etc. with CTAs).
-  - Blog (for your writeups/articles — easy to add more).
-- **Enhanced Blog**: Categories, search/filter, sample HMG-focused articles, instructions for adding new content via GitHub.
-- **Become a Tutor + Upliftment**: Application form + explanation of training and support programs for tutors.
-- **Detailed Explanations Everywhere**: Every feature has dedicated sections explaining *why it works*, curriculum design, parent accountability, free tech stack, exam prep integration, enterprise rollout, benefits for Nigerian schools, honest metrics.
-- **Free Tools Stack Transparency**: Dedicated explanations (no paid AI APIs — cost-effective, scalable; examples: SQL.js, localStorage, Tailwind CDN, etc.).
-- **Project Showcase with Full Proof**: Every tool has Problem → Solution → Impact → Metrics/Tech → Live Link + GitHub.
-- **Parent/Student Accountability**: Expanded interactive dashboard demo, progress bars, mastery certs.
-- **Consistent Premium Theme**: Dark navy gradients, purple/gold accents matching the new uploaded logo. High-contrast text everywhere (#f8fafc on dark). Mobile-first, fast, accessible.
-- **Cross-Ecosystem Integration**: Every page has nav/footer links to all 4 arms + personal portfolio. "Part of HMG Concepts".
-- **Forms**: All use WhatsApp prefill (structured). No server storage.
-- **Asset-Ready & Future-Proof**: Easy logo/founder photo updates via GitHub.
-- **Stats & Proof**: Unified 15+ years, 34 projects, etc. "Live" badges, real metrics.
-- **No Pre-Existing Features Removed**: CBT Pro, virtual classes, lesson notes, data science training, register/contact, founder story, ecosystem links, testimonials — all preserved and **enhanced**.
-- **Interactivity (Vanilla JS only)**: Mobile nav, form prefill, parent dashboard demo, tutor search/filter, blog search/filter, localStorage persistence.
+> Free-based tools first. No paid AI APIs. No unnecessary recurring costs.
 
-**Tech Stack (100% Free)**: Static HTML + Tailwind CSS via CDN + Vanilla JS. Hosted on GitHub Pages or Cloudflare Pages (free). All linked apps use free hosting. No paid services.
+## What v9 adds
 
-## Unified Contact (All Pages)
-- **Primary (fastest)**: WhatsApp +234 810 086 6322 (prefilled messages)
-- Phones: +234 809 448 1488, +234 907 790 7677
-- Emails: buildingmyictcareer@gmail.com (tech/partnerships), hismarvellousgrace@gmail.com (general), adeagboadewalesamson@gmail.com
-- Social/GitHub: @cssadewale, @hmgacademyhub, @hmgtechnologies, @hmgconcepts; LinkedIn adewalesamsonadeagbo; YouTube @hmgconcepts
+### Enterprise operations pages
 
-## Next Steps for You
-1. Review the site locally (see DEPLOYMENT.md).
-2. Customize any text (e.g., add your own articles to blog.html by editing the posts array).
-3. Update assets if needed (see assets/images/README.md).
-4. Deploy (detailed steps in DEPLOYMENT.md — GitHub Pages or Cloudflare Pages recommended, both free).
-5. Share the live URL + WhatsApp for enquiries.
+- `operations-suite.html` — central enterprise operations hub
+- `admissions-crm.html` — lead/enrolment pipeline board
+- `finance-center.html` — quote and invoice generator
+- `timetable-planner.html` — weekly class/session timetable
+- `notification-center.html` — reminder and notification tracker
+- `content-workflow.html` — content approval workflow
+- `form-builder-v9.html` — WhatsApp-ready form generator
+- `reports-center.html` — report templates for parents/schools/tutors/admin
+- `security-center.html` — security, backups and access matrix
+- `api-docs.html` — Supabase REST/API guidance
+- `school-onboarding.html` — school onboarding wizard
 
-**This is the complete, expert-level, enterprise-ready v3 rebuild.**  
-All development used free tools only. True to "Learning Deliberately. Teaching Authentically." Strictly virtual.
+### Enterprise JavaScript
 
-**Part of HMG Concepts — His Marvellous Grace Educational Consult (est. 2015, Lagos/Ogun State, Nigeria).**
+- `assets/js/v9-enterprise.js`
 
-For questions or further customizations: WhatsApp +234 810 086 6322.
+This powers:
 
----
+- CRM pipeline
+- Invoice generator
+- Timetable planner
+- Notification list
+- Form builder
+- Approval workflow
+- Local operations export
 
-*Built with care for Nigerian students, teachers, schools, and partners. 34+ live projects proving the model.*
+### Enterprise documentation
+
+- `docs/V9_ENTERPRISE_FEATURES.md`
+- `docs/V9_OPERATIONS_PLAYBOOK.md`
+
+## Preserved from v8
+
+- Static-first platform architecture
+- PWA support
+- Command palette and search
+- Admin dashboard and CMS
+- cPanel-like control panel
+- Supabase CMS support
+- Role portals: student, parent, tutor, school
+- Course player
+- School OS
+- Platform data model
+- Tutor marketplace
+- LMS gateway
+- Tools and projects
+- Backup Center
+- Analytics
+- Page Builder
+- Theme Studio
+- Bulk Import
+- Governance and Data Room
+
+## Modern site-building tools
+
+v9 includes:
+
+- Vite-ready `package.json`
+- `vite.config.js`
+- `.editorconfig`
+- GitHub Actions static check workflow
+- Node search index generator
+- Node link checker
+- PWA manifest and service worker
+- Modular JavaScript architecture
+
+## No paid AI API
+
+HMG Academy v9 does not use paid AI APIs. All features are powered by:
+
+- Static HTML/CSS/JS
+- Browser APIs
+- localStorage
+- Supabase free tier when configured
+- WhatsApp workflows
+- HMG's existing LMS/CBT/DataTech tools
+
+## Local preview
+
+```bash
+cd "academy v9"
+python3 -m http.server 8000
+```
+
+Open:
+
+`http://localhost:8000`
+
+## Modern development
+
+```bash
+npm install
+npm run dev
+npm run generate:search
+npm run check:links
+```
+
+## Deployment
+
+Read:
+
+`DEPLOYMENT.md`
+
+## Recommended first pages to review
+
+- `index.html`
+- `platform.html`
+- `operations-suite.html`
+- `admissions-crm.html`
+- `finance-center.html`
+- `school-os.html`
+- `admin.html`
+- `cpanel.html`
+- `security-center.html`
+- `reports-center.html`
+
+## Zip package
+
+The downloadable package is:
+
+`academy v9.zip`

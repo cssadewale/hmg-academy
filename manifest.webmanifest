@@ -1,0 +1,12 @@
+{
+  "name": "HMG Academy v7",
+  "short_name": "HMG Academy",
+  "description": "Virtual learning institution, tutor marketplace, LMS, CMS and enterprise academy platform.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#060b1e",
+  "theme_color": "#f6c453",
+  "icons": [
+    {"src":"assets/images/hmg-academy-logo.png","sizes":"512x512","type":"image/png","purpose":"any"}
+  ]
+}

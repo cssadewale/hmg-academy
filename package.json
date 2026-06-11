@@ -1,0 +1,19 @@
+{
+  "name": "hmg-academy-v7",
+  "version": "9.0.0",
+  "private": true,
+  "description": "HMG Academy v9 static-first enterprise EdTech operating system with CMS, portals, PWA, CRM, finance, scheduling and governance.",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "preview": "vite preview --host 0.0.0.0",
+    "build": "vite build --outDir dist",
+    "serve-static": "python3 -m http.server 8000",
+    "check:links": "node tools/check-links.mjs",
+    "generate:search": "node tools/generate-search-index.mjs",
+    "audit:static": "node tools/check-links.mjs && node tools/generate-search-index.mjs",
+    "deploy:prep": "npm run generate:search && npm run check:links"
+  },
+  "devDependencies": {
+    "vite": "latest"
+  }
+}
