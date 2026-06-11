@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://hmgacademy.pages.dev/about.html</loc><priority>0.8</priority></url>
-  <url><loc>https://hmgacademy.pages.dev/admissions-crm.html</loc><priority>0.9</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/admissions-crm.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/analytics.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/api-docs.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/assessment.html</loc><priority>0.8</priority></url>
@@ -10,20 +10,19 @@
   <url><loc>https://hmgacademy.pages.dev/backup-center.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/become-tutor.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/blog.html</loc><priority>0.8</priority></url>
-  <url><loc>https://hmgacademy.pages.dev/book-tutor.html</loc><priority>0.8</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/book-tutor.html</loc><priority>0.9</priority></url>
   <url><loc>https://hmgacademy.pages.dev/bulk-import.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/career-pathways.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/certificates.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/contact.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/content-workflow.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/course-player.html</loc><priority>0.8</priority></url>
-  <url><loc>https://hmgacademy.pages.dev/courses.html</loc><priority>0.9</priority></url>
-  <url><loc>https://hmgacademy.pages.dev/cpanel.html</loc><priority>0.9</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/courses.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/curriculum.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/dashboard.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/data-room.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/enterprise.html</loc><priority>0.8</priority></url>
-  <url><loc>https://hmgacademy.pages.dev/exam-prep.html</loc><priority>0.8</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/exam-prep.html</loc><priority>0.9</priority></url>
   <url><loc>https://hmgacademy.pages.dev/faq.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/feature-guide.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/finance-center.html</loc><priority>0.8</priority></url>
@@ -31,25 +30,28 @@
   <url><loc>https://hmgacademy.pages.dev/for-schools.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/form-builder-v9.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/governance.html</loc><priority>0.8</priority></url>
-  <url><loc>https://hmgacademy.pages.dev/homeschooling.html</loc><priority>0.8</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/homeschooling.html</loc><priority>0.9</priority></url>
   <url><loc>https://hmgacademy.pages.dev/how-it-works.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/</loc><priority>1.0</priority></url>
   <url><loc>https://hmgacademy.pages.dev/integrations.html</loc><priority>0.8</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/job-apply.html</loc><priority>0.8</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/jobs.html</loc><priority>0.9</priority></url>
   <url><loc>https://hmgacademy.pages.dev/learner-portal.html</loc><priority>0.8</priority></url>
-  <url><loc>https://hmgacademy.pages.dev/lms.html</loc><priority>0.8</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/lms.html</loc><priority>0.9</priority></url>
   <url><loc>https://hmgacademy.pages.dev/migration-plan.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/modern-stack.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/notes.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/notification-center.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/offline.html</loc><priority>0.8</priority></url>
-  <url><loc>https://hmgacademy.pages.dev/operations-suite.html</loc><priority>0.9</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/operations-suite.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/page-builder.html</loc><priority>0.8</priority></url>
-  <url><loc>https://hmgacademy.pages.dev/page.html</loc><priority>0.8</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/parent-monitoring.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/parent-portal.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/partners.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/platform-admin.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/platform-data.html</loc><priority>0.8</priority></url>
-  <url><loc>https://hmgacademy.pages.dev/platform.html</loc><priority>0.9</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/platform-fixes-report.html</loc><priority>0.8</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/platform.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/portal-login.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/pricing.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/privacy.html</loc><priority>0.8</priority></url>
@@ -71,7 +73,9 @@
   <url><loc>https://hmgacademy.pages.dev/theme-studio.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/timetable-planner.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/tools.html</loc><priority>0.8</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/tutor-dashboard.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/tutor-portal.html</loc><priority>0.8</priority></url>
+  <url><loc>https://hmgacademy.pages.dev/tutor-register.html</loc><priority>0.9</priority></url>
   <url><loc>https://hmgacademy.pages.dev/tutors.html</loc><priority>0.9</priority></url>
   <url><loc>https://hmgacademy.pages.dev/vetting-process.html</loc><priority>0.8</priority></url>
   <url><loc>https://hmgacademy.pages.dev/virtual-classroom.html</loc><priority>0.8</priority></url>

@@ -1,119 +1,155 @@
-# HMG Academy v9 — Enterprise EdTech Platform and Operations Suite
+# HMG Academy Production Fix — Clean Public Platform + Tutor Operations
 
-HMG Academy v9 is the enhanced enterprise version of the HMG Academy platform.
+This package is a production-focused cleanup and feature enhancement of HMG Academy.
 
-It preserves all v8 features and adds a stronger operations layer for admissions, finance, scheduling, notifications, content governance, reports, security and school onboarding.
+It removes developer-facing/version-history content from the public site and improves the platform for real end users: learners, parents, tutors and schools.
 
-## Architecture
+## Major production fixes
 
-HMG Academy v9 continues the recommended architecture:
+### Removed from public-facing homepage
 
-> Static-first JAMstack EdTech platform + Supabase CMS + PWA + LMS gateway + tutor marketplace + enterprise school portal.
+The following internal/developer sections were removed from the public homepage:
 
-## Core principle
+- What changed in v4
+- Academy v5/v6/v7/v8/v9 version blocks
+- Static architecture explanations intended for developers
+- Ctrl/⌘ + K public UX note
+- Immediate update model explanation
+- Admin/cPanel promotional blocks
 
-> Free-based tools first. No paid AI APIs. No unnecessary recurring costs.
+The homepage now focuses on what end users need:
 
-## What v9 adds
+- Book a tutor
+- Take a free assessment
+- Become a tutor
+- Virtual home schooling
+- Exam prep
+- LMS/CBT tools
+- Parent monitoring
+- School partnerships
 
-### Enterprise operations pages
+## New production features
 
-- `operations-suite.html` — central enterprise operations hub
-- `admissions-crm.html` — lead/enrolment pipeline board
-- `finance-center.html` — quote and invoice generator
-- `timetable-planner.html` — weekly class/session timetable
-- `notification-center.html` — reminder and notification tracker
-- `content-workflow.html` — content approval workflow
-- `form-builder-v9.html` — WhatsApp-ready form generator
-- `reports-center.html` — report templates for parents/schools/tutors/admin
-- `security-center.html` — security, backups and access matrix
-- `api-docs.html` — Supabase REST/API guidance
-- `school-onboarding.html` — school onboarding wizard
+### 1. Tutor Registration
 
-### Enterprise JavaScript
+Page:
 
-- `assets/js/v9-enterprise.js`
+`tutor-register.html`
 
-This powers:
+Collects:
 
-- CRM pipeline
-- Invoice generator
-- Timetable planner
-- Notification list
-- Form builder
-- Approval workflow
-- Local operations export
+- Personal information
+- Contact information
+- Subjects and levels
+- Qualification
+- Years of experience
+- Teaching bio
+- Availability
+- Device/internet readiness
+- Bank name
+- Account name
+- Account number
+- ID/credential reference
 
-### Enterprise documentation
+This is designed for Supabase storage with Row Level Security.
 
-- `docs/V9_ENTERPRISE_FEATURES.md`
-- `docs/V9_OPERATIONS_PLAYBOOK.md`
+### 2. Tutor Jobs Board
 
-## Preserved from v8
+Pages:
 
-- Static-first platform architecture
-- PWA support
-- Command palette and search
-- Admin dashboard and CMS
-- cPanel-like control panel
-- Supabase CMS support
-- Role portals: student, parent, tutor, school
-- Course player
-- School OS
-- Platform data model
+- `jobs.html`
+- `job-apply.html`
+
+Tutors can view open jobs and apply.
+
+### 3. Tutor Dashboard
+
+Page:
+
+`tutor-dashboard.html`
+
+Tutors can:
+
+- Add/schedule lessons
+- View assigned lessons
+- Mark lessons complete
+- Add lesson notes
+
+### 4. Parent Lesson Monitoring
+
+Page:
+
+`parent-monitoring.html`
+
+Parents can monitor:
+
+- Lesson date and time
+- Tutor assigned
+- Subject
+- Lesson status
+- Tutor notes
+
+### 5. Admin Job Posting
+
+Page:
+
+`admin-jobs.html`
+
+Admin can post tutor jobs. This page is restricted/protected for admin use.
+
+### 6. Restricted Admin and cPanel
+
+Public admin/cPanel exposure was fixed.
+
+Login pages:
+
+- `admin.html`
+- `cpanel.html`
+
+Internal dashboards:
+
+- `admin-dashboard.html`
+- `cpanel-dashboard.html`
+
+These are intended to be used with Supabase Auth credentials.
+
+## Supabase schema
+
+New documentation:
+
+`docs/TUTOR_MARKETPLACE_SCHEMA.md`
+
+Includes SQL and RLS starter policies for:
+
+- Tutor applications
+- Tutor jobs
+- Job applications
+- Lesson tracking
+
+## Existing features preserved
+
+The following remain available:
+
 - Tutor marketplace
-- LMS gateway
-- Tools and projects
+- Booking form
+- Virtual home schooling
+- Exam prep
+- LMS platforms
+- Tools/projects page
+- Parent dashboard
+- Assessment tool
+- Course catalogue
+- Assignment tracker
+- Attendance log
+- Certificate generator
 - Backup Center
-- Analytics
-- Page Builder
-- Theme Studio
-- Bulk Import
-- Governance and Data Room
-
-## Modern site-building tools
-
-v9 includes:
-
-- Vite-ready `package.json`
-- `vite.config.js`
-- `.editorconfig`
-- GitHub Actions static check workflow
-- Node search index generator
-- Node link checker
-- PWA manifest and service worker
-- Modular JavaScript architecture
+- Supabase CMS support
+- PWA support
+- School enterprise pages
 
 ## No paid AI API
 
-HMG Academy v9 does not use paid AI APIs. All features are powered by:
-
-- Static HTML/CSS/JS
-- Browser APIs
-- localStorage
-- Supabase free tier when configured
-- WhatsApp workflows
-- HMG's existing LMS/CBT/DataTech tools
-
-## Local preview
-
-```bash
-cd "academy v9"
-python3 -m http.server 8000
-```
-
-Open:
-
-`http://localhost:8000`
-
-## Modern development
-
-```bash
-npm install
-npm run dev
-npm run generate:search
-npm run check:links
-```
+No paid AI API is used. The platform continues to use free/static tools, optional Supabase free tier and WhatsApp workflows.
 
 ## Deployment
 
@@ -121,21 +157,20 @@ Read:
 
 `DEPLOYMENT.md`
 
-## Recommended first pages to review
+## Recommended live deployment steps
 
-- `index.html`
-- `platform.html`
-- `operations-suite.html`
-- `admissions-crm.html`
-- `finance-center.html`
-- `school-os.html`
-- `admin.html`
-- `cpanel.html`
-- `security-center.html`
-- `reports-center.html`
+1. Upload this package to GitHub or Cloudflare Pages.
+2. Configure Supabase using:
+   - `docs/SUPABASE_CMS_SETUP.md`
+   - `docs/TUTOR_MARKETPLACE_SCHEMA.md`
+3. Update `assets/js/config.js` with Supabase URL and anon key.
+4. Create your Supabase admin user.
+5. Test admin login.
+6. Test tutor registration.
+7. Test job posting and application.
+8. Test tutor lesson tracking.
+9. Test parent monitoring.
 
-## Zip package
+## Deliverable zip
 
-The downloadable package is:
-
-`academy v9.zip`
+`academy v10.zip`

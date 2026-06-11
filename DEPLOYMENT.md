@@ -1,106 +1,106 @@
-# HMG Academy v9 — Deployment Guide
+# HMG Academy Production Fix — Deployment Guide
 
-This guide explains how to deploy HMG Academy v9, the enterprise EdTech platform and operations suite.
+This guide explains how to deploy the cleaned and enhanced HMG Academy production package.
 
-## What v9 contains
+## What changed in this production package
 
-- Static-first public website
-- Admin CMS dashboard
-- cPanel-like operations hub
-- PWA support
-- Role portals
-- LMS gateway
-- Tutor marketplace
-- Enterprise school portal
-- Admissions CRM
-- Finance/invoice center
-- Timetable planner
-- Notification center
-- Content workflow
-- Reports center
-- Security center
-- School onboarding wizard
-- Supabase-ready CMS and platform data layer
+The public site has been cleaned for end users. Internal version-history sections and developer-facing details were removed from the homepage. Admin/cPanel pages are now restricted behind login pages.
+
+New production features include:
+
+- Tutor registration with bank/payment details
+- Tutor jobs board
+- Tutor job application flow
+- Tutor lesson dashboard
+- Parent lesson monitoring
+- Admin job posting
+- Supabase schema for tutor marketplace operations
 
 ## Free tools used
 
-- GitHub Pages or Cloudflare Pages
-- Supabase free tier
-- GitHub Actions
-- Vite
-- Browser APIs
-- WhatsApp links
+- GitHub Pages or Cloudflare Pages for hosting
+- Supabase free tier for CMS/data/storage/auth
+- WhatsApp for communication/forms
+- Browser localStorage for demo/local fallback
+- Static HTML/CSS/JS
 
-## Not used
+## No paid AI API
 
-- No paid AI APIs
-- No paid hosting required
-- No paid CMS required
-- No paid CRM required
-- No paid invoicing software required
+No paid AI APIs are used. This keeps the platform cost-effective and suitable for affordable education.
 
 ---
 
-# 1. Static deployment
+# 1. Deploy static files
 
 ## GitHub Pages
 
-1. Open or create your GitHub repository.
-2. Upload the **contents** of `academy v9` to the repository root.
-3. Ensure `index.html` is in the root.
+1. Open your HMG Academy GitHub repository.
+2. Upload the **contents** of `academy v10` to the repository root.
+3. Confirm `index.html` is at the root.
 4. Commit with message:
 
-`Deploy HMG Academy v9 enterprise platform`
+`Deploy cleaned HMG Academy production platform`
 
 5. Go to **Settings** → **Pages**.
 6. Source: Deploy from branch.
 7. Branch: `main`.
 8. Folder: `/root`.
-9. Save and wait for deployment.
+9. Save.
 
 ## Cloudflare Pages
 
-1. Push the files to GitHub.
-2. Go to Cloudflare Dashboard.
-3. Open **Workers & Pages**.
-4. Create Pages project.
-5. Connect your repository.
-6. For raw static deployment:
-   - Framework: None
+1. Push the same files to GitHub.
+2. Open Cloudflare Dashboard.
+3. Go to **Workers & Pages**.
+4. Create/connect a Pages project.
+5. Use these settings for raw static deployment:
+   - Framework preset: `None`
    - Build command: blank
    - Output directory: `/`
-7. Deploy.
-
-## Vite deployment option
-
-If using Vite build:
-
-```bash
-npm install
-npm run build
-```
-
-Then deploy the `dist` folder.
-
-For HMG Academy, raw static deployment is still the simplest.
+6. Deploy.
 
 ---
 
-# 2. Supabase CMS setup
+# 2. Configure Supabase
 
-Do this if you want live admin edits visible to all users.
+Supabase is needed for production storage and admin login.
 
-1. Create Supabase free project.
-2. Create admin user under Authentication.
-3. Run CMS SQL from:
+## Step 1: Create Supabase project
+
+1. Go to https://supabase.com.
+2. Create a free project.
+3. Copy project URL and anon key from Project Settings → API.
+
+## Step 2: Create admin user
+
+1. Go to Supabase Authentication → Users.
+2. Add your admin email and password.
+3. Confirm the user if necessary.
+
+## Step 3: Run CMS SQL
+
+Run the SQL in:
 
 `docs/SUPABASE_CMS_SETUP.md`
 
-4. Create public Storage bucket:
+This enables CMS pages, settings, media and audit logs.
 
-`hmg-media`
+## Step 4: Run tutor marketplace SQL
 
-5. Update:
+Run the SQL in:
+
+`docs/TUTOR_MARKETPLACE_SCHEMA.md`
+
+This enables:
+
+- Tutor applications
+- Tutor jobs
+- Job applications
+- Lesson tracking
+
+## Step 5: Configure frontend
+
+Open:
 
 `assets/js/config.js`
 
@@ -120,126 +120,159 @@ window.HMG_SUPABASE = {
 };
 ```
 
-6. Redeploy.
-7. Login to `admin.html`.
-8. Create and publish a CMS page.
+Redeploy after editing.
 
 ---
 
-# 3. Supabase platform schema
+# 3. Test admin restriction
 
-Do this if you want real student/parent/tutor/school data.
+Open:
 
-Run:
+`admin.html`
 
-`docs/SUPABASE_PLATFORM_SCHEMA.md`
+Expected:
 
-Then configure proper RLS policies.
+- You should see login page.
+- You should not see the full dashboard without login.
 
-Recommended role rules:
+After login:
 
-- Student: own records only
-- Parent: linked child records only
-- Tutor: assigned learners only
-- School admin: own school records only
-- Super admin: all records
+- You should be redirected to `admin-dashboard.html`.
 
----
+Open:
 
-# 4. Test PWA
+`cpanel.html`
 
-PWA requires HTTPS or localhost.
+Expected:
 
-Test:
-
-- `manifest.webmanifest`
-- `service-worker.js`
-- `offline.html`
-- Install prompt
-- Offline fallback
+- Owner control panel login page.
+- Dashboard accessible only after login.
 
 ---
 
-# 5. Generate search index
+# 4. Test tutor workflow
 
-If pages change, regenerate:
+## Tutor registration
 
-```bash
-npm install
-npm run generate:search
-```
+Open:
 
-Commit the updated:
+`tutor-register.html`
 
-`search-index.json`
+Submit a test tutor application.
 
----
+Check Supabase table:
 
-# 6. Check links
+`hmg_tutor_applications`
 
-Before deployment:
+## Admin job posting
 
-```bash
-npm run check:links
-```
+Open:
 
----
+`admin-jobs.html`
 
-# 7. Enterprise feature testing
+Post a tutor job.
 
-Test these pages:
+Check public jobs page:
 
-- `operations-suite.html`
-- `admissions-crm.html`
-- `finance-center.html`
-- `timetable-planner.html`
-- `notification-center.html`
-- `content-workflow.html`
-- `form-builder-v9.html`
-- `reports-center.html`
-- `security-center.html`
-- `api-docs.html`
-- `school-onboarding.html`
+`jobs.html`
 
-Test these functions:
+## Job application
 
-- Add CRM lead
-- Move CRM lead through stages
-- Generate invoice
-- Add timetable slot
-- Add notification
-- Generate form HTML
-- Print report
-- Export operations data
+Open:
 
----
+`jobs.html`
 
-# 8. Post-deployment checklist
+Click Apply.
 
-1. Open `index.html`.
-2. Open `platform.html`.
-3. Open `operations-suite.html`.
-4. Test command palette with `Ctrl/⌘ + K`.
-5. Test admin dashboard.
-6. Test cPanel page.
-7. Test Supabase if configured.
-8. Test WhatsApp forms.
-9. Test LMS/tool links.
-10. Test PWA install/offline.
-11. Export backups.
+Submit application.
+
+Check table:
+
+`hmg_job_applications`
+
+## Tutor lesson tracking
+
+Open:
+
+`tutor-dashboard.html`
+
+Add/schedule a lesson.
+
+Mark it complete.
+
+Check table:
+
+`hmg_lessons_tracking`
+
+## Parent monitoring
+
+Open:
+
+`parent-monitoring.html`
+
+Confirm lesson record appears.
 
 ---
 
-# 9. Security notes
+# 5. Post-deployment checklist
+
+Test these public pages:
+
+- `index.html`
+- `tutors.html`
+- `book-tutor.html`
+- `tutor-register.html`
+- `jobs.html`
+- `job-apply.html`
+- `tutor-dashboard.html`
+- `parent-monitoring.html`
+- `homeschooling.html`
+- `exam-prep.html`
+- `lms.html`
+- `for-schools.html`
+- `contact.html`
+
+Test these restricted pages:
+
+- `admin.html`
+- `admin-dashboard.html`
+- `admin-jobs.html`
+- `cpanel.html`
+- `cpanel-dashboard.html`
+
+Test these features:
+
+- WhatsApp booking form
+- Tutor registration form
+- Tutor job application
+- Admin job posting
+- Lesson scheduling
+- Lesson completion
+- Parent monitoring
+- Supabase inserts
+- PWA/offline fallback if needed
+
+---
+
+# 6. Security notes
 
 - Never expose Supabase service role key in frontend.
-- Use anon key only with correct RLS.
-- Keep admin password strong.
+- Use only anon key with proper RLS policies.
+- Bank details must not be publicly readable.
+- Tutor applications should be readable only by authenticated admin users.
+- Lesson tracking should later be restricted by tutor/parent/student IDs.
+- Use strong admin password.
 - Export backups regularly.
-- Do not store highly sensitive student data in public CMS content.
 
 ---
 
-# 10. No paid AI API policy
+# 7. Recommended next production improvement
 
-HMG Academy v9 does not use paid AI APIs. This keeps the platform cost-effective and aligned with HMG's free-tool discipline.
+After confirming workflows, upgrade lesson tracking from name-based records to ID-based records:
+
+- `tutor_id`
+- `student_id`
+- `parent_id`
+- `school_id`
+
+Then enforce strict Supabase Row Level Security so tutors and parents see only their assigned records.
